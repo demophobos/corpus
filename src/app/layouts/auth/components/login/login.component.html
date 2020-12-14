@@ -1,0 +1,14 @@
+<div class="dialog">
+    <app-dialog-header title="Login" (close)="close()"></app-dialog-header>
+    <app-dialog-content>
+        <form class="dialog-body" [formGroup]="editorForm">
+            <mat-form-field class="input-field-full-width">
+                <input matInput type="email" placeholder="Email" formControlName="emailFormControl" required>
+            </mat-form-field>
+            <mat-form-field class="input-field-full-width">
+                <input matInput type="password" placeholder="Password" formControlName="passwordFormControl" autocomplete="on" required>
+            </mat-form-field>
+        </form>
+    </app-dialog-content>
+    <app-dialog-action class="dialog-footer" (save)="login()" [disabled]="!editorForm.valid"></app-dialog-action>
+</div>

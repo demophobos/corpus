@@ -1,0 +1,10 @@
+<div class="project-item-selector">
+    <mat-form-field class="input-field-full-width">
+        <mat-select [(value)]="selectedId" (selectionChange)="selectionChange(selectedId)">
+            <mat-option *ngFor="let header of headers" [value]="header.id">
+                {{header.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <app-header-menu></app-header-menu>
+</div>

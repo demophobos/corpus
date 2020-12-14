@@ -1,0 +1,50 @@
+@import "../node_modules/@angular/material/prebuilt-themes/indigo-pink.css";
+body {
+    margin: 0;
+    position: absolute;
+    right: 0px;
+    left: 0px;
+    bottom: 0px;
+    top: 0px;
+}
+
+app-sidenav {
+    display: flex;
+}
+
+mat-drawer-container {
+    flex: 1 1 auto;
+    height: 100%;
+}
+mat-drawer {
+    width: auto;
+}
+.mat-bottom-sheet-container {
+    padding: 0 !important;
+}
+.mat-toolbar-row,
+.mat-toolbar-single-row {
+    padding-top: 0px;
+    padding-right: 8px !important;
+    padding-bottom: 0px;
+    padding-left: 8px !important;
+}
+
+.mat-list-base {
+    padding-top: 0px !important;
+}
+.mat-dialog-container {
+    padding: 0 !important;
+}
+.mat-toolbar-multiple-rows {
+    min-height: 0;
+}
+.input-field-full-width {
+    width: 100%;
+}
+.mat-tab-header {
+    height: 45.5px;
+}
+.spacer{
+    flex: 1 1 auto;
+}

@@ -1,0 +1,8 @@
+<mat-toolbar>
+    <mat-toolbar-row class="dialog-footer">
+        <span class="spacer"></span>
+        <button *ngIf="!hideButtons" class="dialog-button" mat-icon-button color="none" (click)="click()" [disabled]="disabled">
+                        <mat-icon svgIcon="save"></mat-icon>
+                    </button>
+    </mat-toolbar-row>
+</mat-toolbar>

@@ -1,0 +1,28 @@
+<div class="dialog">
+    <app-dialog-header title="Header" (close)="close()"></app-dialog-header>
+    <app-dialog-content>
+        <form [formGroup]="editorForm">
+            <mat-form-field class="input-field-full-width">
+                <input matInput placeholder="Name" formControlName="nameFormControl" required>
+            </mat-form-field>
+            <mat-form-field class="input-field-full-width">
+                <textarea matInput placeholder="Description" rows="6" formControlName="descriptionFormControl" required></textarea>
+            </mat-form-field>
+            <mat-form-field class="input-field-full-width">
+                <mat-select formControlName="langFormControl" required>
+                    <mat-option *ngFor="let item of langs | keys" [value]="item.value">
+                        {{item.key}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="input-field-full-width">
+                <mat-select formControlName="typeFormControl" required>
+                    <mat-option *ngFor="let item of editionTypes | keys" [value]="item.value">
+                        {{item.key}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </app-dialog-content>
+    <app-dialog-action (save)="save()" [disabled]="!editorForm.valid"></app-dialog-action>
+</div>

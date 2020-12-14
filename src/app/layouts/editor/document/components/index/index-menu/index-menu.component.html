@@ -1,0 +1,17 @@
+<button mat-icon-button color="primary" [matMenuTriggerFor]="menu">
+    <mat-icon svgIcon="more_vert"></mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="addIndex()">
+        <mat-icon svgIcon="add"></mat-icon>
+        <span>Add Index</span>
+    </button>
+    <button mat-menu-item (click)="editIndex()">
+        <mat-icon svgIcon="edit"></mat-icon>
+        <span>Edit Index</span>
+    </button>
+    <button mat-menu-item (click)="deleteIndex()">
+        <mat-icon svgIcon="delete"></mat-icon>
+        <span>Delete Index</span>
+    </button>
+</mat-menu>

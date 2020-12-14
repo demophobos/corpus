@@ -1,0 +1,18 @@
+<div class="project-area" *ngIf="project !== undefined">
+    <as-split 
+    direction="horizontal" 
+    gutterDblClickDuration="300" 
+    (gutterDblClick)="areaDividerClick()"
+    [useTransition]="useTransition" 
+    [gutterSize]="gutterSize">
+        <as-split-area class="selector-area" [size]="selectorAreaSize">
+            <div fxLayout="column">
+                <app-header-selector></app-header-selector>
+                <app-index-tree></app-index-tree>
+            </div>
+        </as-split-area>
+        <as-split-area class="text-area" [size]="textAreaSize">
+            <app-chunk-analyser></app-chunk-analyser>
+        </as-split-area>
+    </as-split>
+</div>

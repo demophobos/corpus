@@ -1,0 +1,5 @@
+<app-dialog-header [title]="title" (close)="dialogRef.close()"></app-dialog-header>
+<app-dialog-content>
+    {{ message }}
+</app-dialog-content>
+<app-dialog-action (save)="dialogRef.close(true)"></app-dialog-action>

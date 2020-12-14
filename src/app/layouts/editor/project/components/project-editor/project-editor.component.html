@@ -1,0 +1,15 @@
+<div class="dialog">
+    <app-dialog-header title="Project" (close)="close()"></app-dialog-header>
+    <app-dialog-content>
+        <form [formGroup]="editorForm">
+            <mat-form-field class="input-field-full-width">
+                <input matInput placeholder="Name" formControlName="nameFormControl" required>
+            </mat-form-field>
+            <mat-form-field class="input-field-full-width">
+                <textarea matInput placeholder="Description" formControlName="descriptionFormControl" required></textarea>
+            </mat-form-field>
+        </form>
+    </app-dialog-content>
+    <app-dialog-action (save)="save()" [disabled]="!editorForm.valid"></app-dialog-action>
+</div>
+
