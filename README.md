@@ -1,1 +1,1 @@
-# bas-app
+# Corpus Latino-Rossicum
