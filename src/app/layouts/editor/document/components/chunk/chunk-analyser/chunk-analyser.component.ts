@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { AppConfig } from '@shared/constants';
-import { Chunk, IndexTreeNode } from '@shared/models';
-import { DialogService } from '@shared/services';
-import { DocumentService } from '../../../services/document.service';
-import { ChunkEditorComponent } from '../chunk-editor/chunk-editor.component';
+import { EventEnum } from '@shared/enums';
+import { Chunk, Index } from '@shared/models';
+import { EventService } from '../../../services/document-event.service';
 
 @Component({
   selector: 'app-chunk-analyser',
@@ -13,30 +11,27 @@ import { ChunkEditorComponent } from '../chunk-editor/chunk-editor.component';
 })
 export class ChunkAnalyserComponent extends BaseComponent implements OnInit {
   chunk: Chunk;
-  indexTreeNode: IndexTreeNode;
+  index: Index;
   chunkAreaSize: Number = 20;
   toolAreaSize: Number = 80;
   gutterSize: Number = 11;
   useTransition: Boolean = true;
-  constructor(
-    private dialogService: DialogService,
-    private documentService: DocumentService
-  ) {
+  constructor(private eventService: EventService) {
     super();
   }
 
   ngOnInit(): void {
-    this.documentService.selectedIndex$.subscribe((indexTreeNode) => {
-      this.indexTreeNode = indexTreeNode;
-      if (indexTreeNode) {
-        this.documentService.getChunkByIndex(indexTreeNode.id).then((chunk) => {
-          this.chunk = chunk;
-          this.documentService.selectChunk(this.chunk);
-        });
-      } else {
-        this.chunk = undefined;
-        this.documentService.selectChunk(this.chunk);
-      }
+    this.eventService.INDEX_SELECTED.subscribe((index: Index) => {
+      this.index = index;
+    });
+    this.eventService.CHUNK_SELECTED.subscribe((chunk: Chunk) => {
+      this.chunk = chunk;
+    });
+    this.eventService.CHUNK_CREATED.subscribe((chunk: Chunk) => {
+      this.chunk = chunk;
+    });
+    this.eventService.CHUNK_DELETED.subscribe(() => {
+      this.chunk = undefined;
     });
   }
 
@@ -51,44 +46,16 @@ export class ChunkAnalyserComponent extends BaseComponent implements OnInit {
   }
 
   addChunk() {
-    let chunk = new Chunk({ indexId: this.indexTreeNode.id });
-    this.dialogService
-      .showComponent(ChunkEditorComponent, chunk, AppConfig.DefaultDialogWidth)
-      .toPromise()
-      .then((chunk) => {
-        if (chunk) {
-          this.chunk = chunk;
-        }
-      })
-      .then(() => Promise.resolve());
+    this.eventService.do(EventEnum.CHUNK_CREATE, new Chunk({ indexId: this.index.id }));
   }
 
   editChunk() {
-    this.dialogService
-      .showComponent(
-        ChunkEditorComponent,
-        this.chunk,
-        AppConfig.DefaultDialogWidth
-      )
-      .toPromise()
-      .then((chunk) => {
-        if (chunk) {
-          this.chunk = chunk;
-        }
-      })
-      .then(() => Promise.resolve());
+    this.eventService.do(EventEnum.CHUNK_UPDATE, this.chunk);
   }
 
   deleteChunk() {
     if (this.chunk) {
-      this.dialogService
-        .confirm(this.chunk.value, 'Are you sure?')
-        .toPromise()
-        .then((confirmed) => {
-          if (confirmed) {
-            this.documentService.deleteChunk(this.chunk);
-          }
-        });
+      this.eventService.do(EventEnum.CHUNK_DELETE, this.chunk);
     }
   }
 }

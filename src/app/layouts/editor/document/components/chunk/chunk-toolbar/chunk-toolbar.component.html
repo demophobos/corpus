@@ -1,15 +1,15 @@
-<mat-toolbar class="chunk-toolbar" *ngIf="indexTreeNode !== undefined">
+<mat-toolbar class="chunk-toolbar" *ngIf="index !== undefined">
     <mat-chip-list aria-label="Text Index">
-        <mat-chip>{{indexTreeNode.name}}</mat-chip>
+        <mat-chip>{{index.name}}</mat-chip>
       </mat-chip-list>
     <span class="spacer"></span>
-    <button mat-icon-button aria-label="Add Text" (click)="addText()">
+    <button [disabled]="chunk !== undefined" mat-icon-button aria-label="Add Text" (click)="addText()">
         <mat-icon svgIcon="add"></mat-icon>
     </button>
-    <button mat-icon-button aria-label="Edit Text" (click)="editText()">
+    <button [disabled]="chunk == undefined" mat-icon-button aria-label="Edit Text" (click)="editText()">
         <mat-icon svgIcon="edit"></mat-icon>
     </button>
-    <button mat-icon-button aria-label="Delete Text" (click)="deleteText()">
+    <button [disabled]="chunk == undefined" mat-icon-button aria-label="Delete Text" (click)="deleteText()">
         <mat-icon svgIcon="delete"></mat-icon>
     </button>
 </mat-toolbar>

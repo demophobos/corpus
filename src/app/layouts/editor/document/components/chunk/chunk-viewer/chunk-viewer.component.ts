@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { Chunk, IndexTreeNode } from '@shared/models';
-import { DocumentService } from '../../../services/document.service';
+import { Chunk } from '@shared/models';
+import { EventService } from '../../../services/document-event.service';
 
 @Component({
   selector: 'app-chunk-viewer',
@@ -10,12 +10,21 @@ import { DocumentService } from '../../../services/document.service';
 })
 export class ChunkViewerComponent extends BaseComponent implements OnInit {
   chunk: Chunk;
-  constructor(private documentService: DocumentService) {
+  constructor(private eventService: EventService) {
     super();
   }
 
   ngOnInit(): void {
-    this.documentService.selectedChunk$.subscribe(chunk=>{
+    this.eventService.CHUNK_SELECTED.subscribe((chunk: Chunk) => {
+      this.chunk = chunk;
+    });
+    this.eventService.CHUNK_CREATED.subscribe((chunk: Chunk) => {
+      this.chunk = chunk;
+    });
+    this.eventService.CHUNK_DELETED.subscribe(() => {
+      this.chunk = undefined;
+    });
+    this.eventService.CHUNK_UPDATED.subscribe((chunk: Chunk) => {
       this.chunk = chunk;
     });
   }

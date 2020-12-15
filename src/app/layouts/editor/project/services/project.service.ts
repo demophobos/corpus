@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { ApiService, AuthService, SnackBarService } from '@core/services';
-import { ActionEnum } from '@shared/enums';
+import { ApiService, AuthService } from '@core/services';
 import { Project, User } from '@shared/models';
 import { ReplaySubject } from 'rxjs';
 
@@ -16,8 +15,7 @@ export class ProjectService implements OnInit {
 
   constructor(
     private readonly projectApiService: ApiService<Project>,
-    private readonly authService: AuthService,
-    private readonly snackBarService: SnackBarService
+    private readonly authService: AuthService
   ) {
     this.authService.user$.subscribe((user) => {
       this.user$ = user;
@@ -53,7 +51,6 @@ export class ProjectService implements OnInit {
         this.getProjects();
       })
       .then(() => {
-        this.snackBarService.open(`${project.name}`, ActionEnum.ProjectDeleted);
         Promise.resolve();
       });
   }

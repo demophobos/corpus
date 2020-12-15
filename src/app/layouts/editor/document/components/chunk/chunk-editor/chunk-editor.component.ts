@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@shared/components';
 import { Chunk } from '@shared/models';
-import { DocumentService } from '../../../services/document.service';
 
 @Component({
   selector: 'app-chunk-editor',
@@ -15,8 +14,7 @@ export class ChunkEditorComponent extends BaseComponent implements OnInit {
   public editorForm = new FormGroup({
     valueFormControl: new FormControl('', Validators.required)
   });
-  constructor(private dialogRef: MatDialogRef<ChunkEditorComponent>,
-    private documentService: DocumentService) {
+  constructor(private dialogRef: MatDialogRef<ChunkEditorComponent>) {
     super();
   }
 
@@ -25,9 +23,6 @@ export class ChunkEditorComponent extends BaseComponent implements OnInit {
   }
   public save() {
     this.data.value = this.editorForm.controls.valueFormControl.value;
-    this.documentService.saveChunk(this.data).then((chunk)=>{
-      this.documentService.selectChunk(chunk);
-    })
     this.dialogRef.close(this.data);
   }
 

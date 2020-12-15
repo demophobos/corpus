@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
-import { Chunk, IndexTreeNode } from '@shared/models';
+import { Chunk, Index, IndexTreeNode } from '@shared/models';
 import { DialogService } from '@shared/services';
+import { EventService } from '../../../services/document-event.service';
 import { DocumentService } from '../../../services/document.service';
 import { ChunkEditorComponent } from '../chunk-editor/chunk-editor.component';
 
@@ -12,19 +13,29 @@ import { ChunkEditorComponent } from '../chunk-editor/chunk-editor.component';
   styleUrls: ['./chunk-toolbar.component.scss'],
 })
 export class ChunkToolbarComponent extends BaseComponent implements OnInit {
-  indexTreeNode: IndexTreeNode;
+  index: Index;
+  chunk: Chunk;
   @Output() add: EventEmitter<any> = new EventEmitter();
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
   constructor(
-    private documentService: DocumentService
+    private eventService: EventService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.documentService.selectedIndex$.subscribe((indexTreeNode) => {
-      this.indexTreeNode = indexTreeNode;
+    this.eventService.INDEX_SELECTED.subscribe((index) => {
+      this.index = index;
+    });
+    this.eventService.CHUNK_CREATED.subscribe((chunk) => {
+      this.chunk = chunk;
+    });
+    this.eventService.CHUNK_SELECTED.subscribe((chunk) => {
+      this.chunk = chunk;
+    });
+    this.eventService.CHUNK_DELETED.subscribe(() => {
+      this.chunk = undefined;
     });
   }
 
