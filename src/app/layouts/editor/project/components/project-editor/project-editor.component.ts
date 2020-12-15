@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@shared/components';
 import { Project } from '@shared/models';
-import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-project-editor',
@@ -17,8 +16,7 @@ export class ProjectEditorComponent extends BaseComponent implements OnInit {
     nameFormControl: new FormControl('', Validators.required),
     descriptionFormControl: new FormControl('', Validators.required)
   });
-  constructor(private dialogRef: MatDialogRef<ProjectEditorComponent>,
-    private projectService: ProjectService) {
+  constructor(private dialogRef: MatDialogRef<ProjectEditorComponent>) {
     super();
   }
 
@@ -29,11 +27,10 @@ export class ProjectEditorComponent extends BaseComponent implements OnInit {
   public save() {
     this.data.name = this.editorForm.controls.nameFormControl.value;
     this.data.desc = this.editorForm.controls.descriptionFormControl.value;
-    this.projectService.saveProject(this.data);
-    this.dialogRef.close();
+    this.dialogRef.close(this.data);
   }
 
   public close() {
-    this.dialogRef.close(this.data);
+    this.dialogRef.close();
   }
 }

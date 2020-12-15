@@ -12,7 +12,7 @@ export class ChunkService {
   private user: User;
   constructor(
     private readonly dialogService: DialogService, 
-    private readonly chunkApiService: ApiService<Chunk>,
+    private readonly apiService: ApiService<Chunk>,
     private readonly authService: AuthService
     ) { 
       this.authService.user$.subscribe((user : User) => {
@@ -20,7 +20,7 @@ export class ChunkService {
       });
     }
 
-  async showChunkEditorDialog(chunk: Chunk) {
+  async showEditorDialog(chunk: Chunk): Promise<Chunk> {
     return this.dialogService
       .showComponent(ChunkEditorComponent, chunk, AppConfig.DefaultDialogWidth)
       .toPromise()
@@ -34,20 +34,18 @@ export class ChunkService {
   async updateChunk(chunk: Chunk): Promise<Chunk> {
     chunk.modifierId = this.user.id;
     chunk.modified = new Date();
-    return await this.chunkApiService
+    return await this.apiService
       .save(chunk)
       .toPromise()
       .then((chunk: Chunk) => {
         return chunk;
       });
   }
-
-
 
   async createChunk(chunk: Chunk): Promise<Chunk> {
     chunk.creatorId = this.user.id;
     chunk.created = new Date();
-    return await this.chunkApiService
+    return await this.apiService
       .save(chunk)
       .toPromise()
       .then((chunk: Chunk) => {
@@ -55,27 +53,28 @@ export class ChunkService {
       });
   }
 
+  async deleteChunk(chunk: Chunk): Promise<Chunk> {
+    return await this.dialogService
+      .confirm(chunk.id, 'Are you sure?')
+      .toPromise()
+      .then((confirmed) => {
+        if (confirmed) {
+          return this.apiService
+            .remove(chunk)
+            .toPromise()
+            .then((chunk : Chunk) => {
+              return chunk;
+            });
+        }
+      });
+  }
+
   async getChunkByIndex(indexId: string): Promise<Chunk> {
-    return await this.chunkApiService
+    return await this.apiService
       .findByQuery(new Chunk({}), JSON.stringify({ indexId: indexId }))
       .toPromise()
       .then((chunk) => {
         return chunk[0];
-      });
-  }
-  async deleteChunk(chunk: Chunk) {
-    return await this.dialogService
-      .confirm(chunk.value, 'Are you sure?')
-      .toPromise()
-      .then((confirmed) => {
-        if (confirmed) {
-          return this.chunkApiService
-            .remove(chunk)
-            .toPromise()
-            .then((chunk) => {
-              return chunk;
-            });
-        }
       });
   }
 }

@@ -3,8 +3,10 @@ import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AuthService } from '@core/services';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
+import { EventEnum } from '@shared/enums';
 import { MenuItem, Project } from '@shared/models';
 import { DialogService } from '@shared/services';
+import { EditorEventService } from 'app/layouts/editor/editor.event.service';
 import { ProjectEditorComponent } from 'app/layouts/editor/project/components/project-editor/project-editor.component';
 import { ProjectSelectorComponent } from 'app/layouts/editor/project/components/project-selector/project-selector.component';
 import { takeUntil } from 'rxjs/operators';
@@ -25,9 +27,9 @@ export class EditorComponent extends BaseComponent implements OnInit {
 
   constructor(
     private readonly editorService: EditorService,
-    private dialogService: DialogService,
     private bottomSheet: MatBottomSheet,
-    private authService: AuthService
+    private authService: AuthService,
+    private eventService: EditorEventService
   ) {
     super();
   }
@@ -46,11 +48,7 @@ export class EditorComponent extends BaseComponent implements OnInit {
   menuItemSelected(menuItem: MenuItem) {
     switch (menuItem.action) {
       case ActionEnum.NewProject:
-        this.dialogService.showComponent(
-          ProjectEditorComponent,
-          new Project({}),
-          AppConfig.DefaultDialogWidth
-        );
+        this.eventService.do(EventEnum.PROJECT_CREATE, new Project({}));
         break;
       case ActionEnum.OpenProject:
         this.bottomSheet.open(ProjectSelectorComponent);

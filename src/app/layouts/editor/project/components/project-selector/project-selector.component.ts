@@ -2,54 +2,57 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { BaseComponent } from '@shared/components';
-import { AppConfig } from '@shared/constants';
+import { EventEnum } from '@shared/enums';
 import { Project } from '@shared/models';
-import { DialogService } from '@shared/services';
 import { UrlEnum } from 'app/layouts/editor/editor-page/services/url.enum';
-import { ProjectService } from '../../services/project.service';
-import { ProjectEditorComponent } from '../project-editor/project-editor.component';
+import { EditorEventService } from 'app/layouts/editor/editor.event.service';
 
 @Component({
   selector: 'app-project-selector',
   templateUrl: './project-selector.component.html',
-  styleUrls: ['./project-selector.component.scss']
+  styleUrls: ['./project-selector.component.scss'],
 })
 export class ProjectSelectorComponent extends BaseComponent implements OnInit {
   projects: Project[];
-  constructor(private projectService: ProjectService,
-    private dialogService: DialogService,
+  constructor(
     private bottomSheetRef: MatBottomSheetRef<ProjectSelectorComponent>,
     private changeDetectorRef: ChangeDetectorRef,
-    private router: Router
-    ) {
+    private router: Router,
+    private eventService: EditorEventService
+  ) {
     super();
+    this.eventService.do(EventEnum.PROJECTS_LOAD);
   }
 
   ngOnInit(): void {
-    this.projectService.projects$.subscribe(projects => {
+    this.eventService.PROJECT_UPDATED.subscribe((project: Project) => {
+      let item = this.projects.find(i => i.id == project.id);
+      item = project;
+      this.changeDetectorRef.markForCheck();
+    });
+    this.eventService.PROJECT_DELETED.subscribe((project: Project) => {
+      this.projects = this.projects.filter(i=>i.id !== project.id);
+      this.changeDetectorRef.markForCheck();
+    });
+    this.eventService.PROJECTS_LOADED.subscribe((projects: Project[]) => {
       this.projects = projects;
       this.changeDetectorRef.markForCheck();
     });
   }
-  
+
   close() {
     this.bottomSheetRef.dismiss();
   }
 
   open(project: Project) {
+    this.eventService.do(EventEnum.PROJECT_SELECT, project);
     this.router.navigateByUrl(UrlEnum.Project);
-    this.projectService.selectProject(project);
     this.close();
   }
   delete(project: Project) {
-    this.dialogService.confirm(project.name, 'Are you sure?')
-      .toPromise().then(confirmed => {
-        if (confirmed) {
-          this.projectService.deleteProject(project);
-        }
-      });
+    this.eventService.do(EventEnum.PROJECT_DELETE, project);
   }
   edit(project: Project) {
-    this.dialogService.showComponent(ProjectEditorComponent, project, AppConfig.DefaultDialogWidth);
+    this.eventService.do(EventEnum.PROJECT_UPDATE, project);
   }
 }

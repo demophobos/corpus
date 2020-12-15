@@ -1,11 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { AppConfig } from '@shared/constants';
-import { Chunk, Index, IndexTreeNode } from '@shared/models';
-import { DialogService } from '@shared/services';
+import { Chunk, Index } from '@shared/models';
 import { EditorEventService } from '../../../editor.event.service';
-import { DocumentService } from '../../../document/services/document.service';
-import { ChunkEditorComponent } from '../chunk-editor/chunk-editor.component';
 
 @Component({
   selector: 'app-chunk-toolbar',

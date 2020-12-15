@@ -5,7 +5,6 @@ import { BaseComponent } from '@shared/components';
 import { EditionType, Language } from '@shared/enums';
 import { Header } from '@shared/models';
 import { KeysPipe } from '@shared/pipes';
-import { DocumentService } from '../../../services/document.service';
 
 @Component({
   selector: 'app-header-editor',
@@ -22,8 +21,7 @@ export class HeaderEditorComponent extends BaseComponent implements OnInit {
     langFormControl: new FormControl('',  Validators.required),
     typeFormControl: new FormControl('', Validators.required)
   });
-  constructor(private dialogRef: MatDialogRef<HeaderEditorComponent>,
-    private documentService: DocumentService) {
+  constructor(private dialogRef: MatDialogRef<HeaderEditorComponent>) {
     super();
   }
 
@@ -40,8 +38,6 @@ export class HeaderEditorComponent extends BaseComponent implements OnInit {
     this.data.desc = this.editorForm.controls.descriptionFormControl.value;
     this.data.lang = this.editorForm.controls.langFormControl.value;
     this.data.editionType = this.editorForm.controls.typeFormControl.value;
-
-    this.documentService.saveHeader(this.data);
     this.dialogRef.close(this.data);
   }
 
