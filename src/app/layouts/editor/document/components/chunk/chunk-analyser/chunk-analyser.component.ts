@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { EventEnum } from '@shared/enums';
 import { Chunk, Index } from '@shared/models';
-import { EventService } from '../../../services/document-event.service';
+import { EditorEventService } from '../../../../editor.event.service';
 
 @Component({
   selector: 'app-chunk-analyser',
@@ -16,7 +16,7 @@ export class ChunkAnalyserComponent extends BaseComponent implements OnInit {
   toolAreaSize: Number = 80;
   gutterSize: Number = 11;
   useTransition: Boolean = true;
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EditorEventService) {
     super();
   }
 

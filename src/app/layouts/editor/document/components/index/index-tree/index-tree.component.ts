@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { BaseComponent } from '@shared/components';
-import { Index, IndexTreeNode } from '@shared/models';
+import { IndexTreeNode } from '@shared/models';
 import { DocumentService } from '../../../services/document.service';
-import { EventService } from '../../../services/document-event.service';
+import { EditorEventService } from '../../../../editor.event.service';
 import { EventEnum } from '@shared/enums';
 
 @Component({
@@ -16,7 +16,7 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
   treeControl = new NestedTreeControl<IndexTreeNode>((node) => node.children);
   dataSource = new MatTreeNestedDataSource<IndexTreeNode>();
 
-  constructor(private readonly documentService: DocumentService, private eventService: EventService) {
+  constructor(private readonly documentService: DocumentService, private eventService: EditorEventService) {
     super();
   }
 

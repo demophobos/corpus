@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EditorRoutingModule } from './editor-routing.module';
-import { DashboardComponent } from './dashboard/components/dashboard/dashboard.component';
-import { EditorComponent } from './editor/components/editor/editor.component';
+import { DashboardComponent } from './editor-page/components/dashboard/dashboard.component';
+import { EditorComponent } from './editor-page/components/editor-menu/editor-menu.component';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '@shared/shared.module';
 import { ProjectComponent } from './project/components/project/project.component';

@@ -3,7 +3,7 @@ import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { Chunk, Index, IndexTreeNode } from '@shared/models';
 import { DialogService } from '@shared/services';
-import { EventService } from '../../../services/document-event.service';
+import { EditorEventService } from '../../../../editor.event.service';
 import { DocumentService } from '../../../services/document.service';
 import { ChunkEditorComponent } from '../chunk-editor/chunk-editor.component';
 
@@ -19,7 +19,7 @@ export class ChunkToolbarComponent extends BaseComponent implements OnInit {
   @Output() edit: EventEmitter<any> = new EventEmitter();
   @Output() delete: EventEmitter<any> = new EventEmitter();
   constructor(
-    private eventService: EventService
+    private eventService: EditorEventService
   ) {
     super();
   }

@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@shared/components';
 import { Project } from '@shared/models';
-import { ActionEnum } from 'app/layouts/editor/editor/services/action.enum';
 import { ProjectService } from '../../services/project.service';
 
 @Component({

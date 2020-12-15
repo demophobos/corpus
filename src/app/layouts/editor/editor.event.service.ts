@@ -1,12 +1,12 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { EventEnum } from '@shared/enums';
 import { Chunk, Index } from '@shared/models';
-import { DocumentService } from './document.service';
+import { DocumentService } from './document/services/document.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class EventService {
+export class EditorEventService {
   INDEX_CREATED = new EventEmitter<Index>();
   INDEX_UPDATED = new EventEmitter<Index>();
   INDEX_DELETED = new EventEmitter<Index>();

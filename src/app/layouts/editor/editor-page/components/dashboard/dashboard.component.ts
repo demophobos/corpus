@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { DashboardService } from '../../services/dashboard.service';
+import { EditorService } from '../../services/editor.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,12 +12,12 @@ export class DashboardComponent extends BaseComponent implements OnInit {
 
   cards = [];
 
-  constructor(private readonly dashboardService: DashboardService) {
+  constructor(private readonly editorService: EditorService) {
     super();
   }
 
   ngOnInit(): void {
-    this.cards = this.dashboardService.GetCards();
+    this.cards = this.editorService.GetCards();
   }
 
 }

@@ -5,7 +5,7 @@ import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { Project } from '@shared/models';
 import { DialogService } from '@shared/services';
-import { UrlEnum } from 'app/layouts/editor/editor/services/url.enum';
+import { UrlEnum } from 'app/layouts/editor/editor-page/services/url.enum';
 import { ProjectService } from '../../services/project.service';
 import { ProjectEditorComponent } from '../project-editor/project-editor.component';
 

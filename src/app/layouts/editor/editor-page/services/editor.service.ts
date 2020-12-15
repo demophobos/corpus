@@ -15,7 +15,9 @@ export class EditorService {
   constructor() {
     this.GetMenuItems();
   }
-
+  GetCards(): any {
+    return [];
+  }
   GetMenuItems() {
     this.menuData.next([
       new MenuItem({

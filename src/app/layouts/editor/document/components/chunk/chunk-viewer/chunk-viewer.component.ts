@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { Chunk } from '@shared/models';
-import { EventService } from '../../../services/document-event.service';
+import { EditorEventService } from '../../../../editor.event.service';
 
 @Component({
   selector: 'app-chunk-viewer',
@@ -10,7 +10,7 @@ import { EventService } from '../../../services/document-event.service';
 })
 export class ChunkViewerComponent extends BaseComponent implements OnInit {
   chunk: Chunk;
-  constructor(private eventService: EventService) {
+  constructor(private eventService: EditorEventService) {
     super();
   }
 
