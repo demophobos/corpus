@@ -1,11 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
-import { ApiService, AuthService, SnackBarService } from '@core/services';
-import { AppConfig } from '@shared/constants';
-import { Header, Index, Project, IndexTreeNode, Chunk } from '@shared/models';
+import { ApiService } from '@core/services';
+import { Header, Index, Project, IndexTreeNode} from '@shared/models';
 import { DialogService } from '@shared/services';
 import { ReplaySubject } from 'rxjs';
 import { ProjectService } from '../../project/services/project.service';
-import { ChunkEditorComponent } from '../components/chunk/chunk-editor/chunk-editor.component';
 
 @Injectable({
   providedIn: 'root',
@@ -22,13 +20,9 @@ export class DocumentService implements OnInit {
   private selectedHeaderData = new ReplaySubject<Header>();
   selectedHeader$: ReplaySubject<Header> = this.selectedHeaderData;
 
-  private selectedChunkData = new ReplaySubject<Chunk>();
-  selectedChunk$: ReplaySubject<Chunk> = this.selectedChunkData;
-
   constructor(
     private readonly headerApiService: ApiService<Header>,
     private readonly indexApiService: ApiService<Index>,
-    private readonly chunkApiService: ApiService<Chunk>,
     private readonly projectService: ProjectService,
     private readonly dialogService: DialogService
   ) {
@@ -107,7 +101,6 @@ export class DocumentService implements OnInit {
     } else {
       this.contentData.next(new Array<IndexTreeNode>());
     }
-    this.selectedChunkData.next(undefined);
   }
   //#endregion
 
@@ -254,68 +247,5 @@ export class DocumentService implements OnInit {
     return index;
   }
 
-  //#endregion
-
-  //#region CHUNK
-
-  selectChunk(chunk: Chunk) {
-    this.selectedChunkData.next(chunk);
-  }
-
-  async updateChunk(chunk: Chunk): Promise<Chunk> {
-    chunk.modifierId = this.projectService.user$.id;
-    chunk.modified = new Date();
-    return await this.chunkApiService
-      .save(chunk)
-      .toPromise()
-      .then((chunk: Chunk) => {
-        return chunk;
-      });
-  }
-
-  async showChunkEditorDialog(chunk: Chunk) {
-    return this.dialogService
-      .showComponent(ChunkEditorComponent, chunk, AppConfig.DefaultDialogWidth)
-      .toPromise()
-      .then((chunk: Chunk) => {
-        if (chunk) {
-          return chunk;
-        }
-      });
-  }
-
-  async createChunk(chunk: Chunk): Promise<Chunk> {
-    chunk.creatorId = this.projectService.user$.id;
-    chunk.created = new Date();
-    return await this.chunkApiService
-      .save(chunk)
-      .toPromise()
-      .then((chunk: Chunk) => {
-        return chunk;
-      });
-  }
-  async getChunkByIndex(indexId: string): Promise<Chunk> {
-    return await this.chunkApiService
-      .findByQuery(new Chunk({}), JSON.stringify({ indexId: indexId }))
-      .toPromise()
-      .then((chunk) => {
-        return chunk[0];
-      });
-  }
-  async deleteChunk(chunk: Chunk) {
-    return await this.dialogService
-      .confirm(chunk.value, 'Are you sure?')
-      .toPromise()
-      .then((confirmed) => {
-        if (confirmed) {
-          return this.chunkApiService
-            .remove(chunk)
-            .toPromise()
-            .then((chunk) => {
-              return chunk;
-            });
-        }
-      });
-  }
   //#endregion
 }

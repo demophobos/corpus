@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { Chunk } from '@shared/models';
-import { EditorEventService } from '../../../../editor.event.service';
+import { EditorEventService } from '../../../editor.event.service';
 
 @Component({
   selector: 'app-chunk-viewer',

@@ -15,10 +15,10 @@ import { HeaderMenuComponent } from './document/components/header/header-menu/he
 import { IndexMenuComponent } from './document/components/index/index-menu/index-menu.component';
 import { IndexEditorComponent } from './document/components/index/index-editor/index-editor.component';
 import { HeaderEditorComponent } from './document/components/header/header-editor/header-editor.component';
-import { ChunkEditorComponent } from './document/components/chunk/chunk-editor/chunk-editor.component';
-import { ChunkAnalyserComponent } from './document/components/chunk/chunk-analyser/chunk-analyser.component';
-import { ChunkViewerComponent } from './document/components/chunk/chunk-viewer/chunk-viewer.component';
-import { ChunkToolbarComponent } from './document/components/chunk/chunk-toolbar/chunk-toolbar.component';
+import { ChunkEditorComponent } from './chunk/components/chunk-editor/chunk-editor.component';
+import { ChunkAnalyserComponent } from './chunk/components/chunk-analyser/chunk-analyser.component';
+import { ChunkViewerComponent } from './chunk/components/chunk-viewer/chunk-viewer.component';
+import { ChunkToolbarComponent } from './chunk/components/chunk-toolbar/chunk-toolbar.component';
 
 
 @NgModule({

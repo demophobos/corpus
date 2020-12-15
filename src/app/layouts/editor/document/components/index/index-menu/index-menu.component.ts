@@ -4,7 +4,7 @@ import { AppConfig } from '@shared/constants';
 import { Chunk, Index, IndexTreeNode } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { DocumentService } from '../../../services/document.service';
-import { ChunkEditorComponent } from '../../chunk/chunk-editor/chunk-editor.component';
+import { ChunkEditorComponent } from '../../../../chunk/components/chunk-editor/chunk-editor.component';
 import { IndexEditorComponent } from '../index-editor/index-editor.component';
 
 @Component({
