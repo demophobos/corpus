@@ -5,23 +5,5 @@
         </button>
         <span>{{title}}</span>
         <span class="nav-spacer"></span>
-        <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
-            <button *ngIf="authService.isLoggedIn()" mat-icon-button routerLink="/" matTooltip="User">
-                <mat-icon svgIcon="home"></mat-icon>
-            </button>
-            <button *ngIf="authService.isLoggedIn()" mat-icon-button routerLink="/editor" matTooltip="Editor">
-                <mat-icon svgIcon="edit"></mat-icon>
-            </button>
-            <button *ngIf="authService.isLoggedIn()" mat-icon-button routerLink="/admin" matTooltip="Admin">
-                <mat-icon svgIcon="admin"></mat-icon>
-            </button>
-            <mat-divider [vertical]="true" *ngIf="authService.isLoggedIn()"></mat-divider>
-            <button *ngIf="authService.isLoggedOut()" mat-icon-button routerLink="/" matTooltip="Login" (click)="showLogin()">
-                <mat-icon svgIcon="login"></mat-icon>
-            </button>
-            <button *ngIf="authService.isLoggedIn()" mat-icon-button routerLink="/" matTooltip="Logout" (click)="logout()">
-                <mat-icon svgIcon="close"></mat-icon>
-            </button>
-        </div>
     </mat-toolbar-row>
 </mat-toolbar>

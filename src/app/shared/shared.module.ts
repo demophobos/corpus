@@ -31,6 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { KeysPipe } from './pipes/keys.pipe';
 import {MatChipsModule} from '@angular/material/chips';
+import { SnackBarService } from './services';
 @NgModule({
   declarations: [
     ...fromSharedWidgets.widgets,
@@ -96,7 +97,8 @@ import {MatChipsModule} from '@angular/material/chips';
   ],
   providers: [
     DialogService,
-    RedirectService
+    RedirectService,
+    SnackBarService
   ]
 })
 export class SharedModule { }

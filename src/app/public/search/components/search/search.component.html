@@ -1,0 +1,17 @@
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
+  <form class="form" [formGroup]="editorForm">
+    <mat-form-field class="full-width">
+      <input matInput formControlName="formFormControl" (change)="valueChange($event.target.value)">
+      <button mat-button matSuffix mat-icon-button aria-label="search" (click)="search()" [disabled]="searchDisabled">
+        <mat-icon svgIcon="search"></mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button aria-label="settings" (click)="setSettings()" [disabled]="settingsDisabled">
+        <mat-icon svgIcon="settings"></mat-icon>
+      </button>
+      <button mat-button matSuffix mat-icon-button aria-label="clear" (click)="clear()" [disabled]="clearDisabled">
+        <mat-icon svgIcon="close"></mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+</mat-toolbar>
+<app-search-result></app-search-result>

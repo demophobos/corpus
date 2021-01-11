@@ -6,19 +6,11 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
 {
     path: '',
-    loadChildren: () => import('./layouts/default/default.module').then(m => m.DefaultModule)
-  },
-  {
-    path: 'editor',
-    loadChildren: () => import('./layouts/editor/editor.module').then(m => m.EditorModule)
-  },
-  {
-    path: 'admin',
-    loadChildren: () => import('./layouts/admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
   },
   {
     path: '**',
-    loadChildren: () => import('./layouts/default/default.module').then(m => m.DefaultModule)
+    loadChildren: () => import('./public/public.module').then(m => m.PublicModule)
   }
 ];
 
