@@ -32,6 +32,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { KeysPipe } from './pipes/keys.pipe';
 import {MatChipsModule} from '@angular/material/chips';
 import { SnackBarService } from './services';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     ...fromSharedWidgets.widgets,
@@ -67,7 +69,9 @@ import { SnackBarService } from './services';
     AngularSplitModule,
     MatTabsModule,
     MatCheckboxModule,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   exports: [
     ...fromSharedWidgets.widgets,
@@ -93,7 +97,9 @@ import { SnackBarService } from './services';
     MatTabsModule,
     MatCheckboxModule,
     KeysPipe,
-    MatChipsModule
+    MatChipsModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     DialogService,

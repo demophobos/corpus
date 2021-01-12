@@ -1,6 +1,5 @@
 export const AppConfig = {
-    ApiUrl: 'http://localhost:3000/v1/',
-    AuthUrl: 'http://localhost:3000/auth/login/',
+    ApiUrl: 'http://localhost:3000/v2/',
     DefaultTheme: 'indigo-pink-theme',
     DefaultDialogWidth: '800',
     DefaultLoginDialogWidth: '500',

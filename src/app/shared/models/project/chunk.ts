@@ -2,7 +2,7 @@ import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
 export class Chunk extends Model {
-    type: string = AppType.Chunk;
+    apiType: string = AppType.Chunk;
     indexId: string;
     value: string;
     

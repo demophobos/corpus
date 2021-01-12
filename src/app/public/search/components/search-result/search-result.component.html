@@ -1,1 +1,4 @@
-<p>search-result works!</p>
+<mat-progress-bar mode="buffer" *ngIf="isLoading == true"></mat-progress-bar>
+<div *ngIf="chunks">
+    <app-search-result-chunk *ngFor="let chunkId of chunks" [elements]="getElements(chunkId)"></app-search-result-chunk>
+</div>

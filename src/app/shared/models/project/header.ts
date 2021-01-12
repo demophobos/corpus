@@ -2,7 +2,7 @@ import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
 export class Header extends Model {
-    type: string = AppType.Header;
+    apiType: string = AppType.Header;
     code: string;
     name: string;
     desc: string;

@@ -2,7 +2,7 @@ import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
 export class Project extends Model {
-    type: string = AppType.Project;
+    apiType: string = AppType.Project;
     name: string;
     desc: string;
 

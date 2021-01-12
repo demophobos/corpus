@@ -4,7 +4,9 @@ export const AppType = {
   Role: 'roles',
   Project: 'projects',
   Index: 'indeces',
+  IndexView: 'indeces',
   Header: 'headers',
   Chunk: 'chunks',
   Element: 'elements',
+  ElementView: 'elements',
 };

@@ -7,3 +7,5 @@ export * from './project/index';
 export * from './project/header';
 export * from './project/chunk';
 export * from './project/element';
+export * from './project/elementView';
+export * from './project/indexView';

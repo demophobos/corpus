@@ -2,7 +2,7 @@ import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
 export class Index extends Model {
-    type: string = AppType.Index;
+    apiType: string = AppType.Index;
     headerId: string;
     name: string;
     order: number;

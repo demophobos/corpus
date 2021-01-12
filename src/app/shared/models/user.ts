@@ -3,7 +3,7 @@ import { Model } from './base/model';
 
 
 export class User extends Model {
-    type = AppType.User;
+    apiType = AppType.User;
     email: string;
     password: string;
 

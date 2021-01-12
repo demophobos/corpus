@@ -1,0 +1,8 @@
+<div *ngIf="elements" fxLayout="row wrap" fxLayoutAlign="start center">
+    <div fxFlex="10" class="title" (click)="getInfo()">{{chunk.projectCode}} {{chunk.indexName}}</div>
+    <div fxFlex="90" fxLayout="row wrap" fxLayoutAlign="start center">
+        <div *ngFor="let element of elements">
+            <app-search-result-element [element]="element"></app-search-result-element>
+        </div>
+    </div>
+</div>

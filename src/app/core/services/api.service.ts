@@ -22,7 +22,7 @@ export class ApiService<T extends Model> implements OnInit {
   }
 
   findAll(item: T) {
-    return this.httpClient.get(`${AppConfig.ApiUrl}${item.type}`).pipe(
+    return this.httpClient.get(`${AppConfig.ApiUrl}${item.apiType}`).pipe(
       map((res: any) => {
         return res.map((i: any) => ModelMapperService.Map(item, i));
       }),
@@ -32,7 +32,7 @@ export class ApiService<T extends Model> implements OnInit {
 
   findOne(item: T) {
     return this.httpClient
-      .get(`${AppConfig.ApiUrl}${item.type}/${item.id}`)
+      .get(`${AppConfig.ApiUrl}${item.apiType}/${item.id}`)
       .pipe(
         map((res) => {
           return ModelMapperService.Map(item, res);
@@ -43,7 +43,7 @@ export class ApiService<T extends Model> implements OnInit {
 
   findByQuery(item: T, query: string) {
     return this.httpClient
-      .get(`${AppConfig.ApiUrl}${item.type}?params=${query}`)
+      .get(`${AppConfig.ApiUrl}${item.apiType}?params=${query}`)
       .pipe(
         map((res: any) => {
           return res.map((i: any) => ModelMapperService.Map(item, i));
@@ -54,7 +54,7 @@ export class ApiService<T extends Model> implements OnInit {
 
   countByQuery(item: T, query: string) {
     return this.httpClient
-      .get(`${AppConfig.ApiUrl}${item.type}?params=${query}`)
+      .get(`${AppConfig.ApiUrl}${item.apiType}?params=${query}`)
       .pipe(
         map((res: any) => {
           return res.map((i: any) => ModelMapperService.Map(item, i));
@@ -65,7 +65,7 @@ export class ApiService<T extends Model> implements OnInit {
 
   remove(item: T) {
     return this.httpClient
-      .delete(`${AppConfig.ApiUrl}${item.type}/${item.id}`, {
+      .delete(`${AppConfig.ApiUrl}${item.apiType}/${item.id}`, {
         headers: this.headers,
       })
       .pipe(
@@ -79,7 +79,7 @@ export class ApiService<T extends Model> implements OnInit {
   save(item: T) {
     if (item.id !== undefined) {
       return this.httpClient
-        .put(`${AppConfig.ApiUrl}${item.type}/${item.id}`, item, {
+        .put(`${AppConfig.ApiUrl}${item.apiType}/${item.id}`, item, {
           headers: this.headers,
         })
         .pipe(
@@ -90,7 +90,7 @@ export class ApiService<T extends Model> implements OnInit {
         );
     } else {
       return this.httpClient
-        .post(`${AppConfig.ApiUrl}${item.type}`, item, {
+        .post(`${AppConfig.ApiUrl}${item.apiType}`, item, {
           headers: this.headers,
         })
         .pipe(
@@ -104,7 +104,7 @@ export class ApiService<T extends Model> implements OnInit {
   
   patch(item: T) {
     return this.httpClient
-      .patch(`${AppConfig.ApiUrl}${item.type}/${item.id}`, item, {
+      .patch(`${AppConfig.ApiUrl}${item.apiType}/${item.id}`, item, {
         headers: this.headers,
       })
       .pipe(

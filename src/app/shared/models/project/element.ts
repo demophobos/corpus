@@ -2,11 +2,13 @@ import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
 export class Element extends Model {
-    type: string = AppType.Chunk;
-    chunkId: string;
+    apiType: string = AppType.Element;
     value: string;
-    order: number;
-    elementType: number;
+    chunkId: string;
+    order:number;
+    type:number;
+    morphId:string;
+    headerId:string;
 
     public constructor(fields: Partial<Element>) {
         super();

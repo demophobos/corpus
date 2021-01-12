@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AppConfig } from '@shared/constants';
 import { DialogService } from '@shared/services';
+import { SearchService } from '../../services/search.service';
 import { SearchSettingsComponent } from '../search-settings/search-settings.component';
 
 @Component({
@@ -18,7 +19,7 @@ export class SearchComponent implements OnInit {
     formFormControl: new FormControl('')
   });
   
-  constructor(private readonly dialogService: DialogService) { }
+  constructor(private readonly dialogService: DialogService, private searchService: SearchService) { }
 
   ngOnInit(): void {
   }
@@ -33,9 +34,9 @@ export class SearchComponent implements OnInit {
   }
 
   search(){
-
-
+    this.searchService.getElementsByExactForm(this.editorForm.controls.formFormControl.value);
   }
+  
   setSettings(){
     this.dialogService
       .showComponent(
