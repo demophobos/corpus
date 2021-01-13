@@ -14,7 +14,6 @@ export class SearchComponent implements OnInit {
   searchDisabled: boolean = true;
   settingsDisabled: boolean = false;
   clearDisabled: boolean = true;
-
   public editorForm = new FormGroup({
     formFormControl: new FormControl('')
   });
