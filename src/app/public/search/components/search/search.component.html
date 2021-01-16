@@ -1,14 +1,15 @@
 <mat-toolbar fxLayout="row" fxLayoutAlign="space-around center">
   <form class="form" [formGroup]="editorForm">
     <mat-form-field class="full-width">
-      <input matInput formControlName="formFormControl" (change)="valueChange($event.target.value)">
-      <button mat-button matSuffix mat-icon-button aria-label="search" (click)="search()" [disabled]="searchDisabled">
-        <mat-icon svgIcon="search"></mat-icon>
+      <input matInput formControlName="formFormControl">
+      <mat-checkbox matSuffix formControlName="caseFormControl" color="primary"></mat-checkbox>
+      <button mat-button matSuffix mat-icon-button aria-label="search" (click)="search()" color="primary" [disabled]="searchDisabled">
+        <mat-icon svgIcon="play"></mat-icon>
       </button>
-      <button mat-button matSuffix mat-icon-button aria-label="settings" (click)="setSettings()" [disabled]="settingsDisabled">
-        <mat-icon svgIcon="settings"></mat-icon>
+      <button mat-button matSuffix mat-icon-button aria-label="settings" (click)="setSettings()" color="primary" [disabled]="settingsDisabled">
+        <mat-icon svgIcon="options"></mat-icon>
       </button>
-      <button mat-button matSuffix mat-icon-button aria-label="clear" (click)="clear()" [disabled]="clearDisabled">
+      <button mat-button matSuffix mat-icon-button aria-label="clear" (click)="clear()" color="primary" [disabled]="clearDisabled">
         <mat-icon svgIcon="close"></mat-icon>
       </button>
     </mat-form-field>

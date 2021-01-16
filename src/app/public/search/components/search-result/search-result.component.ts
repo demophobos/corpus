@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ElementView } from '@shared/models';
+import { ChunkElementView, ElementView } from '@shared/models';
 import { SearchService } from '../../services/search.service';
 import { from } from 'rxjs';
 import { mergeMap, groupBy, toArray } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { mergeMap, groupBy, toArray } from 'rxjs/operators';
   styleUrls: ['./search-result.component.scss'],
 })
 export class SearchResultComponent extends BaseComponent implements OnInit {
-  chunks: string[];
+  chunks: ChunkElementView[];
   groupped: Map<string, ElementView[]>;
   isLoading: boolean = false;
   constructor(private searchService: SearchService) {
@@ -18,24 +18,24 @@ export class SearchResultComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchService.elements.subscribe((elements) => {
+    this.searchService.chunks.subscribe((chunks) => {
 
-      this.chunks = new Array<string>();
+      this.chunks = chunks;
 
-      this.groupped = new Map<string, ElementView[]>();
+    //   this.groupped = new Map<string, ElementView[]>();
 
-      const source = from(elements);
+    //   const source = from(elements);
 
-      const groupped = source.pipe(
-        groupBy((person) => person.chunkId),
+    //   const groupped = source.pipe(
+    //     groupBy((person) => person.chunkId),
 
-        mergeMap((group) => group.pipe(toArray()))
-      );
+    //     mergeMap((group) => group.pipe(toArray()))
+    //   );
 
-      groupped.subscribe((val) => {
-        this.chunks.push(val[0].chunkId);
-        this.groupped.set(val[0].chunkId, val);
-      });
+    //   groupped.subscribe((val) => {
+    //     this.chunks.push(val[0].chunkId);
+    //     this.groupped.set(val[0].chunkId, val);
+    //   });
     });
 
     this.searchService.isLoading.subscribe(isLoading => {
@@ -45,6 +45,6 @@ export class SearchResultComponent extends BaseComponent implements OnInit {
   }
   
   getElements(chunkId: string): ElementView[] {
-    return this.groupped.get(chunkId);
+    return this.chunks.filter(i=>i.id = chunkId)[0].elements;
   }
 }

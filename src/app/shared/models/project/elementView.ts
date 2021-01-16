@@ -4,6 +4,7 @@ import { Model } from '../base/model';
 export class ElementView extends Model {
   apiType: string = AppType.ElementView;
   projectCode: string;
+  headerCode: string;
   projectId: string;
   indexName: string;
   indexId:string;

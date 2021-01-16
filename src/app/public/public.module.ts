@@ -14,6 +14,7 @@ import { SearchResultComponent } from './search/components/search-result/search-
 import { SearchSettingsComponent } from './search/components/search-settings/search-settings.component';
 import { SearchResultChunkComponent } from './search/components/search-result-chunk/search-result-chunk.component';
 import { SearchResultElementComponent } from './search/components/search-result-element/search-result-element.component';
+import { MorphInfoComponent } from './search/components/morph-info/morph-info.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SearchResultElementComponent } from './search/components/search-result-
     SearchResultComponent,
     SearchSettingsComponent,
     SearchResultChunkComponent,
-    SearchResultElementComponent],
+    SearchResultElementComponent,
+    MorphInfoComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { AppConfig } from '@shared/constants';
+import { ElementQuery } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { SearchService } from '../../services/search.service';
 import { SearchSettingsComponent } from '../search-settings/search-settings.component';
@@ -8,35 +14,55 @@ import { SearchSettingsComponent } from '../search-settings/search-settings.comp
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
   searchDisabled: boolean = true;
   settingsDisabled: boolean = false;
   clearDisabled: boolean = true;
-  public editorForm = new FormGroup({
-    formFormControl: new FormControl('')
-  });
-  
-  constructor(private readonly dialogService: DialogService, private searchService: SearchService) { }
+  public editorForm: FormGroup;
+
+  constructor(
+    private readonly dialogService: DialogService,
+    private searchService: SearchService,
+    private formBuilder: FormBuilder
+  ) {}
 
   ngOnInit(): void {
+    this.editorForm = this.formBuilder.group({
+      formFormControl: new FormControl(''),
+      caseFormControl: new FormControl(false)
+    });
+
+    this.onChanges();
   }
 
-  valueChange(val:string){
-    this.searchDisabled = this.clearDisabled = val.length == 0;
+  onChanges(): void {
+    this.editorForm.valueChanges.subscribe((val) => {
+      if (val.formFormControl) {
+        this.searchDisabled = this.clearDisabled =
+          val.formFormControl.length == 0;
+      } else {
+        this.searchDisabled = this.clearDisabled = true;
+      }
+    });
   }
 
-  clear(){
+  clear() {
     this.editorForm.controls.formFormControl.setValue('');
     this.searchDisabled = this.clearDisabled = true;
   }
 
-  search(){
-    this.searchService.getElementsByExactForm(this.editorForm.controls.formFormControl.value);
+  search() {
+    this.searchService.getElementsByValue(
+      new ElementQuery({ 
+        value:  this.editorForm.controls.formFormControl.value, 
+        sense: this.editorForm.controls.caseFormControl.value
+      })
+    );
   }
-  
-  setSettings(){
+
+  setSettings() {
     this.dialogService
       .showComponent(
         SearchSettingsComponent,

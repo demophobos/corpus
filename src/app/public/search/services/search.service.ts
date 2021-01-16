@@ -1,15 +1,15 @@
 import { Injectable, Injector } from '@angular/core';
 import { ApiService } from '@core/services';
-import { ElementView, IndexView } from '@shared/models';
+import { ChunkElementView, ElementQuery, ElementView, IndexView } from '@shared/models';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  public currentSearch: ReplaySubject<string> = new ReplaySubject<string>(1);
-  public elements: ReplaySubject<ElementView[]> = new ReplaySubject<
-    ElementView[]
+  public currentQuery: ReplaySubject<ElementQuery> = new ReplaySubject<ElementQuery>(1);
+  public chunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<
+  ChunkElementView[]
   >(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   constructor(
@@ -17,15 +17,15 @@ export class SearchService {
     private indexService: ApiService<IndexView>
   ) {}
 
-  public getElementsByExactForm(value: string) {
-    this.elements.next(new Array<ElementView>());
-    this.currentSearch.next(value);
+  public getElementsByValue(query: ElementQuery) {
+    this.chunks.next(new Array<ChunkElementView>());
+    this.currentQuery.next(query);
     this.isLoading.next(true);
     this.elementService
-      .findByQuery(new ElementView({}), JSON.stringify({ value: value }))
+      .findByQuery(new ElementView({}), JSON.stringify(query))
       .toPromise()
       .then((value) => {
-        this.elements.next(value);
+        this.chunks.next(value);
         this.isLoading.next(false);
       });
   }

@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '@shared/components';
-import { ElementView } from '@shared/models';
+import { ChunkElementView, ElementView } from '@shared/models';
 import { SearchService } from '../../services/search.service';
 
 @Component({
@@ -11,14 +11,13 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchResultChunkComponent extends BaseComponent implements OnInit  {
 
-  @Input() elements: ElementView[]
-  chunk: ElementView;
+  @Input() chunk: ChunkElementView;
   constructor(private snackBar: MatSnackBar, private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-    this.chunk = this.elements[0];
+
   }
 
   getInfo(){

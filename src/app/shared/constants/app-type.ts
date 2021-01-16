@@ -7,6 +7,8 @@ export const AppType = {
   IndexView: 'indeces',
   Header: 'headers',
   Chunk: 'chunks',
+  ChunkView: 'chunks',
   Element: 'elements',
   ElementView: 'elements',
+  ChunkElementView: 'elements',
 };

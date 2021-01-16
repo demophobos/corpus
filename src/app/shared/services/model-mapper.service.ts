@@ -1,11 +1,9 @@
-import { Element } from '@angular/compiler';
+import { ElementSchemaRegistry } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { SELECT_ITEM_HEIGHT_EM } from '@angular/material/select';
-import { HeaderComponent } from '@shared/components';
 import { AppType } from '@shared/constants';
-import { Language } from '@shared/enums';
 import {
   Chunk,
+  ChunkElementView,
   ElementView,
   Header,
   Index,
@@ -28,13 +26,36 @@ export class ModelMapperService {
         return this.ToHeader(item);
       case AppType.Chunk:
         return this.ToChunk(item);
-      case AppType.ElementView:
-        return this.ToElementView(item);
+      case AppType.ChunkElementView:
+        return this.ToChunkElementView(item);
+      // case AppType.ElementView:
+      //   return this.ToElementView(item);
       case AppType.IndexView:
         return this.ToIndexView(item);
       default:
         return throwError(this.toString() + '. Unknown Type');
     }
+  }
+  static ToChunkElementView(item: any) {
+    let chunk = new ChunkElementView({
+      id: item._id,
+      indexId: item.indexId,
+      value: item.value,
+      indexName: item.indexName,
+      headerDesc: item.headerDesc,
+      indexOrder: item.indexOrder,
+      headerId: item.headerId,
+      projectDesc: item.projectDesc,
+      projectCode: item.projectCode,
+      headerCode: item.headerCode,
+      headerLang: item.headerLang,
+      headerEditionType: item.headerEditionType,
+      projectId: item.projectId,
+      elements: item.elements.map((res: ElementView) => {
+        return this.ToElementView(res);
+      })
+    });
+    return chunk;
   }
   static ToIndexView(item: any): IndexView {
     return new IndexView({
@@ -51,7 +72,7 @@ export class ModelMapperService {
       headerEditionType: item.headerEditionType,
       headerDesc: item.headerDesc,
       headerLang: item.headerLang,
-      projectCreated: item.projectCreated
+      projectCreated: item.projectCreated,
     });
   }
   static ToElementView(item: any): ElementView {
@@ -80,7 +101,8 @@ export class ModelMapperService {
       projectCode: item.projectCode,
       projectId: item.projectId,
       indexName: item.indexName,
-      indexId:item.indexId,
+      indexId: item.indexId,
+      headerCode: item.headerCode,
     });
   }
   static ToChunk(item: any) {

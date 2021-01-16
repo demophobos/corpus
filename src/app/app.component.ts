@@ -20,6 +20,20 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.RegisterIcons();
   }
   private RegisterIcons() {
+
+    this.matIconRegistry.addSvgIcon(
+      `options`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/options.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `play`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/play.svg'
+      )
+    );
+
     this.matIconRegistry.addSvgIcon(
       `share`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
