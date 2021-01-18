@@ -1,12 +1,3 @@
-.title{
-  color: gray;
-  cursor: pointer;
-}
-.index-title{
-  color:gray;
-  cursor: pointer;
-  margin-right:5px;
-}
 .chunk{
   margin-right: 20px;
   margin-left: 20px;
@@ -14,4 +5,12 @@
 .card{
   margin-left: 20px;
   margin-right: 20px;
+}
+.interp-card{
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: #e7e40d;
+}
+.empty-interp{
+  color: #f32308;
 }

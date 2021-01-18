@@ -2,6 +2,7 @@ import { Injectable, Injector } from '@angular/core';
 import { ApiService } from '@core/services';
 import { FormSearchType } from '@shared/enums';
 import { ChunkElementView, ElementQuery, ElementView, IndexView, MorphModel } from '@shared/models';
+import { InterpModel } from '@shared/models/project/interpModel';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -15,7 +16,8 @@ export class SearchService {
   constructor(
     private elementService: ApiService<ElementView>,
     private indexService: ApiService<IndexView>,
-    private morphService: ApiService<MorphModel>
+    private morphService: ApiService<MorphModel>,
+    private interpService: ApiService<InterpModel>
   ) {}
 
   public getChunks(query: ElementQuery) {
@@ -46,11 +48,21 @@ export class SearchService {
           this.chunks.next(value);
           this.isLoading.next(false);
         });
-      })
+      });
     }
   }
 
-  
+  public getInterp(id: string, interp: boolean = true) : Promise<ChunkElementView[]>{
+    let query = interp ? {sourceId: id} : {interpId: id};
+    return this.interpService.findByQuery(new InterpModel({}), JSON.stringify(query)).toPromise()
+    .then((value: InterpModel[])=>{
+      let chunkIds = interp ? value.map(i=>i.interpId) : value.map(i=>i.sourceId);
+      return this.elementService.findByQuery(new ElementView({}), JSON.stringify({chunkIds: chunkIds})).toPromise()
+        .then((value: ChunkElementView[]) => {
+          return Promise.resolve(value);
+        });
+    });
+  }
 
   public getIndex(id: string): Promise<IndexView> {
     return this.indexService

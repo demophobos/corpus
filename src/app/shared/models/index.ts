@@ -13,3 +13,4 @@ export * from './project/elementView';
 export * from './project/indexView';
 export * from './project/elementQuery';
 export * from './project/morphModel';
+export * from './project/interpModel';

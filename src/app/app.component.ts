@@ -20,7 +20,24 @@ export class AppComponent extends BaseComponent implements OnInit {
     this.RegisterIcons();
   }
   private RegisterIcons() {
-
+    this.matIconRegistry.addSvgIcon(
+      `rus`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/rus.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `lat`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/lat.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `translate`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/translate.svg'
+      )
+    );
     this.matIconRegistry.addSvgIcon(
       `options`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(

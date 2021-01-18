@@ -12,6 +12,7 @@ import {
   MorphModel,
   Project,
   User,
+  InterpModel,
 } from '@shared/models';
 import { throwError } from 'rxjs';
 
@@ -31,6 +32,8 @@ export class ModelMapperService {
         return this.ToMorph(item);
       case AppType.ChunkElementView:
         return this.ToChunkElementView(item);
+      case AppType.Interp:
+        return this.ToInterp(item);
       // case AppType.ElementView:
       //   return this.ToElementView(item);
       case AppType.IndexView:
@@ -38,6 +41,15 @@ export class ModelMapperService {
       default:
         return throwError(this.toString() + '. Unknown Type');
     }
+  }
+  static ToInterp(item: any) {
+    return new InterpModel({
+      id: item._id,
+      sourceHeaderId : item.sourceHeaderId,
+      interpHeaderId: item.interpHeaderId,
+      interpId: item.interpId,
+      sourceId: item.sourceId
+    });
   }
   static ToMorph(item: any): MorphModel {
     return new MorphModel({
