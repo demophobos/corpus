@@ -1,12 +1,12 @@
 import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
-export class Chunk extends Model {
+export class ChunkModel extends Model {
     apiType: string = AppType.Chunk;
     indexId: string;
     value: string;
     
-    public constructor(fields: Partial<Chunk>) {
+    public constructor(fields: Partial<ChunkModel>) {
         super();
         Object.assign(this, fields);
      }

@@ -1,8 +1,8 @@
-import { Index, IndexTreeNode } from '@shared/models';
+import { IndexModel, IndexTreeNode } from '@shared/models';
 
 export class IndexNodeConverter {
-  static convertIndexTreeNodeToIndex(indexTreeNode: IndexTreeNode): Index {
-    let index: Index = indexTreeNode as Index;
+  static convertIndexTreeNodeToIndex(indexTreeNode: IndexTreeNode): IndexModel {
+    let index: IndexModel = indexTreeNode as IndexModel;
     delete indexTreeNode.children;
     return index;
   }

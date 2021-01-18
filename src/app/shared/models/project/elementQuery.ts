@@ -1,6 +1,9 @@
+import { FormSearchType } from "@shared/enums";
+
 export class ElementQuery {
     value: string;
-    sense: boolean;
+    caseSensitive: boolean = false;
+    formSearchType: FormSearchType = FormSearchType.Free
 
     public constructor(fields: Partial<ElementQuery>) {
         Object.assign(this, fields);

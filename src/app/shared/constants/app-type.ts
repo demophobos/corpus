@@ -11,4 +11,5 @@ export const AppType = {
   Element: 'elements',
   ElementView: 'elements',
   ChunkElementView: 'elements',
+  Morph: 'morph-items'
 };

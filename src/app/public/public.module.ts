@@ -11,7 +11,7 @@ import { IndexExplorerComponent } from './index/components/index-explorer/index-
 import { WorkExplorerComponent } from './index/components/work-explorer/work-explorer.component';
 import { SearchComponent } from './search/components/search/search.component';
 import { SearchResultComponent } from './search/components/search-result/search-result.component';
-import { SearchSettingsComponent } from './search/components/search-settings/search-settings.component';
+import { SearchOptionsComponent } from './search/components/search-options/search-options.component';
 import { SearchResultChunkComponent } from './search/components/search-result-chunk/search-result-chunk.component';
 import { SearchResultElementComponent } from './search/components/search-result-element/search-result-element.component';
 import { MorphInfoComponent } from './search/components/morph-info/morph-info.component';
@@ -25,7 +25,7 @@ import { MorphInfoComponent } from './search/components/morph-info/morph-info.co
     WorkExplorerComponent,
     SearchComponent,
     SearchResultComponent,
-    SearchSettingsComponent,
+    SearchOptionsComponent,
     SearchResultChunkComponent,
     SearchResultElementComponent,
     MorphInfoComponent],

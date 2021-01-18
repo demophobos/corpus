@@ -1,11 +1,11 @@
 <mat-card class="card" *ngIf="chunk" class="mat-elevation-z0">
     <mat-card-content>
         <span fxLayout="row wrap" fxLayoutAlign="start center">
+            <span class="title" (click)="getInfo()">[{{chunk.projectCode}} </span>
+            <span class="index-title" (click)="getInfo()">{{chunk.indexName}}]</span>
             <span *ngFor="let element of chunk.elements">
                 <app-search-result-element [element]="element"></app-search-result-element>
             </span>
-            <span class="title" (click)="getInfo()">({{chunk.headerCode}}</span>
-            <span class="index-title" (click)="getInfo()">{{chunk.indexName}})</span>
         </span>
     </mat-card-content>
 </mat-card>

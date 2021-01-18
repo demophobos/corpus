@@ -6,10 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { AppConfig } from '@shared/constants';
-import { ElementQuery } from '@shared/models';
+import { FormSearchType } from '@shared/enums';
+import { ElementQuery, ElementView } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { SearchService } from '../../services/search.service';
-import { SearchSettingsComponent } from '../search-settings/search-settings.component';
+import { SearchOptionsComponent } from '../search-options/search-options.component';
 
 @Component({
   selector: 'app-search',
@@ -20,6 +21,7 @@ export class SearchComponent implements OnInit {
   searchDisabled: boolean = true;
   settingsDisabled: boolean = false;
   clearDisabled: boolean = true;
+  query: ElementQuery;
   public editorForm: FormGroup;
 
   constructor(
@@ -29,6 +31,9 @@ export class SearchComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+    this.query = new ElementQuery ({});
+
     this.editorForm = this.formBuilder.group({
       formFormControl: new FormControl(''),
       caseFormControl: new FormControl(false)
@@ -40,8 +45,10 @@ export class SearchComponent implements OnInit {
   onChanges(): void {
     this.editorForm.valueChanges.subscribe((val) => {
       if (val.formFormControl) {
-        this.searchDisabled = this.clearDisabled =
-          val.formFormControl.length == 0;
+        this.searchDisabled = this.clearDisabled = val.formFormControl.length == 0;
+        if(val.formFormControl.length > 0){
+          this.query.value = val.formFormControl;
+        }
       } else {
         this.searchDisabled = this.clearDisabled = true;
       }
@@ -54,21 +61,14 @@ export class SearchComponent implements OnInit {
   }
 
   search() {
-    this.searchService.getElementsByValue(
-      new ElementQuery({ 
-        value:  this.editorForm.controls.formFormControl.value, 
-        sense: this.editorForm.controls.caseFormControl.value
-      })
-    );
+    this.query.value = this.editorForm.controls.formFormControl.value;
+    this.query.caseSensitive = this.editorForm.controls.caseFormControl.value
+
+    this.searchService.getChunks(this.query);
+
   }
 
   setSettings() {
-    this.dialogService
-      .showComponent(
-        SearchSettingsComponent,
-        null,
-        AppConfig.DefaultDialogWidth
-      )
-      .toPromise();
+    this.dialogService.showComponent(SearchOptionsComponent, this.query, AppConfig.DefaultDialogWidth).toPromise();
   }
 }

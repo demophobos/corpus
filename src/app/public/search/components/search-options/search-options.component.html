@@ -1,0 +1,41 @@
+<div class="dialog" *ngIf="data">
+    <app-dialog-header title="Расширенный поиск" (close)="close()"></app-dialog-header>
+    <app-dialog-content>
+        <mat-card class="mat-elevation-z0">
+            <mat-card-content>
+                <mat-accordion>
+                    <mat-expansion-panel hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Словоформы
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          {{data.formSearchType}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <form class="form" [formGroup]="optionsForm">
+                        <mat-radio-group aria-label="Select an option" formControlName="options">
+                            <mat-radio-button value="0">Свободная форма</mat-radio-button>
+                            <mat-radio-button value="1">Точная форма</mat-radio-button>
+                            <mat-radio-button value="2">Лемма</mat-radio-button>
+                          </mat-radio-group>
+                      </form>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Морфология
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>I'm visible because I am open</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+            </mat-card-content>
+        </mat-card>
+    </app-dialog-content>
+    <app-dialog-action (save)="save()"></app-dialog-action>
+</div>

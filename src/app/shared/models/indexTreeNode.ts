@@ -1,6 +1,6 @@
-import { Index } from './project';
+import { IndexModel } from './project/indexModel';
 
-export class IndexTreeNode extends Index {
+export class IndexTreeNode extends IndexModel {
     children: IndexTreeNode[];
     public constructor(fields: Partial<IndexTreeNode>) {
         super(fields);

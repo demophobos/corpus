@@ -34,6 +34,9 @@ import {MatChipsModule} from '@angular/material/chips';
 import { SnackBarService } from './services';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
+
 @NgModule({
   declarations: [
     ...fromSharedWidgets.widgets,
@@ -71,7 +74,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatCheckboxModule,
     MatChipsModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatRadioModule
   ],
   exports: [
     ...fromSharedWidgets.widgets,
@@ -99,7 +104,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     KeysPipe,
     MatChipsModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatExpansionModule,
+    MatRadioModule
   ],
   providers: [
     DialogService,

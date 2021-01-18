@@ -1,14 +1,15 @@
 import { ElementSchemaRegistry } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { AppType } from '@shared/constants';
+import { AppConfig, AppType } from '@shared/constants';
 import {
-  Chunk,
+  ChunkModel,
   ChunkElementView,
   ElementView,
-  Header,
-  Index,
+  HeaderModel,
+  IndexModel,
   IndexView,
   Model,
+  MorphModel,
   Project,
   User,
 } from '@shared/models';
@@ -26,6 +27,8 @@ export class ModelMapperService {
         return this.ToHeader(item);
       case AppType.Chunk:
         return this.ToChunk(item);
+      case AppType.Morph:
+        return this.ToMorph(item);
       case AppType.ChunkElementView:
         return this.ToChunkElementView(item);
       // case AppType.ElementView:
@@ -35,6 +38,25 @@ export class ModelMapperService {
       default:
         return throwError(this.toString() + '. Unknown Type');
     }
+  }
+  static ToMorph(item: any): MorphModel {
+    return new MorphModel({
+      id: item._id,
+      lemma: item.lemma,
+      form: item.form,
+      pos: item.pos,
+      gender: item.gender,
+      case: item.case,
+      dialect: item.dialect,
+      feature: item.feature,
+      person: item.person,
+      number: item.number,
+      tense: item.tense,
+      mood: item.mood,
+      voice: item.voice,
+      degree: item.degree,
+      lang: item.lang
+    });
   }
   static ToChunkElementView(item: any) {
     let chunk = new ChunkElementView({
@@ -106,15 +128,15 @@ export class ModelMapperService {
     });
   }
   static ToChunk(item: any) {
-    return new Chunk({
+    return new ChunkModel({
       id: item._id,
       indexId: item.indexId,
       value: item.value,
     });
   }
 
-  static ToIndex(item: any): Index {
-    return new Index({
+  static ToIndex(item: any): IndexModel {
+    return new IndexModel({
       id: item._id,
       headerId: item.headerId,
       name: item.name,
@@ -123,8 +145,8 @@ export class ModelMapperService {
     });
   }
 
-  static ToHeader(item: any): Header {
-    return new Header({
+  static ToHeader(item: any): HeaderModel {
+    return new HeaderModel({
       id: item._id,
       code: item.code,
       name: item.name,

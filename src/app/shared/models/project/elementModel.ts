@@ -1,7 +1,7 @@
 import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
-export class Element extends Model {
+export class ElementModel extends Model {
     apiType: string = AppType.Element;
     value: string;
     chunkId: string;
@@ -10,7 +10,7 @@ export class Element extends Model {
     morphId:string;
     headerId:string;
 
-    public constructor(fields: Partial<Element>) {
+    public constructor(fields: Partial<ElementModel>) {
         super();
         Object.assign(this, fields);
      }

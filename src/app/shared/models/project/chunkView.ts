@@ -1,7 +1,7 @@
 import { AppType } from '@shared/constants';
-import { Chunk } from './chunk';
+import { ChunkModel } from './chunkModel';
 
-export class ChunkView extends Chunk {
+export class ChunkView extends ChunkModel {
     apiType: string = AppType.ChunkView;
     indexName : string;
     headerDesc : string;

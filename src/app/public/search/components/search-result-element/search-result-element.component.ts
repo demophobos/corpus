@@ -26,15 +26,20 @@ export class SearchResultElementComponent implements OnInit {
     this.searchService.currentQuery.subscribe((query: ElementQuery) => {
       this.selectedValue = query.value;
 
-      if (this.element && !query.sense) {
+      if (this.element && !query.caseSensitive) {
         this.isSelected =
           this.element.value.toLowerCase() == this.selectedValue.toLowerCase();
       } else {
         this.isSelected = this.element.value == this.selectedValue;
       }
     });
+
+    this.searchService.morphIds.subscribe((morphIds: string[])=>{
+      this.isSelected = morphIds.indexOf(this.element.morphId) > -1
+    });
   }
   morphSelected(element: ElementView) {
-    this.dialogService.showComponent(MorphInfoComponent, element, AppConfig.DefaultDialogWidth, false);
+    //this.dialogService.showComponent(MorphInfoComponent, element, AppConfig.DefaultDialogWidth, false);
   }
 }
+  

@@ -1,7 +1,7 @@
 import { AppType } from '@shared/constants';
 import { Model } from '../base/model';
 
-export class Header extends Model {
+export class HeaderModel extends Model {
     apiType: string = AppType.Header;
     code: string;
     name: string;
@@ -10,7 +10,7 @@ export class Header extends Model {
     lang: string;
     editionType: string;
     
-    public constructor(fields: Partial<Header>) {
+    public constructor(fields: Partial<HeaderModel>) {
         super();
         Object.assign(this, fields);
      }
