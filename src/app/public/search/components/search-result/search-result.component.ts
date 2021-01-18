@@ -1,23 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ChunkElementView, ElementView } from '@shared/models';
+import { ChunkElementView } from '@shared/models';
 import { SearchService } from '../../services/search.service';
-import { from } from 'rxjs';
-import { mergeMap, groupBy, toArray } from 'rxjs/operators';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { Language } from '@shared/enums';
+import { SearchResultChunkComponent } from '../search-result-chunk/search-result-chunk.component';
 @Component({
   selector: 'app-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
 })
-export class SearchResultComponent extends BaseComponent implements OnInit {
+export class SearchResultComponent extends BaseComponent implements AfterViewInit {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(SearchResultChunkComponent, {static: false}) chunkComponent: SearchResultChunkComponent; 
+
+  displayedColumns: string[] = ['projectCode', 'indexName', 'chunk', 'headerCode'];
+  resultsLength = 0;
+  isRateLimitReached = false;
   chunks: ChunkElementView[];
-  groupped: Map<string, ElementView[]>;
   isLoading: boolean = false;
   constructor(private searchService: SearchService) {
     super();
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(){
     this.searchService.chunks.subscribe((chunks) => {
       this.chunks = chunks;
     });
@@ -25,5 +33,9 @@ export class SearchResultComponent extends BaseComponent implements OnInit {
     this.searchService.isLoading.subscribe(isLoading => {
       this.isLoading = isLoading;
     });
+  }
+
+  getInterpIcon(chunk : ChunkElementView): string {
+    return chunk.headerLang == Language.Latin ? Language.Russian : Language.Latin;
   }
 }

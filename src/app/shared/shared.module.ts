@@ -9,7 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RouterModule } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatTable, MatTableModule } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -67,7 +67,6 @@ import {MatRadioModule} from '@angular/material/radio';
     MatTooltipModule,
     MatBottomSheetModule,
     MatSelectModule,
-    MatTableModule,
     MatTreeModule,
     AngularSplitModule,
     MatTabsModule,
@@ -106,7 +105,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatPaginatorModule
   ],
   providers: [
     DialogService,

@@ -1,14 +1,14 @@
 <mat-card class="card" *ngIf="chunk" class="mat-elevation-z0">
-    <mat-card-content>
-        <span fxLayout="row wrap" fxLayoutAlign="start center">
-            <span *ngFor="let element of chunk.elements">
-                <app-search-result-element [element]="element"></app-search-result-element>
-            </span>
-            <app-chunk-info [chunk]="chunk"></app-chunk-info>
-            <span class="spacer"></span>
+    <mat-card-content fxLayout="row">
+        <span fxFlex="5">
             <button mat-button mat-icon-button aria-label="load-tanslation" (click)="loadInterp()" color="primary">
                 <mat-icon svgIcon="{{interpIcon}}"></mat-icon>
             </button>
+        </span>
+        <span fxFill fxLayout="row wrap" fxLayoutAlign="start center">
+            <span *ngFor="let element of chunk.elements">
+                <app-search-result-element [element]="element"></app-search-result-element>
+            </span>            
         </span>
     </mat-card-content>
 </mat-card>
@@ -27,4 +27,3 @@
         </span>
     </mat-card-content>
 </mat-card>
-<mat-divider class="card"></mat-divider>
