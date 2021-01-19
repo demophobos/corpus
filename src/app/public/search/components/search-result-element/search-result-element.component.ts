@@ -15,12 +15,17 @@ import { MorphInfoComponent } from '../morph-info/morph-info.component';
   templateUrl: './search-result-element.component.html',
   styleUrls: ['./search-result-element.component.scss'],
 })
-export class SearchResultElementComponent extends BaseComponent implements OnInit {
+export class SearchResultElementComponent
+  extends BaseComponent
+  implements OnInit {
   @Input() element: ElementView;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
   isSelected: boolean = false;
-  constructor(private searchService: SearchService, private dialogService: DialogService) {
+  query: ElementQuery;
+  morphIds: string[];
+
+  constructor(private searchService: SearchService) {
     super();
   }
 
@@ -28,23 +33,26 @@ export class SearchResultElementComponent extends BaseComponent implements OnIni
     if (this.element) {
       this.isMorphStyle = this.element.morphId !== null;
     }
+
     this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ElementQuery) => {
-      this.selectedValue = query.value;
-      if(this.selectedValue){
-        if (this.element && !query.caseSensitive) {
-          this.isSelected = this.element.value.toLowerCase() == this.selectedValue.toLowerCase();
+        this.query = query;
+      });
+
+    this.searchService.morphIds.pipe(takeUntil(this.destroyed)).subscribe((morphIds: string[]) => {
+        this.morphIds = morphIds;
+      });
+
+      if (this.morphIds?.indexOf(this.element.morphId) > -1) {
+        this.isSelected = true;
+      } else {
+        if (!this.query.caseSensitive) {
+          this.isSelected =
+            this.element.value.toLowerCase() == this.query.value.toLowerCase();
         } else {
-          this.isSelected = this.element.value == this.selectedValue;
+          this.isSelected = this.element.value == this.query.value;
         }
       }
-    });
 
-    this.searchService.morphIds.subscribe((morphIds: string[])=>{
-      this.isSelected = morphIds.indexOf(this.element.morphId) > -1
-    });
   }
-  morphSelected(element: ElementView) {
-    //this.dialogService.showComponent(MorphInfoComponent, element, AppConfig.DefaultDialogWidth, false);
-  }
+
 }
-  

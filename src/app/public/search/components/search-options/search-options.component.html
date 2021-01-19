@@ -1,8 +1,4 @@
-<mat-card class="card mat-elevation-z8">
-  <mat-card-header class="card-header">
-    <mat-card-title class="card-title">формa</mat-card-title>
-    <div class="spacer"></div>
-  </mat-card-header>
+<mat-card class="card mat-elevation-z0">
   <mat-card-content>
     <form class="form" [formGroup]="optionsForm">
       <mat-radio-group aria-label="Select an option" formControlName="options" color="primary">
@@ -11,7 +7,7 @@
         <mat-radio-button value="2">лемма</mat-radio-button>
       </mat-radio-group>
       <br />
-      <mat-checkbox matSuffix formControlName="caseFormControl" color="primary">регистрозависимый</mat-checkbox>
+      <mat-checkbox *ngIf="caseVisible" formControlName="caseFormControl" color="primary">регистрозависимый</mat-checkbox>
     </form>
   </mat-card-content>
 </mat-card>
