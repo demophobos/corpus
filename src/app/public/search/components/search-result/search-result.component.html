@@ -1,4 +1,6 @@
-<mat-progress-bar mode="buffer" *ngIf="isLoading == true"></mat-progress-bar>
+<div class="spinner" *ngIf="isLoading == true" fxLayoutAlign="center center">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngIf="isLoading == false && chunks" class="container mat-elevation-z0">
   <div class="table-container">
     <table mat-table [dataSource]="chunks" class="table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
@@ -8,9 +10,11 @@
           <app-search-result-chunk [chunk]="row"></app-search-result-chunk>
         </td>
       </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr class="header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
-  <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+  <span>{{total}}</span>
+  <span class="spacer"></span>
+  <mat-paginator *ngIf="showPaginator()" [length]="resultsLength" [pageSize]="30"></mat-paginator>
 </div>

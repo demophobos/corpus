@@ -8,7 +8,9 @@
   position: relative;
   overflow: auto;
 }
-
+.header{
+  display: none !important;
+}
 table {
   width: 100%;
 }
@@ -21,4 +23,8 @@ table {
 
 .mat-column-created {
   max-width: 124px;
+}
+.spinner{
+  height: 100%;
+  width: 100%;
 }

@@ -5,7 +5,6 @@ import { SearchService } from '../../services/search.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Language } from '@shared/enums';
-import { SearchResultChunkComponent } from '../search-result-chunk/search-result-chunk.component';
 import { takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-search-result',
@@ -17,7 +16,7 @@ export class SearchResultComponent
   implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  total: number;
   queryConditionInfo: string;
   displayedColumns: string[] = ['chunk'];
   resultsLength = 0;
@@ -34,6 +33,7 @@ export class SearchResultComponent
       });
     this.searchService.chunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
         this.chunks = chunks;
+        this.total = chunks.length;
       });
 
     this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe((isLoading) => {
@@ -45,5 +45,9 @@ export class SearchResultComponent
     return chunk.headerLang == Language.Latin
       ? Language.Russian
       : Language.Latin;
+  }
+
+  showPaginator(): boolean{
+    return !this.isLoading && this.chunks.length > 0;
   }
 }

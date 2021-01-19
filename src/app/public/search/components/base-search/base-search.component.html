@@ -1,0 +1,17 @@
+<mat-card class="mat-elevation-z1">
+    <mat-card-content>
+        <form class="form" [formGroup]="editorForm">
+            <mat-form-field class="full-width">
+                <input matInput formControlName="formFormControl">
+                <button mat-button matSuffix mat-icon-button aria-label="search" (click)="search()" color="primary"
+                    [disabled]="searchDisabled">
+                    <mat-icon svgIcon="play"></mat-icon>
+                </button>
+                <button mat-button matSuffix mat-icon-button aria-label="clear" (click)="clear()" color="primary"
+                    [disabled]="clearDisabled">
+                    <mat-icon svgIcon="close"></mat-icon>
+                </button>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+</mat-card>

@@ -5,6 +5,7 @@ import { ChunkElementView, ElementQuery, ElementView, IndexView, MorphModel } fr
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
 import { ReplaySubject } from 'rxjs';
+import { last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +22,11 @@ export class SearchService implements OnInit {
     private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>
-  ) {}
+  ) {
+    this.getLocalStorageQuery();
+  }
   ngOnInit(): void {
-    
+
   }
 
   public getLocalStorageQuery() : ElementQuery {

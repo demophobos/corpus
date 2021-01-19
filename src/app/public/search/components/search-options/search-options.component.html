@@ -1,24 +1,17 @@
-<div class="dialog" *ngIf="data">
-    <app-dialog-header title="Расширенный поиск" (close)="close()"></app-dialog-header>
-    <app-dialog-content>
-        <mat-card class="mat-elevation-z0">
-          <mat-card-title>Поиск словоформ</mat-card-title>
-            <mat-card-content>
-              <form class="form" [formGroup]="optionsForm">
-                <mat-radio-group aria-label="Select an option" formControlName="options" color="primary">
-                    <mat-radio-button value="0">Свободная форма</mat-radio-button>
-                    <mat-radio-button value="1">Точная форма</mat-radio-button>
-                    <mat-radio-button value="2">Лемма</mat-radio-button>
-                  </mat-radio-group>
-              </form>
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="mat-elevation-z0">
-          <mat-card-title>Морфология</mat-card-title>
-            <mat-card-content>
-              
-            </mat-card-content>
-        </mat-card>
-    </app-dialog-content>
-    <app-dialog-action (save)="save()"></app-dialog-action>
-</div>
+<mat-card class="card mat-elevation-z8">
+  <mat-card-header class="card-header">
+    <mat-card-title class="card-title">формa</mat-card-title>
+    <div class="spacer"></div>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="optionsForm">
+      <mat-radio-group aria-label="Select an option" formControlName="options" color="primary">
+        <mat-radio-button value="0">свободная</mat-radio-button>
+        <mat-radio-button value="1">точная</mat-radio-button>
+        <mat-radio-button value="2">лемма</mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <mat-checkbox matSuffix formControlName="caseFormControl" color="primary">регистрозависимый</mat-checkbox>
+    </form>
+  </mat-card-content>
+</mat-card>
