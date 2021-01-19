@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { ElementQuery, ElementView } from '@shared/models';
 import { DialogService } from '@shared/services';
+import { basename } from 'path';
 import { ElementHelper } from 'protractor';
+import { take, takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 import { MorphInfoComponent } from '../morph-info/morph-info.component';
 
@@ -12,25 +15,27 @@ import { MorphInfoComponent } from '../morph-info/morph-info.component';
   templateUrl: './search-result-element.component.html',
   styleUrls: ['./search-result-element.component.scss'],
 })
-export class SearchResultElementComponent implements OnInit {
+export class SearchResultElementComponent extends BaseComponent implements OnInit {
   @Input() element: ElementView;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
   isSelected: boolean = false;
-  constructor(private searchService: SearchService, private dialogService: DialogService) {}
+  constructor(private searchService: SearchService, private dialogService: DialogService) {
+    super();
+  }
 
   ngOnInit(): void {
     if (this.element) {
       this.isMorphStyle = this.element.morphId !== null;
     }
-    this.searchService.currentQuery.subscribe((query: ElementQuery) => {
+    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ElementQuery) => {
       this.selectedValue = query.value;
-
-      if (this.element && !query.caseSensitive) {
-        this.isSelected =
-          this.element.value.toLowerCase() == this.selectedValue.toLowerCase();
-      } else {
-        this.isSelected = this.element.value == this.selectedValue;
+      if(this.selectedValue){
+        if (this.element && !query.caseSensitive) {
+          this.isSelected = this.element.value.toLowerCase() == this.selectedValue.toLowerCase();
+        } else {
+          this.isSelected = this.element.value == this.selectedValue;
+        }
       }
     });
 
