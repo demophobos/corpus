@@ -31,7 +31,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { KeysPipe } from './pipes/keys.pipe';
 import {MatChipsModule} from '@angular/material/chips';
-import { SnackBarService } from './services';
+import { LocalStorageService, SnackBarService } from './services';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -111,7 +111,8 @@ import {MatRadioModule} from '@angular/material/radio';
   providers: [
     DialogService,
     RedirectService,
-    SnackBarService
+    SnackBarService,
+    LocalStorageService
   ]
 })
 export class SharedModule { }

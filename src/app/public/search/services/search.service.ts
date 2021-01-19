@@ -1,26 +1,45 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
-import { FormSearchType } from '@shared/enums';
+import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
 import { ChunkElementView, ElementQuery, ElementView, IndexView, MorphModel } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
+import { LocalStorageService } from '@shared/services';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SearchService {
+export class SearchService implements OnInit {
+
   public currentQuery: ReplaySubject<ElementQuery> = new ReplaySubject<ElementQuery>(1);
   public chunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
   public morphIds: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   constructor(
+    private localStorageService: LocalStorageService,
     private elementService: ApiService<ElementView>,
     private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>
   ) {}
+  ngOnInit(): void {
+    
+  }
+
+  public getLocalStorageQuery() : ElementQuery {
+    let query = this.localStorageService.getItem(LocalStorageKeyEnum.Query);
+    this.currentQuery.next(query);
+    return query;
+  }
+
+  removeLocalStorageQuery() {
+    this.localStorageService.removeItem(LocalStorageKeyEnum.Query);
+    this.currentQuery.next(new ElementQuery({}));
+  }
 
   public getChunks(query: ElementQuery) {
+
+    this.localStorageService.setItem(LocalStorageKeyEnum.Query, query);
 
     this.chunks.next(new Array<ChunkElementView>());
 

@@ -17,12 +17,11 @@ export class SearchResultComponent
   implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
+
   queryConditionInfo: string;
   displayedColumns: string[] = ['chunk'];
   resultsLength = 0;
   isRateLimitReached = false;
-
   chunks: ChunkElementView[];
   isLoading: boolean = false;
   constructor(private searchService: SearchService) {
@@ -30,20 +29,14 @@ export class SearchResultComponent
   }
 
   ngAfterViewInit() {
-    this.searchService.currentQuery
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((query) => {
+    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
         this.queryConditionInfo = JSON.stringify(query);
       });
-    this.searchService.chunks
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((chunks) => {
+    this.searchService.chunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
         this.chunks = chunks;
       });
 
-    this.searchService.isLoading
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((isLoading) => {
+    this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe((isLoading) => {
         this.isLoading = isLoading;
       });
   }

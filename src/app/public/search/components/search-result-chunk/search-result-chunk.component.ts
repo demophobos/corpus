@@ -13,7 +13,6 @@ import { SearchService } from '../../services/search.service';
 })
 export class SearchResultChunkComponent extends BaseComponent implements OnInit {
   showInterp: boolean = false;
-  interpIcon: string;
   interpIsLoading: boolean = true;
   @Input() chunk: ChunkElementView;
   interpChunks: ChunkElementView[];
@@ -23,10 +22,8 @@ export class SearchResultChunkComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit(): void {
-    this.interpIcon = this.chunk.headerLang == Language.Latin ? Language.Russian : Language.Latin;
+    
   }
-
-
 
   loadInterp() {
     this.showInterp = !this.showInterp;

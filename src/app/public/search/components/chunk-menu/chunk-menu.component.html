@@ -1,0 +1,9 @@
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Text menu">
+    <mat-icon svgIcon="more_vert"></mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="loadInterp()">
+        <mat-icon svgIcon="{{interpIcon}}"></mat-icon>
+        <span>{{interpInfo}}</span>
+    </button>
+  </mat-menu>

@@ -1,16 +1,16 @@
 <span fxLayout="column">
     <mat-card class="card" *ngIf="chunk" class="mat-elevation-z0">
-        <mat-card-header>
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-title">
+                <app-chunk-info [chunk]="chunk"></app-chunk-info>
+            </mat-card-title>
             <span class="spacer"></span>
-            <button mat-button mat-icon-button aria-label="load-tanslation" (click)="loadInterp()" color="primary">
-                <mat-icon svgIcon="{{interpIcon}}"></mat-icon>
-            </button>
+            <app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()"></app-chunk-menu>
         </mat-card-header>
         <mat-card-content fxLayout="row wrap">
             <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
                 <app-search-result-element [element]="element"></app-search-result-element>
             </span>
-            <app-chunk-info [chunk]="chunk"></app-chunk-info>
         </mat-card-content>
     </mat-card>
     <mat-card class="interp-card" *ngIf="showInterp" class="mat-elevation-z0">
