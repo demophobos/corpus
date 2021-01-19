@@ -1,29 +1,30 @@
-<mat-card class="card" *ngIf="chunk" class="mat-elevation-z0">
-    <mat-card-content fxLayout="row">
-        <span fxFlex="5">
+<span fxLayout="column">
+    <mat-card class="card" *ngIf="chunk" class="mat-elevation-z0">
+        <mat-card-header>
+            <span class="spacer"></span>
             <button mat-button mat-icon-button aria-label="load-tanslation" (click)="loadInterp()" color="primary">
                 <mat-icon svgIcon="{{interpIcon}}"></mat-icon>
             </button>
-        </span>
-        <span fxFill fxLayout="row wrap" fxLayoutAlign="start center">
-            <span *ngFor="let element of chunk.elements">
-                <app-search-result-element [element]="element"></app-search-result-element>
-            </span>            
-        </span>
-    </mat-card-content>
-</mat-card>
-<mat-card class="interp-card" *ngIf="showInterp" class="mat-elevation-z0">
-    <mat-card-content>
-        <mat-progress-bar mode="buffer" *ngIf="interpIsLoading == true"></mat-progress-bar>
-        <span *ngFor="let interpChunk of interpChunks" fxLayout="row wrap" fxLayoutAlign="start center">
-            <span *ngFor="let element of interpChunk.elements">
+        </mat-card-header>
+        <mat-card-content fxLayout="row wrap">
+            <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
                 <app-search-result-element [element]="element"></app-search-result-element>
             </span>
-            <app-chunk-info [chunk]="interpChunk"></app-chunk-info>
-            <span class="spacer"></span>
-        </span>
-        <span class="empty-interp" *ngIf="!interpChunks">
-            {{emptyInterpInfo}}
-        </span>
-    </mat-card-content>
-</mat-card>
+            <app-chunk-info [chunk]="chunk"></app-chunk-info>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="interp-card" *ngIf="showInterp" class="mat-elevation-z0">
+        <mat-card-content>
+            <mat-progress-bar mode="buffer" *ngIf="interpIsLoading == true"></mat-progress-bar>
+            <span *ngFor="let interpChunk of interpChunks" fxLayout="row wrap" fxLayoutAlign="start center">
+                <span *ngFor="let element of interpChunk.elements">
+                    <app-search-result-element [element]="element"></app-search-result-element>
+                </span>
+                <app-chunk-info [chunk]="interpChunk"></app-chunk-info>
+            </span>
+            <span class="empty-interp" *ngIf="!interpChunks">
+                {{emptyInterpInfo}}
+            </span>
+        </mat-card-content>
+    </mat-card>
+</span>
