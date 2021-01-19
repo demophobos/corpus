@@ -17,8 +17,7 @@ export class SearchResultComponent
   implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(SearchResultChunkComponent, { static: false })
-  chunkComponent: SearchResultChunkComponent;
+  
   queryConditionInfo: string;
   displayedColumns: string[] = ['chunk'];
   resultsLength = 0;
