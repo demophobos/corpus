@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
-import { ElementQuery } from '@shared/models';
+import { AppConfig } from '@shared/constants';
+import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
@@ -14,7 +15,7 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
   searchDisabled: boolean = true;
   settingsDisabled: boolean = false;
   clearDisabled: boolean = true;
-  query: ElementQuery;
+  query: ChunkQuery;
   editorForm: FormGroup;
   
   constructor(private searchService: SearchService,
@@ -36,7 +37,7 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
       this.searchDisabled = false;
       this.clearDisabled = false;
     }else{
-      this.query = new ElementQuery({});
+      this.query = new ChunkQuery({});
     }
 
     this.onChanges();
@@ -66,7 +67,9 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
     this.searchService.removeLocalStorageQuery();
   }
 
-  search() {
+  async search() {
+    this.query.skip = 0;
+    this.query.limit = AppConfig.DefaultPageLimit;
     this.searchService.getChunks(this.query);
   }
 

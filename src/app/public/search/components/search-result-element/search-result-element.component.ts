@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
-import { ElementQuery, ElementView } from '@shared/models';
+import { ChunkQuery, ElementView } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { basename } from 'path';
 import { ElementHelper } from 'protractor';
@@ -22,7 +22,7 @@ export class SearchResultElementComponent
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
   isSelected: boolean = false;
-  query: ElementQuery;
+  query: ChunkQuery;
   morphIds: string[];
 
   constructor(private searchService: SearchService) {
@@ -34,7 +34,7 @@ export class SearchResultElementComponent
       this.isMorphStyle = this.element.morphId !== null;
     }
 
-    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ElementQuery) => {
+    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ChunkQuery) => {
         this.query = query;
       });
 
@@ -45,12 +45,7 @@ export class SearchResultElementComponent
       if (this.morphIds?.indexOf(this.element.morphId) > -1) {
         this.isSelected = true;
       } else {
-        if (!this.query.caseSensitive) {
-          this.isSelected =
-            this.element.value.toLowerCase() == this.query.value.toLowerCase();
-        } else {
-          this.isSelected = this.element.value == this.query.value;
-        }
+        this.isSelected = this.element.value.toLowerCase() == this.query.value.toLowerCase();
       }
 
   }

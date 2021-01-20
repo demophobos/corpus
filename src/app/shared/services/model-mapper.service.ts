@@ -13,7 +13,9 @@ import {
   Project,
   User,
   InterpModel,
+  PageResponse as PageResponse,
 } from '@shared/models';
+import { Pageable } from '@shared/models/base/pageable';
 import { throwError } from 'rxjs';
 
 @Injectable({
@@ -31,7 +33,7 @@ export class ModelMapperService {
       case AppType.Morph:
         return this.ToMorph(item);
       case AppType.ChunkElementView:
-        return this.ToChunkElementView(item);
+        return this.ToChunkElementViewPage(item);
       case AppType.Interp:
         return this.ToInterp(item);
       // case AppType.ElementView:
@@ -69,6 +71,17 @@ export class ModelMapperService {
       degree: item.degree,
       lang: item.lang
     });
+  }
+  static ToChunkElementViewPage(item: any) {
+    let pageResponse = new PageResponse({
+      total: item.total,
+      skipped: item.skipped,
+      limited: item.limited
+    });
+    pageResponse.documents = item.documents.map((res: ChunkElementView) => {
+      return this.ToChunkElementView(res);
+    });
+    return pageResponse;
   }
   static ToChunkElementView(item: any) {
     let chunk = new ChunkElementView({

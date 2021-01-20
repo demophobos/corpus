@@ -52,6 +52,17 @@ export class ApiService<T extends Model> implements OnInit {
       );
   }
 
+  findPageByQuery(item: T, query: string) {
+    return this.httpClient
+      .get(`${AppConfig.ApiUrl}${item.apiType}?params=${query}`)
+      .pipe(
+        map((res: any) => {
+          return ModelMapperService.Map(item, res);
+        }),
+        catchError((e: any) => throwError(this.errorService.errorHandler(e)))
+      );
+  }
+
   countByQuery(item: T, query: string) {
     return this.httpClient
       .get(`${AppConfig.ApiUrl}${item.apiType}?params=${query}`)

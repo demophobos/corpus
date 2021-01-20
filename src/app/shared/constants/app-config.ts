@@ -5,5 +5,6 @@ export const AppConfig = {
     DefaultLoginDialogWidth: '500',
     SessionExpiresIn: 180,
     AppFullTitle: 'Corpus Latino-Rossicum',
-    AppShortTitle: 'CLR'
-};
+    AppShortTitle: 'CLR',
+    DefaultPageLimit: 5
+}

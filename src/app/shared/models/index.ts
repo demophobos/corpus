@@ -11,6 +11,7 @@ export * from './project/chunkElementView';
 export * from './project/elementModel';
 export * from './project/elementView';
 export * from './project/indexView';
-export * from './project/elementQuery';
+export * from './project/chunkQuery';
 export * from './project/morphModel';
 export * from './project/interpModel';
+export * from './project/pageResponse';

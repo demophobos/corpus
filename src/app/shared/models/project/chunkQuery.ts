@@ -1,11 +1,12 @@
 import { FormSearchType } from "@shared/enums";
 
-export class ElementQuery {
+export class ChunkQuery {
     value: string;
-    caseSensitive: boolean = false;
     formSearchType: FormSearchType = FormSearchType.Free
-
-    public constructor(fields: Partial<ElementQuery>) {
+    total: number;
+    skip: number;
+    limit: number;
+    public constructor(fields: Partial<ChunkQuery>) {
         Object.assign(this, fields);
      }
 }

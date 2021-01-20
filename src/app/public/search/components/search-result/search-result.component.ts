@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ChunkElementView } from '@shared/models';
+import { ChunkElementView, ChunkQuery } from '@shared/models';
 import { SearchService } from '../../services/search.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -16,11 +16,8 @@ export class SearchResultComponent
   implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  total: number;
-  queryConditionInfo: string;
+  query: ChunkQuery;
   displayedColumns: string[] = ['chunk'];
-  resultsLength = 0;
-  isRateLimitReached = false;
   chunks: ChunkElementView[];
   isLoading: boolean = false;
   constructor(private searchService: SearchService) {
@@ -28,12 +25,13 @@ export class SearchResultComponent
   }
 
   ngAfterViewInit() {
+    
     this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
-        this.queryConditionInfo = JSON.stringify(query);
+        this.query = query;
       });
+
     this.searchService.chunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
         this.chunks = chunks;
-        this.total = chunks.length;
       });
 
     this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe((isLoading) => {

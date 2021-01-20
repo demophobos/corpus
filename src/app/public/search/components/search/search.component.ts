@@ -8,7 +8,7 @@ import {
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { FormSearchType } from '@shared/enums';
-import { ElementQuery, ElementView } from '@shared/models';
+import { ChunkQuery, ElementView } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
