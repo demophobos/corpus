@@ -21,6 +21,7 @@ export class SearchResultElementComponent
   @Input() element: ElementView;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
+  isNotMorphStyle: boolean = false;
   isSelected: boolean = false;
   query: ChunkQuery;
   morphIds: string[];
@@ -42,12 +43,17 @@ export class SearchResultElementComponent
         this.morphIds = morphIds;
       });
 
-      if (this.morphIds?.indexOf(this.element.morphId) > -1) {
-        this.isSelected = true;
-      } else {
-        this.isSelected = this.element.value.toLowerCase() == this.query.value.toLowerCase();
-      }
 
+      if (this.morphIds?.indexOf(this.element.morphId) > -1) {
+
+        this.isSelected = true;
+
+      } 
+      else {
+        this.isSelected = this.element.value.toLowerCase() == this.query.value.toLowerCase();
+
+        this.isNotMorphStyle = this.isSelected && this.element.morphId == null;
+      }
   }
 
 }

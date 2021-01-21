@@ -73,8 +73,6 @@ export class SearchService implements OnInit {
 
     query.total = page.total;
 
-    query.skip = page.skipped + query.limit;
-
     this.currentQuery.next(query);
 
     this.localStorageService.setItem(LocalStorageKeyEnum.Query, query);

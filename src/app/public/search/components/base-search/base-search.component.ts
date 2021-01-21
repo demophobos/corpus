@@ -68,7 +68,9 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
   }
 
   async search() {
+    //Init search paging info
     this.query.skip = 0;
+    this.query.index = 0;
     this.query.limit = AppConfig.DefaultPageLimit;
     this.searchService.getChunks(this.query);
   }

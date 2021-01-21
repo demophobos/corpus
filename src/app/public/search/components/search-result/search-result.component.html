@@ -2,7 +2,7 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="isLoading == false && chunks" class="container mat-elevation-z0">
-  <mat-paginator *ngIf="query && showPaginator()" [length]="query.total" [pageSize]="query.limit"></mat-paginator>
+  <mat-paginator [pageIndex]="query.index" [length]="query.total" [pageSize]="query.limit" (page)="pageEvent = loadPage($event)"></mat-paginator>
   <div class="table-container">
     <table mat-table [dataSource]="chunks" class="table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
       <ng-container matColumnDef="chunk">

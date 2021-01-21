@@ -1,7 +1,12 @@
-.morph{
-    cursor : pointer;
-    color:blue;
+.morph {
+  cursor: pointer;
+  color: blue;
 }
-.mark{
-    background: gold;
+.notmorph {
+  text-decoration-line: underline;
+  text-decoration-style: double;
+  text-decoration-color: red;
+}
+.mark {
+  background: gold;
 }

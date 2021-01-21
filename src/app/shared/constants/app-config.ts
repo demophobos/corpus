@@ -6,5 +6,5 @@ export const AppConfig = {
     SessionExpiresIn: 180,
     AppFullTitle: 'Corpus Latino-Rossicum',
     AppShortTitle: 'CLR',
-    DefaultPageLimit: 5
+    DefaultPageLimit: 8
 }
