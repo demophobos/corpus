@@ -1,3 +1,5 @@
+import { FormSearchType } from "@shared/enums";
+
 export const AppConfig = {
     ApiUrl: 'http://localhost:3000/v2/',
     DefaultTheme: 'indigo-pink-theme',
@@ -6,5 +8,6 @@ export const AppConfig = {
     SessionExpiresIn: 180,
     AppFullTitle: 'Corpus Latino-Rossicum',
     AppShortTitle: 'CLR',
-    DefaultPageLimit: 8
+    DefaultPageLimit: 10,
+    DefaultSearchTypeValue: FormSearchType.Free
 }

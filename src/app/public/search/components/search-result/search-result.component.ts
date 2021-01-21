@@ -18,6 +18,12 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
 
   query: ChunkQuery;
 
+  index: number;
+
+  total: number;
+
+  limit: number;
+
   displayedColumns: string[] = ['chunk'];
 
   chunks: ChunkElementView[];
@@ -26,7 +32,6 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
 
   pageEvent: PageEvent;
 
-  pageIndex: number;
 
   constructor(private searchService: SearchService) {
     super();
@@ -35,7 +40,18 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
   ngAfterViewInit() {
 
     this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
+        
         this.query = query;
+
+        if(query){
+
+          this.limit = query.limit;
+
+          this.total = query.total;
+  
+          this.index = query.index;
+        }
+
       });
 
     this.searchService.chunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
@@ -55,7 +71,7 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
   }
 
   showPaginator(): boolean{
-    return !this.isLoading && this.chunks.length > 0;
+    return !this.isLoading && this.chunks !== undefined && this.chunks.length > 0;
   }
 
   loadPage(page: PageEvent): any {

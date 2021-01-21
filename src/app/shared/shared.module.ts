@@ -117,7 +117,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatProgressSpinnerModule,
     MatExpansionModule,
     MatRadioModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatTooltipModule
   ],
   providers: [
     DialogService,

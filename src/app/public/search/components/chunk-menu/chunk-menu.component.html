@@ -1,9 +1,9 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" color="primary" aria-label="Text menu">
-    <mat-icon svgIcon="more_vert"></mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="loadInterp()">
-        <mat-icon svgIcon="{{interpIcon}}"></mat-icon>
-        <span>{{interpInfo}}</span>
-    </button>
-  </mat-menu>
+<button mat-icon-button color="primary" matTooltip="{{interpInfo}}" (click)="loadInterp()">
+  <mat-icon svgIcon="versio"></mat-icon>
+</button>
+<button mat-icon-button color="primary" matTooltip="Morphologia">
+  <mat-icon svgIcon="morph"></mat-icon>
+</button>
+<button mat-icon-button color="primary" matTooltip="Commentarii">
+  <mat-icon svgIcon="comment"></mat-icon>
+</button>

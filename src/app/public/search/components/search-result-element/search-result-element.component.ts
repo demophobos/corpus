@@ -53,6 +53,7 @@ export class SearchResultElementComponent
         this.isSelected = this.element.value.toLowerCase() == this.query.value.toLowerCase();
 
         this.isNotMorphStyle = this.isSelected && this.element.morphId == null;
+        
       }
   }
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@shared/components';
+import { AppConfig } from '@shared/constants';
 import { FormSearchType } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { basename } from 'path';
@@ -19,16 +20,23 @@ export class SearchOptionsComponent extends BaseComponent implements OnInit {
   query: ChunkQuery;
   constructor(private fb: FormBuilder, private searchService: SearchService) {
     super();
+
+    this.optionsForm = this.fb.group({
+      options: [AppConfig.DefaultSearchTypeValue]
+    });
   }
 
   ngOnInit(): void {
     this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
     });
+    
+    
 
-    this.optionsForm = this.fb.group({
-      options: [this.query.formSearchType]
-    });
+    if(this.query){
+      this.optionsForm.controls.options.setValue(this.query.formSearchType);
+    }
+   
 
     this.onChanges();
   }
