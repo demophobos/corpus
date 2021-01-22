@@ -1,12 +1,11 @@
-import { Injectable, Injector, OnInit } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
 import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
-import { ChunkElementView, ChunkQuery, ChunkView, ElementView, IndexView, MorphModel, PageResponse } from '@shared/models';
+import { ChunkElementView, ChunkQuery, ChunkView, IndexView, MorphModel, PageResponse } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
 import { ReplaySubject } from 'rxjs';
-import { last } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +14,12 @@ export class SearchService implements OnInit {
 
   public currentQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
-  public textChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  public showComment: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  public comment: ReplaySubject<ChunkElementView> = new ReplaySubject<ChunkElementView>(1);
   constructor(
     private localStorageService: LocalStorageService,
-    private elementService: ApiService<ElementView>,
     private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>,
@@ -30,6 +29,14 @@ export class SearchService implements OnInit {
   }
   ngOnInit(): void {
 
+  }
+
+  loadComment(chunk: ChunkElementView) {
+    this.comment.next(chunk);
+  }
+
+  showCommentPane(show: boolean) {
+    this.showComment.next(show);
   }
 
   public getLocalStorageQuery() : ChunkQuery {
@@ -52,6 +59,8 @@ export class SearchService implements OnInit {
 }
 
   public async getChunks(query: ChunkQuery){
+
+    this.comment.next(null);
 
     this.isLoading.next(true);
 

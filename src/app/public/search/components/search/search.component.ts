@@ -12,7 +12,6 @@ import { ChunkQuery, ElementView } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
-import { SearchOptionsComponent } from '../search-options/search-options.component';
 
 @Component({
   selector: 'app-search',
@@ -21,12 +20,18 @@ import { SearchOptionsComponent } from '../search-options/search-options.compone
 })
 export class SearchComponent extends BaseComponent implements OnInit {
 
+  searchRulePaneSize = 20;
+  searchResultPaneSize = 80;
+  commentPaneSize = 0;
 
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-
+    this.searchService.showComment.pipe(takeUntil(this.destroyed)).subscribe(showComment=>{
+      this.commentPaneSize = showComment ? 20 : 0;
+      this.searchResultPaneSize = showComment ? 60 : 80;
+    })
   }
 }

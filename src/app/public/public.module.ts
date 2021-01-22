@@ -18,7 +18,7 @@ import { MorphInfoComponent } from './search/components/morph-info/morph-info.co
 import { ChunkInfoComponent } from './search/components/chunk-info/chunk-info.component';
 import { ChunkMenuComponent } from './search/components/chunk-menu/chunk-menu.component';
 import { BaseSearchComponent } from './search/components/base-search/base-search.component';
-import { SearchResultTextComponent } from './search/components/search-result-text/search-result-text.component';
+import { CommentComponent } from './search/components/comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { SearchResultTextComponent } from './search/components/search-result-tex
     ChunkInfoComponent,
     ChunkMenuComponent,
     BaseSearchComponent,
-    SearchResultTextComponent],
+    CommentComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

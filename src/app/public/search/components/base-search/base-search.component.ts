@@ -73,4 +73,8 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
     this.searchService.getChunks(this.query);
   }
 
+
+  close(){
+    
+  }
 }

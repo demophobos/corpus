@@ -5,7 +5,7 @@
                 <app-chunk-info [chunk]="chunk"></app-chunk-info>
             </mat-card-title>
             <span class="spacer"></span>
-            <app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()"></app-chunk-menu>
+            <app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()" (showComment)="loadComment()"></app-chunk-menu>
         </mat-card-header>
         <mat-card-content fxLayout="row wrap">
             <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
