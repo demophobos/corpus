@@ -71,8 +71,11 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
     //Init search paging info
     this.query.skip = 0;
     this.query.index = 0;
+    this.query.total = 0;
     this.query.limit = AppConfig.DefaultPageLimit;
+    this.query.forms = [];
     this.searchService.getChunks(this.query);
+    //this.searchService.getElementedChunks(this.query);
   }
 
 }

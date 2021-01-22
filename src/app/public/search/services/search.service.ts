@@ -1,7 +1,7 @@
 import { Injectable, Injector, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
-import { ChunkElementView, ChunkQuery, ElementView, IndexView, MorphModel, PageResponse } from '@shared/models';
+import { ChunkElementView, ChunkQuery, ChunkView, ElementView, IndexView, MorphModel, PageResponse } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
 import { ReplaySubject } from 'rxjs';
@@ -13,15 +13,17 @@ import { last } from 'rxjs/operators';
 export class SearchService implements OnInit {
 
   public currentQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
-  public chunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
-  public morphIds: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
+  public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
+  public textChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
+  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   constructor(
     private localStorageService: LocalStorageService,
     private elementService: ApiService<ElementView>,
     private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
-    private interpService: ApiService<InterpModel>
+    private interpService: ApiService<InterpModel>,
+    private chunkService: ApiService<ChunkView>
   ) {
     this.getLocalStorageQuery();
   }
@@ -40,36 +42,47 @@ export class SearchService implements OnInit {
     this.currentQuery.next(new ChunkQuery({}));
   }
 
-  public async getChunks(query: ChunkQuery) {
 
-    this.chunks.next(new Array<ChunkElementView>());
+  public async getChunks(query: ChunkQuery){
 
     this.isLoading.next(true);
 
-    if(query.formSearchType == FormSearchType.Free){
-      
-      let page = await this.elementService.findPageByQuery(new ElementView({}), JSON.stringify({value : query.value, skip: query.skip, limit: query.limit})).toPromise();
+    let value = query.value;
 
-      this.setResult(page, query);
+    if(query.formSearchType == FormSearchType.Lemma){
 
-    } else{
+      if(query.skip == 0 && query.total == 0){
 
-      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, formSearchType : query.formSearchType})).toPromise()
-      
-      //check query options for forms
-      var morphIds = forms.map(i=>i.id);
+        const forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, formSearchType : query.formSearchType})).toPromise()
+        .then((forms: MorphModel[])=>{
+          return Promise.resolve(forms);
+        })
 
-      this.morphIds.next(morphIds);
-      
-      let page = await this.elementService.findPageByQuery(new ElementView({}), JSON.stringify({morphIds: morphIds, skip: query.skip, limit: query.limit})).toPromise();
-      
-      this.setResult(page, query);
+        const formValues = forms.filter((thing, i, arr) => arr.findIndex(t => t.form == thing.form) === i).map(i=>i.form);
+  
+        this.foundForms.next(forms);
+
+        query.forms = formValues;
+
+        value = query.forms.join(' ');
+
+      }else{
+        value = query.forms.join(' ');
+      }
     }
+
+    let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
+    JSON.stringify({value : value, skip: query.skip, limit: query.limit, total: query.total, formSearchType : query.formSearchType})).toPromise()
+    .then((page: PageResponse)=> {
+      return Promise.resolve(page);
+    });
+
+    this.setResult(page, query);
   }
 
   private setResult(page: any, query: ChunkQuery) {
 
-    this.chunks.next(page.documents);
+    this.elementedChunks.next(page.documents);
 
     query.total = page.total;
 

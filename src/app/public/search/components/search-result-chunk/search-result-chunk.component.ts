@@ -14,7 +14,7 @@ import { SearchService } from '../../services/search.service';
 export class SearchResultChunkComponent extends BaseComponent implements OnInit {
   showInterp: boolean = false;
   interpIsLoading: boolean = true;
-  @Input() chunk: ChunkElementView;
+  @Input() chunk: any;
   interpChunks: ChunkElementView[];
   emptyInterpInfo: string;
   constructor(private searchService: SearchService) {

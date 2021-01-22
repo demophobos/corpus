@@ -14,6 +14,7 @@ import {
   User,
   InterpModel,
   PageResponse as PageResponse,
+  ChunkView,
 } from '@shared/models';
 import { Pageable } from '@shared/models/base/pageable';
 import { throwError } from 'rxjs';
@@ -29,21 +30,55 @@ export class ModelMapperService {
       case AppType.Header:
         return this.ToHeader(item);
       case AppType.Chunk:
-        return this.ToChunk(item);
+        return this.ToChunkElementViewPage(item);
+        case AppType.ChunkView:
+        return this.ToChunkViewPage(item);
       case AppType.Morph:
         return this.ToMorph(item);
       case AppType.ChunkElementView:
         return this.ToChunkElementViewPage(item);
       case AppType.Interp:
         return this.ToInterp(item);
-      // case AppType.ElementView:
-      //   return this.ToElementView(item);
+      case AppType.ElementView:
+         return this.ToElementView(item);
       case AppType.IndexView:
         return this.ToIndexView(item);
       default:
         return throwError(this.toString() + '. Unknown Type');
     }
   }
+  static ToChunkViewPage(item: any) {
+    let pageResponse = new PageResponse({
+      total: item.total,
+      skipped: item.skipped,
+      limited: item.limited
+    });
+
+    pageResponse.documents = item.documents.map((res: ChunkView) => {
+      return this.ToChunkView(res);
+    });
+    return pageResponse;
+  }
+
+  static ToChunkView(item: any) {
+    return new ChunkView({
+      id: item._id,
+      indexId: item.indexId,
+      value: item.value,
+      indexName : item.indexName,
+      headerDesc : item.headerDesc,
+      indexOrder : item.indexOrder,
+      headerId : item.headerId,
+      projectDesc : item.projectDesc,
+      projectCode : item.projectCode,
+      headerCode : item.headerCode,
+      headerLang : item.headerLang,
+      headerEditionType : item.headerEditionType,
+      projectId : item.projectId
+    });
+  }
+
+  
   static ToInterp(item: any) {
     return new InterpModel({
       id: item._id,

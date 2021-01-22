@@ -54,7 +54,7 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
 
       });
 
-    this.searchService.chunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
+    this.searchService.elementedChunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
         this.chunks = chunks;
       });
 
