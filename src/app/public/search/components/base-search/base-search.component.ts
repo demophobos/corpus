@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
+import { FormSearchType } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
@@ -68,14 +69,8 @@ export class BaseSearchComponent extends BaseComponent implements OnInit {
   }
 
   async search() {
-    //Init search paging info
-    this.query.skip = 0;
-    this.query.index = 0;
-    this.query.total = 0;
-    this.query.limit = AppConfig.DefaultPageLimit;
-    this.query.forms = [];
+    this.searchService.resetQuery(this.query);
     this.searchService.getChunks(this.query);
-    //this.searchService.getElementedChunks(this.query);
   }
 
 }

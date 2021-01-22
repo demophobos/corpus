@@ -46,7 +46,7 @@ export class SearchOptionsComponent extends BaseComponent implements OnInit {
       if (val.options) {
         this.query.formSearchType = val.options;
       } else {
-        this.query.formSearchType = FormSearchType.Free
+        this.query.formSearchType = FormSearchType.Form
       }
     });
   }

@@ -9,5 +9,5 @@ export const AppConfig = {
     AppFullTitle: 'Corpus Latino-Rossicum',
     AppShortTitle: 'CLR',
     DefaultPageLimit: 10,
-    DefaultSearchTypeValue: FormSearchType.Free
+    DefaultSearchTypeValue: FormSearchType.Form
 }

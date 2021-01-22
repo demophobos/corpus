@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
-import { ChunkElementView } from '@shared/models';
+import { ChunkElementView, ChunkView } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
@@ -14,7 +14,7 @@ import { SearchService } from '../../services/search.service';
 export class SearchResultChunkComponent extends BaseComponent implements OnInit {
   showInterp: boolean = false;
   interpIsLoading: boolean = true;
-  @Input() chunk: any;
+  @Input() chunk: ChunkElementView;
   interpChunks: ChunkElementView[];
   emptyInterpInfo: string;
   constructor(private searchService: SearchService) {

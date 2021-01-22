@@ -1,5 +1,6 @@
 import { Injectable, Injector, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
+import { AppConfig } from '@shared/constants';
 import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
 import { ChunkElementView, ChunkQuery, ChunkView, ElementView, IndexView, MorphModel, PageResponse } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
@@ -42,6 +43,13 @@ export class SearchService implements OnInit {
     this.currentQuery.next(new ChunkQuery({}));
   }
 
+  resetQuery(query: ChunkQuery) {
+    query.skip = 0;
+    query.index = 0;
+    query.total = 0;
+    query.limit = AppConfig.DefaultPageLimit;
+    query.forms = [];
+}
 
   public async getChunks(query: ChunkQuery){
 
@@ -93,7 +101,7 @@ export class SearchService implements OnInit {
     this.isLoading.next(false);
   }
 
-  public async getInterp(id: string, interp: boolean = true, skip: number = 0, limit: number = 0) : Promise<ChunkElementView[]>{
+  public async getInterp(id: string, interp: boolean = true, skip: number = 0, limit: number = 0, total: number = 0) : Promise<ChunkView[]>{
 
     let query = interp ? {sourceId: id} : {interpId: id};
 
@@ -107,7 +115,7 @@ export class SearchService implements OnInit {
 
       let chunkIds = interp ? interps.map(i => i.interpId) : interps.map(i_1 => i_1.sourceId);
 
-      const page = await this.elementService.findPageByQuery(new ElementView({}), JSON.stringify({ chunkIds: chunkIds, skip: skip, limit: limit })).toPromise()
+      const page = await this.chunkService.findPageByQuery(new ChunkView({}), JSON.stringify({ chunkIds: chunkIds, skip: skip, limit: limit, total: total })).toPromise()
       .then((page: PageResponse)=>{
         return page;
       });

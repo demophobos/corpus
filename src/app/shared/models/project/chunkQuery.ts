@@ -2,7 +2,7 @@ import { FormSearchType } from "@shared/enums";
 
 export class ChunkQuery {
     value: string;
-    formSearchType: FormSearchType = FormSearchType.Free
+    formSearchType: FormSearchType = FormSearchType.Form
     index: number;
     total: number;
     skip: number;
