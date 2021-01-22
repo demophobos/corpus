@@ -1,15 +1,5 @@
-import { Component, destroyPlatform, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { AppConfig } from '@shared/constants';
-import { FormSearchType } from '@shared/enums';
-import { ChunkQuery, ElementView } from '@shared/models';
-import { DialogService } from '@shared/services';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 

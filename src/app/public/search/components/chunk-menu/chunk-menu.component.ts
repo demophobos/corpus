@@ -13,13 +13,11 @@ export class ChunkMenuComponent implements OnInit {
   @Output() showInterp: EventEmitter<any> = new EventEmitter();
   @Output() showComment: EventEmitter<any> = new EventEmitter();
   interpIcon: string;
-  interpInfo: string;
 
   constructor() { }
 
   ngOnInit(): void {
     this.interpIcon = this.chunk.headerLang == Language.Latin ? Language.Russian : Language.Latin;
-    this.interpInfo = 'Versio';
   }
 
   loadInterp(){

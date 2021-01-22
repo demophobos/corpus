@@ -39,7 +39,7 @@ export class SearchResultChunkComponent extends BaseComponent implements OnInit 
         if(values.length > 0){
           this.interpChunks = values;
         }else{
-          this.emptyInterpInfo = this.chunk.headerLang == Language.Latin ? "Переводы отсутствуют" : "Оригинал отсутствует";
+          this.emptyInterpInfo = "versiones desunt";
         }
       }).then(()=>{
         this.interpIsLoading = false;

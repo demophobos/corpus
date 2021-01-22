@@ -1,18 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
-import { AppConfig } from '@shared/constants';
-import { FormSearchType } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-base-search',
-  templateUrl: './base-search.component.html',
-  styleUrls: ['./base-search.component.scss']
+  selector: 'app-search-rules',
+  templateUrl: './search-rules.component.html',
+  styleUrls: ['./search-rules.component.scss']
 })
-export class BaseSearchComponent extends BaseComponent implements OnInit {
+export class SearchRulesComponent extends BaseComponent implements OnInit {
   searchDisabled: boolean = true;
   settingsDisabled: boolean = false;
   clearDisabled: boolean = true;
