@@ -10,11 +10,11 @@ import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-search-options',
-  templateUrl: './search-options.component.html',
-  styleUrls: ['./search-options.component.scss'],
+  selector: 'app-search-form-type-options',
+  templateUrl: './search-form-type-options.component.html',
+  styleUrls: ['./search-form-type-options.component.scss'],
 })
-export class SearchOptionsComponent extends BaseComponent implements OnInit {
+export class SearchFormTypeOptionsComponent extends BaseComponent implements OnInit {
   panelOpenState = true;
   optionsForm: FormGroup;
   query: ChunkQuery;

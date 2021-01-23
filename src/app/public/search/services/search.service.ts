@@ -2,9 +2,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
 import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
-import { ChunkElementView, ChunkQuery, ChunkView, IndexView, MorphModel, PageResponse } from '@shared/models';
+import { ChunkElementView, ChunkQuery, ChunkView, HeaderModel, IndexView, MorphModel, PageResponse } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
+import { promise } from 'protractor';
 import { ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -23,7 +24,8 @@ export class SearchService implements OnInit {
     private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>,
-    private chunkService: ApiService<ChunkView>
+    private chunkService: ApiService<ChunkView>,
+    private headerService: ApiService<HeaderModel>
   ) {
     this.getLocalStorageQuery();
   }
@@ -89,7 +91,7 @@ export class SearchService implements OnInit {
     }
 
     let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
-    JSON.stringify({value : value, skip: query.skip, limit: query.limit, total: query.total, formSearchType : query.formSearchType})).toPromise()
+    JSON.stringify({value : value, skip: query.skip, limit: query.limit, total: query.total, headers : query.headers})).toPromise()
     .then((page: PageResponse)=> {
       return Promise.resolve(page);
     });
@@ -138,5 +140,12 @@ export class SearchService implements OnInit {
     const result = await this.indexService .findByQuery(new IndexView({}), JSON.stringify({ _id: id })).toPromise();
 
     return await Promise.resolve(result[0]);
+  }
+
+  public async getHeaders(): Promise<HeaderModel[]>{
+    return await this.headerService.findByQuery(new HeaderModel({}), JSON.stringify({})).toPromise()
+    .then((headers: HeaderModel[])=>{
+      return Promise.resolve(headers);
+    });
   }
 }

@@ -1,14 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '@shared/components';
-import { AppConfig } from '@shared/constants';
 import { ChunkQuery, ElementView, MorphModel } from '@shared/models';
-import { DialogService } from '@shared/services';
-import { basename } from 'path';
-import { ElementHelper } from 'protractor';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
-import { MorphInfoComponent } from '../morph-info/morph-info.component';
 
 @Component({
   selector: 'app-search-result-element',

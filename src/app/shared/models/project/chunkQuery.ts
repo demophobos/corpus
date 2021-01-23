@@ -8,6 +8,7 @@ export class ChunkQuery {
     skip: number;
     limit: number;
     forms: string [];
+    headers: string[];
     public constructor(fields: Partial<ChunkQuery>) {
         Object.assign(this, fields);
      }

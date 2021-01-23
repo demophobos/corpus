@@ -1,5 +1,4 @@
-<mat-card class="mat-elevation-z0">
-    <mat-card-content>
-        {{info}}
-    </mat-card-content>
-</mat-card>
+<div *ngIf="element && element.form">
+    <span>{{element.form}}, {{element.pos}}</span>
+    <span *ngIf="element.lemma !== element.form">[{{element.lemma}}]</span>
+</div>

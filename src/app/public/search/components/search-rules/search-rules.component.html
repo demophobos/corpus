@@ -1,9 +1,8 @@
 <mat-card class="mat-elevation-z0">
     <mat-card-header>
         <mat-card-title>
-                ad quaerendum
+            regulae quaerendi
         </mat-card-title>
-        <mat-card-subtitle>regulae</mat-card-subtitle>
         <div class="spacer"></div>
         <button mat-icon-button aria-label="close" (click)="close()" color="primary">
             <mat-icon svgIcon="close"></mat-icon>
@@ -11,11 +10,11 @@
     </mat-card-header>
     <mat-card-content>
         <form class="form" [formGroup]="editorForm">
-            <mat-form-field class="full-width">
+            <mat-form-field class="input-field-full-width">
                 <input matInput formControlName="formFormControl">
                 <button matSuffix mat-icon-button aria-label="search" (click)="search()" color="primary"
                     [disabled]="searchDisabled">
-                    <mat-icon svgIcon="play"></mat-icon>
+                    <mat-icon svgIcon="search"></mat-icon>
                 </button>
                 <button matSuffix mat-icon-button aria-label="clear" (click)="clear()" color="primary"
                     [disabled]="clearDisabled">
@@ -23,6 +22,7 @@
                 </button>
             </mat-form-field>
         </form>
-        <app-search-options></app-search-options>
+        <app-search-form-type-options></app-search-form-type-options>
+        <app-search-author-work-options></app-search-author-work-options>
     </mat-card-content>
 </mat-card>

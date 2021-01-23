@@ -11,7 +11,6 @@ import { IndexExplorerComponent } from './index/components/index-explorer/index-
 import { WorkExplorerComponent } from './index/components/work-explorer/work-explorer.component';
 import { SearchComponent } from './search/components/search/search.component';
 import { SearchResultComponent } from './search/components/search-result/search-result.component';
-import { SearchOptionsComponent } from './search/components/search-options/search-options.component';
 import { SearchResultChunkComponent } from './search/components/search-result-chunk/search-result-chunk.component';
 import { SearchResultElementComponent } from './search/components/search-result-element/search-result-element.component';
 import { MorphInfoComponent } from './search/components/morph-info/morph-info.component';
@@ -19,6 +18,8 @@ import { ChunkInfoComponent } from './search/components/chunk-info/chunk-info.co
 import { ChunkMenuComponent } from './search/components/chunk-menu/chunk-menu.component';
 import { SearchRulesComponent } from './search/components/search-rules/search-rules.component';
 import { CommentComponent } from './search/components/comment/comment.component';
+import { SearchFormTypeOptionsComponent } from './search/components/search-form-type-options/search-form-type-options.component';
+import { SearchAuthorWorkOptionsComponent } from './search/components/search-author-work-options/search-author-work-options.component';
 
 @NgModule({
   declarations: [
@@ -29,14 +30,15 @@ import { CommentComponent } from './search/components/comment/comment.component'
     WorkExplorerComponent,
     SearchComponent,
     SearchResultComponent,
-    SearchOptionsComponent,
     SearchResultChunkComponent,
     SearchResultElementComponent,
     MorphInfoComponent,
     ChunkInfoComponent,
     ChunkMenuComponent,
     SearchRulesComponent,
-    CommentComponent],
+    CommentComponent,
+    SearchFormTypeOptionsComponent,
+    SearchAuthorWorkOptionsComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,
