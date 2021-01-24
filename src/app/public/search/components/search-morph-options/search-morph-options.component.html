@@ -1,0 +1,28 @@
+<mat-selection-list [formControl]="categorySelector" color="primary" class="input-field-full-width author-selector" multiple>
+    <div mat-subheader>Partes orationis</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(pos)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Tempus</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(tempus)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Modus</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(modus)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Genus</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(genus)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Numerus</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(numerus)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Persona</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(persona)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Casus</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(casus)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Gradus</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(gradus)" [value]="item.code">{{item.code}}</mat-list-option>
+    <mat-divider></mat-divider>
+    <div mat-subheader>Genus [Voice]</div>
+    <mat-list-option *ngFor="let item of getCategoryItems(genus2)" [value]="item.code">{{item.code}}</mat-list-option>
+  </mat-selection-list>

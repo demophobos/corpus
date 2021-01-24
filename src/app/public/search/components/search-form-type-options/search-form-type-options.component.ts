@@ -43,10 +43,12 @@ export class SearchFormTypeOptionsComponent extends BaseComponent implements OnI
 
   onChanges(): void {
     this.optionsForm.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((val) => {
-      if (val.options) {
-        this.query.formSearchType = val.options;
-      } else {
-        this.query.formSearchType = FormSearchType.Form
+      if(this.query){
+        if (val.options) {
+          this.query.formSearchType = val.options;
+        } else {
+          this.query.formSearchType = FormSearchType.Form
+        }
       }
     });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
+import { FormSearchType } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
@@ -16,7 +17,8 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
   clearDisabled: boolean = true;
   query: ChunkQuery;
   editorForm: FormGroup;
-  
+  panelOpenState = false;
+  morphDisabled = false;
   constructor(private searchService: SearchService,
     private formBuilder: FormBuilder) {
     super();

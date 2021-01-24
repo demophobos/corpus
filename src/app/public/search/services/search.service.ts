@@ -2,11 +2,12 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
 import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
-import { ChunkElementView, ChunkQuery, ChunkView, HeaderModel, IndexView, MorphModel, PageResponse } from '@shared/models';
+import { ChunkElementView, ChunkQuery, ChunkView, HeaderModel, IndexView, MorphModel, PageResponse, TaxonomyQuery, TaxonomyViewModel } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
 import { promise } from 'protractor';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, throwError } from 'rxjs';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,8 @@ export class SearchService implements OnInit {
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>,
     private chunkService: ApiService<ChunkView>,
-    private headerService: ApiService<HeaderModel>
+    private headerService: ApiService<HeaderModel>,
+    private taxonomyService: ApiService<TaxonomyViewModel>
   ) {
     this.getLocalStorageQuery();
   }
@@ -147,5 +149,19 @@ export class SearchService implements OnInit {
     .then((headers: HeaderModel[])=>{
       return Promise.resolve(headers);
     });
+  }
+
+  public getTaxonomyItems(categoryCode: string): Promise<TaxonomyViewModel[]>{
+    return this.taxonomyService.findByQuery(new TaxonomyViewModel({}), JSON.stringify(new TaxonomyQuery({categoryCode: categoryCode}))).toPromise()
+    .then((items: TaxonomyViewModel[])=>{
+      return Promise.resolve(items);
+    })
+  }
+
+  public getAllTaxonomyItems(): Promise<TaxonomyViewModel[]>{
+    return this.taxonomyService.findByQuery(new TaxonomyViewModel({}), JSON.stringify(new TaxonomyQuery({}))).toPromise()
+    .then((items: TaxonomyViewModel[])=>{
+      return Promise.resolve(items);
+    })
   }
 }

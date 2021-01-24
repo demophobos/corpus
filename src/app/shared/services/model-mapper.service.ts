@@ -1,6 +1,7 @@
 import { ElementSchemaRegistry } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AppConfig, AppType } from '@shared/constants';
+import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
 import {
   ChunkModel,
   ChunkElementView,
@@ -15,6 +16,7 @@ import {
   InterpModel,
   PageResponse as PageResponse,
   ChunkView,
+  TaxonomyViewModel,
 } from '@shared/models';
 import { Pageable } from '@shared/models/base/pageable';
 import { throwError } from 'rxjs';
@@ -27,6 +29,8 @@ export class ModelMapperService {
 
   public static Map<T extends Model>(obj: T, item: any) {
     switch (obj.apiType) {
+      case AppType.Taxonomy:
+        return this.ToTaxonomy(item);
       case AppType.Header:
         return this.ToHeader(item);
       case AppType.Chunk:
@@ -46,6 +50,18 @@ export class ModelMapperService {
       default:
         return throwError(this.toString() + '. Unknown Type');
     }
+  }
+  static ToTaxonomy(item: any) {
+    return new TaxonomyViewModel(
+      {
+        id: item._id,
+        code: item.code,
+        categoryCode: item.categoryCode,
+        categoryDesc: item.categoryDesc,
+        categoryId:item.categoryId,
+        desc: item.desc,
+        parentId: item.parentId
+      })
   }
   static ToChunkViewPage(item: any) {
     let pageResponse = new PageResponse({

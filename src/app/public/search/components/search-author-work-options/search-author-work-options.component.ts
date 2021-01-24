@@ -1,4 +1,5 @@
 import { query } from '@angular/animations';
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
@@ -24,12 +25,15 @@ export class SearchAuthorWorkOptionsComponent extends BaseComponent implements O
 
     this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
-    })
-  }
+      if(this.query && this.query.headers){
+        this.headerSelector.setValue(this.query.headers);
+      }
+    });
 
-  selectionChange(values: any){
-    if(this.query){
-      this.query.headers = values.value;
-    }
+    this.headerSelector.valueChanges.subscribe((values : string[])=>{
+      if(this.query){
+        this.query.headers = values;
+      }
+    });
   }
 }

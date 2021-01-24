@@ -1,4 +1,5 @@
 import { FormSearchType } from "@shared/enums";
+import { TaxonomyViewModel } from "./taxonomyViewModel";
 
 export class ChunkQuery {
     value: string;
@@ -9,6 +10,7 @@ export class ChunkQuery {
     limit: number;
     forms: string [];
     headers: string[];
+    formAttrs: string[];
     public constructor(fields: Partial<ChunkQuery>) {
         Object.assign(this, fields);
      }

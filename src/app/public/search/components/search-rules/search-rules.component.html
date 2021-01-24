@@ -22,7 +22,43 @@
                 </button>
             </mat-form-field>
         </form>
-        <app-search-form-type-options></app-search-form-type-options>
-        <app-search-author-work-options></app-search-author-work-options>
+        <mat-accordion>
+            <mat-expansion-panel class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Specialitas formarum
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <mat-chip color="primary">
+                        {{query.formSearchType}}
+                      </mat-chip>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-search-form-type-options></app-search-form-type-options>
+            </mat-expansion-panel>
+            <mat-expansion-panel [disabled]="morphDisabled" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Morphologia
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-search-morph-options></app-search-morph-options>
+            </mat-expansion-panel>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Auctores et opera
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <mat-chip color="primary" *ngIf="query.headers">
+                            {{query.headers.length}}
+                        </mat-chip>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-search-author-work-options></app-search-author-work-options>
+            </mat-expansion-panel>
+        </mat-accordion>
     </mat-card-content>
 </mat-card>

@@ -15,3 +15,5 @@ export * from './project/chunkQuery';
 export * from './project/morphModel';
 export * from './project/interpModel';
 export * from './project/pageResponse';
+export * from './project/taxonomyViewModel';
+export * from './project/taxonomyQuery';
