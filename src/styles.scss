@@ -54,3 +54,11 @@ mat-drawer {
 .mat-paginator-container{
     justify-content: center !important;
 }
+
+.mat-expansion-panel-header{
+    padding-left: 0 !important;
+    padding-right: 6px !important;
+}
+.mat-expansion-panel-body{
+    padding: 0 !important;
+}

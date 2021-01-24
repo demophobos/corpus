@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 import { BaseComponent } from '@shared/components';
-import { FormSearchType } from '@shared/enums';
+import { FormSearchTypeEnum } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
@@ -19,6 +20,7 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
   editorForm: FormGroup;
   panelOpenState = false;
   morphDisabled = false;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   constructor(private searchService: SearchService,
     private formBuilder: FormBuilder) {
     super();
@@ -31,7 +33,11 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
 
     this.searchService.currentQuery.subscribe(query=>{
       this.query = query;
-    })
+      this.morphDisabled = this.query.formSearchType == FormSearchTypeEnum.Form;
+      if(this.morphDisabled){
+        this.accordion.closeAll();
+      }
+    });
 
     if (this.query ) {
       this.editorForm.controls.formFormControl.setValue(this.query.value);
@@ -71,10 +77,5 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
   async search() {
     this.searchService.resetQuery(this.query);
     this.searchService.getChunks(this.query);
-  }
-
-
-  close(){
-    
   }
 }

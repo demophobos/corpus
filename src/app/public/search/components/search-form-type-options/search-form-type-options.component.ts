@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
-import { FormSearchType } from '@shared/enums';
+import { FormSearchTypeEnum } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { basename } from 'path';
 import { takeUntil } from 'rxjs/operators';
@@ -47,8 +47,9 @@ export class SearchFormTypeOptionsComponent extends BaseComponent implements OnI
         if (val.options) {
           this.query.formSearchType = val.options;
         } else {
-          this.query.formSearchType = FormSearchType.Form
+          this.query.formSearchType = FormSearchTypeEnum.Form
         }
+        this.searchService.currentQuery.next(this.query);
       }
     });
   }

@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
-import { FormSearchType, LocalStorageKeyEnum } from '@shared/enums';
+import { FormSearchTypeEnum, LocalStorageKeyEnum } from '@shared/enums';
 import { ChunkElementView, ChunkQuery, ChunkView, HeaderModel, IndexView, MorphModel, PageResponse, TaxonomyQuery, TaxonomyViewModel } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
@@ -60,6 +60,7 @@ export class SearchService implements OnInit {
     query.total = 0;
     query.limit = AppConfig.DefaultPageLimit;
     query.forms = [];
+    this.foundForms.next([]);
 }
 
   public async getChunks(query: ChunkQuery){
@@ -70,7 +71,7 @@ export class SearchService implements OnInit {
 
     let value = query.value;
 
-    if(query.formSearchType == FormSearchType.Lemma){
+    if(query.formSearchType == FormSearchTypeEnum.Lemma){
 
       if(query.skip == 0 && query.total == 0){
 

@@ -1,4 +1,4 @@
-import { FormSearchType } from "@shared/enums";
+import { FormSearchTypeEnum } from "@shared/enums";
 
 export const AppConfig = {
     ApiUrl: 'http://localhost:3000/v2/',
@@ -9,5 +9,5 @@ export const AppConfig = {
     AppFullTitle: 'Corpus Latino-Rossicum',
     AppShortTitle: 'CLR',
     DefaultPageLimit: 10,
-    DefaultSearchTypeValue: FormSearchType.Form
+    DefaultSearchTypeValue: FormSearchTypeEnum.Form
 }

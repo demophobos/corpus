@@ -39,7 +39,7 @@ export class SearchResultChunkComponent extends BaseComponent implements OnInit 
         if(values.length > 0){
           this.interpChunks = values;
         }else{
-          this.emptyInterpInfo = "versiones desunt";
+          this.emptyInterpInfo = "versio deest";
         }
       }).then(()=>{
         this.interpIsLoading = false;

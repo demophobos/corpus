@@ -1,14 +1,5 @@
 <mat-card class="mat-elevation-z0">
     <mat-card-header>
-        <mat-card-title>
-            regulae quaerendi
-        </mat-card-title>
-        <div class="spacer"></div>
-        <button mat-icon-button aria-label="close" (click)="close()" color="primary">
-            <mat-icon svgIcon="close"></mat-icon>
-        </button>
-    </mat-card-header>
-    <mat-card-content>
         <form class="form" [formGroup]="editorForm">
             <mat-form-field class="input-field-full-width">
                 <input matInput formControlName="formFormControl">
@@ -22,33 +13,24 @@
                 </button>
             </mat-form-field>
         </form>
-        <mat-accordion>
-            <mat-expansion-panel class="mat-elevation-z0">
+    </mat-card-header>
+    <mat-card-content>
+        <app-search-form-type-options></app-search-form-type-options>
+        <mat-accordion multi>
+            <mat-expansion-panel hideToggle [disabled]="morphDisabled" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="morph-panel mat-elevation-z0">
                 <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        Specialitas formarum
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <mat-chip color="primary">
-                        {{query.formSearchType}}
-                      </mat-chip>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <app-search-form-type-options></app-search-form-type-options>
-            </mat-expansion-panel>
-            <mat-expansion-panel [disabled]="morphDisabled" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
+                    <mat-panel-title class="panel-header-title">
                         Morphologia
                     </mat-panel-title>
                     <mat-panel-description>
+                        {{query.morphAttrs}}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <app-search-morph-options></app-search-morph-options>
             </mat-expansion-panel>
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
+            <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
                 <mat-expansion-panel-header>
-                    <mat-panel-title>
+                    <mat-panel-title class="panel-header-title">
                         Auctores et opera
                     </mat-panel-title>
                     <mat-panel-description>
@@ -61,4 +43,5 @@
             </mat-expansion-panel>
         </mat-accordion>
     </mat-card-content>
+
 </mat-card>
