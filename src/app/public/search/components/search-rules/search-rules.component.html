@@ -34,9 +34,8 @@
                         Auctores et opera
                     </mat-panel-title>
                     <mat-panel-description>
-                        <mat-chip color="primary" *ngIf="query.headers">
-                            {{query.headers.length}}
-                        </mat-chip>
+                        <div class="spacer"></div>
+                        <div>{{query.headers.length}}</div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <app-search-author-work-options></app-search-author-work-options>
