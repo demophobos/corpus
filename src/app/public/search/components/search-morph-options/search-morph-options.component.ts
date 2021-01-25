@@ -25,6 +25,7 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
   casus: string = TaxonomyCategoryEnum.Case;
   gradus: string = TaxonomyCategoryEnum.Degree;
   genus2:string = TaxonomyCategoryEnum.Voice;
+
   constructor(private searchService: SearchService) {
     super();
   }
@@ -37,35 +38,65 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
 
     this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
-      if(this.query && this.query.formAttrs){
-        this.categorySelector.setValue(this.query.formAttrs);
-      }
     });
+  }
 
-    this.categorySelector.valueChanges.subscribe((values : string[])=>{
-      if(this.query){
-        if(values.length == 0){
-          this.query.formAttrs.forEach(v=>{
-            if(this.categoryItems.map(i=>i.code).indexOf(v) > 0){
-              delete this.query.formAttrs[v];
-            }
-          });
-        }else{
-          this.query.formAttrs = values;
-        }
-      }
-    });
+  getCategoryTitle(category: string) : string {
+    if(this.categoryItems){
+      return this.categoryItems.filter(i=>i.categoryCode == category).map(i=>i.categoryDesc)[0];
+    }
   }
 
   getCategoryItems(category: string) : TaxonomyViewModel[]{
     if(this.categoryItems){
       return this.categoryItems.filter(i=>i.categoryCode == category);
     }
-    
   }
 
-  select(attributes: string[]){
-    let test = attributes;
+  posSelected(selected){
+    if(this.query){
+      this.query.pos = selected;
+    }
+  }
+  tempusSelected(selected){
+    if(this.query){
+      this.query.tense = selected;
+    }
+  }
+  modusSelected(selected){
+    if(this.query){
+      this.query.mood = selected;
+    }
+  }
+  genusSelected(selected){
+    if(this.query){
+      this.query.gender = selected;
+    }
+  }
+  numerusSelected(selected){
+    if(this.query){
+      this.query.number = selected;
+    }
+  }
+  personaSelected(selected){
+    if(this.query){
+      this.query.person = selected;
+    }
+  }
+  casusSelected(selected){
+    if(this.query){
+      this.query.case = selected;
+    }
+  }
+  gradusSelected(selected){
+    if(this.query){
+      this.query.degree = selected;
+    }
+  }
+  genus2Selected(selected){
+    if(this.query){
+      this.query.voice = selected;
+    }
   }
 
 }

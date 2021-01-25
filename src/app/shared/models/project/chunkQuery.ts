@@ -10,7 +10,15 @@ export class ChunkQuery {
     limit: number;
     forms: string [];
     headers: string[];
-    formAttrs: string[];
+    pos: string[] = [];
+    gender: string[] = [];
+    case: string[] = [];
+    person: string[] =[];
+    number: string[] = [];
+    tense: string[] = [];
+    mood: string[] = [];
+    voice: string[] = [];
+    degree: string[] = [];
     public constructor(fields: Partial<ChunkQuery>) {
         Object.assign(this, fields);
      }

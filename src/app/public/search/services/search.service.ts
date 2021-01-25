@@ -2,7 +2,17 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
 import { FormSearchTypeEnum, LocalStorageKeyEnum } from '@shared/enums';
-import { ChunkElementView, ChunkQuery, ChunkView, HeaderModel, IndexView, MorphModel, PageResponse, TaxonomyQuery, TaxonomyViewModel } from '@shared/models';
+import {
+  ChunkElementView,
+  ChunkQuery,
+  ChunkView,
+  HeaderModel,
+  IndexView,
+  MorphModel,
+  PageResponse,
+  TaxonomyQuery,
+  TaxonomyViewModel,
+} from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
 import { promise } from 'protractor';
@@ -13,13 +23,20 @@ import { textChangeRangeIsUnchanged } from 'typescript';
   providedIn: 'root',
 })
 export class SearchService implements OnInit {
-
-  public currentQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
-  public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
-  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
+  public currentQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(
+    1
+  );
+  public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<
+    ChunkElementView[]
+  >(1);
+  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<
+    MorphModel[]
+  >(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   public showComment: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  public comment: ReplaySubject<ChunkElementView> = new ReplaySubject<ChunkElementView>(1);
+  public comment: ReplaySubject<ChunkElementView> = new ReplaySubject<ChunkElementView>(
+    1
+  );
   constructor(
     private localStorageService: LocalStorageService,
     private indexService: ApiService<IndexView>,
@@ -31,9 +48,7 @@ export class SearchService implements OnInit {
   ) {
     this.getLocalStorageQuery();
   }
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   loadComment(chunk: ChunkElementView) {
     this.comment.next(chunk);
@@ -43,10 +58,13 @@ export class SearchService implements OnInit {
     this.showComment.next(show);
   }
 
-  public getLocalStorageQuery() : ChunkQuery {
+  public getLocalStorageQuery() {
     let query = this.localStorageService.getItem(LocalStorageKeyEnum.Query);
-    this.currentQuery.next(query);
-    return query;
+    if (query) {
+      this.currentQuery.next(query);
+    } else {
+      this.currentQuery.next(new ChunkQuery({}));
+    }
   }
 
   removeLocalStorageQuery() {
@@ -61,49 +79,93 @@ export class SearchService implements OnInit {
     query.limit = AppConfig.DefaultPageLimit;
     query.forms = [];
     this.foundForms.next([]);
-}
+  }
 
-  public async getChunks(query: ChunkQuery){
-
+  public async getChunks(query: ChunkQuery) {
     this.comment.next(null);
 
     this.isLoading.next(true);
 
     let value = query.value;
 
-    if(query.formSearchType == FormSearchTypeEnum.Lemma){
+    if (query.formSearchType == FormSearchTypeEnum.Lemma) {
+      if (query.skip == 0 && query.total == 0) {
+        let forms = await this.morphService
+          .findByQuery(
+            new MorphModel({}),
+            JSON.stringify({
+              value: query.value,
+              formSearchType: query.formSearchType,
+            })
+          )
+          .toPromise()
+          .then((forms: MorphModel[]) => {
+            return Promise.resolve(forms);
+          });
 
-      if(query.skip == 0 && query.total == 0){
+        forms = this.filterByAttributes(query, forms);
 
-        const forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, formSearchType : query.formSearchType})).toPromise()
-        .then((forms: MorphModel[])=>{
-          return Promise.resolve(forms);
-        })
+        let formValues = forms
+          .filter(
+            (thing, i, arr) => arr.findIndex((t) => t.form == thing.form) === i
+          )
+          .map((i) => i.form);
 
-        const formValues = forms.filter((thing, i, arr) => arr.findIndex(t => t.form == thing.form) === i).map(i=>i.form);
-  
         this.foundForms.next(forms);
 
         query.forms = formValues;
 
         value = query.forms.join(' ');
-
-      }else{
+      } else {
         value = query.forms.join(' ');
       }
     }
 
-    let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
-    JSON.stringify({value : value, skip: query.skip, limit: query.limit, total: query.total, headers : query.headers})).toPromise()
-    .then((page: PageResponse)=> {
-      return Promise.resolve(page);
-    });
+    let page = await this.chunkService
+      .findPageByQuery(
+        new ChunkView({}),
+        JSON.stringify({
+          value: value,
+          skip: query.skip,
+          limit: query.limit,
+          total: query.total,
+          headers: query.headers,
+        })
+      )
+      .toPromise()
+      .then((page: PageResponse) => {
+        return Promise.resolve(page);
+      });
 
     this.setResult(page, query);
   }
 
-  private setResult(page: any, query: ChunkQuery) {
+  filterByAttributes(query: ChunkQuery, forms: MorphModel[]): MorphModel[] {
+    let selected = forms;
+    if (query) {
+      selected = forms.filter(
+        (i) =>
+          this.contains(query.pos, i.pos) &&
+          this.contains(query.mood, i.mood) &&
+          this.contains(query.number, i.number) &&
+          this.contains(query.tense, i.tense) &&
+          this.contains(query.voice, i.voice) &&
+          this.contains(query.case, i.case) &&
+          this.contains(query.degree, i.degree) &&
+          this.contains(query.gender, i.gender)
+      );
+    }
+    return selected;
+  }
 
+  private contains(formAttrs: string[], attr: string): boolean {
+    if(formAttrs.length == 0){
+      return true;
+    }
+    return formAttrs.indexOf(attr) > -1;
+  }
+
+  private setResult(page: any, query: ChunkQuery) {
     this.elementedChunks.next(page.documents);
 
     query.total = page.total;
@@ -115,54 +177,83 @@ export class SearchService implements OnInit {
     this.isLoading.next(false);
   }
 
-  public async getInterp(id: string, interp: boolean = true, skip: number = 0, limit: number = 0, total: number = 0) : Promise<ChunkView[]>{
+  public async getInterp(
+    id: string,
+    interp: boolean = true,
+    skip: number = 0,
+    limit: number = 0,
+    total: number = 0
+  ): Promise<ChunkView[]> {
+    let query = interp ? { sourceId: id } : { interpId: id };
 
-    let query = interp ? {sourceId: id} : {interpId: id};
+    const interps = await this.interpService
+      .findByQuery(new InterpModel({}), JSON.stringify(query))
+      .toPromise();
 
-    const interps = await this.interpService.findByQuery(new InterpModel({}), JSON.stringify(query)).toPromise();
-
-    if(interps.length == 0){
-
+    if (interps.length == 0) {
       return Promise.resolve([]);
+    } else {
+      let chunkIds = interp
+        ? interps.map((i) => i.interpId)
+        : interps.map((i_1) => i_1.sourceId);
 
-    }else{
+      const page = await this.chunkService
+        .findPageByQuery(
+          new ChunkView({}),
+          JSON.stringify({
+            chunkIds: chunkIds,
+            skip: skip,
+            limit: limit,
+            total: total,
+          })
+        )
+        .toPromise()
+        .then((page: PageResponse) => {
+          return page;
+        });
 
-      let chunkIds = interp ? interps.map(i => i.interpId) : interps.map(i_1 => i_1.sourceId);
-
-      const page = await this.chunkService.findPageByQuery(new ChunkView({}), JSON.stringify({ chunkIds: chunkIds, skip: skip, limit: limit, total: total })).toPromise()
-      .then((page: PageResponse)=>{
-        return page;
-      });
-  
       return await Promise.resolve(page.documents as ChunkElementView[]);
     }
   }
 
   public async getIndex(id: string): Promise<IndexView> {
-
-    const result = await this.indexService .findByQuery(new IndexView({}), JSON.stringify({ _id: id })).toPromise();
+    const result = await this.indexService
+      .findByQuery(new IndexView({}), JSON.stringify({ _id: id }))
+      .toPromise();
 
     return await Promise.resolve(result[0]);
   }
 
-  public async getHeaders(): Promise<HeaderModel[]>{
-    return await this.headerService.findByQuery(new HeaderModel({}), JSON.stringify({})).toPromise()
-    .then((headers: HeaderModel[])=>{
-      return Promise.resolve(headers);
-    });
+  public async getHeaders(): Promise<HeaderModel[]> {
+    return await this.headerService
+      .findByQuery(new HeaderModel({}), JSON.stringify({}))
+      .toPromise()
+      .then((headers: HeaderModel[]) => {
+        return Promise.resolve(headers);
+      });
   }
 
-  public getTaxonomyItems(categoryCode: string): Promise<TaxonomyViewModel[]>{
-    return this.taxonomyService.findByQuery(new TaxonomyViewModel({}), JSON.stringify(new TaxonomyQuery({categoryCode: categoryCode}))).toPromise()
-    .then((items: TaxonomyViewModel[])=>{
-      return Promise.resolve(items);
-    })
+  public getTaxonomyItems(categoryCode: string): Promise<TaxonomyViewModel[]> {
+    return this.taxonomyService
+      .findByQuery(
+        new TaxonomyViewModel({}),
+        JSON.stringify(new TaxonomyQuery({ categoryCode: categoryCode }))
+      )
+      .toPromise()
+      .then((items: TaxonomyViewModel[]) => {
+        return Promise.resolve(items);
+      });
   }
 
-  public getAllTaxonomyItems(): Promise<TaxonomyViewModel[]>{
-    return this.taxonomyService.findByQuery(new TaxonomyViewModel({}), JSON.stringify(new TaxonomyQuery({}))).toPromise()
-    .then((items: TaxonomyViewModel[])=>{
-      return Promise.resolve(items);
-    })
+  public getAllTaxonomyItems(): Promise<TaxonomyViewModel[]> {
+    return this.taxonomyService
+      .findByQuery(
+        new TaxonomyViewModel({}),
+        JSON.stringify(new TaxonomyQuery({}))
+      )
+      .toPromise()
+      .then((items: TaxonomyViewModel[]) => {
+        return Promise.resolve(items);
+      });
   }
 }

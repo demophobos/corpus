@@ -21,6 +21,7 @@ import { CommentComponent } from './search/components/comment/comment.component'
 import { SearchFormTypeOptionsComponent } from './search/components/search-form-type-options/search-form-type-options.component';
 import { SearchAuthorWorkOptionsComponent } from './search/components/search-author-work-options/search-author-work-options.component';
 import { SearchMorphOptionsComponent } from './search/components/search-morph-options/search-morph-options.component';
+import { SearchMorphCategoryComponent } from './search/components/search-morph-category/search-morph-category.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SearchMorphOptionsComponent } from './search/components/search-morph-op
     CommentComponent,
     SearchFormTypeOptionsComponent,
     SearchAuthorWorkOptionsComponent,
-    SearchMorphOptionsComponent],
+    SearchMorphOptionsComponent,
+    SearchMorphCategoryComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,
