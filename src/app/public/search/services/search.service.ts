@@ -2,27 +2,35 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
 import { FormSearchTypeEnum, LocalStorageKeyEnum } from '@shared/enums';
+import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
 import {
   ChunkElementView,
   ChunkQuery,
   ChunkView,
+  ElementView,
   HeaderModel,
   IndexView,
   MorphModel,
   PageResponse,
   TaxonomyQuery,
+  TaxonomyTreeNode,
   TaxonomyViewModel,
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { LocalStorageService } from '@shared/services';
-import { promise } from 'protractor';
-import { ReplaySubject, throwError } from 'rxjs';
-import { textChangeRangeIsUnchanged } from 'typescript';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService implements OnInit {
+
+  dataChange = new BehaviorSubject<TaxonomyTreeNode[]>([]);
+
+  get data(): TaxonomyTreeNode[] { return this.dataChange.value; }
+  
+  public selectedWord: ReplaySubject<ElementView> = new ReplaySubject<ElementView>(1);
+
   public currentQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(
     1
   );
@@ -44,11 +52,17 @@ export class SearchService implements OnInit {
     private interpService: ApiService<InterpModel>,
     private chunkService: ApiService<ChunkView>,
     private headerService: ApiService<HeaderModel>,
-    private taxonomyService: ApiService<TaxonomyViewModel>
+    private taxonomyService: ApiService<TaxonomyViewModel>,
+    private elementService: ApiService<ElementView>
   ) {
     this.getLocalStorageQuery();
   }
   ngOnInit(): void {}
+
+  setSelectedWord(word: ElementView){
+    this.selectedWord.next(word);
+  }
+
 
   loadComment(chunk: ChunkElementView) {
     this.comment.next(chunk);
@@ -255,5 +269,29 @@ export class SearchService implements OnInit {
       .then((items: TaxonomyViewModel[]) => {
         return Promise.resolve(items);
       });
+  }
+
+  async buildMorphTree(): Promise<TaxonomyTreeNode[]> {
+    return await this.getTaxonomyItems(TaxonomyCategoryEnum.PosAttribute)
+    .then((items:TaxonomyViewModel[])=>{
+      return items.map(i=>{
+        return new TaxonomyTreeNode({
+          categoryCode: i.categoryCode,
+          categoryDesc: i.categoryDesc,
+          categoryId: i.categoryId,
+          code: i.code,
+          desc: i.desc,
+          children: []
+        });
+      })
+    });
+  }
+
+  async countWordUsage(value: string):Promise<Number>{
+    return this.elementService.countByQuery(new ElementView({}), JSON.stringify({getCount: true, value: value})).toPromise()
+    .then((result: Number)=>{
+      return Promise.resolve(result);
+    });
+
   }
 }

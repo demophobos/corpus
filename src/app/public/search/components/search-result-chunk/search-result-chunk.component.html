@@ -15,7 +15,7 @@
     </mat-card>
     <mat-progress-bar color="primary" mode="buffer" *ngIf="showInterp && interpIsLoading == true"></mat-progress-bar>
     <div *ngIf="showInterp && !interpIsLoading">
-        <mat-card *ngFor="let interpChunk of interpChunks" class="interp-card" class="mat-elevation-z0">
+        <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z0 interp-card">
             <mat-card-header class="card-header">
                 <mat-card-title class="card-interp-title">
                     <app-chunk-info [chunk]="interpChunk"></app-chunk-info>

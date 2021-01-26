@@ -17,3 +17,4 @@ export * from './project/interpModel';
 export * from './project/pageResponse';
 export * from './project/taxonomyViewModel';
 export * from './project/taxonomyQuery';
+export * from './taxonomyTreeNode';

@@ -17,7 +17,19 @@
     <mat-card-content>
         <app-search-form-type-options></app-search-form-type-options>
         <mat-accordion multi>
-            <mat-expansion-panel hideToggle [disabled]="morphDisabled" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="morph-panel mat-elevation-z0">
+            <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="author-panel mat-elevation-z0">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-header-title">
+                        Auctores et opera
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        <div class="spacer"></div>
+                        <div *ngIf="query.headers">{{query.headers.length}}</div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-search-author-work-options></app-search-author-work-options>
+            </mat-expansion-panel>
+            <mat-expansion-panel hideToggle [disabled]="morphDisabled" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="panel-header-title">
                         Morphologia
@@ -27,18 +39,6 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <app-search-morph-options></app-search-morph-options>
-            </mat-expansion-panel>
-            <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <mat-panel-title class="panel-header-title">
-                        Auctores et opera
-                    </mat-panel-title>
-                    <mat-panel-description>
-                        <div class="spacer"></div>
-                        <div>{{query.headers.length}}</div>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-                <app-search-author-work-options></app-search-author-work-options>
             </mat-expansion-panel>
         </mat-accordion>
     </mat-card-content>

@@ -49,4 +49,8 @@ export class SearchResultElementComponent
       }
   }
 
+  selectWord(word: ElementView){
+    this.searchService.setSelectedWord(word);
+  }
+
 }

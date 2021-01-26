@@ -1,19 +1,11 @@
 <div *ngIf="query">
   <app-search-morph-category [items]="getCategoryItems(pos)" [selectedItems]="query.pos" [title]="getCategoryTitle(pos)" (selected)="posSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(tempus)" [selectedItems]="query.tense" [title]="getCategoryTitle(tempus)" (selected)="tempusSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(modus)" [selectedItems]="query.mood" [title]="getCategoryTitle(modus)" (selected)="modusSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(genus)" [selectedItems]="query.gender" [title]="getCategoryTitle(genus)" (selected)="genusSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(numerus)" [selectedItems]="query.number" [title]="getCategoryTitle(numerus)" (selected)="numerusSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(persona)" [selectedItems]="query.person" [title]="getCategoryTitle(persona)" (selected)="personaSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(casus)" [selectedItems]="query.case" [title]="getCategoryTitle(casus)"  (selected)="casusSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(gradus)" [selectedItems]="query.degree" [title]="getCategoryTitle(gradus)" (selected)="gradusSelected($event)"></app-search-morph-category>
-  <mat-divider></mat-divider>
   <app-search-morph-category [items]="getCategoryItems(genus2)" [selectedItems]="query.voice" [title]="getCategoryTitle(genus2)" (selected)="genus2Selected($event)"></app-search-morph-category>
 </div>

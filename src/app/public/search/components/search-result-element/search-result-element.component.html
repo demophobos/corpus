@@ -1,4 +1,4 @@
-<div *ngIf="element !== undefined && element.type == 0" [ngClass]="{morph:isMorphStyle, notmorph:isNotMorphStyle, mark:isSelected}">{{element.value}}</div>
+<div *ngIf="element !== undefined && element.type == 0" (click)="selectWord(element)" [ngClass]="{morph:isMorphStyle, notmorph:isNotMorphStyle, mark:isSelected}">{{element.value}}</div>
 <div *ngIf="element !== undefined && element.type == 1">{{element.value}}</div>
 <div *ngIf="element !== undefined && element.type == 2">{{element.value}}</div>
 <div *ngIf="element !== undefined && element.type == 3">&nbsp;</div>

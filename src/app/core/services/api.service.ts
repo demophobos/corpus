@@ -68,7 +68,7 @@ export class ApiService<T extends Model> implements OnInit {
       .get(`${AppConfig.ApiUrl}${item.apiType}?params=${query}`)
       .pipe(
         map((res: any) => {
-          return res.map((i: any) => ModelMapperService.Map(item, i));
+          return res;
         }),
         catchError((e: any) => throwError(this.errorService.errorHandler(e)))
       );

@@ -1,16 +1,36 @@
 <mat-card class="mat-elevation-z0">
     <mat-card-header>
         <mat-card-title>notae</mat-card-title>
-        <mat-card-subtitle *ngIf="chunk">
-            {{chunk.headerCode}},
-            {{chunk.indexName}}
+        <mat-card-subtitle *ngIf="word">
+            {{word.value.toLowerCase()}}
         </mat-card-subtitle>
         <div class="spacer"></div>
         <button mat-icon-button aria-label="clear" (click)="close()" color="primary">
             <mat-icon svgIcon="close"></mat-icon>
         </button>
     </mat-card-header>
-    <mat-card-content>
-        
+    <mat-card-content *ngIf="word && word.morphId">
+    <mat-accordion multi>
+        <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Morphologia
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{word.pos}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel hideToggle (click)="showUsage()" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Usus
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{wordUsageCount}}
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>
     </mat-card-content>
 </mat-card>
