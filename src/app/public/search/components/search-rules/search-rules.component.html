@@ -20,7 +20,7 @@
             <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="author-panel mat-elevation-z0">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="panel-header-title">
-                        Auctores et opera
+                        Opera
                     </mat-panel-title>
                     <mat-panel-description>
                         <div class="spacer"></div>
@@ -35,7 +35,7 @@
                         Morphologia
                     </mat-panel-title>
                     <mat-panel-description>
-                        
+                        {{selectedMorphAttributes}}
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <app-search-morph-options></app-search-morph-options>

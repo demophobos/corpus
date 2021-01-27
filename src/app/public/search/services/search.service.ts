@@ -24,6 +24,17 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService implements OnInit {
+  getSelectedMorphAttrubutes(query: ChunkQuery): number {
+    return query.pos.length + 
+    query.gender.length  +
+    query.case.length  +
+    query.person.length  +
+    query.number.length +
+    query.tense.length +
+    query.mood.length +
+    query.voice.length  + 
+    query.degree.length ;
+  }
 
   dataChange = new BehaviorSubject<TaxonomyTreeNode[]>([]);
 

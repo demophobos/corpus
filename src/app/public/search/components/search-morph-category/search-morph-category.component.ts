@@ -11,6 +11,7 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search-morph-category.component.scss']
 })
 export class SearchMorphCategoryComponent extends BaseComponent implements OnInit, AfterViewInit {
+  panelOpenState = false;
   @Input() items: TaxonomyViewModel[];
   @Input() title: string;
   @Input() selectedItems: string[];

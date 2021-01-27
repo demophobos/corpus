@@ -20,6 +20,7 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
   editorForm: FormGroup;
   panelOpenState = false;
   morphDisabled = false;
+  selectedMorphAttributes: number = 0;
   @ViewChild(MatAccordion) accordion: MatAccordion;
   constructor(private searchService: SearchService,
     private formBuilder: FormBuilder) {
@@ -37,6 +38,7 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
       if(this.morphDisabled && this.accordion){
         this.accordion.closeAll();
       }
+      this.selectedMorphAttributes = this.searchService.getSelectedMorphAttrubutes(query);
     });
 
     if (this.query ) {
