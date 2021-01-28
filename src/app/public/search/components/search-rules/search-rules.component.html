@@ -17,10 +17,12 @@
     <mat-card-content>
         <app-search-form-type-options></app-search-form-type-options>
         <mat-accordion multi>
-            <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="author-panel mat-elevation-z0">
+            <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+                class="author-panel mat-elevation-z0">
                 <mat-expansion-panel-header>
-                    <mat-panel-title class="panel-header-title">
-                        Opera
+                    <mat-panel-title class="panel-header-title" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon svgIcon="books"></mat-icon>
+                        <span>Opera</span>
                     </mat-panel-title>
                     <mat-panel-description>
                         <div class="spacer"></div>
@@ -29,10 +31,12 @@
                 </mat-expansion-panel-header>
                 <app-search-author-work-options></app-search-author-work-options>
             </mat-expansion-panel>
-            <mat-expansion-panel hideToggle [disabled]="morphDisabled" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
+            <mat-expansion-panel hideToggle [disabled]="morphDisabled" (opened)="panelOpenState = true"
+                (closed)="panelOpenState = false" class="mat-elevation-z0">
                 <mat-expansion-panel-header>
-                    <mat-panel-title class="panel-header-title">
-                        Morphologia
+                    <mat-panel-title class="panel-header-title" fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon svgIcon="morphology"></mat-icon>
+                        <span>Morphologia</span>
                     </mat-panel-title>
                     <mat-panel-description>
                         <div class="spacer"></div>
@@ -43,5 +47,4 @@
             </mat-expansion-panel>
         </mat-accordion>
     </mat-card-content>
-
 </mat-card>

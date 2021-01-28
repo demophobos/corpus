@@ -8,6 +8,6 @@ export const AppConfig = {
     SessionExpiresIn: 180,
     AppFullTitle: 'Corpus Latino-Rossicum',
     AppShortTitle: 'CLR',
-    DefaultPageLimit: 10,
+    DefaultPageLimit: 5,
     DefaultSearchTypeValue: FormSearchTypeEnum.Form
 }

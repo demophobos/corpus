@@ -6,7 +6,9 @@ body {
     left: 0px;
     bottom: 0px;
     top: 0px;
+    background-color: whitesmoke;
 }
+
 
 app-sidenav {
     display: flex;
@@ -15,9 +17,18 @@ app-sidenav {
 mat-drawer-container {
     flex: 1 1 auto;
     height: 100%;
+    background-color: transparent !important; 
 }
 mat-drawer {
     width: auto;
+}
+
+mat-expansion-panel-header{
+    background-color: transparent !important; 
+}
+
+mat-card{
+    background-color: transparent !important; 
 }
 .mat-bottom-sheet-container {
     padding: 0 !important;
@@ -58,7 +69,17 @@ mat-drawer {
 .mat-expansion-panel-header{
     padding-left: 0 !important;
     padding-right: 6px !important;
+    background-color: whitesmoke !important;
 }
 .mat-expansion-panel-body{
     padding: 0 !important;
+    background-color: whitesmoke !important;
 }
+.mat-paginator-container{
+    background-color: whitesmoke;
+}
+
+.panel-header-title{
+    font-weight: bold;
+    color: #3f51b5;
+  }

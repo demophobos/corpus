@@ -1,8 +1,7 @@
-<mat-card class="mat-elevation-z0">
+<mat-card class="mat-elevation-z0" *ngIf="word">
     <mat-card-header>
-        <mat-card-title>notae</mat-card-title>
-        <mat-card-subtitle *ngIf="word">
-            {{word.value.toLowerCase()}}
+        <mat-card-title>{{word.value.toLowerCase()}}</mat-card-title>
+        <mat-card-subtitle>
         </mat-card-subtitle>
         <div class="spacer"></div>
         <button mat-icon-button aria-label="clear" (click)="close()" color="primary">
@@ -13,7 +12,7 @@
     <mat-accordion multi>
         <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
             <mat-expansion-panel-header>
-                <mat-panel-title>
+                <mat-panel-title class="panel-header-title">
                     Morphologia
                 </mat-panel-title>
                 <mat-panel-description>
@@ -23,7 +22,7 @@
         </mat-expansion-panel>
         <mat-expansion-panel hideToggle (click)="showUsage()" (opened)="panelOpenState = true" (closed)="panelOpenState = false" class="mat-elevation-z0">
             <mat-expansion-panel-header>
-                <mat-panel-title>
+                <mat-panel-title class="panel-header-title">
                     Usus
                 </mat-panel-title>
                 <mat-panel-description>
