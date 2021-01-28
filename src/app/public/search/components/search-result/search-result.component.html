@@ -1,18 +1,40 @@
-<mat-paginator *ngIf="showPaginator()" [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)"></mat-paginator>
-<div class="spinner" *ngIf="isLoading == true" fxLayoutAlign="center center">
-  <mat-spinner></mat-spinner>
-</div>
-<div *ngIf="isLoading == false && chunks" class="container mat-elevation-z0">
-  <div class="table-container">
-    <table mat-table [dataSource]="chunks" class="table" matSort matSortActive="created" matSortDisableClear matSortDirection="desc">
-      <ng-container matColumnDef="chunk">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let row">
-          <app-search-result-chunk [chunk]="row"></app-search-result-chunk>
-        </td>
-      </ng-container>
-      <tr class="header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-  </div>
-</div>
+<mat-card class="mat-elevation-z0">
+  <mat-card-header>
+    <mat-card-title>eventus</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="spinner" *ngIf="isLoading == true" fxLayoutAlign="center center">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div *ngIf="isLoading == false && chunks" class="container mat-elevation-z0">
+      <div class="table-container">
+        <table mat-table [dataSource]="chunks" class="table" matSort matSortActive="created" matSortDisableClear
+          matSortDirection="desc">
+
+          <ng-container matColumnDef="chunk">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <app-search-result-chunk [chunk]="row"></app-search-result-chunk>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox color="primary" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+          <tr class="header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+          </tr>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-checkbox *ngIf="showPaginator()" color="primary" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()"></mat-checkbox>
+    <div class="spacer"></div>
+    <mat-paginator *ngIf="showPaginator()" [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)"></mat-paginator>
+  </mat-card-actions>
+</mat-card>

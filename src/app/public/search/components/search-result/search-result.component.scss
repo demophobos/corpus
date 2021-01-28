@@ -3,13 +3,12 @@
   position: relative;
   min-height: 200px;
 }
-
+.header{
+  display: none;
+}
 .table-container {
   position: relative;
   overflow: auto;
-}
-.header{
-  display: none !important;
 }
 table {
   width: 100%;
