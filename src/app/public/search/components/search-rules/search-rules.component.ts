@@ -32,13 +32,15 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
       formFormControl: new FormControl('')
     });
 
-    this.searchService.currentQuery.subscribe(query=>{
+    this.searchService.chunkQuery.subscribe(query=>{
       this.query = query;
       this.morphDisabled = this.query.formSearchType == FormSearchTypeEnum.Form;
       if(this.morphDisabled && this.accordion){
         this.accordion.closeAll();
       }
-      this.selectedMorphAttributes = this.searchService.getSelectedMorphAttrubutes(query);
+      this.searchService.selectedAttributesCount.subscribe(count=>{
+        this.selectedMorphAttributes = count;
+      })
     });
 
     if (this.query ) {

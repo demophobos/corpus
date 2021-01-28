@@ -36,7 +36,7 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
       this.categoryItems = items;
     });
 
-    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
     });
   }
@@ -56,46 +56,55 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
   posSelected(selected){
     if(this.query){
       this.query.pos = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   tempusSelected(selected){
     if(this.query){
       this.query.tense = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   modusSelected(selected){
     if(this.query){
       this.query.mood = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   genusSelected(selected){
     if(this.query){
       this.query.gender = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   numerusSelected(selected){
     if(this.query){
       this.query.number = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   personaSelected(selected){
     if(this.query){
       this.query.person = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   casusSelected(selected){
     if(this.query){
       this.query.case = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   gradusSelected(selected){
     if(this.query){
       this.query.degree = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
   genus2Selected(selected){
     if(this.query){
       this.query.voice = selected;
+      this.searchService.setSelectedMorphAttrubutesCount(this.query);
     }
   }
 

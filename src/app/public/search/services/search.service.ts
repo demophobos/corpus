@@ -24,38 +24,20 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService implements OnInit {
-  getSelectedMorphAttrubutes(query: ChunkQuery): number {
-    return query.pos.length + 
-    query.gender.length  +
-    query.case.length  +
-    query.person.length  +
-    query.number.length +
-    query.tense.length +
-    query.mood.length +
-    query.voice.length  + 
-    query.degree.length ;
-  }
 
   dataChange = new BehaviorSubject<TaxonomyTreeNode[]>([]);
 
   get data(): TaxonomyTreeNode[] { return this.dataChange.value; }
   
   public selectedWord: ReplaySubject<ElementView> = new ReplaySubject<ElementView>(1);
-
-  public currentQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(
-    1
-  );
-  public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<
-    ChunkElementView[]
-  >(1);
-  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<
-    MorphModel[]
-  >(1);
+  public selectedAttributesCount = new BehaviorSubject<number>(0);
+  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
+  public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
+  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   public showComment: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  public comment: ReplaySubject<ChunkElementView> = new ReplaySubject<ChunkElementView>(
-    1
-  );
+  public comment: ReplaySubject<ChunkElementView> = new ReplaySubject<ChunkElementView>(1);
+
   constructor(
     private localStorageService: LocalStorageService,
     private indexService: ApiService<IndexView>,
@@ -69,6 +51,18 @@ export class SearchService implements OnInit {
     this.getLocalStorageQuery();
   }
   ngOnInit(): void {}
+
+  setSelectedMorphAttrubutesCount(query: ChunkQuery)  {
+    this.selectedAttributesCount.next(query.pos.length + 
+    query.gender.length  +
+    query.case.length  +
+    query.person.length  +
+    query.number.length +
+    query.tense.length +
+    query.mood.length +
+    query.voice.length  + 
+    query.degree.length);
+  }
 
   setSelectedWord(word: ElementView){
     this.selectedWord.next(word);
@@ -86,15 +80,19 @@ export class SearchService implements OnInit {
   public getLocalStorageQuery() {
     let query = this.localStorageService.getItem(LocalStorageKeyEnum.Query);
     if (query) {
-      this.currentQuery.next(query);
+      this.chunkQuery.next(query);
     } else {
-      this.currentQuery.next(new ChunkQuery({}));
+      query = new ChunkQuery({})
+      this.chunkQuery.next(query);
     }
+    this.setSelectedMorphAttrubutesCount(query);
   }
 
   removeLocalStorageQuery() {
     this.localStorageService.removeItem(LocalStorageKeyEnum.Query);
-    this.currentQuery.next(new ChunkQuery({}));
+    let query = new ChunkQuery({})
+    this.chunkQuery.next(query);
+    this.setSelectedMorphAttrubutesCount(query);
   }
 
   resetQuery(query: ChunkQuery) {
@@ -195,7 +193,7 @@ export class SearchService implements OnInit {
 
     query.total = page.total;
 
-    this.currentQuery.next(query);
+    this.chunkQuery.next(query);
 
     this.localStorageService.setItem(LocalStorageKeyEnum.Query, query);
 
@@ -280,22 +278,6 @@ export class SearchService implements OnInit {
       .then((items: TaxonomyViewModel[]) => {
         return Promise.resolve(items);
       });
-  }
-
-  async buildMorphTree(): Promise<TaxonomyTreeNode[]> {
-    return await this.getTaxonomyItems(TaxonomyCategoryEnum.PosAttribute)
-    .then((items:TaxonomyViewModel[])=>{
-      return items.map(i=>{
-        return new TaxonomyTreeNode({
-          categoryCode: i.categoryCode,
-          categoryDesc: i.categoryDesc,
-          categoryId: i.categoryId,
-          code: i.code,
-          desc: i.desc,
-          children: []
-        });
-      })
-    });
   }
 
   async countWordUsage(value: string):Promise<Number>{

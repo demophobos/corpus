@@ -39,7 +39,7 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
 
   ngAfterViewInit() {
 
-    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
         
         this.query = query;
 

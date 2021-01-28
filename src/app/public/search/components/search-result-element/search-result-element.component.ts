@@ -29,7 +29,7 @@ export class SearchResultElementComponent
       this.isMorphStyle = this.element.morphId !== null;
     }
 
-    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ChunkQuery) => {
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ChunkQuery) => {
         this.query = query;
       });
 

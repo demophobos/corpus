@@ -23,7 +23,7 @@ export class SearchAuthorWorkOptionsComponent extends BaseComponent implements O
   async ngOnInit(): Promise<void> {
     this.headers = await this.searchService.getHeaders();
 
-    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
       if(this.query && this.query.headers){
         this.headerSelector.setValue(this.query.headers);

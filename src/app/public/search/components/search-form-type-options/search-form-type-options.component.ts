@@ -27,7 +27,7 @@ export class SearchFormTypeOptionsComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.searchService.currentQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
     });
     
@@ -49,7 +49,7 @@ export class SearchFormTypeOptionsComponent extends BaseComponent implements OnI
         } else {
           this.query.formSearchType = FormSearchTypeEnum.Form
         }
-        this.searchService.currentQuery.next(this.query);
+        this.searchService.chunkQuery.next(this.query);
       }
     });
   }
