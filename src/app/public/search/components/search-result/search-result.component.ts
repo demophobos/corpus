@@ -40,6 +40,10 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
     super();
   }
 
+  showHideCommentPane(){
+    this.searchService.switchCommentPane = true;
+  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.chunks.data.length;

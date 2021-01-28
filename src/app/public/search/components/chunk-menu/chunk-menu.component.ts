@@ -11,7 +11,6 @@ export class ChunkMenuComponent implements OnInit {
 
   @Input() chunk: ChunkElementView;
   @Output() showInterp: EventEmitter<any> = new EventEmitter();
-  @Output() showComment: EventEmitter<any> = new EventEmitter();
   interpIcon: string;
 
   constructor() { }
@@ -22,9 +21,5 @@ export class ChunkMenuComponent implements OnInit {
 
   loadInterp(){
     this.showInterp.emit();
-  }
-
-  loadComment(){
-    this.showComment.emit();
   }
 }

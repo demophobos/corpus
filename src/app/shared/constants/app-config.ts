@@ -9,5 +9,6 @@ export const AppConfig = {
     AppFullTitle: 'Corpus Latino-Rossicum',
     AppShortTitle: 'CLR',
     DefaultPageLimit: 5,
-    DefaultSearchTypeValue: FormSearchTypeEnum.Form
+    DefaultSearchTypeValue: FormSearchTypeEnum.Form,
+    DefaultShowCommentPane: false
 }

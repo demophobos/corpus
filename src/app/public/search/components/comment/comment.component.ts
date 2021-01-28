@@ -21,23 +21,14 @@ export class CommentComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchService.selectedWord.pipe(takeUntil(this.destroyed)).subscribe(word=>{
-      if(word){
-        this.word = word;
-        this.searchService.countWordUsage(this.word.value).then((result: Number)=>{
-          this.wordUsageCount = result;
-        });
+    this.searchService.commentable.pipe(takeUntil(this.destroyed)).subscribe(comment=>{
+      
+      if(comment instanceof ChunkElementView){
+        this.chunk = comment as ChunkElementView;
+      }else{
+        this.word = comment as ElementView;
       }
     });
-    this.searchService.comment.pipe(takeUntil(this.destroyed)).subscribe(comment=>{
-      this.chunk = comment;
-      if(comment){
-        this.words = comment.elements.filter(i=>i.type == ElementTypeEnum.Word);
-      }
-    });
-  }
-  close(){
-    this.searchService.showCommentPane(false);
   }
 
   showUsage(){

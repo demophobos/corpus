@@ -25,11 +25,6 @@ export class SearchResultChunkComponent extends BaseComponent implements OnInit 
     
   }
 
-  loadComment(){
-    this.searchService.showCommentPane(true);
-    this.searchService.loadComment(this.chunk);
-  }
-
   loadInterp() {
     this.showInterp = !this.showInterp;
     if(this.showInterp){

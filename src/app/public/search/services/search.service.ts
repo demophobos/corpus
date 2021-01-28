@@ -2,7 +2,6 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
 import { FormSearchTypeEnum, LocalStorageKeyEnum } from '@shared/enums';
-import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
 import {
   ChunkElementView,
   ChunkQuery,
@@ -13,7 +12,6 @@ import {
   MorphModel,
   PageResponse,
   TaxonomyQuery,
-  TaxonomyTreeNode,
   TaxonomyViewModel,
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
@@ -25,18 +23,31 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 })
 export class SearchService implements OnInit {
 
-  dataChange = new BehaviorSubject<TaxonomyTreeNode[]>([]);
+  //#region CommentPane
+  public showComment: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(AppConfig.DefaultShowCommentPane);
 
-  get data(): TaxonomyTreeNode[] { return this.dataChange.value; }
-  
-  public selectedWord: ReplaySubject<ElementView> = new ReplaySubject<ElementView>(1);
+  private get getCommentPaneState() : boolean {
+    return this.showComment.value; 
+  }
+
+  set switchCommentPane(value: boolean) {
+    this.showComment.next(value !== this.getCommentPaneState);
+  }
+  //#endregion
+
+  //#region Commentable entities
+  public commentable: BehaviorSubject<ChunkElementView | ElementView> = new BehaviorSubject<ChunkElementView | ElementView>(undefined);
+
+  set setCommentable(value: ChunkElementView | ElementView){
+    this.commentable.next(value);
+  }
+  //#endregion
+
   public selectedAttributesCount = new BehaviorSubject<number>(0);
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  public showComment: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  public comment: ReplaySubject<ChunkElementView> = new ReplaySubject<ChunkElementView>(1);
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -64,13 +75,9 @@ export class SearchService implements OnInit {
     query.degree.length);
   }
 
-  setSelectedWord(word: ElementView){
-    this.selectedWord.next(word);
-  }
-
 
   loadComment(chunk: ChunkElementView) {
-    this.comment.next(chunk);
+    this.commentable.next(chunk);
   }
 
   showCommentPane(show: boolean) {
@@ -105,7 +112,7 @@ export class SearchService implements OnInit {
   }
 
   public async getChunks(query: ChunkQuery) {
-    this.comment.next(null);
+    this.commentable.next(null);
 
     this.isLoading.next(true);
 

@@ -1,6 +1,9 @@
 <mat-card class="mat-elevation-z0">
   <mat-card-header>
     <mat-card-title>eventus</mat-card-title>
+    <button mat-icon-button color="primary" matTooltip="Notae" (click)="$event.stopPropagation()" (click)="showHideCommentPane()">
+      <mat-icon svgIcon="notae"></mat-icon>
+    </button>
   </mat-card-header>
   <mat-card-content>
     <div class="spinner" *ngIf="isLoading == true" fxLayoutAlign="center center">

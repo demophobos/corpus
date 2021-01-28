@@ -1,6 +1,3 @@
-<button mat-icon-button color="primary" matTooltip="Versiones" (click)="loadInterp()">
+<button mat-icon-button color="primary" matTooltip="Versiones" (click)="$event.stopPropagation()" (click)="loadInterp()">
   <mat-icon svgIcon="versio"></mat-icon>
-</button>
-<button mat-icon-button color="primary" matTooltip="Notae" (click)="loadComment()">
-  <mat-icon svgIcon="notae"></mat-icon>
 </button>

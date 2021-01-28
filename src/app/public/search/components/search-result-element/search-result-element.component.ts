@@ -50,7 +50,7 @@ export class SearchResultElementComponent
   }
 
   selectWord(word: ElementView){
-    this.searchService.setSelectedWord(word);
+    this.searchService.setCommentable = word;
   }
 
 }
