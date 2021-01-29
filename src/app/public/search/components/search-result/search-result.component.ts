@@ -35,13 +35,9 @@ export class SearchResultComponent extends BaseComponent implements AfterViewIni
   pageEvent: PageEvent;
 
   selection = new SelectionModel<ChunkElementView>(true, []);
-  
+
   constructor(private searchService: SearchService) {
     super();
-  }
-
-  showHideCommentPane(){
-    this.searchService.switchCommentPane = true;
   }
 
   isAllSelected() {

@@ -1,0 +1,16 @@
+<mat-card class="mat-elevation-z0" *ngIf="word">
+    <mat-card-header fxLayout="row">
+        <mat-card-title fxLayoutAlign="start center">{{word.value}}</mat-card-title>
+        <div class="spacer"></div>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-tab-group dynamicHeight *ngIf="word.form">
+            <mat-tab label="Morphologia"> 
+                {{word.lemma}}
+            </mat-tab>
+            <mat-tab label="Statistics">
+                
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

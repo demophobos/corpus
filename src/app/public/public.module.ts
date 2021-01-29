@@ -17,11 +17,14 @@ import { MorphInfoComponent } from './search/components/morph-info/morph-info.co
 import { ChunkInfoComponent } from './search/components/chunk-info/chunk-info.component';
 import { ChunkMenuComponent } from './search/components/chunk-menu/chunk-menu.component';
 import { SearchRulesComponent } from './search/components/search-rules/search-rules.component';
-import { CommentComponent } from './search/components/comment/comment.component';
+import { CommentPaneComponent } from './search/components/comment/comment-pane/comment-pane.component';
 import { SearchFormTypeOptionsComponent } from './search/components/search-form-type-options/search-form-type-options.component';
 import { SearchAuthorWorkOptionsComponent } from './search/components/search-author-work-options/search-author-work-options.component';
 import { SearchMorphOptionsComponent } from './search/components/search-morph-options/search-morph-options.component';
 import { SearchMorphCategoryComponent } from './search/components/search-morph-category/search-morph-category.component';
+import { CommentWordComponent } from './search/components/comment/comment-word/comment-word.component';
+import { CommentChunkComponent } from './search/components/comment/comment-chunk/comment-chunk.component';
+import { SearchResultToolbarComponent } from './search/components/search-result-toolbar/search-result-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -38,11 +41,14 @@ import { SearchMorphCategoryComponent } from './search/components/search-morph-c
     ChunkInfoComponent,
     ChunkMenuComponent,
     SearchRulesComponent,
-    CommentComponent,
+    CommentPaneComponent,
     SearchFormTypeOptionsComponent,
     SearchAuthorWorkOptionsComponent,
     SearchMorphOptionsComponent,
-    SearchMorphCategoryComponent],
+    SearchMorphCategoryComponent,
+    CommentWordComponent,
+    CommentChunkComponent,
+    SearchResultToolbarComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

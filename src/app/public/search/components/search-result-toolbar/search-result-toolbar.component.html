@@ -1,0 +1,10 @@
+<mat-toolbar>
+    <button mat-icon-button color="primary" matTooltip="Export">
+        <mat-icon svgIcon="export"></mat-icon>
+    </button>
+    <span class="spacer"></span>
+    <button mat-icon-button color="primary" matTooltip="Notae" (click)="$event.stopPropagation()"
+        (click)="showHideCommentPane()">
+        <mat-icon svgIcon="{{commentPaneIcon}}"></mat-icon>
+    </button>
+</mat-toolbar>

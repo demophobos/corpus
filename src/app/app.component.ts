@@ -21,9 +21,21 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   private RegisterIcons() {
     this.matIconRegistry.addSvgIcon(
-      `morphology`,
+      `morph`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/icons/morphology.svg'
+        '../assets/icons/morph.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `export`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/export.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `info`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/info.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
@@ -45,9 +57,15 @@ export class AppComponent extends BaseComponent implements OnInit {
       )
     );
     this.matIconRegistry.addSvgIcon(
-      `morph`,
+      `comment_open`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/icons/morph.svg'
+        '../assets/icons/comment_open.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `comment_close`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/comment_close.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(
