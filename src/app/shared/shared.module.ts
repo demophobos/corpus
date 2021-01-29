@@ -39,7 +39,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 @NgModule({
   declarations: [
     ...fromSharedWidgets.widgets,
@@ -86,7 +86,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatProgressBarModule,
     MatProgressSpinnerModule,
     MatExpansionModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonToggleModule
   ],
   exports: [
     ...fromSharedWidgets.widgets,
@@ -118,7 +119,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     MatExpansionModule,
     MatRadioModule,
     MatPaginatorModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatButtonToggleModule
   ],
   providers: [
     DialogService,
