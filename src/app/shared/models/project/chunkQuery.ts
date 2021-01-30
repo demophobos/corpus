@@ -1,9 +1,8 @@
-import { FormSearchTypeEnum } from "@shared/enums";
 import { TaxonomyViewModel } from "./taxonomyViewModel";
 
 export class ChunkQuery {
     value: string;
-    formSearchType: FormSearchTypeEnum = FormSearchTypeEnum.Form
+    searchLemma: boolean = false;
     index: number;
     total: number;
     skip: number;

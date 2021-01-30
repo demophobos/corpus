@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { AppConfig } from '@shared/constants';
-import { FormSearchTypeEnum, LocalStorageKeyEnum } from '@shared/enums';
+import { LocalStorageKeyEnum } from '@shared/enums';
 import {
   ChunkElementView,
   ChunkQuery,
@@ -118,14 +118,14 @@ export class SearchService implements OnInit {
 
     let value = query.value;
 
-    if (query.formSearchType == FormSearchTypeEnum.Lemma) {
+    if (query.searchLemma) {
       if (query.skip == 0 && query.total == 0) {
         let forms = await this.morphService
           .findByQuery(
             new MorphModel({}),
             JSON.stringify({
               value: query.value,
-              formSearchType: query.formSearchType,
+              formSearchType: query.searchLemma,
             })
           )
           .toPromise()

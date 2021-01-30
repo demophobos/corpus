@@ -16,7 +16,7 @@ import { SearchResultElementComponent } from './search/components/search-result-
 import { MorphInfoComponent } from './search/components/morph-info/morph-info.component';
 import { ChunkInfoComponent } from './search/components/chunk-info/chunk-info.component';
 import { ChunkMenuComponent } from './search/components/chunk-menu/chunk-menu.component';
-import { SearchRulesComponent } from './search/components/search-rules/search-rules.component';
+import { SearchRulesComponent } from './search/components/search-conditions/search-conditions.component';
 import { CommentPaneComponent } from './search/components/comment/comment-pane/comment-pane.component';
 import { SearchAuthorWorkOptionsComponent } from './search/components/search-author-work-options/search-author-work-options.component';
 import { SearchMorphOptionsComponent } from './search/components/search-morph-options/search-morph-options.component';

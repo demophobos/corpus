@@ -2,15 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatAccordion } from '@angular/material/expansion';
 import { BaseComponent } from '@shared/components';
-import { FormSearchTypeEnum } from '@shared/enums';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-search-rules',
-  templateUrl: './search-rules.component.html',
-  styleUrls: ['./search-rules.component.scss']
+  selector: 'app-search-conditions',
+  templateUrl: './search-conditions.component.html',
+  styleUrls: ['./search-conditions.component.scss']
 })
 export class SearchRulesComponent extends BaseComponent implements OnInit {
   searchDisabled: boolean = true;
@@ -37,8 +36,8 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
 
       this.query = query;
       
-      this.morphDisabled = this.query.formSearchType === FormSearchTypeEnum.Form;
-      this.editorForm.controls.checkControl.setValue(this.query.formSearchType);
+      this.morphDisabled = this.query.searchLemma == false;
+      this.editorForm.controls.checkControl.setValue(this.query.searchLemma);
       this.editorForm.controls.valueControl.setValue(this.query.value);
       this.searchDisabled = false;
       this.clearDisabled = false;
@@ -83,7 +82,7 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
   }
 
   async search() {
-    this.query.formSearchType = this.editorForm.controls.checkControl.value;
+    this.query.searchLemma = this.editorForm.controls.checkControl.value;
     this.searchService.resetQuery(this.query);
     this.searchService.getChunks(this.query);
   }
