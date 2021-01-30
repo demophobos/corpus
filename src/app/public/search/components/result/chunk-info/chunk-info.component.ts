@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChunkElementView } from '@shared/models';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-chunk-info',

@@ -21,6 +21,18 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   private RegisterIcons() {
     this.matIconRegistry.addSvgIcon(
+      `morph-condition`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/icons/morph-condition.svg'
+        )
+      );
+    this.matIconRegistry.addSvgIcon(
+      `work-condition`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/icons/work-condition.svg'
+        )
+      );
+    this.matIconRegistry.addSvgIcon(
     `checked`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         '../assets/icons/checked.svg'

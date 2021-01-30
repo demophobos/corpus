@@ -1,12 +1,10 @@
 <div style="width: 100%; height: 100%">
   <as-split [useTransition]="true" direction="horizontal">
-    <as-split-area [maxSize]="searchRulePaneSize" [size]="searchRulePaneSize">
-      <app-search-conditions></app-search-conditions>
-    </as-split-area>
     <as-split-area [size]="searchResultPaneSize">
+      <app-search-toolbar></app-search-toolbar>
       <app-search-result></app-search-result>
     </as-split-area>
-    <as-split-area [maxSize]="commentPaneSize" [size]="commentPaneSize">
+    <as-split-area [minSize]="commentPaneSize" [maxSize]="commentPaneSize" [size]="commentPaneSize">
       <app-comment-pane></app-comment-pane>
     </as-split-area>
   </as-split>

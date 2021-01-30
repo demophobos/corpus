@@ -4,9 +4,9 @@ import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-search-result-toolbar',
-  templateUrl: './search-result-toolbar.component.html',
-  styleUrls: ['./search-result-toolbar.component.scss']
+  selector: 'app-search-toolbar',
+  templateUrl: './search-toolbar.component.html',
+  styleUrls: ['./search-toolbar.component.scss']
 })
 export class SearchResultToolbarComponent extends BaseComponent implements OnInit {
   commentPaneIcon: string = "comment_open";

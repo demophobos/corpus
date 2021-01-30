@@ -4,12 +4,12 @@ import { BaseComponent } from '@shared/components';
 import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
 import { ChunkQuery, TaxonomyViewModel } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
-  selector: 'app-search-morph-options',
-  templateUrl: './search-morph-options.component.html',
-  styleUrls: ['./search-morph-options.component.scss']
+  selector: 'app-morph-condition',
+  templateUrl: './morph-condition.component.html',
+  styleUrls: ['./morph-condition.component.scss']
 })
 export class SearchMorphOptionsComponent extends BaseComponent implements OnInit {
   panelOpenState = false;

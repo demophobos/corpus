@@ -2,13 +2,11 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output } from '@
 import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { TaxonomyViewModel } from '@shared/models';
-import { takeUntil } from 'rxjs/operators';
-import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-search-morph-category',
-  templateUrl: './search-morph-category.component.html',
-  styleUrls: ['./search-morph-category.component.scss']
+  selector: 'app-morph-category',
+  templateUrl: './morph-category.component.html',
+  styleUrls: ['./morph-category.component.scss']
 })
 export class SearchMorphCategoryComponent extends BaseComponent implements OnInit, AfterViewInit {
   panelOpenState = false;

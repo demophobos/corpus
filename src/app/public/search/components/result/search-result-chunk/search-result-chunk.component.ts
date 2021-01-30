@@ -4,7 +4,7 @@ import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
 import { ChunkElementView, ChunkView } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-search-result-chunk',

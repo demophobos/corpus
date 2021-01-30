@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { ChunkElementView, ChunkQuery } from '@shared/models';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../../services/search.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Language } from '@shared/enums';

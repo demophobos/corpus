@@ -5,12 +5,12 @@ import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery, HeaderModel } from '@shared/models';
 import { take, takeUntil } from 'rxjs/operators';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
-  selector: 'app-search-author-work-options',
-  templateUrl: './search-author-work-options.component.html',
-  styleUrls: ['./search-author-work-options.component.scss']
+  selector: 'app-author-work-condition',
+  templateUrl: './author-work-condition.component.html',
+  styleUrls: ['./author-work-condition.component.scss']
 })
 export class SearchAuthorWorkOptionsComponent extends BaseComponent implements OnInit {
   headerSelector = new FormControl();
