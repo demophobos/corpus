@@ -21,6 +21,24 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   private RegisterIcons() {
     this.matIconRegistry.addSvgIcon(
+    `checked`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/checked.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `unchecked`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/unchecked.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `filter_remove`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/filter_remove.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
       `stat`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         '../assets/icons/stat.svg'

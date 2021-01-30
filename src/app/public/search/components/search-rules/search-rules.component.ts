@@ -29,12 +29,20 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.editorForm = this.formBuilder.group({
-      formFormControl: new FormControl('')
+      valueControl: new FormControl(''),
+      checkControl: new FormControl()
     });
 
     this.searchService.chunkQuery.subscribe(query=>{
+
       this.query = query;
-      this.morphDisabled = this.query.formSearchType == FormSearchTypeEnum.Form;
+      
+      this.morphDisabled = this.query.formSearchType === FormSearchTypeEnum.Form;
+      this.editorForm.controls.checkControl.setValue(this.query.formSearchType);
+      this.editorForm.controls.valueControl.setValue(this.query.value);
+      this.searchDisabled = false;
+      this.clearDisabled = false;
+
       if(this.morphDisabled && this.accordion){
         this.accordion.closeAll();
       }
@@ -43,42 +51,39 @@ export class SearchRulesComponent extends BaseComponent implements OnInit {
       })
     });
 
-    if (this.query ) {
-      this.editorForm.controls.formFormControl.setValue(this.query.value);
-      this.searchDisabled = false;
-      this.clearDisabled = false;
-    }else{
-      this.query = new ChunkQuery({});
-    }
-
     this.onChanges();
   }
 
   onChanges(): void {
     this.editorForm.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((val) => {
 
-        if (val.formFormControl) {
+        if (val.valueControl) {
 
-          this.searchDisabled = this.clearDisabled = val.formFormControl.length == 0;
-
-          this.query.value = val.formFormControl;
+          this.searchDisabled = this.clearDisabled = val.valueControl.length == 0;
+          this.query.value = val.valueControl;
 
         } else {
-
           this.searchDisabled = this.clearDisabled = true;
+        }
 
+        this.morphDisabled = val.checkControl == false;
+
+        if(this.morphDisabled && this.accordion){
+          this.accordion.closeAll();
         }
         
       });
   }
 
   clear() {
-    this.editorForm.controls.formFormControl.setValue('');
-    this.searchDisabled = this.clearDisabled = true;
+    this.editorForm.controls.valueControl.setValue('');
+    this.editorForm.controls.checkControl.setValue(false);
+    this.morphDisabled = this.searchDisabled = this.clearDisabled = true;
     this.searchService.removeLocalStorageQuery();
   }
 
   async search() {
+    this.query.formSearchType = this.editorForm.controls.checkControl.value;
     this.searchService.resetQuery(this.query);
     this.searchService.getChunks(this.query);
   }

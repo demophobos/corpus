@@ -1,21 +1,19 @@
+<mat-toolbar>
+    <form class="form" [formGroup]="editorForm">
+        <mat-form-field class="input-field-full-width">
+            <mat-checkbox  formControlName="checkControl" color="primary" class="checkbox"></mat-checkbox>
+            <input matInput formControlName="valueControl">
+            <button matSuffix mat-icon-button aria-label="search" (click)="search()" color="primary" [disabled]="searchDisabled">
+                <mat-icon svgIcon="search"></mat-icon>
+            </button>
+            <button matSuffix mat-icon-button aria-label="clear" (click)="clear()" color="primary" [disabled]="clearDisabled">
+                <mat-icon svgIcon="filter_remove"></mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+</mat-toolbar>
 <mat-card class="mat-elevation-z0">
-    <mat-card-header>
-        <form class="form" [formGroup]="editorForm">
-            <mat-form-field class="input-field-full-width">
-                <input matInput formControlName="formFormControl">
-                <button matSuffix mat-icon-button aria-label="search" (click)="search()" color="primary"
-                    [disabled]="searchDisabled">
-                    <mat-icon svgIcon="search"></mat-icon>
-                </button>
-                <button matSuffix mat-icon-button aria-label="clear" (click)="clear()" color="primary"
-                    [disabled]="clearDisabled">
-                    <mat-icon svgIcon="close"></mat-icon>
-                </button>
-            </mat-form-field>
-        </form>
-    </mat-card-header>
     <mat-card-content>
-        <app-search-form-type-options></app-search-form-type-options>
         <mat-accordion multi>
             <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false"
                 class="author-panel mat-elevation-z0">
@@ -26,7 +24,7 @@
                     </mat-panel-title>
                     <mat-panel-description>
                         <div class="spacer"></div>
-                        <div *ngIf="query.headers">{{query.headers.length}}</div>
+                        <div *ngIf="query && query.headers">{{query.headers.length}}</div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <app-search-author-work-options></app-search-author-work-options>

@@ -18,7 +18,6 @@ import { ChunkInfoComponent } from './search/components/chunk-info/chunk-info.co
 import { ChunkMenuComponent } from './search/components/chunk-menu/chunk-menu.component';
 import { SearchRulesComponent } from './search/components/search-rules/search-rules.component';
 import { CommentPaneComponent } from './search/components/comment/comment-pane/comment-pane.component';
-import { SearchFormTypeOptionsComponent } from './search/components/search-form-type-options/search-form-type-options.component';
 import { SearchAuthorWorkOptionsComponent } from './search/components/search-author-work-options/search-author-work-options.component';
 import { SearchMorphOptionsComponent } from './search/components/search-morph-options/search-morph-options.component';
 import { SearchMorphCategoryComponent } from './search/components/search-morph-category/search-morph-category.component';
@@ -42,7 +41,6 @@ import { SearchResultToolbarComponent } from './search/components/search-result-
     ChunkMenuComponent,
     SearchRulesComponent,
     CommentPaneComponent,
-    SearchFormTypeOptionsComponent,
     SearchAuthorWorkOptionsComponent,
     SearchMorphOptionsComponent,
     SearchMorphCategoryComponent,
