@@ -10,9 +10,9 @@ import { IndexComponent } from './index/components/index/index.component';
 import { IndexExplorerComponent } from './index/components/index-explorer/index-explorer.component';
 import { WorkExplorerComponent } from './index/components/work-explorer/work-explorer.component';
 import { SearchPageComponent } from './search/components/search-page/search-page.component';
-import { SearchResultComponent } from './search/components/result/search-result/search-result.component';
-import { SearchResultChunkComponent } from './search/components/result/search-result-chunk/search-result-chunk.component';
-import { SearchResultElementComponent } from './search/components/result/search-result-element/search-result-element.component';
+import { ResultTableComponent } from './search/components/result/result-table/result-table.component';
+import { ResultChunkComponent } from './search/components/result/result-chunk/result-chunk.component';
+import { ResultElementComponent } from './search/components/result/result-element/result-element.component';
 import { MorphInfoComponent } from './search/components/result/morph-info/morph-info.component';
 import { ChunkInfoComponent } from './search/components/result/chunk-info/chunk-info.component';
 import { ChunkMenuComponent } from './search/components/result/chunk-menu/chunk-menu.component';
@@ -33,9 +33,9 @@ import { BaseConditionComponent } from './search/components/condition/base-condi
     IndexExplorerComponent,
     WorkExplorerComponent,
     SearchPageComponent,
-    SearchResultComponent,
-    SearchResultChunkComponent,
-    SearchResultElementComponent,
+    ResultTableComponent,
+    ResultChunkComponent,
+    ResultElementComponent,
     MorphInfoComponent,
     ChunkInfoComponent,
     ChunkMenuComponent,

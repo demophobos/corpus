@@ -1,17 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
-import { ChunkElementView, ChunkView } from '@shared/models';
-import { takeUntil } from 'rxjs/operators';
+import { ChunkElementView} from '@shared/models';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
-  selector: 'app-search-result-chunk',
-  templateUrl: './search-result-chunk.component.html',
-  styleUrls: ['./search-result-chunk.component.scss'],
+  selector: 'app-result-chunk',
+  templateUrl: './result-chunk.component.html',
+  styleUrls: ['./result-chunk.component.scss'],
 })
-export class SearchResultChunkComponent extends BaseComponent implements OnInit {
+export class ResultChunkComponent extends BaseComponent implements OnInit {
   showInterp: boolean = false;
   interpIsLoading: boolean = true;
   @Input() chunk: ChunkElementView;

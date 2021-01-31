@@ -9,7 +9,7 @@
         </mat-card-header>
         <mat-card-content fxLayout="row wrap">
             <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
-                <app-search-result-element [element]="element"></app-search-result-element>
+                <app-result-element [element]="element"></app-result-element>
             </span>
         </mat-card-content>
     </mat-card>
@@ -24,7 +24,7 @@
             </mat-card-header>
             <mat-card-content fxLayout="row wrap">
                 <span *ngFor="let element of interpChunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
-                    <app-search-result-element [element]="element"></app-search-result-element>
+                    <app-result-element [element]="element"></app-result-element>
                 </span>
             </mat-card-content>
         </mat-card>

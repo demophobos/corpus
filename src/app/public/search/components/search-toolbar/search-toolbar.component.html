@@ -1,11 +1,11 @@
 <mat-toolbar>
-   <app-base-condition></app-base-condition>
-    <button mat-icon-button color="primary" matTooltip="Export">
-        <mat-icon svgIcon="export"></mat-icon>
+    <button mat-icon-button color="primary" matTooltip="{{conditionPaneButtonTooltip}}" (click)="showHideConditionPane()">
+        <mat-icon svgIcon="{{conditionPaneIcon}}"></mat-icon>
     </button>
-    <span class="spacer"></span>
-    <button mat-icon-button color="primary" matTooltip="Notae" (click)="$event.stopPropagation()"
-        (click)="showHideCommentPane()">
+    <mat-divider [vertical]="true" [inset]="true"></mat-divider>
+    <app-base-condition></app-base-condition>
+    <mat-divider [vertical]="true" [inset]="true"></mat-divider>
+    <button mat-icon-button color="primary" matTooltip="{{commentPaneButtonTooltip}}" (click)="showHideCommentPane()">
         <mat-icon svgIcon="{{commentPaneIcon}}"></mat-icon>
     </button>
 </mat-toolbar>

@@ -5,11 +5,11 @@ import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
-  selector: 'app-search-result-element',
-  templateUrl: './search-result-element.component.html',
-  styleUrls: ['./search-result-element.component.scss'],
+  selector: 'app-result-element',
+  templateUrl: './result-element.component.html',
+  styleUrls: ['./result-element.component.scss'],
 })
-export class SearchResultElementComponent
+export class ResultElementComponent
   extends BaseComponent
   implements OnInit {
   @Input() element: ElementView;

@@ -23,15 +23,27 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 })
 export class SearchService implements OnInit {
 
+//#region ConditionPane
+public conditionPaneState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+private get getConditionPaneState() : boolean {
+  return this.conditionPaneState.value; 
+}
+
+set switchConditionPane(value: boolean) {
+  this.conditionPaneState.next(value !== this.getConditionPaneState);
+}
+//#endregion
+
   //#region CommentPane
-  public showComment: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(AppConfig.DefaultShowCommentPane);
+  public commentPaneState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(AppConfig.DefaultShowCommentPane);
 
   private get getCommentPaneState() : boolean {
-    return this.showComment.value; 
+    return this.commentPaneState.value; 
   }
 
   set switchCommentPane(value: boolean) {
-    this.showComment.next(value !== this.getCommentPaneState);
+    this.commentPaneState.next(value !== this.getCommentPaneState);
   }
   //#endregion
 
@@ -78,10 +90,6 @@ export class SearchService implements OnInit {
 
   loadComment(chunk: ChunkElementView) {
     this.commentable.next(chunk);
-  }
-
-  showCommentPane(show: boolean) {
-    this.showComment.next(show);
   }
 
   public getLocalStorageQuery() {

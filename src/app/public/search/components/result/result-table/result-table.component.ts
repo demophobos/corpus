@@ -3,18 +3,17 @@ import { BaseComponent } from '@shared/components';
 import { ChunkElementView, ChunkQuery } from '@shared/models';
 import { SearchService } from '../../../services/search.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
 import { Language } from '@shared/enums';
 import { takeUntil } from 'rxjs/operators';
 import { AppConfig } from '@shared/constants';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 @Component({
-  selector: 'app-search-result',
-  templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.scss'],
+  selector: 'app-result-table',
+  templateUrl: './result-table.component.html',
+  styleUrls: ['./result-table.component.scss'],
 })
-export class SearchResultComponent extends BaseComponent implements AfterViewInit {
+export class ResultTableComponent extends BaseComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

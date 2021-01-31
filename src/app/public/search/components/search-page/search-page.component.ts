@@ -12,15 +12,20 @@ export class SearchPageComponent extends BaseComponent implements OnInit {
 
   searchResultPaneSize = 100;
   commentPaneSize = 0;
-
+  conditionPaneSize = 0;
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-    this.searchService.showComment.pipe(takeUntil(this.destroyed)).subscribe(showComment=>{
-      this.commentPaneSize = showComment ? 20 : 0;
-      this.searchResultPaneSize = showComment ? 80 : 100;
+    this.searchService.commentPaneState.pipe(takeUntil(this.destroyed)).subscribe(showComment=>{
+      this.commentPaneSize = showComment ? 30 : 0;
+      this.searchResultPaneSize = showComment ? 70 : 100;
+    });
+
+    this.searchService.conditionPaneState.pipe(takeUntil(this.destroyed)).subscribe(showCondition=>{
+      this.conditionPaneSize = showCondition ? 20 : 0;
+      this.searchResultPaneSize = showCondition ? 80 : 100;
     })
   }
 }
