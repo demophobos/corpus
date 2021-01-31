@@ -17,13 +17,15 @@ import { MorphInfoComponent } from './search/components/result/morph-info/morph-
 import { ChunkInfoComponent } from './search/components/result/chunk-info/chunk-info.component';
 import { ChunkMenuComponent } from './search/components/result/chunk-menu/chunk-menu.component';
 import { CommentPaneComponent } from './search/components/comment/comment-pane/comment-pane.component';
-import { SearchAuthorWorkOptionsComponent } from './search/components/condition/author-work-condition/author-work-condition.component';
+import { WorkConditionComponent } from './search/components/condition/work-condition/work-condition.component';
 import { SearchMorphOptionsComponent } from './search/components/condition/morph-condition/morph-condition.component';
 import { SearchMorphCategoryComponent } from './search/components/condition/morph-category/morph-category.component';
 import { CommentWordComponent } from './search/components/comment/comment-word/comment-word.component';
 import { CommentChunkComponent } from './search/components/comment/comment-chunk/comment-chunk.component';
 import { SearchResultToolbarComponent } from './search/components/search-toolbar/search-toolbar.component';
 import { BaseConditionComponent } from './search/components/condition/base-condition/base-condition.component';
+import { ConditionToolbarComponent } from './search/components/condition/condition-toolbar/condition-toolbar.component';
+import { ResultToolbarComponent } from './search/components/result/result-toolbar/result-toolbar.component';
 
 @NgModule({
   declarations: [
@@ -40,13 +42,15 @@ import { BaseConditionComponent } from './search/components/condition/base-condi
     ChunkInfoComponent,
     ChunkMenuComponent,
     CommentPaneComponent,
-    SearchAuthorWorkOptionsComponent,
+    WorkConditionComponent,
     SearchMorphOptionsComponent,
     SearchMorphCategoryComponent,
     CommentWordComponent,
     CommentChunkComponent,
     SearchResultToolbarComponent,
-    BaseConditionComponent],
+    BaseConditionComponent,
+    ConditionToolbarComponent,
+    ResultToolbarComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

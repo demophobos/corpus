@@ -1,7 +1,9 @@
 <div style="width: 100%; height: 100%">
   <as-split [useTransition]="true" direction="horizontal">
     <as-split-area [minSize]="conditionPaneSize" [maxSize]="conditionPaneSize" [size]="conditionPaneSize">
-
+      <app-condition-toolbar></app-condition-toolbar>
+      <app-morph-condition></app-morph-condition>
+      <app-work-condition></app-work-condition>
     </as-split-area>
     <as-split-area [size]="searchResultPaneSize">
       <app-search-toolbar></app-search-toolbar>

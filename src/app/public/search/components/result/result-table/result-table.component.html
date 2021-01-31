@@ -1,3 +1,4 @@
+<app-result-toolbar></app-result-toolbar>
 <mat-card class="mat-elevation-z0">
   <mat-card-content>
     <div class="spinner" *ngIf="isLoading == true" fxLayoutAlign="center center">
@@ -28,8 +29,8 @@
     </div>
   </mat-card-content>
   <mat-card-actions>
-    <mat-checkbox *ngIf="showPaginator()" color="primary" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()"></mat-checkbox>
-    <div class="spacer"></div>
+    <!-- <mat-checkbox *ngIf="showPaginator()" color="primary" (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()"></mat-checkbox>
+    <div class="spacer"></div> -->
     <mat-paginator *ngIf="showPaginator()" [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)"></mat-paginator>
   </mat-card-actions>
 </mat-card>

@@ -1,18 +1,16 @@
-import { query } from '@angular/animations';
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery, HeaderModel } from '@shared/models';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
-  selector: 'app-author-work-condition',
-  templateUrl: './author-work-condition.component.html',
-  styleUrls: ['./author-work-condition.component.scss']
+  selector: 'app-work-condition',
+  templateUrl: './work-condition.component.html',
+  styleUrls: ['./work-condition.component.scss']
 })
-export class SearchAuthorWorkOptionsComponent extends BaseComponent implements OnInit {
+export class WorkConditionComponent extends BaseComponent implements OnInit {
   headerSelector = new FormControl();
   headers: HeaderModel[];
   query: ChunkQuery;
