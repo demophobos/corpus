@@ -15,11 +15,9 @@ export class BaseConditionComponent extends BaseComponent implements OnInit {
   query: ChunkQuery;
   constructor(private formBuilder: FormBuilder, private searchService: SearchService) {
     super();
-
     this.editorForm = this.formBuilder.group({
       valueControl: new FormControl('')
     });
-
   }
 
   ngOnInit(): void {
