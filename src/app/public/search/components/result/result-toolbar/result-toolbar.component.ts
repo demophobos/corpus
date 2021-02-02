@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { ChunkQuery } from '@shared/models';
@@ -16,16 +16,15 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
   index: number;
   total: number;
   limit: number;
-  isLoading: boolean = false;
   pageEvent: PageEvent;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-    this.searchService.chunkQuery
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((query) => {
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
         this.query = query;
 
         if(query){
@@ -37,14 +36,14 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
           this.index = query.index;
         }
       });
-
-      this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe((isLoading) => {
-        this.isLoading = isLoading;
-      });
   }
 
   export(){
+    
+  }
 
+  reserch(){
+    this.searchService.resetQuery(this.query);
   }
 
   loadPage(page: PageEvent): any {

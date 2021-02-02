@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ConditionTypeEnum } from '@shared/enums';
+import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
@@ -10,32 +10,18 @@ import { SearchService } from '../../services/search.service';
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent extends BaseComponent implements OnInit {
-
-  searchResultPaneSize = 100;
-  commentPaneSize = 0;
-  conditionPaneSize = 0;
-  conditionType: ConditionTypeEnum = ConditionTypeEnum.Morph;
+  query: ChunkQuery;
+  isLoading: boolean;
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-    this.searchService.commentPaneState.pipe(takeUntil(this.destroyed)).subscribe(showComment=>{
-      this.commentPaneSize = showComment ? 20 : 0;
-      this.searchResultPaneSize = showComment ? 80 : 100;
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
+        this.query = query;
     });
-
-    this.searchService.conditionPaneState.pipe(takeUntil(this.destroyed)).subscribe(showCondition=>{
-      this.conditionPaneSize = showCondition ? 20 : 0;
-      this.searchResultPaneSize = showCondition ? 80 : 100;
-    })
-  }
-
-  showWorks(){
-    this.conditionType = ConditionTypeEnum.Works;
-  }
-
-  showMorph(){
-    this.conditionType = ConditionTypeEnum.Morph;
+    this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe(isLoading=>{
+      this.isLoading = isLoading;
+    });
   }
 }

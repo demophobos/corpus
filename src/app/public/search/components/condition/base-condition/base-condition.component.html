@@ -1,9 +1,5 @@
 <form class="form" [formGroup]="editorForm">
     <mat-form-field class="input-field-full-width">
-        <mat-checkbox  formControlName="checkControl" color="primary" class="checkbox" matTooltip="Search all forms"></mat-checkbox>
         <input matInput formControlName="valueControl" class="value">
-        <button matSuffix mat-icon-button aria-label="search" (click)="search()" color="primary" [disabled]="searchDisabled">
-            <mat-icon svgIcon="search"></mat-icon>
-        </button>
     </mat-form-field>
 </form>

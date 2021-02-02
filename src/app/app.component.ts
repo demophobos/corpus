@@ -21,6 +21,12 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   private RegisterIcons() {
     this.matIconRegistry.addSvgIcon(
+      `research`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/icons/research.svg'
+        )
+      );
+    this.matIconRegistry.addSvgIcon(
       `arrow_left`,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           '../assets/icons/arrow_left.svg'

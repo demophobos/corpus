@@ -17,7 +17,7 @@ export class ResultTableComponent extends BaseComponent implements AfterViewInit
 
   displayedColumns: string[] = ['select', 'chunk'];
 
-  chunks: MatTableDataSource<ChunkElementView>;
+  chunks: MatTableDataSource<ChunkElementView> = new MatTableDataSource([]);
 
   isLoading: boolean = false;
 

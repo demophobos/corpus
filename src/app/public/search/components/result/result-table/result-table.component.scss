@@ -1,29 +1,31 @@
 /* Structure */
+
 .container {
-  position: relative;
-  min-height: 200px;
-}
-.header{
-  display: none;
-}
-.table-container {
-  position: relative;
-  overflow: auto;
-}
-table {
-  width: 100%;
+    position: relative;
+    min-height: 200px;
 }
 
+.header {
+    display: none;
+}
+
+.table-container {
+    position: relative;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+
 /* Column Widths */
+
 .mat-column-number,
 .mat-column-state {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 .mat-column-created {
-  max-width: 124px;
-}
-.spinner{
-  height: 100%;
-  width: 100%;
+    max-width: 124px;
 }

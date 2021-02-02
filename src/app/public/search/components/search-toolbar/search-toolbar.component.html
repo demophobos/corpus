@@ -1,11 +1,10 @@
 <mat-toolbar>
-    <button mat-icon-button color="primary" matTooltip="{{conditionPaneButtonTooltip}}" (click)="showHideConditionPane()">
-        <mat-icon svgIcon="{{conditionPaneIcon}}"></mat-icon>
-    </button>
-    <mat-divider [vertical]="true"></mat-divider>
-    <app-base-condition></app-base-condition>
-    <mat-divider [vertical]="true"></mat-divider>
-    <button mat-icon-button color="primary" matTooltip="{{commentPaneButtonTooltip}}" (click)="showHideCommentPane()">
-        <mat-icon svgIcon="{{commentPaneIcon}}"></mat-icon>
-    </button>
-</mat-toolbar>
+   <span>Search</span>
+   <span class="spacer"></span>
+   <button mat-icon-button matTooltip="Search" (click)="search()">
+     <mat-icon svgIcon="search"></mat-icon>
+   </button>
+   <button mat-icon-button matTooltip="Clear" (click)="clear()">
+    <mat-icon svgIcon="close"></mat-icon>
+  </button>
+ </mat-toolbar>

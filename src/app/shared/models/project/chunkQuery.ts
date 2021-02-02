@@ -3,10 +3,10 @@ import { TaxonomyViewModel } from "./taxonomyViewModel";
 export class ChunkQuery {
     value: string;
     searchLemma: boolean = false;
-    index: number;
-    total: number;
-    skip: number;
-    limit: number;
+    index: number = 0;
+    total: number = 0;
+    skip: number = 0;
+    limit: number = 0;
     forms: string [];
     headers: string[] = [];
     pos: string[] = [];
