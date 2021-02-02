@@ -71,7 +71,7 @@ set switchConditionPane(value: boolean) {
     private taxonomyService: ApiService<TaxonomyViewModel>,
     private elementService: ApiService<ElementView>
   ) {
-    this.getLocalStorageQuery();
+    this.initQuery();
   }
   ngOnInit(): void {}
 
@@ -87,11 +87,6 @@ set switchConditionPane(value: boolean) {
     query.degree.length);
   }
 
-
-  loadComment(chunk: ChunkElementView) {
-    this.commentable.next(chunk);
-  }
-
   public getLocalStorageQuery() {
     let query = this.localStorageService.getItem(LocalStorageKeyEnum.Query);
     if (query) {
@@ -103,7 +98,7 @@ set switchConditionPane(value: boolean) {
     this.setSelectedMorphAttrubutesCount(query);
   }
 
-  removeLocalStorageQuery() {
+  private initQuery() {
     this.localStorageService.removeItem(LocalStorageKeyEnum.Query);
     let query = new ChunkQuery({})
     this.chunkQuery.next(query);

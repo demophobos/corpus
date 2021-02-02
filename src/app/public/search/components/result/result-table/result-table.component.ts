@@ -15,23 +15,11 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class ResultTableComponent extends BaseComponent implements AfterViewInit {
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  query: ChunkQuery;
-
-  index: number;
-
-  total: number;
-
-  limit: number;
-
   displayedColumns: string[] = ['select', 'chunk'];
 
   chunks: MatTableDataSource<ChunkElementView>;
 
   isLoading: boolean = false;
-
-  pageEvent: PageEvent;
 
   selection = new SelectionModel<ChunkElementView>(true, []);
 
@@ -62,21 +50,6 @@ export class ResultTableComponent extends BaseComponent implements AfterViewInit
 
   ngAfterViewInit() {
 
-    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
-        
-        this.query = query;
-
-        if(query){
-
-          this.limit = query.limit;
-
-          this.total = query.total;
-  
-          this.index = query.index;
-        }
-
-      });
-
     this.searchService.elementedChunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
         this.chunks = new MatTableDataSource(chunks);
       });
@@ -84,22 +57,11 @@ export class ResultTableComponent extends BaseComponent implements AfterViewInit
     this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe((isLoading) => {
         this.isLoading = isLoading;
       });
-
   }
 
   getInterpIcon(chunk: ChunkElementView): string {
     return chunk.headerLang == Language.Latin
       ? Language.Russian
       : Language.Latin;
-  }
-
-  showPaginator(): boolean{
-    return !this.isLoading && this.chunks !== undefined && this.chunks.data.length > 0;
-  }
-
-  loadPage(page: PageEvent): any {
-    this.query.index = page.pageIndex;
-    this.query.skip = page.pageIndex * AppConfig.DefaultPageLimit;
-    this.searchService.getChunks(this.query);
   }
 }

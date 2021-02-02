@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
+import { ConditionTypeEnum } from '@shared/enums';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../services/search.service';
 
@@ -13,6 +14,7 @@ export class SearchPageComponent extends BaseComponent implements OnInit {
   searchResultPaneSize = 100;
   commentPaneSize = 0;
   conditionPaneSize = 0;
+  conditionType: ConditionTypeEnum = ConditionTypeEnum.Morph;
   constructor(private searchService: SearchService) {
     super();
   }
@@ -27,5 +29,13 @@ export class SearchPageComponent extends BaseComponent implements OnInit {
       this.conditionPaneSize = showCondition ? 20 : 0;
       this.searchResultPaneSize = showCondition ? 80 : 100;
     })
+  }
+
+  showWorks(){
+    this.conditionType = ConditionTypeEnum.Works;
+  }
+
+  showMorph(){
+    this.conditionType = ConditionTypeEnum.Morph;
   }
 }

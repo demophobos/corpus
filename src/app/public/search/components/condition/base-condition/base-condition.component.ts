@@ -50,13 +50,6 @@ export class BaseConditionComponent extends BaseComponent implements OnInit {
       });
   }
 
-  clear() {
-    this.editorForm.controls.valueControl.setValue('');
-    this.editorForm.controls.checkControl.setValue(false);
-    this.searchDisabled = this.clearDisabled = true;
-    this.searchService.removeLocalStorageQuery();
-  }
-
   async search() {
     this.query.value = this.editorForm.controls.valueControl.value;
     this.query.searchLemma = this.editorForm.controls.checkControl.value;

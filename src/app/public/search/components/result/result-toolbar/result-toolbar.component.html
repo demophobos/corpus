@@ -1,1 +1,8 @@
-<p>result-toolbar works!</p>
+<mat-toolbar>
+    <span>Query: </span>
+    <mat-paginator [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)"></mat-paginator>
+    <span class="spacer"></span>
+    <button mat-icon-button color="primary" matTooltip="Export" (click)="export()">
+        <mat-icon svgIcon="export"></mat-icon>
+    </button>
+</mat-toolbar>

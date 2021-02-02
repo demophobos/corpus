@@ -1,9 +1,13 @@
 <div style="width: 100%; height: 100%">
   <as-split [useTransition]="true" direction="horizontal">
     <as-split-area [minSize]="conditionPaneSize" [maxSize]="conditionPaneSize" [size]="conditionPaneSize">
-      <app-condition-toolbar></app-condition-toolbar>
-      <app-morph-condition></app-morph-condition>
+      <app-condition-toolbar (onShowWork)="showWorks()" (onShowMorph)="showMorph()"></app-condition-toolbar>
+      <ng-template [ngIf]="conditionType == 1">
+        <app-morph-condition></app-morph-condition>
+     </ng-template>
+     <ng-template [ngIf]="conditionType == 0">
       <app-work-condition></app-work-condition>
+   </ng-template>
     </as-split-area>
     <as-split-area [size]="searchResultPaneSize">
       <app-search-toolbar></app-search-toolbar>

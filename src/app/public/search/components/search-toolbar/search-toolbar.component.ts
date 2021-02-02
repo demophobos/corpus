@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
@@ -17,6 +18,8 @@ export class SearchResultToolbarComponent
   conditionPaneButtonTooltip: string = 'Show conditions';
   commentPaneButtonTooltip: string = 'Show comments';
   query: ChunkQuery;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  
   constructor(private searchService: SearchService) {
     super();
   }
