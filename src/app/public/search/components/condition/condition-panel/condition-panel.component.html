@@ -4,23 +4,18 @@
             <mat-expansion-panel class="mat-elevation-z0">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="panel-title">
-                        Feature
+                        Morphologia
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <app-form-condition></app-form-condition>
+                <ng-template [ngIf]="query && query.searchLemma">
+                    <app-morph-condition></app-morph-condition>
+                </ng-template>
             </mat-expansion-panel>
             <mat-expansion-panel class="mat-elevation-z0">
                 <mat-expansion-panel-header>
                     <mat-panel-title class="panel-title">
-                        Morphology
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-morph-condition></app-morph-condition>
-            </mat-expansion-panel>
-            <mat-expansion-panel class="mat-elevation-z0">
-                <mat-expansion-panel-header>
-                    <mat-panel-title class="panel-title">
-                        Authors & Works
+                        Auctores et Opera
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <app-work-condition></app-work-condition>
