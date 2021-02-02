@@ -13,7 +13,8 @@ import { SearchService } from '../../services/search.service';
 export class SearchResultToolbarComponent extends BaseComponent implements OnInit {
 
   query: ChunkQuery;
-  
+  searchDisabled: boolean;
+  clearDisabled:boolean;
   constructor(private searchService: SearchService) {
     super();
   }
@@ -32,6 +33,6 @@ export class SearchResultToolbarComponent extends BaseComponent implements OnIni
   }
 
   clear(){
-
+    this.searchService.initQuery();
   }
 }

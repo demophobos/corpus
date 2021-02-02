@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
+import { SpinnerComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { LocalStorageKeyEnum } from '@shared/enums';
 import {
@@ -15,8 +16,8 @@ import {
   TaxonomyViewModel,
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
-import { LocalStorageService } from '@shared/services';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { DialogService, LocalStorageService } from '@shared/services';
+import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -69,7 +70,8 @@ set switchConditionPane(value: boolean) {
     private chunkService: ApiService<ChunkView>,
     private headerService: ApiService<HeaderModel>,
     private taxonomyService: ApiService<TaxonomyViewModel>,
-    private elementService: ApiService<ElementView>
+    private elementService: ApiService<ElementView>,
+    private dialogService: DialogService
   ) {
     this.initQuery();
   }
@@ -87,6 +89,10 @@ set switchConditionPane(value: boolean) {
     query.degree.length);
   }
 
+  public showSpinner() {
+    return this.dialogService.showLoader(SpinnerComponent);
+  }
+
   public getLocalStorageQuery() {
     let query = this.localStorageService.getItem(LocalStorageKeyEnum.Query);
     if (query) {
@@ -98,7 +104,7 @@ set switchConditionPane(value: boolean) {
     this.setSelectedMorphAttrubutesCount(query);
   }
 
-  private initQuery() {
+  public initQuery() {
     this.localStorageService.removeItem(LocalStorageKeyEnum.Query);
     let query = new ChunkQuery({})
     this.chunkQuery.next(query);

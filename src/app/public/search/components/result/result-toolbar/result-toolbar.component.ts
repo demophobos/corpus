@@ -17,6 +17,7 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
   total: number;
   limit: number;
   pageEvent: PageEvent;
+  isLoading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private searchService: SearchService) {
@@ -24,7 +25,7 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query) => {
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
         this.query = query;
 
         if(query){
@@ -35,6 +36,10 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
   
           this.index = query.index;
         }
+      });
+
+      this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe(isLoading=>{
+        this.isLoading = isLoading;
       });
   }
 

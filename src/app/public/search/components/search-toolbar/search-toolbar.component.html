@@ -1,10 +1,10 @@
 <mat-toolbar>
-   <span>Search</span>
-   <span class="spacer"></span>
-   <button mat-icon-button matTooltip="Search" (click)="search()">
+    <span>Search</span>
+    <span class="spacer"></span>
+    <button mat-icon-button color="primary" matTooltip="Search" (click)="search()" [disabled]="searchDisabled">
      <mat-icon svgIcon="search"></mat-icon>
    </button>
-   <button mat-icon-button matTooltip="Clear" (click)="clear()">
+    <button mat-icon-button color="primary" matTooltip="Clear" (click)="clear()" [disabled]="clearDisabled">
     <mat-icon svgIcon="close"></mat-icon>
   </button>
- </mat-toolbar>
+</mat-toolbar>

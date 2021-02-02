@@ -17,9 +17,14 @@ export class DialogService {
 
   public showComponent(modalComponent: any, modalData: any, width: string, disableClose: boolean = true): Observable<any> {
     const dialogRef = this.dialog.open(modalComponent, { width: `${width}px`, hasBackdrop: true });
-    // tslint:disable-next-line:no-string-literal
     dialogRef.componentInstance['data'] = modalData;
     dialogRef.disableClose = disableClose;
     return dialogRef.afterClosed();
+  }
+
+  public showLoader(modalComponent: any) {
+    const dialogRef = this.dialog.open(modalComponent, { width: `100%`, hasBackdrop: true });
+    dialogRef.disableClose = true;
+    return dialogRef;
   }
 }

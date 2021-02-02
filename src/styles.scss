@@ -9,7 +9,6 @@ body {
     background-color: whitesmoke;
 }
 
-
 app-sidenav {
     display: flex;
 }
@@ -17,22 +16,25 @@ app-sidenav {
 mat-drawer-container {
     flex: 1 1 auto;
     height: 100%;
-    background-color: transparent !important; 
+    background-color: transparent !important;
 }
+
 mat-drawer {
     width: auto;
 }
 
-mat-expansion-panel-header{
-    background-color: transparent !important; 
+mat-expansion-panel-header {
+    background-color: transparent !important;
 }
 
-mat-card{
-    background-color: transparent !important; 
+mat-card {
+    background-color: transparent !important;
 }
+
 .mat-bottom-sheet-container {
     padding: 0 !important;
 }
+
 .mat-toolbar-row,
 .mat-toolbar-single-row {
     padding-top: 0px;
@@ -44,46 +46,55 @@ mat-card{
 .mat-list-base {
     padding-top: 0px !important;
 }
+
 .mat-dialog-container {
     padding: 0 !important;
 }
+
 .mat-toolbar-multiple-rows {
     min-height: 0;
 }
+
 .input-field-full-width {
     width: 100%;
 }
+
 .mat-tab-header {
     height: 45.5px;
 }
-.mat-card-header-text{
+
+.mat-card-header-text {
     margin: auto !important;
-  }
-.spacer{
+}
+
+.spacer {
     flex: 1 1 auto;
 }
-.mat-paginator-container{
+
+.mat-paginator-container {
     justify-content: center !important;
 }
 
-.mat-expansion-panel-header{
+.mat-expansion-panel-header {
     padding-left: 0 !important;
     padding-right: 6px !important;
     background-color: whitesmoke !important;
 }
-.mat-expansion-panel-body{
+
+.mat-expansion-panel-body {
     padding: 0 !important;
     background-color: whitesmoke !important;
 }
-.mat-paginator-container{
+
+.mat-paginator-container {
     background-color: whitesmoke;
 }
-.mat-paginator-page-size{
+
+.mat-paginator-page-size {
     display: none !important;
-  }
-  
-.panel-header-title{
+}
+
+.panel-header-title {
     font-weight: bold;
     color: #3f51b5;
-  }
-
+}
