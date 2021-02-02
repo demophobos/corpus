@@ -13,16 +13,12 @@ import { SearchService } from '../../services/search.service';
 export class SearchResultToolbarComponent extends BaseComponent implements OnInit {
 
   query: ChunkQuery;
-  searchDisabled: boolean;
-  clearDisabled:boolean;
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-    this.searchService.chunkQuery
-      .pipe(takeUntil(this.destroyed))
-      .subscribe((query) => {
+    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
         this.query = query;
       });
   }

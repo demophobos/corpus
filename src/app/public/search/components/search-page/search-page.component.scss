@@ -1,17 +1,8 @@
-.search-page {
-    width: 100%;
-}
-
-.spinner {
-    height: 100%;
-    width: 100%;
-}
-
+.spinner,
+.search-page,
+app-condition-panel,
+app-result-table,
 app-search-toolbar,
 app-result-toolbar {
-    width: 100%;
-}
-
-app-condition-panel {
     width: 100%;
 }

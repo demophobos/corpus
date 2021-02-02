@@ -24,7 +24,6 @@ import { CommentWordComponent } from './search/components/comment/comment-word/c
 import { CommentChunkComponent } from './search/components/comment/comment-chunk/comment-chunk.component';
 import { SearchResultToolbarComponent } from './search/components/search-toolbar/search-toolbar.component';
 import { BaseConditionComponent } from './search/components/condition/base-condition/base-condition.component';
-import { ConditionToolbarComponent } from './search/components/condition/condition-toolbar/condition-toolbar.component';
 import { ResultToolbarComponent } from './search/components/result/result-toolbar/result-toolbar.component';
 import { ConditionPanelComponent } from './search/components/condition/condition-panel/condition-panel.component';
 import { FormConditionComponent } from './search/components/condition/form-condition/form-condition.component';
@@ -51,7 +50,6 @@ import { FormConditionComponent } from './search/components/condition/form-condi
     CommentChunkComponent,
     SearchResultToolbarComponent,
     BaseConditionComponent,
-    ConditionToolbarComponent,
     ResultToolbarComponent,
     ConditionPanelComponent,
     FormConditionComponent],

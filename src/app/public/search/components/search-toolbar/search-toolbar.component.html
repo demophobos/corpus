@@ -1,10 +1,10 @@
 <mat-toolbar>
     <span>Search:</span>
     <app-base-condition></app-base-condition>
-    <button mat-icon-button color="primary" matTooltip="Search" (click)="search()" [disabled]="searchDisabled">
+    <button mat-icon-button color="primary" matTooltip="Search" (click)="search()" [disabled]="query.value === undefined">
      <mat-icon svgIcon="search"></mat-icon>
    </button>
-    <button mat-icon-button color="primary" matTooltip="Clear" (click)="clear()" [disabled]="clearDisabled">
+    <button mat-icon-button color="primary" matTooltip="Clear" (click)="clear()" [disabled]="query.value === undefined">
     <mat-icon svgIcon="close"></mat-icon>
   </button>
 </mat-toolbar>
