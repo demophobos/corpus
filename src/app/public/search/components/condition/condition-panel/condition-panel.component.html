@@ -5,6 +5,10 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title class="panel-title">
                         Morphologia
+                        <span class="spacer"></span>
+                        <mat-chip-list>
+                            <mat-chip color="primary">{{selectedMorphItemsCount}}</mat-chip>
+                        </mat-chip-list>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <app-form-condition></app-form-condition>
@@ -16,6 +20,8 @@
                 <mat-expansion-panel-header>
                     <mat-panel-title class="panel-title">
                         Auctores et Opera
+                        <span class="spacer"></span>
+                        <mat-chip color="primary">{{worksCount}}</mat-chip>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <app-work-condition></app-work-condition>

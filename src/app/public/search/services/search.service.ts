@@ -24,29 +24,6 @@ import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
 })
 export class SearchService implements OnInit {
 
-//#region ConditionPane
-public conditionPaneState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-private get getConditionPaneState() : boolean {
-  return this.conditionPaneState.value; 
-}
-
-set switchConditionPane(value: boolean) {
-  this.conditionPaneState.next(value !== this.getConditionPaneState);
-}
-//#endregion
-
-  //#region CommentPane
-  public commentPaneState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(AppConfig.DefaultShowCommentPane);
-
-  private get getCommentPaneState() : boolean {
-    return this.commentPaneState.value; 
-  }
-
-  set switchCommentPane(value: boolean) {
-    this.commentPaneState.next(value !== this.getCommentPaneState);
-  }
-  //#endregion
 
   //#region Commentable entities
   public commentable: BehaviorSubject<ChunkElementView | ElementView> = new BehaviorSubject<ChunkElementView | ElementView>(undefined);
@@ -57,6 +34,7 @@ set switchConditionPane(value: boolean) {
   //#endregion
 
   public selectedAttributesCount = new BehaviorSubject<number>(0);
+  public selectedWorksCount = new BehaviorSubject<number>(0);
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
@@ -76,6 +54,10 @@ set switchConditionPane(value: boolean) {
     this.initQuery();
   }
   ngOnInit(): void {}
+
+  setSelectedWorksCount(query: ChunkQuery){
+    this.selectedWorksCount.next(query.headers.length);
+  }
 
   setSelectedMorphAttrubutesCount(query: ChunkQuery)  {
     this.selectedAttributesCount.next(query.pos.length + 

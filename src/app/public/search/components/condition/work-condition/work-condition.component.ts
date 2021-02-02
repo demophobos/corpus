@@ -31,6 +31,7 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
     this.headerSelector.valueChanges.subscribe((values : string[])=>{
       if(this.query){
         this.query.headers = values;
+        this.searchService.setSelectedWorksCount(this.query);
       }
     });
   }
