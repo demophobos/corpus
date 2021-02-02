@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
-import { take, takeUntil } from 'rxjs/operators';
-import { SearchPageComponent } from '../../search-page/search-page.component';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-condition-panel',
@@ -12,8 +11,8 @@ import { SearchPageComponent } from '../../search-page/search-page.component';
 })
 export class ConditionPanelComponent extends BaseComponent implements OnInit {
   query: ChunkQuery;
-  selectedMorphItemsCount: number;
-  worksCount: number;
+  morphItems: string[];
+  workItems: string[];
   constructor(private searchService: SearchService) {
     super();
   }
@@ -23,13 +22,20 @@ export class ConditionPanelComponent extends BaseComponent implements OnInit {
       this.query = query;
     });
 
-    this.searchService.selectedAttributesCount.pipe(takeUntil(this.destroyed)).subscribe(count=>{
-      this.selectedMorphItemsCount = count;
+    this.searchService.selectedAttributes.pipe(takeUntil(this.destroyed)).subscribe(items=>{
+      this.morphItems = items;
     });
 
-    this.searchService.selectedWorksCount.pipe(takeUntil(this.destroyed)).subscribe(count=>{
-      this.worksCount = count;
+    this.searchService.selectedWorks.pipe(takeUntil(this.destroyed)).subscribe(items=>{
+      this.workItems = items;
     });
   }
 
+  removeMorphItem(item){
+    this.morphItems = this.morphItems.filter(i=> i !== item);
+  }
+
+  removeWorkItem(item){
+    this.workItems = this.workItems.filter(i=> i !== item);
+  }
 }

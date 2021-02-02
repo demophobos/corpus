@@ -8,8 +8,9 @@ app-base-condition {
 
 .panel-title {
     padding-left: 15px;
+    align-items: center;
 }
 
-::ng-deep .mat-expansion-panel-body {
-    padding: 10;
+.selected-items {
+    margin-left: 15px;
 }

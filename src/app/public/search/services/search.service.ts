@@ -33,8 +33,8 @@ export class SearchService implements OnInit {
   }
   //#endregion
 
-  public selectedAttributesCount = new BehaviorSubject<number>(0);
-  public selectedWorksCount = new BehaviorSubject<number>(0);
+  public selectedAttributes = new BehaviorSubject<string[]>([]);
+  public selectedWorks = new BehaviorSubject<string[]>([]);
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
@@ -56,19 +56,11 @@ export class SearchService implements OnInit {
   ngOnInit(): void {}
 
   setSelectedWorksCount(query: ChunkQuery){
-    this.selectedWorksCount.next(query.headers.length);
+    this.selectedWorks.next(query.headers);
   }
 
-  setSelectedMorphAttrubutesCount(query: ChunkQuery)  {
-    this.selectedAttributesCount.next(query.pos.length + 
-    query.gender.length  +
-    query.case.length  +
-    query.person.length  +
-    query.number.length +
-    query.tense.length +
-    query.mood.length +
-    query.voice.length  + 
-    query.degree.length);
+  setSelectedMorphAttrubutes(query: ChunkQuery)  {
+    this.selectedAttributes.next(Array().concat(query.pos, query.gender, query.case, query.person, query.number, query.tense, query.mood, query.voice, query.degree));
   }
 
   public showSpinner() {
@@ -83,14 +75,14 @@ export class SearchService implements OnInit {
       query = new ChunkQuery({})
       this.chunkQuery.next(query);
     }
-    this.setSelectedMorphAttrubutesCount(query);
+    this.setSelectedMorphAttrubutes(query);
   }
 
   public initQuery() {
     this.localStorageService.removeItem(LocalStorageKeyEnum.Query);
     let query = new ChunkQuery({})
     this.chunkQuery.next(query);
-    this.setSelectedMorphAttrubutesCount(query);
+    this.setSelectedMorphAttrubutes(query);
   }
 
   resetQuery(query: ChunkQuery) {

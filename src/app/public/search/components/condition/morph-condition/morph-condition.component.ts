@@ -56,55 +56,55 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
   posSelected(selected){
     if(this.query){
       this.query.pos = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   tempusSelected(selected){
     if(this.query){
       this.query.tense = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   modusSelected(selected){
     if(this.query){
       this.query.mood = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   genusSelected(selected){
     if(this.query){
       this.query.gender = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   numerusSelected(selected){
     if(this.query){
       this.query.number = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   personaSelected(selected){
     if(this.query){
       this.query.person = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   casusSelected(selected){
     if(this.query){
       this.query.case = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   gradusSelected(selected){
     if(this.query){
       this.query.degree = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
   genus2Selected(selected){
     if(this.query){
       this.query.voice = selected;
-      this.searchService.setSelectedMorphAttrubutesCount(this.query);
+      this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
 
