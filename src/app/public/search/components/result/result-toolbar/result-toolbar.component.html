@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <span>Result</span>
+    <span>Result:</span>
     <mat-paginator [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)" [disabled]="isLoading == true"></mat-paginator>
     <span class="spacer"></span>
     <button mat-icon-button color="primary" matTooltip="New Search" (click)="reserch()">

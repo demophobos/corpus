@@ -34,4 +34,8 @@ export class BaseConditionComponent extends BaseComponent implements OnInit {
         this.query.value = val.valueControl;
       });
   }
+
+  applyFilter(value){
+    let test = value; 
+  }
 }
