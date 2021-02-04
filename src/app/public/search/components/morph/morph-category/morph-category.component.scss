@@ -1,9 +1,12 @@
 .category-title {
     color: #3f51b5;
+    margin-top: 15px;
     margin-left: 15px;
 }
 
 .attribute-item {
     height: 30px !important;
     font-size: small !important;
+    display: flex;
+    flex-direction: row !important;
 }

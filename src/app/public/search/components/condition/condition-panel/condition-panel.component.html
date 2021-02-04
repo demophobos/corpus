@@ -1,38 +1,38 @@
 <mat-card class="card" class="mat-elevation-z0">
-    <mat-card-content>
-        <mat-accordion>
-            <mat-expansion-panel class="mat-elevation-z8" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title class="panel-title">
-                        Morphologia
-                        <mat-chip-list class="selected-items">
-                            <mat-chip color="primary" selected>{{formType}}</mat-chip>
-                            <ng-template [ngIf]="searchLemma">
-                                <mat-chip *ngFor="let item of morphItems" [removable]="true" (removed)="removeMorphItem(item)">{{item}}
-                                    <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
-                                </mat-chip>
-                            </ng-template>
-                        </mat-chip-list>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-form-condition></app-form-condition>
-                <ng-template [ngIf]="query && query.searchLemma">
-                    <app-morph-condition></app-morph-condition>
-                </ng-template>
-            </mat-expansion-panel>
-            <mat-expansion-panel class="mat-elevation-z8" hideToggle>
-                <mat-expansion-panel-header>
-                    <mat-panel-title class="panel-title">
-                        Auctores et Opera
-                        <mat-chip-list class="selected-items">
-                            <mat-chip *ngFor="let item of workItems" [removable]="true" (removed)="removeWorkItem(item)">{{item.code}}
+    <mat-accordion>
+        <mat-expansion-panel class="mat-elevation-z8" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="panel-title">
+                    Morphologia
+                    <mat-chip-list class="selected-items">
+                        <mat-chip color="primary" selected>{{formType}}</mat-chip>
+                        <ng-template [ngIf]="searchLemma">
+                            <mat-chip *ngFor="let item of morphItems" [removable]="true" (removed)="removeMorphItem(item)">{{item}}
                                 <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
                             </mat-chip>
-                        </mat-chip-list>
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
-                <app-work-condition></app-work-condition>
-            </mat-expansion-panel>
-        </mat-accordion>
-    </mat-card-content>
+                        </ng-template>
+                    </mat-chip-list>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-form-condition></app-form-condition>
+            <ng-template [ngIf]="query && query.searchLemma">
+                <mat-card class="card" class="mat-elevation-z0">
+                    <app-morph-condition></app-morph-condition>
+                </mat-card>
+            </ng-template>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="mat-elevation-z8" hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="panel-title">
+                    Auctores et Opera
+                    <mat-chip-list class="selected-items">
+                        <mat-chip *ngFor="let item of workItems" [removable]="true" (removed)="removeWorkItem(item)" selected>{{item.code}}
+                            <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <app-work-condition></app-work-condition>
+        </mat-expansion-panel>
+    </mat-accordion>
 </mat-card>

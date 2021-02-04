@@ -1,13 +1,9 @@
 <mat-accordion>
-    <mat-expansion-panel *ngIf="items" class="mat-elevation-z1" hideToggle>
+    <mat-expansion-panel *ngIf="items" class="mat-elevation-z0" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title class="category-title">
-                {{title}}
+                <span matBadge="{{selectedItems.length}}" matBadgeOverlap="false" matBadgeSize="small">{{title}}</span>
             </mat-panel-title>
-            <mat-panel-description>
-                <div class="spacer"></div>
-                {{selectedItems.length}}
-            </mat-panel-description>
         </mat-expansion-panel-header>
         <mat-selection-list *ngIf="items" [formControl]="selector" color="primary" class="input-field-full-width" multiple>
             <mat-list-option class="attribute-item" *ngFor="let item of items" [value]="item.code">{{item.desc}}</mat-list-option>

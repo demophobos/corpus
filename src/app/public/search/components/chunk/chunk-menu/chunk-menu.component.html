@@ -1,3 +1,9 @@
-<button mat-icon-button color="primary" matTooltip="Versiones" (click)="$event.stopPropagation()" (click)="loadInterp()">
-  <mat-icon svgIcon="versio"></mat-icon>
+<button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
+  <mat-icon svgIcon="more_vert"></mat-icon>
 </button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="loadInterp()">
+    <mat-icon svgIcon="versio" color="primary"></mat-icon>
+    <span>Versio</span>
+  </button>
+</mat-menu>
