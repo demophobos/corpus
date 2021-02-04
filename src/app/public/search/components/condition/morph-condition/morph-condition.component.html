@@ -1,11 +1,37 @@
 <div *ngIf="query">
-    <app-morph-category [items]="getCategoryItems(pos)" [selectedItems]="query.pos" [title]="getCategoryTitle(pos)" (selected)="posSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(tempus)" [selectedItems]="query.tense" [title]="getCategoryTitle(tempus)" (selected)="tempusSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(modus)" [selectedItems]="query.mood" [title]="getCategoryTitle(modus)" (selected)="modusSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(genus)" [selectedItems]="query.gender" [title]="getCategoryTitle(genus)" (selected)="genusSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(numerus)" [selectedItems]="query.number" [title]="getCategoryTitle(numerus)" (selected)="numerusSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(persona)" [selectedItems]="query.person" [title]="getCategoryTitle(persona)" (selected)="personaSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(casus)" [selectedItems]="query.case" [title]="getCategoryTitle(casus)" (selected)="casusSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(gradus)" [selectedItems]="query.degree" [title]="getCategoryTitle(gradus)" (selected)="gradusSelected($event)"></app-morph-category>
-    <app-morph-category [items]="getCategoryItems(genus2)" [selectedItems]="query.voice" [title]="getCategoryTitle(genus2)" (selected)="genus2Selected($event)"></app-morph-category>
+    <mat-tab-group class="category-tab">
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span matBadge="{{getSelected(pos)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(pos)}}</span>
+            </ng-template>
+            <app-morph-category [items]="getCategoryItems(pos)" [selectedItems]="query.pos" (selected)="posSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <span matBadge="{{getSelected(tempus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(tempus)}}</span>
+            </ng-template>
+            <app-morph-category [items]="getCategoryItems(tempus)" [selectedItems]="query.tense" (selected)="tempusSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(modus)}}">
+            <app-morph-category [items]="getCategoryItems(modus)" [selectedItems]="query.mood" (selected)="modusSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(genus)}}">
+            <app-morph-category [items]="getCategoryItems(genus)" [selectedItems]="query.gender" (selected)="genusSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(numerus)}}">
+            <app-morph-category [items]="getCategoryItems(numerus)" [selectedItems]="query.number" (selected)="numerusSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(persona)}}">
+            <app-morph-category [items]="getCategoryItems(persona)" [selectedItems]="query.person" (selected)="personaSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(casus)}}">
+            <app-morph-category [items]="getCategoryItems(casus)" [selectedItems]="query.case" (selected)="casusSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(gradus)}}">
+            <app-morph-category [items]="getCategoryItems(gradus)" [selectedItems]="query.degree" (selected)="gradusSelected($event)"></app-morph-category>
+        </mat-tab>
+        <mat-tab label="{{getCategoryTitle(genus2)}}">
+            <app-morph-category [items]="getCategoryItems(genus2)" [selectedItems]="query.voice" (selected)="genus2Selected($event)"></app-morph-category>
+        </mat-tab>
+    </mat-tab-group>
 </div>

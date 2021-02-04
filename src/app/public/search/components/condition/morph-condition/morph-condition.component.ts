@@ -53,6 +53,15 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
     }
   }
 
+  getSelected(cat){
+    if(cat == 'Pos'){
+      return this.query.pos.length;
+    }
+    if(cat == 'Tense'){
+      return this.query.tense.length;
+    }
+  }
+
   posSelected(selected){
     if(this.query){
       this.query.pos = selected;

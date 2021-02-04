@@ -21,7 +21,6 @@ export class SearchMorphCategoryComponent
   implements OnInit, AfterViewInit, OnChanges {
   panelOpenState = false;
   @Input() items: TaxonomyViewModel[];
-  @Input() title: string;
   @Input() selectedItems: string[];
   @Output() selected: EventEmitter<void> = new EventEmitter();
   selector = new FormControl();

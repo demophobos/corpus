@@ -1,12 +1,15 @@
-<mat-accordion>
+<mat-selection-list *ngIf="items" [formControl]="selector" color="primary" class="input-field-full-width" multiple>
+    <mat-list-option class="attribute-item" *ngFor="let item of items" [value]="item.code">{{item.desc}}
+    </mat-list-option>
+</mat-selection-list>
+
+<!-- <mat-accordion>
     <mat-expansion-panel *ngIf="items" class="mat-elevation-z0" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title class="category-title">
-                <span matBadge="{{selectedItems.length}}" matBadgeOverlap="false" matBadgeSize="small">{{title}}</span>
+                <span matBadge="{{selectedItems.length}}" matBadgeOverlap="false" matBadgeSize="small"></span>
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-selection-list *ngIf="items" [formControl]="selector" color="primary" class="input-field-full-width" multiple>
-            <mat-list-option class="attribute-item" *ngFor="let item of items" [value]="item.code">{{item.desc}}</mat-list-option>
-        </mat-selection-list>
+
     </mat-expansion-panel>
-</mat-accordion>
+</mat-accordion> -->
