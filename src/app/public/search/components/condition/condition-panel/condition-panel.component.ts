@@ -13,6 +13,8 @@ export class ConditionPanelComponent extends BaseComponent implements OnInit {
   query: ChunkQuery;
   morphItems: string[];
   workItems: HeaderModel[];
+  formType: string;
+  searchLemma:boolean = false;
   constructor(private searchService: SearchService) {
     super();
   }
@@ -20,6 +22,16 @@ export class ConditionPanelComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
+      
+    });
+
+    this.searchService.searchLemma.pipe(takeUntil(this.destroyed)).subscribe(searchLemma=>{
+      this.searchLemma = searchLemma;
+      if(searchLemma){
+        this.formType = "Lemma";
+      }else{
+        this.formType = "Form";
+      }
     });
 
     this.searchService.selectedAttributes.pipe(takeUntil(this.destroyed)).subscribe(items=>{

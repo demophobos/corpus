@@ -31,6 +31,7 @@ export class FormConditionComponent extends BaseComponent implements OnInit {
   onChanges(): void {
     this.editorForm.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((val) => {
         this.query.searchLemma = val.checkControl == '0' ? false : true;
+        this.searchService.searchLemma.next(this.query.searchLemma);
       });
   }
 

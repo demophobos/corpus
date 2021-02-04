@@ -1,10 +1,12 @@
-<mat-toolbar>
-    <mat-paginator [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)" [disabled]="isLoading == true"></mat-paginator>
-    <span class="spacer"></span>
-    <button mat-icon-button color="primary" matTooltip="New Search" (click)="reserch()">
-        <mat-icon svgIcon="research"></mat-icon>
-    </button>
-    <button mat-icon-button color="primary" matTooltip="Export" (click)="export()">
-        <mat-icon svgIcon="export"></mat-icon>
-    </button>
-</mat-toolbar>
+<mat-card class="mat-elevation-z0">
+    <mat-toolbar class="mat-elevation-z8">
+        <mat-paginator [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)" [disabled]="isLoading == true"></mat-paginator>
+        <span class="spacer"></span>
+        <button mat-icon-button color="primary" matTooltip="New Search" (click)="reserch()">
+            <mat-icon svgIcon="research"></mat-icon>
+        </button>
+        <button mat-icon-button color="primary" matTooltip="Export" (click)="export()">
+            <mat-icon svgIcon="export"></mat-icon>
+        </button>
+    </mat-toolbar>
+</mat-card>
