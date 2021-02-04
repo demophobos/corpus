@@ -1,29 +1,22 @@
-.chunk{
-  margin-right: 20px;
-  margin-left: 20px;
-}
-.card{
-  margin-right: 20px;
-}
-.card-header{
-  margin: auto !important;
-  font-size: 16px;
-  height: 40px;
+.card-header {
+    font-size: 16px;
+    height: 40px;
 }
 
-.card-title{
-  margin: auto !important;
-  font-size: 14px !important;
+.card-title {
+    font-size: 14px !important;
 }
-.card-interp-title{
-  margin: auto !important;
-  font-size: 14px !important;
-  color: #f32308 !important;
+
+.card-interp-title {
+    font-size: 14px !important;
+    color: #f32308 !important;
 }
-.interp-card{
-  background-color: whitesmoke;
+
+.interp-card {
+    background-color: whitesmoke !important;
 }
-.empty-interp{
-  color: #f32308;
-  background-color: whitesmoke;
+
+.empty-interp {
+    color: #f32308;
+    background-color: whitesmoke !important;
 }

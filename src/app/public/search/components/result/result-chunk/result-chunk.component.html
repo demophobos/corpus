@@ -1,37 +1,37 @@
 <span fxLayout="column">
-    <mat-card class="card mat-elevation-z0" *ngIf="chunk">
+    <mat-card class="card mat-elevation-z1" *ngIf="chunk">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">
                 <app-chunk-info [chunk]="chunk"></app-chunk-info>
             </mat-card-title>
             <span class="spacer"></span>
-            <app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()"></app-chunk-menu>
-        </mat-card-header>
-        <mat-card-content fxLayout="row wrap">
-            <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
+<app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()"></app-chunk-menu>
+</mat-card-header>
+<mat-card-content fxLayout="row wrap">
+    <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
                 <app-result-element [element]="element"></app-result-element>
             </span>
-        </mat-card-content>
-    </mat-card>
-    <mat-progress-bar color="primary" mode="buffer" *ngIf="showInterp && interpIsLoading == true"></mat-progress-bar>
-    <div *ngIf="showInterp && !interpIsLoading">
-        <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z0 interp-card">
-            <mat-card-header class="card-header">
-                <mat-card-title class="card-interp-title">
-                    <app-chunk-info [chunk]="interpChunk"></app-chunk-info>
-                </mat-card-title>
-                <span class="spacer"></span>
-            </mat-card-header>
-            <mat-card-content fxLayout="row wrap">
-                <span *ngFor="let element of interpChunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
+</mat-card-content>
+</mat-card>
+<mat-progress-bar color="primary" mode="buffer" *ngIf="showInterp && interpIsLoading == true"></mat-progress-bar>
+<div *ngIf="showInterp && !interpIsLoading">
+    <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z1 interp-card">
+        <mat-card-header class="card-header">
+            <mat-card-title class="card-interp-title">
+                <app-chunk-info [chunk]="interpChunk"></app-chunk-info>
+            </mat-card-title>
+            <span class="spacer"></span>
+        </mat-card-header>
+        <mat-card-content fxLayout="row wrap">
+            <span *ngFor="let element of interpChunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
                     <app-result-element [element]="element"></app-result-element>
                 </span>
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="card mat-elevation-z0" *ngIf="!interpChunks">
-            <mat-card-content class="empty-interp">
-                {{emptyInterpInfo}}
-            </mat-card-content>
-        </mat-card>
-    </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="card mat-elevation-z1" *ngIf="!interpChunks">
+        <mat-card-content class="empty-interp">
+            {{emptyInterpInfo}}
+        </mat-card-content>
+    </mat-card>
+</div>
 </span>
