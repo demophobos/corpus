@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ChunkQuery } from '@shared/models';
+import { ChunkQuery, HeaderModel } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
 import { takeUntil } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
 export class ConditionPanelComponent extends BaseComponent implements OnInit {
   query: ChunkQuery;
   morphItems: string[];
-  workItems: string[];
+  workItems: HeaderModel[];
   constructor(private searchService: SearchService) {
     super();
   }
@@ -33,9 +33,23 @@ export class ConditionPanelComponent extends BaseComponent implements OnInit {
 
   removeMorphItem(item){
     this.morphItems = this.morphItems.filter(i=> i !== item);
+    this.query.pos = this.query.pos.filter(i=> i !== item);
+    this.query.case = this.query.case.filter(i=> i !== item);
+    this.query.degree = this.query.degree.filter(i=> i !== item);
+    this.query.gender = this.query.gender.filter(i=> i !== item);
+    this.query.mood = this.query.mood.filter(i=> i !== item);
+    this.query.number = this.query.number.filter(i=> i !== item);
+    this.query.person = this.query.person.filter(i=> i !== item);
+    this.query.tense = this.query.tense.filter(i=> i !== item);
+    this.query.voice = this.query.voice.filter(i=> i !== item);
+    this.searchService.chunkQuery.next(this.query);
+    this.searchService.setSelectedMorphAttrubutes(this.query);
   }
 
-  removeWorkItem(item){
-    this.workItems = this.workItems.filter(i=> i !== item);
+  removeWorkItem(item: HeaderModel){
+    this.workItems = this.workItems.filter(i=> i.id !== item.id);
+    this.query.headers = this.query.headers.filter(i=>i !== item.id)
+    this.searchService.chunkQuery.next(this.query);
+    this.searchService.selectedWorks.next(this.workItems);
   }
 }

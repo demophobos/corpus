@@ -34,7 +34,13 @@ export class SearchService implements OnInit {
   //#endregion
 
   public selectedAttributes = new BehaviorSubject<string[]>([]);
-  public selectedWorks = new BehaviorSubject<string[]>([]);
+  public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
+  public headers = new BehaviorSubject<HeaderModel[]>([]);
+
+  public getHeaders(){
+    return this.headers.value;
+  }
+
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
@@ -52,15 +58,35 @@ export class SearchService implements OnInit {
     private dialogService: DialogService
   ) {
     this.initQuery();
+    this.loadHeaders();
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   setSelectedWorksCount(query: ChunkQuery){
-    this.selectedWorks.next(query.headers);
+    let arr: HeaderModel[] = [];
+
+     this.getHeaders().forEach(i=>{
+       if(query.headers.includes(i.id)){
+         arr.push(i);
+       }
+    });
+
+    this.selectedWorks.next(arr);
   }
 
   setSelectedMorphAttrubutes(query: ChunkQuery)  {
-    this.selectedAttributes.next(Array().concat(query.pos, query.gender, query.case, query.person, query.number, query.tense, query.mood, query.voice, query.degree));
+    this.selectedAttributes.next(Array().concat(
+      query.pos, 
+      query.gender, 
+      query.case, 
+      query.person, 
+      query.number, 
+      query.tense, 
+      query.mood, 
+      query.voice, 
+      query.degree));
   }
 
   public showSpinner() {
@@ -237,12 +263,13 @@ export class SearchService implements OnInit {
     return await Promise.resolve(result[0]);
   }
 
-  public async getHeaders(): Promise<HeaderModel[]> {
+  private async loadHeaders() {
     return await this.headerService
       .findByQuery(new HeaderModel({}), JSON.stringify({}))
       .toPromise()
       .then((headers: HeaderModel[]) => {
-        return Promise.resolve(headers);
+        this.headers.next(headers);
+        return Promise.resolve();
       });
   }
 

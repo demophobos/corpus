@@ -22,7 +22,7 @@
                     <mat-panel-title class="panel-title">
                         Auctores et Opera
                         <mat-chip-list class="selected-items">
-                            <mat-chip *ngFor="let item of workItems" color="primary" [removable]="true" (removed)="removeWorkItem(item)">{{item}}
+                            <mat-chip *ngFor="let item of workItems" color="primary" [removable]="true" (removed)="removeWorkItem(item)">{{item.code}}
                                 <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
                             </mat-chip>
                         </mat-chip-list>

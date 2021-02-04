@@ -19,7 +19,10 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    this.headers = await this.searchService.getHeaders();
+
+    this.searchService.headers.pipe(takeUntil(this.destroyed)).subscribe(headers => {
+      this.headers = headers;
+    });
 
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
@@ -28,11 +31,12 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
       }
     });
 
-    this.headerSelector.valueChanges.subscribe((values : string[])=>{
+    this.headerSelector.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((values : string[])=>{
       if(this.query){
         this.query.headers = values;
         this.searchService.setSelectedWorksCount(this.query);
       }
     });
+
   }
 }
