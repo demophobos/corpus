@@ -11,12 +11,11 @@ import {
   IndexView,
   Model,
   MorphModel,
-  Project,
-  User,
   InterpModel,
   PageResponse as PageResponse,
   ChunkView,
   TaxonomyViewModel,
+  HeaderView,
 } from '@shared/models';
 import { Pageable } from '@shared/models/base/pageable';
 import { throwError } from 'rxjs';
@@ -32,7 +31,7 @@ export class ModelMapperService {
       case AppType.Taxonomy:
         return this.ToTaxonomy(item);
       case AppType.Header:
-        return this.ToHeader(item);
+        return this.ToHeaderView(item);
       case AppType.Chunk:
         return this.ToChunkElementViewPage(item);
         case AppType.ChunkView:
@@ -230,6 +229,19 @@ export class ModelMapperService {
       projectId: item.projectId,
       editionType: item.editionType,
       lang: item.lang,
+    });
+  }
+  static ToHeaderView(item: any): HeaderView {
+    return new HeaderView({
+      id: item._id,
+      code: item.code,
+      name: item.name,
+      desc: item.desc,
+      projectId: item.projectId,
+      editionType: item.editionType,
+      lang: item.lang,
+      projectCode : item.projectCode,
+      projectDesc: item.projectDesc
     });
   }
 }

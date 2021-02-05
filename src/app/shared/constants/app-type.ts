@@ -6,6 +6,7 @@ export enum AppType {
   Index = 'indeces',
   IndexView = 'indeces',
   Header = 'headers',
+  HeaderView = 'headers',
   Chunk = 'chunks',
   ChunkView = 'chunks',
   Element = 'elements',

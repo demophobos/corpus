@@ -9,6 +9,7 @@ import {
   ChunkView,
   ElementView,
   HeaderModel,
+  HeaderView,
   IndexView,
   MorphModel,
   PageResponse,
@@ -17,7 +18,7 @@ import {
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { DialogService, LocalStorageService } from '@shared/services';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +36,7 @@ export class SearchService implements OnInit {
   public searchLemma = new BehaviorSubject<boolean>(false);
   public selectedAttributes = new BehaviorSubject<string[]>([]);
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
-  public headers = new BehaviorSubject<HeaderModel[]>([]);
+  public headers = new BehaviorSubject<HeaderView[]>([]);
 
   public getHeaders(){
     return this.headers.value;
@@ -265,9 +266,9 @@ export class SearchService implements OnInit {
 
   private async loadHeaders() {
     return await this.headerService
-      .findByQuery(new HeaderModel({}), JSON.stringify({}))
+      .findByQuery(new HeaderView({}), JSON.stringify({}))
       .toPromise()
-      .then((headers: HeaderModel[]) => {
+      .then((headers: HeaderView[]) => {
         this.headers.next(headers);
         return Promise.resolve();
       });
