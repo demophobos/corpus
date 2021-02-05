@@ -53,12 +53,33 @@ export class SearchMorphOptionsComponent extends BaseComponent implements OnInit
     }
   }
 
-  getSelected(cat){
-    if(cat == 'Pos'){
+  getSelected(cat: string){
+    if(cat == TaxonomyCategoryEnum.Pos){
       return this.query.pos.length;
     }
-    if(cat == 'Tense'){
+    if(cat == TaxonomyCategoryEnum.Tense){
       return this.query.tense.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Case){
+      return this.query.case.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Degree){
+      return this.query.degree.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Gender){
+      return this.query.gender.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Mood){
+      return this.query.mood.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Number){
+      return this.query.number.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Person){
+      return this.query.person.length;
+    }
+    if(cat == TaxonomyCategoryEnum.Voice){
+      return this.query.voice.length;
     }
   }
 
