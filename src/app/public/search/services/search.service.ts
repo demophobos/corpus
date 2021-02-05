@@ -135,7 +135,7 @@ export class SearchService implements OnInit {
             new MorphModel({}),
             JSON.stringify({
               value: query.value,
-              formSearchType: query.searchLemma,
+              searchLemma: query.searchLemma,
             })
           )
           .toPromise()
