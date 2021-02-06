@@ -1,1 +1,5 @@
-<p>distance-condition works!</p>
+<div class="selector" [formGroup]="formGroup" [ngClass]="{disabled:disabled == true, enabled:disabled == false }">
+    <mat-select formControlName="optionControl" matTooltip="Interpositio Vocabulorum" class="selector-item">
+        <mat-option *ngFor="let option of options" [value]="option.value">{{option.name}}</mat-option>
+    </mat-select>
+</div>

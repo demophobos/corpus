@@ -2,10 +2,11 @@
     <mat-toolbar class="mat-elevation-z8">
         <app-base-condition></app-base-condition>
         <app-word-comb-condition></app-word-comb-condition>
-        <button mat-icon-button color="primary" matTooltip="Search" (click)="search()" [disabled]="disabled">
+        <app-distance-condition></app-distance-condition>
+        <button mat-icon-button color="primary" matTooltip="Ad quaerendum" (click)="search()" [disabled]="disabled">
       <mat-icon svgIcon="search"></mat-icon>
     </button>
-        <button mat-icon-button color="primary" matTooltip="Clear" (click)="clear()" [disabled]="disabled">
+        <button mat-icon-button color="primary" matTooltip="Ad purgandum" (click)="clear()" [disabled]="disabled">
       <mat-icon svgIcon="close"></mat-icon>
     </button>
     </mat-toolbar>
