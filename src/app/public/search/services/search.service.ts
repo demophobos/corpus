@@ -128,48 +128,27 @@ export class SearchService implements OnInit {
 
     let value = query.value;
 
-    if (query.searchLemma) {
-      if (query.skip == 0 && query.total == 0) {
-        let forms = await this.morphService
-          .findByQuery(
-            new MorphModel({}),
-            JSON.stringify({
-              value: query.value,
-              searchLemma: query.searchLemma,
-            })
-          )
-          .toPromise()
-          .then((forms: MorphModel[]) => {
-            return Promise.resolve(forms);
-          });
+    if (query.skip == 0 && query.total == 0) {
+      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, searchLemma: query.searchLemma, }))
+        .toPromise()
+        .then((forms: MorphModel[]) => {
+          return Promise.resolve(forms);
+        });
 
-        forms = this.filterByAttributes(query, forms);
+      forms = this.filterByAttributes(query, forms);
 
-        let formValues = forms
-          .filter(
-            (thing, i, arr) => arr.findIndex((t) => t.form == thing.form) === i
-          )
-          .map((i) => i.form);
+      let formValues = forms.filter((thing, i, arr) => arr.findIndex((t) => t.form == thing.form) === i).map((i) => i.form);
 
-        this.foundForms.next(forms);
+      this.foundForms.next(forms);
 
-        query.forms = formValues;
+      query.forms = formValues;
 
-        value = query.forms.join(' ');
-      } else {
-        value = query.forms.join(' ');
-      }
+      value = query.forms.join(' ');
+    } else {
+      value = query.forms.join(' ');
     }
 
-    let page = await this.chunkService
-      .findPageByQuery(
-        new ChunkView({}),
-        JSON.stringify({
-          value: value,
-          skip: query.skip,
-          limit: query.limit,
-          total: query.total,
-          headers: query.headers,
+    let page = await this.chunkService.findPageByQuery(new ChunkView({}), JSON.stringify({value: value, skip: query.skip, limit: query.limit, total: query.total, headers: query.headers,
         })
       )
       .toPromise()

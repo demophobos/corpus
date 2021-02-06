@@ -37,12 +37,16 @@ export class ResultElementComponent
         this.morphIds = morphIds;
       });
 
+      var values = this.query.value.split(' ');
 
       if (this.morphIds?.find(i=>i.id == this.element.morphId) || this.morphIds?.find(i=>i.form.toLowerCase() == this.element.value.toLowerCase())) {
         this.isSelected = true;
       } 
-      else {
-        this.isSelected = this.element.value.toLowerCase() == this.query.value.toLowerCase();
+      else {  
+
+        values.forEach(i=>{
+          this.isSelected = this.element.value.toLowerCase() == i.toLowerCase();
+        });
 
         this.isNotMorphStyle = this.isSelected && this.element.morphId == null;
         

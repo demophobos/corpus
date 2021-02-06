@@ -27,6 +27,8 @@ import { BaseConditionComponent } from './search/components/condition/base-condi
 import { ResultToolbarComponent } from './search/components/result/result-toolbar/result-toolbar.component';
 import { ConditionPanelComponent } from './search/components/condition/condition-panel/condition-panel.component';
 import { FormConditionComponent } from './search/components/condition/form-condition/form-condition.component';
+import { WordCombConditionComponent } from './search/components/condition/word-comb-condition/word-comb-condition.component';
+import { DistanceConditionComponent } from './search/components/condition/distance-condition/distance-condition.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { FormConditionComponent } from './search/components/condition/form-condi
     BaseConditionComponent,
     ResultToolbarComponent,
     ConditionPanelComponent,
-    FormConditionComponent],
+    FormConditionComponent,
+    WordCombConditionComponent,
+    DistanceConditionComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,
