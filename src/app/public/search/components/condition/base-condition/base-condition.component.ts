@@ -33,7 +33,14 @@ export class BaseConditionComponent extends BaseComponent implements OnInit {
 
   onChanges(): void {
     this.editorForm.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((value) => {
-        this.query.value = value.valueControl;
-      });
+      if(value.valueControl){
+        let rawValue = value.valueControl.trim();
+        this.query.value = rawValue == '' ? undefined : rawValue;
+        this.searchService.rawValue.next(this.query.value);
+      }else{
+        this.query.value = undefined;
+      }
+      this.searchService.rawValue.next(this.query.value);
+    });
   }
 }

@@ -2,10 +2,10 @@
     <mat-toolbar class="mat-elevation-z8">
         <app-base-condition></app-base-condition>
         <app-word-comb-condition></app-word-comb-condition>
-        <button mat-icon-button color="primary" matTooltip="Search" (click)="search()" [disabled]="query.value === undefined">
+        <button mat-icon-button color="primary" matTooltip="Search" (click)="search()" [disabled]="disabled">
       <mat-icon svgIcon="search"></mat-icon>
     </button>
-        <button mat-icon-button color="primary" matTooltip="Clear" (click)="clear()" [disabled]="query.value === undefined">
+        <button mat-icon-button color="primary" matTooltip="Clear" (click)="clear()" [disabled]="disabled">
       <mat-icon svgIcon="close"></mat-icon>
     </button>
     </mat-toolbar>

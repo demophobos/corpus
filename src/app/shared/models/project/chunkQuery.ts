@@ -2,6 +2,7 @@ import { TaxonomyViewModel } from "./taxonomyViewModel";
 
 export class ChunkQuery {
     value: string;
+    valueOp: string;
     searchLemma: boolean = false;
     index: number = 0;
     total: number = 0;

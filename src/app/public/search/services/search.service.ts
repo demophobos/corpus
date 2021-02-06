@@ -33,6 +33,12 @@ export class SearchService implements OnInit {
     this.commentable.next(value);
   }
   //#endregion
+  public rawValue = new BehaviorSubject<string>(undefined);
+
+  getRawValue(){
+    return this.rawValue.value;
+  }
+  
   public searchLemma = new BehaviorSubject<boolean>(false);
   public selectedAttributes = new BehaviorSubject<string[]>([]);
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
