@@ -1,9 +1,9 @@
-<button mat-icon-button [matMenuTriggerFor]="menu" color="primary">
-  <mat-icon svgIcon="more_vert"></mat-icon>
+<button mat-icon-button color="primary" (click)="loadPrevChunk()">
+  <mat-icon svgIcon="backward"></mat-icon>
 </button>
-<mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="loadInterp()">
-    <mat-icon svgIcon="versio" color="primary"></mat-icon>
-    <span>Versio</span>
-  </button>
-</mat-menu>
+<button mat-icon-button color="primary" (click)="loadInterp()">
+  <mat-icon svgIcon="versio"></mat-icon>
+</button>
+<button mat-icon-button color="primary" (click)="loadNextChunk()">
+  <mat-icon svgIcon="forward"></mat-icon>
+</button>

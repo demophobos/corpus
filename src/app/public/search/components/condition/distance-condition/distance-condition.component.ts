@@ -56,7 +56,7 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
   }
   onChanges(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((value) => {
-        this.query.valueOp = value.optionControl;
+        this.query.valueIp = value.optionControl;
       });
   }
 }

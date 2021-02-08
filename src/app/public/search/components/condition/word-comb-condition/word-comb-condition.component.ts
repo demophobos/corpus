@@ -30,6 +30,7 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
     });
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
       this.query = query;
+      this.formGroup.controls.optionControl.setValue(this.query.valueOp);
     });
     this.searchService.rawValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
       if(value === undefined){

@@ -2,7 +2,8 @@ import { TaxonomyViewModel } from "./taxonomyViewModel";
 
 export class ChunkQuery {
     value: string;
-    valueOp: string;
+    valueOp: string = 'and';
+    valueIp: string;
     searchLemma: boolean = false;
     index: number = 0;
     total: number = 0;

@@ -42,4 +42,12 @@ export class ResultChunkComponent extends BaseComponent implements OnInit {
       this.interpChunks = null;
     }
   }
+
+  nextChunk(){
+
+  }
+
+  prevChunk(){
+    
+  }
 }

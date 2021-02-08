@@ -127,6 +127,10 @@ export class SearchService implements OnInit {
     this.foundForms.next([]);
   }
 
+  public async getChunk(){
+    
+  }
+
   public async getChunks(query: ChunkQuery) {
     this.commentable.next(null);
 

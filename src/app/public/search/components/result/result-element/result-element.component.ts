@@ -35,22 +35,15 @@ export class ResultElementComponent
 
     this.searchService.foundForms.pipe(takeUntil(this.destroyed)).subscribe((morphIds: MorphModel[]) => {
         this.morphIds = morphIds;
-      });
-
-      var values = this.query.value.split(' ');
-
-      if (this.morphIds?.find(i=>i.id == this.element.morphId) || this.morphIds?.find(i=>i.form.toLowerCase() == this.element.value.toLowerCase())) {
+        if (this.morphIds?.find(i=>i.id == this.element.morphId)) {
         this.isSelected = true;
       } 
-      else {  
 
-        values.forEach(i=>{
-          this.isSelected = this.element.value.toLowerCase() == i.toLowerCase();
-        });
+      this.isNotMorphStyle = this.isSelected && this.element.morphId == null;
+      
+      });
 
-        this.isNotMorphStyle = this.isSelected && this.element.morphId == null;
-        
-      }
+      
   }
 
   selectWord(word: ElementView){
