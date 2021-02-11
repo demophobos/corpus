@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChunkElementView } from '@shared/models';
+import { ChunkView } from '@shared/models';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -8,13 +8,13 @@ import { SearchService } from '../../../services/search.service';
   styleUrls: ['./chunk-info.component.scss']
 })
 export class ChunkInfoComponent implements OnInit {
-  @Input() chunk: ChunkElementView;
+  @Input() chunk: ChunkView;
   constructor(private searchService: SearchService) { }
 
   ngOnInit(): void {
 
   }
-  getInfo(chunk: ChunkElementView) {
+  getInfo(chunk: ChunkView) {
     this.searchService.setCommentable = chunk;
   }
 }

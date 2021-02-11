@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
-import { ChunkElementView} from '@shared/models';
+import { ChunkView } from '@shared/models';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -12,8 +12,8 @@ import { SearchService } from '../../../services/search.service';
 export class ResultChunkComponent extends BaseComponent implements OnInit {
   showInterp: boolean = false;
   interpIsLoading: boolean = true;
-  @Input() chunk: ChunkElementView;
-  interpChunks: ChunkElementView[];
+  @Input() chunk: ChunkView;
+  interpChunks: ChunkView[];
   emptyInterpInfo: string;
   constructor(private searchService: SearchService) {
     super();
@@ -28,7 +28,7 @@ export class ResultChunkComponent extends BaseComponent implements OnInit {
     if(this.showInterp){
       this.interpIsLoading = true;
       this.searchService.getInterp(this.chunk.id, this.chunk.headerLang == Language.Latin)
-      .then((values: ChunkElementView[])=>{
+      .then((values: ChunkView[])=>{
         if(values.length > 0){
           this.interpChunks = values;
         }else{

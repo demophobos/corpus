@@ -1,5 +1,3 @@
-import { TaxonomyViewModel } from "./taxonomyViewModel";
-
 export class ChunkQuery {
     value: string;
     valueOp: string = 'and';
@@ -20,6 +18,7 @@ export class ChunkQuery {
     mood: string[] = [];
     voice: string[] = [];
     degree: string[] = [];
+    quid: string;
     public constructor(fields: Partial<ChunkQuery>) {
         Object.assign(this, fields);
      }

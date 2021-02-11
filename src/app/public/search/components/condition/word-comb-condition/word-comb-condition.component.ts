@@ -26,7 +26,7 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      optionControl: [{value: 'and', disabled: this.disabled}, [ Validators.required ] ],
+      optionControl: [{value: 'or', disabled: this.disabled}, [ Validators.required ] ],
     });
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
       this.query = query;
@@ -38,7 +38,7 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
         this.disabled = true;
       }else{
         if(value.split(' ').length == 1){
-          this.formGroup.controls.optionControl.setValue(this.options[1].value);
+          this.formGroup.controls.optionControl.setValue(this.options[0].value);
           this.formGroup.controls.optionControl.disable();
           this.disabled = true;
         }else{

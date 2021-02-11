@@ -3,9 +3,10 @@ import { ApiService } from '@core/services';
 import { SpinnerComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { LocalStorageKeyEnum } from '@shared/enums';
+import { Guid } from '@shared/helpers';
 import {
-  ChunkElementView,
   ChunkQuery,
+  ChunkValueItemModel,
   ChunkView,
   ElementView,
   HeaderModel,
@@ -27,9 +28,9 @@ export class SearchService implements OnInit {
 
 
   //#region Commentable entities
-  public commentable: BehaviorSubject<ChunkElementView | ElementView> = new BehaviorSubject<ChunkElementView | ElementView>(undefined);
+  public commentable: BehaviorSubject<ChunkView | ChunkValueItemModel | ElementView> = new BehaviorSubject<ChunkView |ChunkValueItemModel | ElementView>(undefined);
 
-  set setCommentable(value: ChunkElementView | ElementView){
+  set setCommentable(value: ChunkView | ChunkValueItemModel | ElementView){
     this.commentable.next(value);
   }
   //#endregion
@@ -49,7 +50,7 @@ export class SearchService implements OnInit {
   }
 
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
-  public elementedChunks: ReplaySubject<ChunkElementView[]> = new ReplaySubject<ChunkElementView[]>(1);
+  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
@@ -119,6 +120,7 @@ export class SearchService implements OnInit {
   }
 
   resetQuery(query: ChunkQuery) {
+    query.quid = Guid.newGuid();
     query.skip = 0;
     query.index = 0;
     query.total = 0;
@@ -132,33 +134,54 @@ export class SearchService implements OnInit {
   }
 
   public async getChunks(query: ChunkQuery) {
-    this.commentable.next(null);
 
     this.isLoading.next(true);
 
     let value = query.value;
 
     if (query.skip == 0 && query.total == 0) {
-      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, searchLemma: query.searchLemma, }))
-        .toPromise()
-        .then((forms: MorphModel[]) => {
-          return Promise.resolve(forms);
-        });
+      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, searchLemma: query.searchLemma }))
+      .toPromise()
+      .then((forms: MorphModel[]) => {
+        return Promise.resolve(forms);
+      });
 
+    if(forms.length > 0){
       forms = this.filterByAttributes(query, forms);
 
       let formValues = forms.filter((thing, i, arr) => arr.findIndex((t) => t.form == thing.form) === i).map((i) => i.form);
-
+  
       this.foundForms.next(forms);
-
+  
       query.forms = formValues;
-
-      value = query.forms.join(' ');
-    } else {
+    }else{
+      query.forms = value.split(' ');
+    }
+    if(query.valueOp == 'phrase'){
+      value = query.value;
+    }else{
       value = query.forms.join(' ');
     }
 
-    let page = await this.chunkService.findPageByQuery(new ChunkView({}), JSON.stringify({value: value, skip: query.skip, limit: query.limit, total: query.total, headers: query.headers,
+    } else {
+      if(query.valueOp == 'phrase'){
+        value = query.value;
+      }else{
+        value = query.forms.join(' ');
+      }
+  
+    }
+
+    let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
+    JSON.stringify({
+      quid:query.quid,
+      valueOp: query.valueOp, 
+      valueIp:query.valueIp, 
+      value: value, 
+      skip: query.skip, 
+      limit: query.limit, 
+      total: query.total, 
+      headers: query.headers,
         })
       )
       .toPromise()
@@ -241,7 +264,7 @@ export class SearchService implements OnInit {
           return page;
         });
 
-      return await Promise.resolve(page.documents as ChunkElementView[]);
+      return await Promise.resolve(page.documents as ChunkView[]);
     }
   }
 

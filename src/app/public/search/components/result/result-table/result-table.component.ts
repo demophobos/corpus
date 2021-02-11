@@ -1,9 +1,9 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ChunkElementView } from '@shared/models';
 import { SearchService } from '../../../services/search.service';
 import { takeUntil } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
+import { ChunkView } from '@shared/models';
 @Component({
   selector: 'app-result-table',
   templateUrl: './result-table.component.html',
@@ -13,7 +13,7 @@ export class ResultTableComponent extends BaseComponent implements AfterViewInit
 
   displayedColumns: string[] = ['chunk'];
 
-  chunks: MatTableDataSource<ChunkElementView> = new MatTableDataSource([]);
+  chunks: MatTableDataSource<ChunkView> = new MatTableDataSource([]);
 
   isLoading: boolean = false;
 

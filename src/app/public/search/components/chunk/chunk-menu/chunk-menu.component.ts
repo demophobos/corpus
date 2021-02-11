@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Language } from '@shared/enums';
-import { ChunkElementView } from '@shared/models';
+import { ChunkView } from '@shared/models';
 
 @Component({
   selector: 'app-chunk-menu',
@@ -9,7 +9,7 @@ import { ChunkElementView } from '@shared/models';
 })
 export class ChunkMenuComponent implements OnInit {
 
-  @Input() chunk: ChunkElementView;
+  @Input() chunk: ChunkView;
   @Output() showInterp: EventEmitter<any> = new EventEmitter();
   @Output() nextChunk: EventEmitter<any> = new EventEmitter();
   @Output() prevChunk: EventEmitter<any> = new EventEmitter();

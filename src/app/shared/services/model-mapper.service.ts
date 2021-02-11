@@ -1,10 +1,7 @@
-import { ElementSchemaRegistry } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { AppConfig, AppType } from '@shared/constants';
-import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
+import { AppType } from '@shared/constants';
 import {
   ChunkModel,
-  ChunkElementView,
   ElementView,
   HeaderModel,
   IndexModel,
@@ -17,7 +14,6 @@ import {
   TaxonomyViewModel,
   HeaderView,
 } from '@shared/models';
-import { Pageable } from '@shared/models/base/pageable';
 import { throwError } from 'rxjs';
 
 @Injectable({
@@ -32,14 +28,10 @@ export class ModelMapperService {
         return this.ToTaxonomy(item);
       case AppType.Header:
         return this.ToHeaderView(item);
-      case AppType.Chunk:
-        return this.ToChunkElementViewPage(item);
         case AppType.ChunkView:
         return this.ToChunkViewPage(item);
       case AppType.Morph:
         return this.ToMorph(item);
-      case AppType.ChunkElementView:
-        return this.ToChunkElementViewPage(item);
       case AppType.Interp:
         return this.ToInterp(item);
       case AppType.ElementView:
@@ -76,7 +68,7 @@ export class ModelMapperService {
   }
 
   static ToChunkView(item: any) {
-    return new ChunkView({
+    let chunkView = new ChunkView({
       id: item._id,
       indexId: item.indexId,
       value: item.value,
@@ -89,8 +81,13 @@ export class ModelMapperService {
       headerCode : item.headerCode,
       headerLang : item.headerLang,
       headerEditionType : item.headerEditionType,
-      projectId : item.projectId
+      projectId : item.projectId,
+      valueObj: item.valueObj
     });
+
+    chunkView.elements = JSON.parse(chunkView.valueObj);
+
+    return chunkView;
   }
 
   
@@ -122,38 +119,7 @@ export class ModelMapperService {
       lang: item.lang
     });
   }
-  static ToChunkElementViewPage(item: any) {
-    let pageResponse = new PageResponse({
-      total: item.total,
-      skipped: item.skipped,
-      limited: item.limited
-    });
-    pageResponse.documents = item.documents.map((res: ChunkElementView) => {
-      return this.ToChunkElementView(res);
-    });
-    return pageResponse;
-  }
-  static ToChunkElementView(item: any) {
-    let chunk = new ChunkElementView({
-      id: item._id,
-      indexId: item.indexId,
-      value: item.value,
-      indexName: item.indexName,
-      headerDesc: item.headerDesc,
-      indexOrder: item.indexOrder,
-      headerId: item.headerId,
-      projectDesc: item.projectDesc,
-      projectCode: item.projectCode,
-      headerCode: item.headerCode,
-      headerLang: item.headerLang,
-      headerEditionType: item.headerEditionType,
-      projectId: item.projectId,
-      elements: item.elements.map((res: ElementView) => {
-        return this.ToElementView(res);
-      })
-    });
-    return chunk;
-  }
+  
   static ToIndexView(item: any): IndexView {
     return new IndexView({
       id: item._id,

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ChunkQuery, ElementView, MorphModel } from '@shared/models';
+import { ChunkQuery, ChunkValueItemModel, ElementView, MorphModel } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 
@@ -12,7 +12,7 @@ import { SearchService } from '../../../services/search.service';
 export class ResultElementComponent
   extends BaseComponent
   implements OnInit {
-  @Input() element: ElementView;
+  @Input() element: ChunkValueItemModel;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
   isNotMorphStyle: boolean = false;
@@ -26,7 +26,7 @@ export class ResultElementComponent
 
   ngOnInit(): void {
     if (this.element) {
-      this.isMorphStyle = this.element.morphId !== null;
+      this.isMorphStyle = this.element.morphId !== undefined;
     }
 
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ChunkQuery) => {
@@ -35,18 +35,19 @@ export class ResultElementComponent
 
     this.searchService.foundForms.pipe(takeUntil(this.destroyed)).subscribe((morphIds: MorphModel[]) => {
         this.morphIds = morphIds;
-        if (this.morphIds?.find(i=>i.id == this.element.morphId)) {
+        if (this.morphIds?.find(i=>i.id == this.element.morphId) || 
+        this.morphIds?.find(i=>i.form.toLowerCase() == this.element.value.toLowerCase())) {
         this.isSelected = true;
       } 
 
-      this.isNotMorphStyle = this.isSelected && this.element.morphId == null;
+      //this.isNotMorphStyle = this.element.morphId == undefined;
       
       });
 
       
   }
 
-  selectWord(word: ElementView){
+  selectWord(word: ChunkValueItemModel){
     this.searchService.setCommentable = word;
   }
 

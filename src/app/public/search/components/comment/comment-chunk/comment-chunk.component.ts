@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ChunkElementView } from '@shared/models';
+import { ChunkView } from '@shared/models';
+
 
 @Component({
   selector: 'app-comment-chunk',
@@ -7,7 +8,7 @@ import { ChunkElementView } from '@shared/models';
   styleUrls: ['./comment-chunk.component.scss']
 })
 export class CommentChunkComponent implements OnInit {
-  @Input() chunk: ChunkElementView;
+  @Input() chunk: ChunkView;
   constructor() { }
 
   ngOnInit(): void {
