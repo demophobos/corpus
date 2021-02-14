@@ -19,3 +19,4 @@ export * from './project/taxonomyViewModel';
 export * from './project/taxonomyQuery';
 export * from './taxonomyTreeNode';
 export * from './project/chunkValueObjModel';
+export * from './project/queryMorph';

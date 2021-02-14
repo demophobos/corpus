@@ -34,17 +34,12 @@ export class ResultElementComponent
       });
 
     this.searchService.foundForms.pipe(takeUntil(this.destroyed)).subscribe((morphIds: MorphModel[]) => {
-        this.morphIds = morphIds;
-        if (this.morphIds?.find(i=>i.id == this.element.morphId) || 
-        this.morphIds?.find(i=>i.form.toLowerCase() == this.element.value.toLowerCase())) {
-        this.isSelected = true;
-      } 
 
-      //this.isNotMorphStyle = this.element.morphId == undefined;
+        this.morphIds = morphIds;
+
+        this.isSelected = this.morphIds?.find(i=>i.id == this.element.morphId) !== undefined;
       
       });
-
-      
   }
 
   selectWord(word: ChunkValueItemModel){

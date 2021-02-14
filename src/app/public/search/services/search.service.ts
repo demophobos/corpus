@@ -14,6 +14,7 @@ import {
   IndexView,
   MorphModel,
   PageResponse,
+  QueryMorph,
   TaxonomyQuery,
   TaxonomyViewModel,
 } from '@shared/models';
@@ -125,7 +126,7 @@ export class SearchService implements OnInit {
     query.index = 0;
     query.total = 0;
     query.limit = AppConfig.DefaultPageLimit;
-    query.forms = [];
+    query.formIds = [];
     this.foundForms.next([]);
   }
 
@@ -140,36 +141,23 @@ export class SearchService implements OnInit {
     let value = query.value;
 
     if (query.skip == 0 && query.total == 0) {
-      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, searchLemma: query.searchLemma }))
+      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, allForms: query.searchLemma }))
       .toPromise()
       .then((forms: MorphModel[]) => {
         return Promise.resolve(forms);
       });
 
     if(forms.length > 0){
-      forms = this.filterByAttributes(query, forms);
 
-      let formValues = forms.filter((thing, i, arr) => arr.findIndex((t) => t.form == thing.form) === i).map((i) => i.form);
+      forms = this.filterByAttributes(query, forms);
   
       this.foundForms.next(forms);
   
-      query.forms = formValues;
-    }else{
-      query.forms = value.split(' ');
-    }
-    if(query.valueOp == 'phrase'){
-      value = query.value;
-    }else{
-      value = query.forms.join(' ');
-    }
+      query.formIds = forms.map((item: any) => {
+        return item.id;
+      });
 
-    } else {
-      if(query.valueOp == 'phrase'){
-        value = query.value;
-      }else{
-        value = query.forms.join(' ');
-      }
-  
+    }
     }
 
     let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
@@ -177,12 +165,11 @@ export class SearchService implements OnInit {
       quid:query.quid,
       valueOp: query.valueOp, 
       valueIp:query.valueIp, 
-      value: value, 
+      formIds: query.formIds, 
       skip: query.skip, 
       limit: query.limit, 
       total: query.total, 
-      headers: query.headers,
-        })
+      headers: query.headers})
       )
       .toPromise()
       .then((page: PageResponse) => {

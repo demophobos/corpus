@@ -1,3 +1,5 @@
+import { QueryMorph } from "./queryMorph";
+
 export class ChunkQuery {
     value: string;
     valueOp: string = 'and';
@@ -7,7 +9,7 @@ export class ChunkQuery {
     total: number = 0;
     skip: number = 0;
     limit: number = 0;
-    forms: string [];
+    formIds: string [];
     headers: string[] = [];
     pos: string[] = [];
     gender: string[] = [];
