@@ -138,8 +138,6 @@ export class SearchService implements OnInit {
 
     this.isLoading.next(true);
 
-    let value = query.value;
-
     if (query.skip == 0 && query.total == 0) {
       let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, allForms: query.searchLemma }))
       .toPromise()
@@ -163,9 +161,10 @@ export class SearchService implements OnInit {
     let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
     JSON.stringify({
       quid:query.quid,
+      value: query.value,
+      allForms: query.searchLemma,
       valueOp: query.valueOp, 
-      valueIp:query.valueIp, 
-      formIds: query.formIds, 
+      valueIp:query.valueIp,  
       skip: query.skip, 
       limit: query.limit, 
       total: query.total, 
