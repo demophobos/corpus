@@ -41,6 +41,9 @@ export class SearchService implements OnInit {
     return this.rawValue.value;
   }
   
+  public wordCombValue = new BehaviorSubject<string>('or');
+  public distanceValue = new BehaviorSubject<string>('0');
+
   public searchLemma = new BehaviorSubject<boolean>(false);
   public selectedAttributes = new BehaviorSubject<string[]>([]);
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
@@ -127,6 +130,8 @@ export class SearchService implements OnInit {
     query.total = 0;
     query.limit = AppConfig.DefaultPageLimit;
     query.formIds = [];
+    query.valueIp = this.distanceValue.value;
+    query.valueOp = this.wordCombValue.value;
     this.foundForms.next([]);
   }
 

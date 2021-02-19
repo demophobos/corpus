@@ -37,6 +37,16 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
       this.query = query;
     });
+    this.searchService.wordCombValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
+      if(value == "phrase" || value == "or"){
+        this.formGroup.controls.optionControl.setValue(this.options[0].value);
+        this.formGroup.controls.optionControl.disable();
+        this.disabled = true;
+      }else{
+        this.formGroup.controls.optionControl.enable();
+        this.disabled = false;
+      }
+    })
     this.searchService.rawValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
       if(value === undefined){
         this.formGroup.controls.optionControl.disable();
@@ -57,6 +67,7 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
   onChanges(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((value) => {
         this.query.valueIp = value.optionControl;
+        this.searchService.distanceValue.next(this.query.valueIp);
       });
   }
 }

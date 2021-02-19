@@ -53,6 +53,7 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
   onChanges(): void {
     this.formGroup.valueChanges.pipe(takeUntil(this.destroyed)).subscribe((value) => {
         this.query.valueOp = value.optionControl;
+        this.searchService.wordCombValue.next(this.query.valueOp);
       });
   }
 
