@@ -129,7 +129,7 @@ export class SearchService implements OnInit {
     query.index = 0;
     query.total = 0;
     query.limit = AppConfig.DefaultPageLimit;
-    query.formIds = [];
+    query.includeIds = [];
     query.valueIp = this.distanceValue.value;
     query.valueOp = this.wordCombValue.value;
     this.foundForms.next([]);
@@ -156,7 +156,7 @@ export class SearchService implements OnInit {
   
       this.foundForms.next(forms);
   
-      query.formIds = forms.map((item: any) => {
+      query.includeIds = forms.map((item: any) => {
         return item.id;
       });
 
@@ -173,7 +173,8 @@ export class SearchService implements OnInit {
       skip: query.skip, 
       limit: query.limit, 
       total: query.total, 
-      headers: query.headers})
+      headers: query.headers,
+      includeIds: query.includeIds})
       )
       .toPromise()
       .then((page: PageResponse) => {

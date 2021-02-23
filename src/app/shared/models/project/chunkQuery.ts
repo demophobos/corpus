@@ -9,7 +9,7 @@ export class ChunkQuery {
     total: number = 0;
     skip: number = 0;
     limit: number = 0;
-    formIds: string [];
+    includeIds: string [];
     headers: string[] = [];
     pos: string[] = [];
     gender: string[] = [];
