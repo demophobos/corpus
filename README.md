@@ -1,1 +1,1 @@
-# Corpus Latino-Rossicum
+# Latino-Rossicum Corpus Client
