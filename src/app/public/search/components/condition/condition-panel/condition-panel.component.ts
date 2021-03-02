@@ -30,7 +30,7 @@ export class ConditionPanelComponent extends BaseComponent implements OnInit {
       if(searchLemma){
         this.formType = "Lemma";
       }else{
-        this.formType = "Form";
+        this.formType = "Forma";
       }
     });
 
