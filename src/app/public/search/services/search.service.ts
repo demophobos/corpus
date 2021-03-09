@@ -2,21 +2,33 @@ import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
 import { SpinnerComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
-import { LocalStorageKeyEnum } from '@shared/enums';
+import { LocalStorageKeyEnum, PosEnum } from '@shared/enums';
 import { Guid } from '@shared/helpers';
 import {
+  AdjView,
+  AdvView,
+  ArticleView,
   ChunkQuery,
   ChunkValueItemModel,
   ChunkView,
+  ConjView,
   ElementView,
+  ExclamView,
   HeaderModel,
   HeaderView,
   IndexView,
   MorphModel,
+  NounView,
+  NumView,
   PageResponse,
+  ParticView,
+  PartView,
+  PrepView,
+  PronView,
   QueryMorph,
   TaxonomyQuery,
   TaxonomyViewModel,
+  VerbView,
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { DialogService, LocalStorageService } from '@shared/services';
@@ -26,21 +38,23 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService implements OnInit {
-
-
   //#region Commentable entities
-  public commentable: BehaviorSubject<ChunkView | ChunkValueItemModel | ElementView> = new BehaviorSubject<ChunkView |ChunkValueItemModel | ElementView>(undefined);
+  public commentable: BehaviorSubject<
+    ChunkView | ChunkValueItemModel | ElementView
+  > = new BehaviorSubject<ChunkView | ChunkValueItemModel | ElementView>(
+    undefined
+  );
 
-  set setCommentable(value: ChunkView | ChunkValueItemModel | ElementView){
+  set setCommentable(value: ChunkView | ChunkValueItemModel | ElementView) {
     this.commentable.next(value);
   }
   //#endregion
   public rawValue = new BehaviorSubject<string>(undefined);
 
-  getRawValue(){
+  getRawValue() {
     return this.rawValue.value;
   }
-  
+
   public wordCombValue = new BehaviorSubject<string>('or');
   public distanceValue = new BehaviorSubject<string>('0');
 
@@ -49,13 +63,19 @@ export class SearchService implements OnInit {
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
   public headers = new BehaviorSubject<HeaderView[]>([]);
 
-  public getHeaders(){
+  public getHeaders() {
     return this.headers.value;
   }
 
-  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
-  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
-  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
+  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(
+    1
+  );
+  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<
+    ChunkView[]
+  >(1);
+  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<
+    MorphModel[]
+  >(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor(
@@ -72,33 +92,34 @@ export class SearchService implements OnInit {
     this.initQuery();
     this.loadHeaders();
   }
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
-  setSelectedWorksCount(query: ChunkQuery){
+  setSelectedWorksCount(query: ChunkQuery) {
     let arr: HeaderModel[] = [];
 
-     this.getHeaders().forEach(i=>{
-       if(query.headers.includes(i.id)){
-         arr.push(i);
-       }
+    this.getHeaders().forEach((i) => {
+      if (query.headers.includes(i.id)) {
+        arr.push(i);
+      }
     });
 
     this.selectedWorks.next(arr);
   }
 
-  setSelectedMorphAttrubutes(query: ChunkQuery)  {
-    this.selectedAttributes.next(Array().concat(
-      query.pos, 
-      query.gender, 
-      query.case, 
-      query.person, 
-      query.number, 
-      query.tense, 
-      query.mood, 
-      query.voice, 
-      query.degree));
+  setSelectedMorphAttrubutes(query: ChunkQuery) {
+    this.selectedAttributes.next(
+      Array().concat(
+        query.pos,
+        query.gender,
+        query.case,
+        query.person,
+        query.number,
+        query.tense,
+        query.mood,
+        query.voice,
+        query.degree
+      )
+    );
   }
 
   public showSpinner() {
@@ -110,7 +131,7 @@ export class SearchService implements OnInit {
     if (query) {
       this.chunkQuery.next(query);
     } else {
-      query = new ChunkQuery({})
+      query = new ChunkQuery({});
       this.chunkQuery.next(query);
     }
     this.setSelectedMorphAttrubutes(query);
@@ -118,7 +139,7 @@ export class SearchService implements OnInit {
 
   public initQuery() {
     this.localStorageService.removeItem(LocalStorageKeyEnum.Query);
-    let query = new ChunkQuery({})
+    let query = new ChunkQuery({});
     this.chunkQuery.next(query);
     this.setSelectedMorphAttrubutes(query);
   }
@@ -135,46 +156,46 @@ export class SearchService implements OnInit {
     this.foundForms.next([]);
   }
 
-  public async getChunk(){
-    
-  }
-
   public async getChunks(query: ChunkQuery) {
-
     this.isLoading.next(true);
 
     if (query.skip == 0 && query.total == 0) {
-      let forms = await this.morphService.findByQuery(new MorphModel({}), JSON.stringify({value: query.value, allForms: query.searchLemma }))
-      .toPromise()
-      .then((forms: MorphModel[]) => {
-        return Promise.resolve(forms);
-      });
+      let forms = await this.morphService
+        .findByQuery(
+          new MorphModel({}),
+          JSON.stringify({ value: query.value, allForms: query.searchLemma })
+        )
+        .toPromise()
+        .then((forms: MorphModel[]) => {
+          return Promise.resolve(forms);
+        });
 
-    if(forms.length > 0){
+      if (forms.length > 0) {
+        forms = this.filterByAttributes(query, forms);
 
-      forms = this.filterByAttributes(query, forms);
-  
-      this.foundForms.next(forms);
-  
-      query.includeIds = forms.map((item: any) => {
-        return item.id;
-      });
+        this.foundForms.next(forms);
 
+        query.includeIds = forms.map((item: any) => {
+          return item.id;
+        });
+      }
     }
-    }
 
-    let page = await this.chunkService.findPageByQuery(new ChunkView({}), 
-    JSON.stringify({
-      quid:query.quid,
-      value: query.value,
-      allForms: query.searchLemma,
-      valueOp: query.valueOp, 
-      valueIp:query.valueIp,  
-      skip: query.skip, 
-      limit: query.limit, 
-      total: query.total, 
-      headers: query.headers,
-      includeIds: query.includeIds})
+    let page = await this.chunkService
+      .findPageByQuery(
+        new ChunkView({}),
+        JSON.stringify({
+          quid: query.quid,
+          value: query.value,
+          allForms: query.searchLemma,
+          valueOp: query.valueOp,
+          valueIp: query.valueIp,
+          skip: query.skip,
+          limit: query.limit,
+          total: query.total,
+          headers: query.headers,
+          includeIds: query.includeIds,
+        })
       )
       .toPromise()
       .then((page: PageResponse) => {
@@ -203,7 +224,7 @@ export class SearchService implements OnInit {
   }
 
   private contains(formAttrs: string[], attr: string): boolean {
-    if(formAttrs.length == 0){
+    if (formAttrs.length == 0) {
       return true;
     }
     return formAttrs.indexOf(attr) > -1;
@@ -302,11 +323,132 @@ export class SearchService implements OnInit {
       });
   }
 
-  async countWordUsage(value: string):Promise<Number>{
-    return this.elementService.countByQuery(new ElementView({}), JSON.stringify({getCount: true, value: value})).toPromise()
-    .then((result: Number)=>{
-      return Promise.resolve(result);
-    });
+  async countWordUsage(value: string): Promise<Number> {
+    return this.elementService
+      .countByQuery(
+        new ElementView({}),
+        JSON.stringify({ getCount: true, value: value })
+      )
+      .toPromise()
+      .then((result: Number) => {
+        return Promise.resolve(result);
+      });
+  }
 
+  public getPosView(element: ChunkValueItemModel) {
+    switch (element.pos) {
+      case PosEnum.Noun:
+        return new NounView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          GENDER: element.gender,
+          CASE: element.case,
+          NUMBER: element.number,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Adj:
+        return new AdjView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          GENDER: element.gender,
+          CASE: element.case,
+          NUMBER: element.number,
+          DEGREE: element.degree,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Adv:
+        return new AdvView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          DEGREE: element.degree,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Conj:
+        return new ConjView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Exclam:
+        return new ExclamView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Numeral:
+        return new NumView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          GENDER: element.gender,
+          CASE: element.case,
+          NUMBER: element.number,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Part:
+        return new PartView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          VOICE: element.voice,
+          TENSE: element.tense,
+          GENDER: element.gender,
+          CASE: element.case,
+          NUMBER: element.number,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Particle:
+        return new ParticView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Prep:
+        return new PrepView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Pron:
+        return new PronView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          GENDER: element.gender,
+          CASE: element.case,
+          NUMBER: element.number,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Verb:
+        return new VerbView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          GENDER: element.gender,
+          CASE: element.case,
+          NUMBER: element.number,
+          PERSON: element.person,
+          MOOD: element.mood,
+          VOICE: element.voice,
+          TENSE: element.tense,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      case PosEnum.Article:
+        return new ArticleView({
+          LEMMA: element.lemma,
+          POS: element.pos,
+          DIALECT: element.dialect,
+          FEATURE: element.feature
+        });
+      default:
+        return null;
+    }
   }
 }

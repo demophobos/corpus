@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery, ChunkValueItemModel, ElementView, MorphModel } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
@@ -7,7 +7,7 @@ import { SearchService } from '../../../services/search.service';
 @Component({
   selector: 'app-result-element',
   templateUrl: './result-element.component.html',
-  styleUrls: ['./result-element.component.scss'],
+  styleUrls: ['./result-element.component.scss']
 })
 export class ResultElementComponent
   extends BaseComponent
@@ -19,7 +19,7 @@ export class ResultElementComponent
   isSelected: boolean = false;
   query: ChunkQuery;
   morphIds: MorphModel[];
-
+  posTooltip: string;
   constructor(private searchService: SearchService) {
     super();
   }
@@ -27,6 +27,8 @@ export class ResultElementComponent
   ngOnInit(): void {
     if (this.element) {
       this.isMorphStyle = this.element.morphId !== undefined;
+      this.posTooltip = this.element.morphId !== undefined ? JSON.stringify(this.searchService.getPosView(this.element), null, 8) : "";
+      this.posTooltip = this.posTooltip.replace('{', '').replace('}', '').replace( /"/g, '' ).replace( /,/g, '' );
     }
 
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ChunkQuery) => {
