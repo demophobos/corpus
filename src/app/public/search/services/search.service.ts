@@ -339,6 +339,7 @@ export class SearchService implements OnInit {
     switch (element.pos) {
       case PosEnum.Noun:
         return new NounView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           GENDER: element.gender,
@@ -349,6 +350,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Adj:
         return new AdjView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           GENDER: element.gender,
@@ -360,6 +362,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Adv:
         return new AdvView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           DEGREE: element.degree,
@@ -368,6 +371,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Conj:
         return new ConjView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           DIALECT: element.dialect,
@@ -375,6 +379,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Exclam:
         return new ExclamView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           DIALECT: element.dialect,
@@ -382,6 +387,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Numeral:
         return new NumView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           GENDER: element.gender,
@@ -392,6 +398,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Part:
         return new PartView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           VOICE: element.voice,
@@ -404,6 +411,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Particle:
         return new ParticView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           DIALECT: element.dialect,
@@ -411,6 +419,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Prep:
         return new PrepView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           DIALECT: element.dialect,
@@ -418,6 +427,7 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Pron:
         return new PronView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
           GENDER: element.gender,
@@ -428,22 +438,27 @@ export class SearchService implements OnInit {
         });
       case PosEnum.Verb:
         return new VerbView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
-          GENDER: element.gender,
-          CASE: element.case,
-          NUMBER: element.number,
-          PERSON: element.person,
+          TENSE: element.tense,
           MOOD: element.mood,
           VOICE: element.voice,
-          TENSE: element.tense,
+          CASE: element.case,
+          GENDER: element.gender,
+          NUMBER: element.number,
+          PERSON: element.person,
           DIALECT: element.dialect,
           FEATURE: element.feature
         });
       case PosEnum.Article:
         return new ArticleView({
+          FORMA: element.form,
           LEMMA: element.lemma,
           POS: element.pos,
+          CASE: element.case,
+          GENDER: element.gender,
+          NUMBER: element.number,
           DIALECT: element.dialect,
           FEATURE: element.feature
         });
