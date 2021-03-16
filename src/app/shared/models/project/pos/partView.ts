@@ -1,11 +1,11 @@
 import { PosBaseView } from './posBaseView';
 
 export class PartView extends PosBaseView {
-  VOICE: string;
-  TENSE: string;
-  GENDER: string;
-  CASE: string;
-  NUMBER: string;
+  GENUS_VERBI: string;
+  TEMPUS: string;
+  GENUS: string;
+  CASUS: string;
+  NUMERUS: string;
   public constructor(fields: Partial<PartView>) {
     super();
     Object.assign(this, fields);

@@ -341,126 +341,126 @@ export class SearchService implements OnInit {
         return new NounView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          GENDER: element.gender,
-          CASE: element.case,
-          NUMBER: element.number,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          GENUS: element.gender,
+          CASUS: element.case,
+          NUMERUS: element.number,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Adj:
         return new AdjView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          GENDER: element.gender,
-          CASE: element.case,
-          NUMBER: element.number,
-          DEGREE: element.degree,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          GENUS: element.gender,
+          CASUS: element.case,
+          NUMERUS: element.number,
+          GRADUS: element.degree,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Adv:
         return new AdvView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          DEGREE: element.degree,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          GRADUS: element.degree,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Conj:
         return new ConjView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Exclam:
         return new ExclamView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Numeral:
         return new NumView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          GENDER: element.gender,
-          CASE: element.case,
-          NUMBER: element.number,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          GENUS: element.gender,
+          CASUS: element.case,
+          NUMERUS: element.number,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Part:
         return new PartView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          VOICE: element.voice,
-          TENSE: element.tense,
-          GENDER: element.gender,
-          CASE: element.case,
-          NUMBER: element.number,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          GENUS_VERBI: element.voice,
+          TEMPUS: element.tense,
+          GENUS: element.gender,
+          CASUS: element.case,
+          NUMERUS: element.number,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Particle:
         return new ParticView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Prep:
         return new PrepView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Pron:
         return new PronView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          GENDER: element.gender,
-          CASE: element.case,
-          NUMBER: element.number,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          GENUS: element.gender,
+          CASUS: element.case,
+          NUMERUS: element.number,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Verb:
         return new VerbView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          TENSE: element.tense,
-          MOOD: element.mood,
-          VOICE: element.voice,
-          CASE: element.case,
-          GENDER: element.gender,
-          NUMBER: element.number,
+          PARS_ORATIONIS: element.pos,
+          TEMPUS: element.tense,
+          MODUS: element.mood,
+          GENUS_VERBI: element.voice,
+          CASUS: element.case,
+          GENUS: element.gender,
+          NUMERUS: element.number,
           PERSON: element.person,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       case PosEnum.Article:
         return new ArticleView({
           FORMA: element.form,
           LEMMA: element.lemma,
-          POS: element.pos,
-          CASE: element.case,
-          GENDER: element.gender,
-          NUMBER: element.number,
-          DIALECT: element.dialect,
-          FEATURE: element.feature
+          PARS_ORATIONIS: element.pos,
+          CASUS: element.case,
+          GENUS: element.gender,
+          NUMERUS: element.number,
+          SERMO: element.dialect,
+          ATTRIBUTIO: element.feature
         });
       default:
         return null;

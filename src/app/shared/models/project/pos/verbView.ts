@@ -1,13 +1,13 @@
 import { PosBaseView } from './posBaseView';
 
 export class VerbView extends PosBaseView {
-  TENSE: string;
-  MOOD: string;
-  CASE: string;
-  NUMBER: string;
+  TEMPUS: string;
+  MODUS: string;
+  CASUS: string;
+  NUMERUS: string;
   PERSON: string;
-  GENDER: string;
-  VOICE: string;
+  GENUS: string;
+  GENUS_VERBI: string;
   public constructor(fields: Partial<VerbView>) {
     super();
     Object.assign(this, fields);

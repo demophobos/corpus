@@ -28,7 +28,7 @@ export class ResultElementComponent
     if (this.element) {
       this.isMorphStyle = this.element.morphId !== undefined;
       this.posTooltip = this.element.morphId !== undefined ? JSON.stringify(this.searchService.getPosView(this.element), null, 8) : "";
-      this.posTooltip = this.posTooltip.replace('{', '').replace('}', '').replace( /"/g, '' ).replace( /,/g, '' );
+      this.posTooltip = this.posTooltip.replace('{', '').replace('}', '').replace( /"/g, '' ).replace( /,/g, '' ).replace(/_/g, ' ');
     }
 
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe((query: ChunkQuery) => {

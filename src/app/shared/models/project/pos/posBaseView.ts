@@ -1,7 +1,7 @@
 export class PosBaseView{
     FORMA: string;
-    POS: string;
+    PARS_ORATIONIS: string;
     LEMMA: string;
-    FEATURE: string;
-    DIALECT: string;
+    ATTRIBUTIO: string;
+    SERMO: string;
 }
