@@ -1,5 +1,5 @@
 export const AppConfig = {
-    ApiUrl: 'http://localhost:3000/v2/',
+    ApiUrl: 'https://clr-api.iling.spb.ru/v2/',
     DefaultTheme: 'indigo-pink-theme',
     DefaultDialogWidth: '800',
     DefaultLoginDialogWidth: '500',

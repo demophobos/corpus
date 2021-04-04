@@ -9,7 +9,7 @@ import { SearchPageComponent } from './search/components/search-page/search-page
 const routes: Routes = [
   {
     path: '', component: DefaultComponent, children: [
-      { path: '', component: HomeComponent },
+      { path: 'search', component: SearchPageComponent },
       { path: 'home', component: HomeComponent },
       { path: 'index', component: IndexComponent },
       { path: 'search', component: SearchPageComponent }
