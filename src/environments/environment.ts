@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  API: 'http://localhost:4200/api'
+  API: 'https://clr-api.iling.spb.ru/v2'
 };
 
 /*

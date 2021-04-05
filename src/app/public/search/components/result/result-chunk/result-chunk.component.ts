@@ -44,10 +44,10 @@ export class ResultChunkComponent extends BaseComponent implements OnInit {
   }
 
   nextChunk(){
-
+let test = 1;
   }
 
   prevChunk(){
-    
+    let test = 1;
   }
 }

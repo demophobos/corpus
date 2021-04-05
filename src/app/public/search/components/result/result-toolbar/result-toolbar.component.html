@@ -5,9 +5,8 @@
         </button>
         <span class="spacer"></span>
         <mat-paginator [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)" [disabled]="isLoading == true"></mat-paginator>
-        <span class="spacer"></span>
-        <button mat-icon-button color="primary" matTooltip="Export" (click)="export()">
+        <!-- <button mat-icon-button color="primary" matTooltip="Export" (click)="export()">
             <mat-icon svgIcon="export"></mat-icon>
-        </button>
+        </button> -->
     </mat-toolbar>
 </mat-card>
