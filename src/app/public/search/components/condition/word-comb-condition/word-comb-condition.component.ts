@@ -17,7 +17,7 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
   options: any = [
     {value: 'or', name: WordMatchCombEnum.AnyWord}, 
     {value: 'and', name: WordMatchCombEnum.AllWords}, 
-    {value: 'phrase', name: WordMatchCombEnum.Phrase}
+    //{value: 'phrase', name: WordMatchCombEnum.Phrase}
   ];
   disabled: boolean = true;
   constructor(public fb: FormBuilder, private searchService: SearchService) { 

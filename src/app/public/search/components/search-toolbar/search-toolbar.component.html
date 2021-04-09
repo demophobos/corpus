@@ -1,13 +1,17 @@
 <mat-card class="mat-elevation-z0">
     <mat-toolbar class="mat-elevation-z8">
-        <app-base-condition></app-base-condition>
-        <app-word-comb-condition></app-word-comb-condition>
-        <app-distance-condition></app-distance-condition>
-        <button mat-icon-button color="primary" matTooltip="Ad quaerendum" (click)="search()" [disabled]="disabled">
-      <mat-icon svgIcon="search"></mat-icon>
-    </button>
-        <button mat-icon-button color="primary" matTooltip="Ad purgandum" (click)="clear()" [disabled]="disabled">
-      <mat-icon svgIcon="close"></mat-icon>
-    </button>
+        <mat-toolbar-row>
+            <app-base-condition></app-base-condition>
+            <button mat-icon-button color="primary" matTooltip="Ad quaerendum" (click)="search()" [disabled]="disabled">
+          <mat-icon svgIcon="search"></mat-icon>
+        </button>
+            <button mat-icon-button color="primary" matTooltip="Ad purgandum" (click)="clear()" [disabled]="disabled">
+          <mat-icon svgIcon="close"></mat-icon>
+        </button>
+        </mat-toolbar-row>
+        <mat-toolbar-row>
+            <app-word-comb-condition></app-word-comb-condition>
+            <app-distance-condition></app-distance-condition>
+        </mat-toolbar-row>
     </mat-toolbar>
 </mat-card>
