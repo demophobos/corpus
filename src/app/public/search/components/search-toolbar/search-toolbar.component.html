@@ -1,6 +1,6 @@
 <mat-card class="mat-elevation-z0">
     <mat-toolbar>
-        <mat-toolbar-row class="mat-elevation-z8">
+        <mat-toolbar-row class="mat-elevation-z8 base-condition-row">
             <app-base-condition></app-base-condition>
             <button mat-icon-button color="primary" matTooltip="Ad quaerendum" (click)="search()" [disabled]="disabled">
                 <mat-icon svgIcon="search"></mat-icon>
@@ -9,19 +9,19 @@
                 <mat-icon svgIcon="close"></mat-icon>
             </button>
         </mat-toolbar-row>
-        <mat-toolbar-row class="mat-elevation-z8">
+        <mat-toolbar-row class="mat-elevation-z4">
             <app-form-condition></app-form-condition>
         </mat-toolbar-row>
-        <mat-toolbar-row class="mat-elevation-z8">
+        <mat-toolbar-row class="mat-elevation-z4">
             <app-word-comb-condition></app-word-comb-condition>
         </mat-toolbar-row>
-        <mat-toolbar-row class="mat-elevation-z8">
+        <mat-toolbar-row class="mat-elevation-z4">
             <app-distance-condition></app-distance-condition>
         </mat-toolbar-row>
-        <mat-toolbar-row class="mat-elevation-z8">
+        <mat-toolbar-row class="mat-elevation-z4">
             <app-morph-condition-panel></app-morph-condition-panel>
         </mat-toolbar-row>
-        <mat-toolbar-row class="mat-elevation-z8">
+        <mat-toolbar-row class="mat-elevation-z4">
             <app-work-condition-panel></app-work-condition-panel>
         </mat-toolbar-row>
     </mat-toolbar>

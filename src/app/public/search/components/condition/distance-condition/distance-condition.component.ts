@@ -14,7 +14,7 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
   formGroup: FormGroup;
   query: ChunkQuery;
   options: any = [
-    {value: 0, name: '-0-'}, 
+    {value: 0, name: ' '}, 
     {value: 1, name: '-1-'}, 
     {value: 2, name: '-2-'},
     {value: 3, name: '-3-'}, 
@@ -32,35 +32,26 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      optionControl: [{value: 0, disabled: this.disabled}, [ Validators.required ] ],
+      optionControl: [{value: 0, disabled: this.disabled }, [ Validators.required ] ],
     });
+
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
       this.query = query;
+      if(this.query && this.query.valueIp){
+        this.formGroup.controls.optionControl.enable();
+          this.disabled = false;
+          this.formGroup.controls.optionControl.setValue(this.query.valueIp);
+      }
     });
     this.searchService.wordCombValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
-      if(value == "phrase" || value == "or"){
+      if(value == "and"){
+        this.formGroup.controls.optionControl.enable();
+        this.disabled = false;
+      }else{
         this.formGroup.controls.optionControl.setValue(this.options[0].value);
         this.formGroup.controls.optionControl.disable();
         this.disabled = true;
-      }else{
-        this.formGroup.controls.optionControl.enable();
-        this.disabled = false;
       }
-    })
-    this.searchService.rawValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
-      if(value === undefined){
-        this.formGroup.controls.optionControl.disable();
-        this.disabled = true;
-      }else{
-        if(value.split(' ').length == 1){
-          this.formGroup.controls.optionControl.setValue(this.options[0].value);
-          this.formGroup.controls.optionControl.disable();
-          this.disabled = true;
-        }else{
-          this.formGroup.controls.optionControl.enable();
-          this.disabled = false;
-        }
-      } 
     });
     this.onChanges();
   }

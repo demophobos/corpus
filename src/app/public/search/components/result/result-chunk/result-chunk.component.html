@@ -1,5 +1,5 @@
 <span fxLayout="column">
-    <mat-card class="card mat-elevation-z8" *ngIf="chunk">
+    <mat-card class="card mat-elevation-z4" *ngIf="chunk">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">
                 <app-chunk-info [chunk]="chunk"></app-chunk-info>
@@ -15,7 +15,7 @@
 </mat-card>
 <mat-progress-bar color="primary" mode="buffer" *ngIf="showInterp && interpIsLoading == true"></mat-progress-bar>
 <div *ngIf="showInterp && !interpIsLoading">
-    <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z8 interp-card">
+    <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z4 interp-card">
         <mat-card-header class="card-header">
             <mat-card-title class="card-title">
                 <app-chunk-info [chunk]="interpChunk"></app-chunk-info>
@@ -28,7 +28,7 @@
                 </span>
         </mat-card-content>
     </mat-card>
-    <mat-card class="card mat-elevation-z1" *ngIf="!interpChunks">
+    <mat-card class="card mat-elevation-z4" *ngIf="!interpChunks">
         <mat-card-content class="empty-interp">
             {{emptyInterpInfo}}
         </mat-card-content>
