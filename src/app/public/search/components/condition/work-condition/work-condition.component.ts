@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
-import {
-  ChunkQuery,
-  HeaderModel,
-  HeaderView,
-  ProjectModel,
-} from '@shared/models';
+import { ChunkQuery, HeaderView, ProjectModel } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 
@@ -31,15 +26,18 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
       .subscribe((headers) => {
         this.headers = headers;
         this.projects = headers
-        .filter((thing, i, arr) => arr.findIndex(t => t.projectId == thing.projectId) === i)
-        .map(
-          (i) =>
-            new ProjectModel({
-              code: i.projectCode,
-              desc: i.projectDesc,
-              id: i.projectId,
-            })
-        );
+          .filter(
+            (thing, i, arr) =>
+              arr.findIndex((t) => t.projectId == thing.projectId) === i
+          )
+          .map(
+            (i) =>
+              new ProjectModel({
+                code: i.projectCode,
+                desc: i.projectDesc,
+                id: i.projectId,
+              })
+          );
       });
 
     this.searchService.chunkQuery
@@ -62,6 +60,6 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
   }
 
   getProjectHeaders(projectId: string) {
-    return this.headers.filter(i=>i.projectId == projectId);
+    return this.headers.filter((i) => i.projectId == projectId);
   }
 }

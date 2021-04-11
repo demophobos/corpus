@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
@@ -35,4 +34,5 @@ export class SearchResultToolbarComponent extends BaseComponent implements OnIni
   clear(){
     this.searchService.initQuery();
   }
+
 }

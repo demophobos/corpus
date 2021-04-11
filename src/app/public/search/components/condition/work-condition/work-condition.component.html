@@ -1,7 +1,14 @@
-<mat-selection-list *ngIf="headers" [formControl]="headerSelector" color="primary" class="input-field-full-width author-selector" multiple>
-    <div *ngFor="let project of projects">
-        <div mat-subheader>{{project.desc}}</div>
-        <mat-list-option class="work-item" *ngFor="let header of getProjectHeaders(project.id)" [value]="header.id">{{header.code}}</mat-list-option>
-        <mat-divider></mat-divider>
-    </div>
-</mat-selection-list>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Auctores et Opera</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-selection-list *ngIf="headers" [formControl]="headerSelector" color="primary" class="input-field-full-width author-selector" multiple>
+            <div *ngFor="let project of projects">
+                <div mat-subheader>{{project.desc}}</div>
+                <mat-list-option class="work-item" *ngFor="let header of getProjectHeaders(project.id)" [value]="header.id">{{header.code}}</mat-list-option>
+                <mat-divider></mat-divider>
+            </div>
+        </mat-selection-list>
+    </mat-card-content>
+</mat-card>

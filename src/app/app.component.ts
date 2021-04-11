@@ -21,6 +21,18 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   private RegisterIcons() {
     this.matIconRegistry.addSvgIcon(
+      `select_text`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/icons/select_text.svg'
+        )
+      );
+      this.matIconRegistry.addSvgIcon(
+        `select_category`,
+          this.domSanitizer.bypassSecurityTrustResourceUrl(
+            '../assets/icons/select_category.svg'
+          )
+        );
+    this.matIconRegistry.addSvgIcon(
       `logo`,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           '../assets/icons/logo.svg'
@@ -84,6 +96,12 @@ export class AppComponent extends BaseComponent implements OnInit {
       `unchecked`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
         '../assets/icons/unchecked.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `filter_plus`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/filter_plus.svg'
       )
     );
     this.matIconRegistry.addSvgIcon(

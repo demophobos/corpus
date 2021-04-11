@@ -18,17 +18,18 @@ import { ChunkInfoComponent } from './search/components/chunk/chunk-info/chunk-i
 import { ChunkMenuComponent } from './search/components/chunk/chunk-menu/chunk-menu.component';
 import { CommentPaneComponent } from './search/components/comment/comment-pane/comment-pane.component';
 import { WorkConditionComponent } from './search/components/condition/work-condition/work-condition.component';
-import { SearchMorphOptionsComponent } from './search/components/condition/morph-condition/morph-condition.component';
+import { MorphConditionComponent } from './search/components/condition/morph-condition/morph-condition.component';
 import { SearchMorphCategoryComponent } from './search/components/morph/morph-category/morph-category.component';
 import { CommentWordComponent } from './search/components/comment/comment-word/comment-word.component';
 import { CommentChunkComponent } from './search/components/comment/comment-chunk/comment-chunk.component';
 import { SearchResultToolbarComponent } from './search/components/search-toolbar/search-toolbar.component';
 import { BaseConditionComponent } from './search/components/condition/base-condition/base-condition.component';
 import { ResultToolbarComponent } from './search/components/result/result-toolbar/result-toolbar.component';
-import { ConditionPanelComponent } from './search/components/condition/condition-panel/condition-panel.component';
 import { FormConditionComponent } from './search/components/condition/form-condition/form-condition.component';
 import { WordCombConditionComponent } from './search/components/condition/word-comb-condition/word-comb-condition.component';
 import { DistanceConditionComponent } from './search/components/condition/distance-condition/distance-condition.component';
+import { MorphConditionPanelComponent } from './search/components/condition/morph-condition-panel/morph-condition-panel.component';
+import { WorkConditionPanelComponent } from './search/components/condition/work-condition-panel/work-condition-panel.component';
 
 @NgModule({
   declarations: [
@@ -46,17 +47,18 @@ import { DistanceConditionComponent } from './search/components/condition/distan
     ChunkMenuComponent,
     CommentPaneComponent,
     WorkConditionComponent,
-    SearchMorphOptionsComponent,
+    MorphConditionComponent,
     SearchMorphCategoryComponent,
     CommentWordComponent,
     CommentChunkComponent,
     SearchResultToolbarComponent,
     BaseConditionComponent,
     ResultToolbarComponent,
-    ConditionPanelComponent,
     FormConditionComponent,
     WordCombConditionComponent,
-    DistanceConditionComponent],
+    DistanceConditionComponent,
+    MorphConditionPanelComponent,
+    WorkConditionPanelComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

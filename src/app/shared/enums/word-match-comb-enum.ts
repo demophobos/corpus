@@ -1,5 +1,5 @@
 export enum WordMatchCombEnum{
-    AllWords = "omnia",
-    AnyWord = "quodvis",
+    AllWords = "omnia vocabula",
+    AnyWord = "quodvis vocabulum",
     Phrase = "phrasis"
 }

@@ -1,46 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
-import { ChunkQuery, HeaderModel } from '@shared/models';
+import { AppConfig } from '@shared/constants';
+import { ChunkQuery } from '@shared/models';
+import { DialogService } from '@shared/services';
 import { SearchService } from 'app/public/search/services/search.service';
 import { takeUntil } from 'rxjs/operators';
+import { MorphConditionComponent } from '../morph-condition/morph-condition.component';
 
 @Component({
-  selector: 'app-condition-panel',
-  templateUrl: './condition-panel.component.html',
-  styleUrls: ['./condition-panel.component.scss']
+  selector: 'app-morph-condition-panel',
+  templateUrl: './morph-condition-panel.component.html',
+  styleUrls: ['./morph-condition-panel.component.scss']
 })
-export class ConditionPanelComponent extends BaseComponent implements OnInit {
-  query: ChunkQuery;
+export class MorphConditionPanelComponent extends BaseComponent implements OnInit{
   morphItems: string[];
-  workItems: HeaderModel[];
-  formType: string;
+  query: ChunkQuery;
   searchLemma:boolean = false;
-  constructor(private searchService: SearchService) {
+  constructor(private dialogService: DialogService, private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
       this.query = query;
-      
     });
-
-    this.searchService.searchLemma.pipe(takeUntil(this.destroyed)).subscribe(searchLemma=>{
-      this.searchLemma = searchLemma;
-      if(searchLemma){
-        this.formType = "Lemma";
-      }else{
-        this.formType = "Forma";
-      }
-    });
-
     this.searchService.selectedAttributes.pipe(takeUntil(this.destroyed)).subscribe(items=>{
       this.morphItems = items;
     });
-
-    this.searchService.selectedWorks.pipe(takeUntil(this.destroyed)).subscribe(items=>{
-      this.workItems = items;
+    this.searchService.searchLemma.pipe(takeUntil(this.destroyed)).subscribe(searchLemma=>{
+      this.searchLemma = searchLemma;
     });
+  }
+  showMorphSelector(){
+    this.dialogService.showComponent(MorphConditionComponent, null, AppConfig.DefaultDialogWidth, false);
   }
 
   removeMorphItem(item){
@@ -56,12 +49,5 @@ export class ConditionPanelComponent extends BaseComponent implements OnInit {
     this.query.voice = this.query.voice.filter(i=> i !== item);
     this.searchService.chunkQuery.next(this.query);
     this.searchService.setSelectedMorphAttrubutes(this.query);
-  }
-
-  removeWorkItem(item: HeaderModel){
-    this.workItems = this.workItems.filter(i=> i.id !== item.id);
-    this.query.headers = this.query.headers.filter(i=>i !== item.id)
-    this.searchService.chunkQuery.next(this.query);
-    this.searchService.selectedWorks.next(this.workItems);
   }
 }

@@ -11,7 +11,7 @@ import { SearchService } from '../../../services/search.service';
   templateUrl: './morph-condition.component.html',
   styleUrls: ['./morph-condition.component.scss']
 })
-export class SearchMorphOptionsComponent extends BaseComponent implements OnInit {
+export class MorphConditionComponent extends BaseComponent implements OnInit {
   panelOpenState = false;
   categorySelector = new FormControl();
   query: ChunkQuery;

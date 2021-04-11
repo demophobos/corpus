@@ -1,58 +1,63 @@
-<div *ngIf="query">
-    <mat-tab-group class="category-tab">
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(pos)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(pos)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(pos)" [selectedItems]="query.pos" (selected)="posSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(tempus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(tempus)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(tempus)" [selectedItems]="query.tense" (selected)="tempusSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(modus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(modus)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(modus)" [selectedItems]="query.mood" (selected)="modusSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(genus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(genus)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(genus)" [selectedItems]="query.gender" (selected)="genusSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(numerus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(numerus)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(numerus)" [selectedItems]="query.number" (selected)="numerusSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(persona)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(persona)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(persona)" [selectedItems]="query.person" (selected)="personaSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(casus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(casus)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(casus)" [selectedItems]="query.case" (selected)="casusSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(gradus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(gradus)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(gradus)" [selectedItems]="query.degree" (selected)="gradusSelected($event)"></app-morph-category>
-        </mat-tab>
-        <mat-tab>
-            <ng-template mat-tab-label>
-                <span matBadge="{{getSelected(genus2)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(genus2)}}</span>
-            </ng-template>
-            <app-morph-category [items]="getCategoryItems(genus2)" [selectedItems]="query.voice" (selected)="genus2Selected($event)"></app-morph-category>
-        </mat-tab>
-    </mat-tab-group>
-</div>
+<mat-card *ngIf="query">
+    <mat-card-header>
+        <mat-card-title>Morphologia</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <mat-tab-group class="category-tab">
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(pos)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(pos)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(pos)" [selectedItems]="query.pos" (selected)="posSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(tempus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(tempus)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(tempus)" [selectedItems]="query.tense" (selected)="tempusSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(modus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(modus)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(modus)" [selectedItems]="query.mood" (selected)="modusSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(genus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(genus)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(genus)" [selectedItems]="query.gender" (selected)="genusSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(numerus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(numerus)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(numerus)" [selectedItems]="query.number" (selected)="numerusSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(persona)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(persona)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(persona)" [selectedItems]="query.person" (selected)="personaSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(casus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(casus)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(casus)" [selectedItems]="query.case" (selected)="casusSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(gradus)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(gradus)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(gradus)" [selectedItems]="query.degree" (selected)="gradusSelected($event)"></app-morph-category>
+            </mat-tab>
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <span matBadge="{{getSelected(genus2)}}" matBadgeOverlap="false" matBadgeSize="small">{{getCategoryTitle(genus2)}}</span>
+                </ng-template>
+                <app-morph-category [items]="getCategoryItems(genus2)" [selectedItems]="query.voice" (selected)="genus2Selected($event)"></app-morph-category>
+            </mat-tab>
+        </mat-tab-group>
+    </mat-card-content>
+</mat-card>

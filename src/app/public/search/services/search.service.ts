@@ -67,15 +67,9 @@ export class SearchService implements OnInit {
     return this.headers.value;
   }
 
-  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(
-    1
-  );
-  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<
-    ChunkView[]
-  >(1);
-  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<
-    MorphModel[]
-  >(1);
+  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
+  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
+  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   constructor(

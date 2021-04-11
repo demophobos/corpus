@@ -1,7 +1,6 @@
 <div class="search-page" fxLayout="column" fxLayoutAlign="start center">
     <ng-template [ngIf]="query.total == 0">
         <app-search-toolbar></app-search-toolbar>
-        <app-condition-panel></app-condition-panel>
     </ng-template>
     <ng-template [ngIf]="query.total > 0">
         <app-result-toolbar></app-result-toolbar>
