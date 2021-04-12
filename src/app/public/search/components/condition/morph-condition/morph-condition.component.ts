@@ -43,13 +43,15 @@ export class MorphConditionComponent extends BaseComponent implements OnInit {
 
   getCategoryTitle(category: string) : string {
     if(this.categoryItems){
-      return this.categoryItems.filter(i=>i.categoryCode == category).map(i=>i.categoryDesc)[0];
+      return this.categoryItems.filter(i=>i.categoryCode == category)
+      .map(i=>i.categoryDesc)[0];
     }
   }
 
   getCategoryItems(category: string) : TaxonomyViewModel[]{
     if(this.categoryItems){
-      return this.categoryItems.filter(i=>i.categoryCode == category);
+      return this.categoryItems.filter(i=>i.categoryCode == category)
+      .sort((a, b) => (a.code < b.code ? -1 : 1));
     }
   }
 
