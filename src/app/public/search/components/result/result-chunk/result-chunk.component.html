@@ -1,17 +1,22 @@
-<span fxLayout="column">
-    <mat-card class="card mat-elevation-z4" *ngIf="chunk">
-        <mat-card-header class="card-header">
-            <mat-card-title class="card-title">
-                <app-chunk-info [chunk]="chunk"></app-chunk-info>
-            </mat-card-title>
-            <span class="spacer"></span>
-<app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()" (nextChunk)="nextChunk()" (prevChunk)="prevChunk()"></app-chunk-menu>
-</mat-card-header>
-<mat-card-content fxLayout="row wrap">
-    <span *ngFor="let element of chunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
+<mat-card class="card mat-elevation-z4" *ngIf="chunk">
+    <mat-card-header class="card-header">
+        <mat-card-title class="card-title">
+            <app-chunk-info [chunk]="chunk"></app-chunk-info>
+        </mat-card-title>
+        <span class="spacer"></span>
+        <app-chunk-menu [chunk]="chunk" (showInterp)="loadInterp()" (nextChunk)="nextChunk()" (prevChunk)="prevChunk()">
+        </app-chunk-menu>
+    </mat-card-header>
+    <mat-card-content>
+        <span *ngFor="let element of chunk.elements">
+            <ng-template [ngIf]="element.type !== 4">
                 <app-result-element [element]="element"></app-result-element>
-            </span>
-</mat-card-content>
+            </ng-template>
+            <ng-template [ngIf]="element.type == 4">
+                <br />
+            </ng-template>
+        </span>
+    </mat-card-content>
 </mat-card>
 <mat-progress-bar color="primary" mode="buffer" *ngIf="showInterp && interpIsLoading == true"></mat-progress-bar>
 <div *ngIf="showInterp && !interpIsLoading">
@@ -22,10 +27,15 @@
             </mat-card-title>
             <span class="spacer"></span>
         </mat-card-header>
-        <mat-card-content fxLayout="row wrap">
-            <span *ngFor="let element of interpChunk.elements" fxLayout="row wrap" fxLayoutAlign="start center">
+        <mat-card-content>
+            <span *ngFor="let element of interpChunk.elements">
+                <ng-template [ngIf]="element.type !== 4">
                     <app-result-element [element]="element"></app-result-element>
-                </span>
+                </ng-template>
+                <ng-template [ngIf]="element.type == 4">
+                    <br />
+                </ng-template>
+            </span>
         </mat-card-content>
     </mat-card>
     <mat-card class="card mat-elevation-z4" *ngIf="!interpChunks">
@@ -34,4 +44,3 @@
         </mat-card-content>
     </mat-card>
 </div>
-</span>
