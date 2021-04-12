@@ -21,8 +21,8 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
     //{value: 'phrase', name: WordMatchCombEnum.Phrase}
   ];
   disabled: boolean = true;
-  constructor(public fb: FormBuilder, private searchService: SearchService) { 
-    super();
+  constructor(public fb: FormBuilder, private searchService: SearchService, private deviceService: DeviceDetectorService) { 
+    super(deviceService);
   }
 
   ngOnInit(): void {

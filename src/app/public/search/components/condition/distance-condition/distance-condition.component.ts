@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -26,8 +27,8 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
     {value: 9, name: '-9-'}
   ];
   disabled: boolean = true;
-  constructor(public fb: FormBuilder, private searchService: SearchService) {
-    super();
+  constructor(public fb: FormBuilder, private searchService: SearchService, private deviceService: DeviceDetectorService) {
+    super(deviceService);
   }
 
   ngOnInit(): void {

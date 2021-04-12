@@ -18,12 +18,9 @@ export class MorphConditionPanelComponent extends BaseComponent implements OnIni
   morphItems: string[];
   query: ChunkQuery;
   searchLemma:boolean = false;
-  deviceInfo = null;
-  isMobile = false;
+
   constructor(private dialogService: DialogService, private searchService: SearchService, private deviceService: DeviceDetectorService) {
-    super();
-    this.deviceInfo = this.deviceService.getDeviceInfo();
-    this.isMobile = this.deviceService.isMobile();
+    super(deviceService);
   }
 
   ngOnInit(): void {

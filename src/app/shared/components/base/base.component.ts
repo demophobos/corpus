@@ -11,10 +11,14 @@ import { Subject } from 'rxjs';
   `
 })
 export class BaseComponent implements OnDestroy {
-
+  deviceInfo = null;
+  isMobile = false;
   destroyed = new Subject();
-  constructor() {
-
+  constructor(deviceService: DeviceDetectorService = null) {
+    if(deviceService){
+      this.deviceInfo = deviceService.getDeviceInfo();
+      this.isMobile = deviceService.isMobile();
+    }
   }
 
   ngOnDestroy() {

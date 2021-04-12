@@ -1,4 +1,4 @@
-<label class="selector-title">Interpositio:</label>
+<label>Interpositio:</label>
 <span class="selector" [formGroup]="formGroup" [ngClass]="{disabled:disabled == true, enabled:disabled == false }">
     <mat-select formControlName="optionControl" matTooltip="Interpositio Vocabulorum">
         <mat-option *ngFor="let option of options" [value]="option.value" class="selector-item">{{option.name}}</mat-option>

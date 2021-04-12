@@ -1,4 +1,4 @@
-<label class="selector-title">Compositio:</label>
+<label>Compositio:</label>
 <span class="selector" [formGroup]="formGroup" [ngClass]="{disabled:disabled == true, enabled:disabled == false }">
     <mat-select formControlName="optionControl" matTooltip="Compositio Vocabulorum">
         <mat-option *ngFor="let option of options" [value]="option.value">{{option.name}}</mat-option>
