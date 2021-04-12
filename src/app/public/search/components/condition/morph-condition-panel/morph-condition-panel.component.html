@@ -11,6 +11,7 @@
         </mat-chip-list>
     </ng-template>
     <ng-template [ngIf]="searchLemma && isMobile">
-        <span matBadge="{{morphItems.length}}" matBadgeOverlap="false"></span>
+        <div class="spacer"></div>
+        <span matBadge="{{morphItems.length}}" class="count-badge" matBadgeOverlap="false"></span>
     </ng-template>
 </div>

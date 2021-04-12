@@ -1,5 +1,11 @@
 <form class="form" [formGroup]="editorForm">
     <mat-form-field class="input-field-full-width">
         <input matInput formControlName="valueControl" maxlength="100">
+        <button mat-icon-button matSuffix color="primary" matTooltip="Ad quaerendum" (click)="search()" [disabled]="disabled">
+            <mat-icon svgIcon="search"></mat-icon>
+        </button>
+        <button mat-icon-button matSuffix color="primary" matTooltip="Ad purgandum" (click)="clear()" [disabled]="disabled">
+            <mat-icon svgIcon="close"></mat-icon>
+        </button>
     </mat-form-field>
 </form>

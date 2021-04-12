@@ -12,7 +12,6 @@ import { SearchService } from '../../services/search.service';
 export class SearchResultToolbarComponent extends BaseComponent implements OnInit {
 
   query: ChunkQuery;
-  disabled: boolean;
   constructor(private searchService: SearchService) {
     super();
   }
@@ -21,18 +20,7 @@ export class SearchResultToolbarComponent extends BaseComponent implements OnIni
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
         this.query = query;
       });
-      this.searchService.rawValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
-        this.disabled = value == undefined;
-      });
-  }
 
-  async search() {
-    this.searchService.resetQuery(this.query);
-    this.searchService.getChunks(this.query);
-  }
-
-  clear(){
-    this.searchService.initQuery();
   }
 
 }

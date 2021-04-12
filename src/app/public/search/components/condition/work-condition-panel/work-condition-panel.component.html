@@ -4,7 +4,8 @@
         <mat-icon svgIcon="filter_plus"></mat-icon>
     </button>
     <ng-template [ngIf]="isMobile">
-        <span matBadge="{{workItems.length}}" matBadgeOverlap="false"></span>
+        <div class="spacer"></div>
+        <span class="count-badge" matBadge="{{workItems.length}}" matBadgeOverlap="false"></span>
     </ng-template>
     <ng-template [ngIf]="!isMobile">
         <mat-chip-list>

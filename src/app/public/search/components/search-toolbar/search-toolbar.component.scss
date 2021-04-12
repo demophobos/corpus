@@ -1,4 +1,6 @@
 app-base-condition {
+    margin-left: 15px;
+    margin-right: 15px;
     width: 100%;
 }
 
@@ -8,6 +10,14 @@ app-word-comb-condition {
 
 app-distance-condition {
     width: 50px;
+}
+
+app-morph-condition-panel {
+    width: 100%;
+}
+
+app-work-condition-panel {
+    width: 100%;
 }
 
 .base-condition-row {

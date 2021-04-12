@@ -13,6 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 export class BaseConditionComponent extends BaseComponent implements OnInit {
   editorForm: FormGroup;
   query: ChunkQuery;
+  disabled: boolean;
   constructor(
     private formBuilder: FormBuilder,
     private searchService: SearchService
@@ -29,6 +30,9 @@ export class BaseConditionComponent extends BaseComponent implements OnInit {
       this.query = query;
       this.editorForm.controls.valueControl.setValue(this.query.value);
     });
+    this.searchService.rawValue.pipe(takeUntil(this.destroyed)).subscribe(value=>{
+      this.disabled = value == undefined;
+    });
   }
 
   onChanges(): void {
@@ -42,5 +46,14 @@ export class BaseConditionComponent extends BaseComponent implements OnInit {
       }
       this.searchService.rawValue.next(this.query.value);
     });
+  }
+
+  async search() {
+    this.searchService.resetQuery(this.query);
+    this.searchService.getChunks(this.query);
+  }
+
+  clear(){
+    this.searchService.initQuery();
   }
 }
