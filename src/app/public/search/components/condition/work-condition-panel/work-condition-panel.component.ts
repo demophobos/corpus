@@ -5,6 +5,7 @@ import { AppConfig } from '@shared/constants';
 import { ChunkQuery, HeaderModel } from '@shared/models';
 import { DialogService } from '@shared/services';
 import { SearchService } from 'app/public/search/services/search.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { takeUntil } from 'rxjs/operators';
 import { WorkConditionComponent } from '../work-condition/work-condition.component';
 
@@ -17,8 +18,12 @@ export class WorkConditionPanelComponent extends BaseComponent implements OnInit
   query: ChunkQuery;
   morphItems: string[];
   workItems: HeaderModel[];
-  constructor(private dialogService: DialogService, private searchService: SearchService) {
+  deviceInfo = null;
+  isMobile = false;
+  constructor(private dialogService: DialogService, private searchService: SearchService, private deviceService: DeviceDetectorService) {
     super();
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    this.isMobile = this.deviceService.isMobile();
   }
 
   ngOnInit(): void {

@@ -3,11 +3,14 @@
     <button mat-icon-button color="primary" aria-label="" (click)="showMorphSelector()" [disabled]="searchLemma == false">
         <mat-icon svgIcon="filter_plus"></mat-icon>
     </button>
-    <ng-template [ngIf]="searchLemma">
+    <ng-template [ngIf]="searchLemma && !isMobile">
         <mat-chip-list>
             <mat-chip *ngFor="let item of morphItems" [removable]="true" (removed)="removeMorphItem(item)" selected>{{item}}
                 <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
             </mat-chip>
         </mat-chip-list>
+    </ng-template>
+    <ng-template [ngIf]="searchLemma && isMobile">
+        <span matBadge="{{morphItems.length}}" matBadgeOverlap="false"></span>
     </ng-template>
 </div>

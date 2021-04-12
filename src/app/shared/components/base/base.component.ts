@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -12,8 +13,9 @@ import { Subject } from 'rxjs';
 export class BaseComponent implements OnDestroy {
 
   destroyed = new Subject();
+  constructor() {
 
-  constructor() {}
+  }
 
   ngOnDestroy() {
     this.destroyed.next(null);

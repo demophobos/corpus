@@ -4,6 +4,7 @@ import { BaseComponent } from '@shared/components';
 import { WordMatchCombEnum } from '@shared/enums/word-match-comb-enum';
 import { ChunkQuery } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({

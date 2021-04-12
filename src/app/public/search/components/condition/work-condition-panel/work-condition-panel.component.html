@@ -3,9 +3,14 @@
     <button mat-icon-button color="primary" aria-label="" (click)="showWorkSelector()">
         <mat-icon svgIcon="filter_plus"></mat-icon>
     </button>
-    <mat-chip-list>
-        <mat-chip *ngFor="let item of workItems" [removable]="true" (removed)="removeWorkItem(item)" selected>{{item.code}}
-            <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
-        </mat-chip>
-    </mat-chip-list>
+    <ng-template [ngIf]="isMobile">
+        <span matBadge="{{workItems.length}}" matBadgeOverlap="false"></span>
+    </ng-template>
+    <ng-template [ngIf]="!isMobile">
+        <mat-chip-list>
+            <mat-chip *ngFor="let item of workItems" [removable]="true" (removed)="removeWorkItem(item)" selected>{{item.code}}
+                <mat-icon matChipRemove *ngIf="true" svgIcon="close"></mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </ng-template>
 </div>

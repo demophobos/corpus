@@ -5,9 +5,9 @@ export const AppConfig = {
     DefaultLoginDialogWidth: '500',
     SessionExpiresIn: 180,
     AppFullTitle: 'CORPUS LATINO-ROSSICUM',
+    AppShortTitle: 'CLR',
     Copyright: 'ILS RAS 2021',
     AppVersion: '0.0.0.1',
-    AppShortTitle: 'CLR',
     DefaultPageLimit: 5,
     DefaultSearchLemma: false,
     DefaultShowCommentPane: false

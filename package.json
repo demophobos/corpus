@@ -29,6 +29,7 @@
         "angular-split": "^4.0.0",
         "http-status-codes": "^1.4.0",
         "moment": "^2.29.1",
+        "ngx-device-detector": "^2.0.6",
         "rxjs": "~6.6.3",
         "tslib": "^2.0.0",
         "zone.js": "~0.10.2"

@@ -4,7 +4,7 @@ import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '@shared/components/base/base.component';
 import { AppConfig } from '@shared/constants';
 import { MenuItem } from '@shared/models';
-import { SnackBarService } from '@shared/services';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-default',
@@ -15,12 +15,22 @@ export class DefaultComponent extends BaseComponent implements OnInit {
 
   menuItems = [];
 
-  title = `${AppConfig.AppFullTitle}`;
+  title: string;
 
   sideBarOpen = false;
 
-  constructor(private readonly defaultService: DefaultService) {
+  deviceInfo = null;
+
+  constructor(private readonly defaultService: DefaultService, private deviceService: DeviceDetectorService) {
     super();
+
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+      const isMobile = this.deviceService.isMobile();
+      if(isMobile){
+        this.title = AppConfig.AppShortTitle;
+      }else{
+        this.title = AppConfig.AppFullTitle;
+      }
   }
 
   ngOnInit(): void {
