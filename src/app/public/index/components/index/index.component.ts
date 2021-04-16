@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonDataService } from '@shared/services/common-data.service';
 
 @Component({
   selector: 'app-index',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { SpinnerComponent } from '@shared/components';
 import { Observable } from 'rxjs';
 import { ConfirmDialogComponent } from '../components/confirm-dialog/confirm-dialog.component';
 
@@ -13,6 +14,10 @@ export class DialogService {
     dialogRef.componentInstance.title = title;
     dialogRef.componentInstance.message = message;
     return dialogRef.afterClosed();
+  }
+
+  public showSpinner() {
+    return this.showLoader(SpinnerComponent);
   }
 
   public showComponent(modalComponent: any, modalData: any, width: string, disableClose: boolean = true): Observable<any> {

@@ -1,0 +1,86 @@
+import { Injectable } from '@angular/core';
+import { ApiService } from '@core/services/api.service';
+import {
+  HeaderModel,
+  HeaderView,
+  TaxonomyQuery,
+  TaxonomyViewModel,
+} from '@shared/models';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CommonDataService {
+  public taxonomyItems = new BehaviorSubject<TaxonomyViewModel[]>([]);
+  public headers = new BehaviorSubject<HeaderView[]>([]);
+  constructor(
+    private headerService: ApiService<HeaderModel>,
+    private taxonomyService: ApiService<TaxonomyViewModel>
+  ) {}
+
+  public async getTaxonomyItems(): Promise<TaxonomyViewModel[]> {
+    if (this.taxonomyItems.value.length == 0) {
+      return await this.loadTaxonomyItems().then(() => {
+        return this.taxonomyItems.value;
+      });
+    }
+    return this.taxonomyItems.value;
+  }
+
+  public async getHeaders(): Promise<HeaderView[]> {
+    if (this.headers.value.length == 0) {
+      return await this.loadHeaders().then(() => {
+        return this.headers.value;
+      });
+    }
+    return this.headers.value;
+  }
+
+  public getHeadersByFirstLetter(letter: string): HeaderView[] {
+    return this.headers.value.filter((i) => i.code.startsWith(letter));
+  }
+
+  public getHeaderLetterGroupsByLang(langCode: string): string[] {
+    return this.getHeadersByLang(langCode)
+      .map((i) => i.code[0])
+      .filter(this.onlyUnique)
+      .sort(this.sortAsc);
+  }
+
+  public getHeadersByLang(langCode: string): HeaderView[] {
+    var filtered = this.headers.value.filter((i) => i.lang == langCode);
+    return filtered;
+  }
+
+  private async loadHeaders() {
+    await this.headerService
+      .findByQuery(new HeaderView({}), JSON.stringify({}))
+      .toPromise()
+      .then((headers: HeaderView[]) => {
+        this.headers.next(headers);
+        Promise.resolve();
+      });
+  }
+
+  private async loadTaxonomyItems() {
+    await this.taxonomyService
+      .findByQuery(
+        new TaxonomyViewModel({}),
+        JSON.stringify(new TaxonomyQuery({}))
+      )
+      .toPromise()
+      .then((items: TaxonomyViewModel[]) => {
+        this.taxonomyItems.next(items);
+        Promise.resolve();
+      });
+  }
+
+  private onlyUnique(value: any, index: any, self: string | any[]) {
+    return self.indexOf(value) === index;
+  }
+
+  private sortAsc(a: string, b: string) {
+    return a < b ? -1 : 1;
+  }
+}

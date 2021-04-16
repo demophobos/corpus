@@ -32,6 +32,7 @@ import {
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
 import { DialogService, LocalStorageService } from '@shared/services';
+import { CommonDataService } from '@shared/services/common-data.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -61,16 +62,12 @@ export class SearchService implements OnInit {
   public searchLemma = new BehaviorSubject<boolean>(false);
   public selectedAttributes = new BehaviorSubject<string[]>([]);
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
-  public headers = new BehaviorSubject<HeaderView[]>([]);
-
-  public getHeaders() {
-    return this.headers.value;
-  }
 
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -78,20 +75,18 @@ export class SearchService implements OnInit {
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>,
     private chunkService: ApiService<ChunkView>,
-    private headerService: ApiService<HeaderModel>,
-    private taxonomyService: ApiService<TaxonomyViewModel>,
     private elementService: ApiService<ElementView>,
-    private dialogService: DialogService
+    private commonDataService: CommonDataService
   ) {
     this.initQuery();
-    this.loadHeaders();
   }
+
   ngOnInit(): void {}
 
   setSelectedWorksCount(query: ChunkQuery) {
     let arr: HeaderModel[] = [];
 
-    this.getHeaders().forEach((i) => {
+    this.commonDataService.headers.value.forEach((i) => {
       if (query.headers.includes(i.id)) {
         arr.push(i);
       }
@@ -114,10 +109,6 @@ export class SearchService implements OnInit {
         query.degree
       )
     );
-  }
-
-  public showSpinner() {
-    return this.dialogService.showLoader(SpinnerComponent);
   }
 
   public getLocalStorageQuery() {
@@ -281,40 +272,6 @@ export class SearchService implements OnInit {
       .toPromise();
 
     return await Promise.resolve(result[0]);
-  }
-
-  private async loadHeaders() {
-    return await this.headerService
-      .findByQuery(new HeaderView({}), JSON.stringify({}))
-      .toPromise()
-      .then((headers: HeaderView[]) => {
-        this.headers.next(headers);
-        return Promise.resolve();
-      });
-  }
-
-  public getTaxonomyItems(categoryCode: string): Promise<TaxonomyViewModel[]> {
-    return this.taxonomyService
-      .findByQuery(
-        new TaxonomyViewModel({}),
-        JSON.stringify(new TaxonomyQuery({ categoryCode: categoryCode }))
-      )
-      .toPromise()
-      .then((items: TaxonomyViewModel[]) => {
-        return Promise.resolve(items);
-      });
-  }
-
-  public getAllTaxonomyItems(): Promise<TaxonomyViewModel[]> {
-    return this.taxonomyService
-      .findByQuery(
-        new TaxonomyViewModel({}),
-        JSON.stringify(new TaxonomyQuery({}))
-      )
-      .toPromise()
-      .then((items: TaxonomyViewModel[]) => {
-        return Promise.resolve(items);
-      });
   }
 
   async countWordUsage(value: string): Promise<Number> {
