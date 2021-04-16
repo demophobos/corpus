@@ -3,6 +3,7 @@ import { ApiService } from '@core/services/api.service';
 import {
   HeaderModel,
   HeaderView,
+  ProjectModel,
   TaxonomyQuery,
   TaxonomyViewModel,
 } from '@shared/models';
@@ -14,6 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 export class CommonDataService {
   public taxonomyItems = new BehaviorSubject<TaxonomyViewModel[]>([]);
   public headers = new BehaviorSubject<HeaderView[]>([]);
+  public projects = new BehaviorSubject<ProjectModel[]>([]);
   constructor(
     private headerService: ApiService<HeaderModel>,
     private taxonomyService: ApiService<TaxonomyViewModel>
@@ -35,6 +37,10 @@ export class CommonDataService {
       });
     }
     return this.headers.value;
+  }
+
+  public getHeadersByProject(projectId: string): HeaderView[] {
+    return this.headers.value.filter((i) => i.projectId == projectId);
   }
 
   public getHeadersByFirstLetter(letter: string): HeaderView[] {
@@ -59,6 +65,21 @@ export class CommonDataService {
       .toPromise()
       .then((headers: HeaderView[]) => {
         this.headers.next(headers);
+        this.projects.next(
+          headers
+            .filter(
+              (thing, i, arr) =>
+                arr.findIndex((t) => t.projectId == thing.projectId) === i
+            )
+            .map(
+              (i) =>
+                new ProjectModel({
+                  code: i.projectCode,
+                  desc: i.projectDesc,
+                  id: i.projectId,
+                })
+            )
+        );
         Promise.resolve();
       });
   }

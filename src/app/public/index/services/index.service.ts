@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services';
 import { HeaderView, IndexView } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
-export interface WorkGroup {
-  letter: string;
+export interface ProjectGroup {
+  code: string;
   headers: HeaderView[];
 }
 
@@ -20,17 +20,17 @@ export class IndexService {
     private indexApiService: ApiService<IndexView>
   ) {}
 
-  public getWorkGroups(langCode: string): Promise<WorkGroup[]> {
+  public getWorkGroups(): Promise<ProjectGroup[]> {
     return this.commonDataService.getHeaders().then(() => {
-      var workGroups: WorkGroup[] = [];
-      var groups = this.commonDataService.getHeaderLetterGroupsByLang(langCode);
-      groups.forEach((letter) => {
-        workGroups.push({
-          letter: letter,
-          headers: this.commonDataService.getHeadersByFirstLetter(letter),
+      var projectGroups: ProjectGroup[] = [];
+      var groups = this.commonDataService.projects.value;
+      groups.forEach((project) => {
+        projectGroups.push({
+          code: project.code,
+          headers: this.commonDataService.getHeadersByProject(project.id)
         });
       });
-      return workGroups;
+      return projectGroups;
     });
   }
 

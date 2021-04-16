@@ -29,7 +29,6 @@ import { DistanceConditionComponent } from './search/components/condition/distan
 import { MorphConditionPanelComponent } from './search/components/condition/morph-condition-panel/morph-condition-panel.component';
 import { WorkConditionPanelComponent } from './search/components/condition/work-condition-panel/work-condition-panel.component';
 import { ExplorerComponent } from './index/components/explorer/explorer.component';
-import { LangSelectorComponent } from './index/components/lang-selector/lang-selector.component';
 import { WorkSelectorComponent } from './index/components/work-selector/work-selector.component';
 import { IndexSelectorComponent } from './index/components/index-selector/index-selector.component';
 
@@ -60,7 +59,6 @@ import { IndexSelectorComponent } from './index/components/index-selector/index-
     MorphConditionPanelComponent,
     WorkConditionPanelComponent,
     ExplorerComponent,
-    LangSelectorComponent,
     WorkSelectorComponent,
     IndexSelectorComponent],
   imports: [

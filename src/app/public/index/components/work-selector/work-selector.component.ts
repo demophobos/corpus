@@ -4,8 +4,8 @@ import { HeaderView } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
 import { IndexService } from '../../services/index.service';
 
-export interface WorkGroup {
-  letter: string;
+export interface ProjectGroup {
+  code: string;
   headers: HeaderView[];
 }
 
@@ -28,15 +28,13 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
 export class WorkSelectorComponent implements OnInit {
   workForm = new FormControl();
 
-  workGroups: WorkGroup[] = [];
+  projectGroups: ProjectGroup[] = [];
 
   constructor(private indexService: IndexService) {}
 
   ngOnInit() {
-    this.indexService.selectedLang.subscribe((lang) => {
-      this.indexService.getWorkGroups(lang).then((items) => {
-        this.workGroups = items;
-      });
+    this.indexService.getWorkGroups().then((items) => {
+      this.projectGroups = items;
     });
   }
 

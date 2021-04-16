@@ -1,7 +1,10 @@
-<mat-form-field>
-    <mat-select (selectionChange)="indexChanged($event)">
-        <mat-option *ngFor="let index of indeces" [value]="index.id">
-            {{index.name}}
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+<form [formGroup]="editorForm">
+    <mat-form-field class="index-field">
+        <input type="text" aria-label="Index" matInput formControlName="indexSelectorControl" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="indexChanged($event)">
+            <mat-option *ngFor="let index of filteredIndeces | async" [value]="index.name">
+                {{index.name}}
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
