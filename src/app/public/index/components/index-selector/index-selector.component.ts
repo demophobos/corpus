@@ -18,12 +18,14 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
   constructor(private indexService: IndexService, private formBuilder: FormBuilder) {
     super();
     this.editorForm = this.formBuilder.group({
-      indexSelectorControl: new FormControl(''),
+      indexSelectorControl: [{value: '', disabled: true } ]
     });
   }
 
   ngOnInit(): void {
     this.indexService.selectedHeader.subscribe((header) => {
+      this.editorForm.controls.indexSelectorControl.setValue('');
+      this.editorForm.controls.indexSelectorControl.disable();
       this.indexService.getIndeces(header.id).then((indeces) => {
         this.indeces = indeces;
         if(this.indeces.length > 0){
@@ -46,6 +48,9 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
     }
   }
   indexChanged(event) {
-    var test = event.option.value;
+    let selectedIndex = this.indeces.find(i=>i.name == event.option.value)[0];
+    if(selectedIndex){
+      this.indexService.selectedIndex.next(selectedIndex);
+    }
   }
 }

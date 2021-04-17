@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '@core/services/api.service';
+import { ProjectGroup } from '@shared/interfaces';
 import {
   HeaderModel,
   HeaderView,
@@ -29,6 +30,20 @@ export class CommonDataService {
     }
     return this.taxonomyItems.value;
   }
+  
+  public getHeadersGrouppedByProject(): Promise<ProjectGroup[]> {
+    return this.getHeaders().then(() => {
+      var projectGroups: ProjectGroup[] = [];
+      var groups = this.getProjectGroups();
+      groups.forEach((project) => {
+        projectGroups.push({
+          code: project.code,
+          headers: this.getHeadersByProject(project.id)
+        });
+      });
+      return projectGroups;
+    });
+  }
 
   public async getHeaders(): Promise<HeaderView[]> {
     if (this.headers.value.length == 0) {
@@ -37,6 +52,10 @@ export class CommonDataService {
       });
     }
     return this.headers.value;
+  }
+
+  public getProjectGroups() {
+    return this.projects.value.sort((a, b) => this.sortAsc(a.code, b.code));
   }
 
   public getHeadersByProject(projectId: string): HeaderView[] {

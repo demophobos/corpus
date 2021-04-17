@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
+import { ProjectGroup } from '@shared/interfaces';
 import { ChunkQuery, HeaderView, ProjectModel } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
 import { takeUntil } from 'rxjs/operators';
@@ -16,29 +17,32 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
   projects: ProjectModel[];
   headers: HeaderView[];
   query: ChunkQuery;
-
+  projectGroups: ProjectGroup[] = [];
   constructor(private searchService: SearchService, private commonDataService: CommonDataService) {
     super();
   }
 
   async ngOnInit(): Promise<void> {
-    this.commonDataService.getHeaders()
-      .then((headers) => {
-        this.headers = headers;
-        this.projects = headers
-          .filter(
-            (thing, i, arr) =>
-              arr.findIndex((t) => t.projectId == thing.projectId) === i
-          )
-          .map(
-            (i) =>
-              new ProjectModel({
-                code: i.projectCode,
-                desc: i.projectDesc,
-                id: i.projectId,
-              })
-          );
-      });
+    this.commonDataService.getHeadersGrouppedByProject().then((items) => {
+      this.projectGroups = items;
+    });
+    // this.commonDataService.getHeaders()
+    //   .then((headers) => {
+    //     this.headers = headers;
+    //     this.projects = headers
+    //       .filter(
+    //         (thing, i, arr) =>
+    //           arr.findIndex((t) => t.projectId == thing.projectId) === i
+    //       )
+    //       .map(
+    //         (i) =>
+    //           new ProjectModel({
+    //             code: i.projectCode,
+    //             desc: i.projectDesc,
+    //             id: i.projectId,
+    //           })
+    //       );
+    //   });
 
     this.searchService.chunkQuery
       .pipe(takeUntil(this.destroyed))

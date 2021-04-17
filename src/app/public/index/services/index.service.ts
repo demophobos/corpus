@@ -15,24 +15,10 @@ export interface ProjectGroup {
 export class IndexService {
   public selectedLang: ReplaySubject<string> = new ReplaySubject<string>(1);
   public selectedHeader: ReplaySubject<HeaderView> = new ReplaySubject<HeaderView>(1);
+  public selectedIndex: ReplaySubject<IndexView> = new ReplaySubject<IndexView>(1);
   constructor(
-    private commonDataService: CommonDataService,
     private indexApiService: ApiService<IndexView>
   ) {}
-
-  public getWorkGroups(): Promise<ProjectGroup[]> {
-    return this.commonDataService.getHeaders().then(() => {
-      var projectGroups: ProjectGroup[] = [];
-      var groups = this.commonDataService.projects.value;
-      groups.forEach((project) => {
-        projectGroups.push({
-          code: project.code,
-          headers: this.commonDataService.getHeadersByProject(project.id)
-        });
-      });
-      return projectGroups;
-    });
-  }
 
   public async getIndeces(headerId: string): Promise<IndexView[]> {
     return await this.indexApiService

@@ -84,15 +84,15 @@ export class SearchService implements OnInit {
   ngOnInit(): void {}
 
   setSelectedWorksCount(query: ChunkQuery) {
-    let arr: HeaderModel[] = [];
-
-    this.commonDataService.headers.value.forEach((i) => {
-      if (query.headers.includes(i.id)) {
-        arr.push(i);
-      }
+    this.commonDataService.getHeaders().then(headers=>{
+      let arr: HeaderModel[] = [];
+      headers.forEach((i) => {
+        if (query.headers.includes(i.id)) {
+          arr.push(i);
+        }
+      });
+      this.selectedWorks.next(arr);
     });
-
-    this.selectedWorks.next(arr);
   }
 
   setSelectedMorphAttrubutes(query: ChunkQuery) {

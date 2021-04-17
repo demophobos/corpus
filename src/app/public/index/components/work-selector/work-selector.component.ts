@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { HeaderView } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
-import { IndexService } from '../../services/index.service';
-
-export interface ProjectGroup {
-  code: string;
-  headers: HeaderView[];
-}
+import { IndexService, ProjectGroup } from '../../services/index.service';
 
 export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   const filterValue = value.toLowerCase();
@@ -17,9 +12,6 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   );
 };
 
-/**
- * @title Option groups autocomplete
- */
 @Component({
   selector: 'app-work-selector',
   templateUrl: './work-selector.component.html',
@@ -30,10 +22,10 @@ export class WorkSelectorComponent implements OnInit {
 
   projectGroups: ProjectGroup[] = [];
 
-  constructor(private indexService: IndexService) {}
+  constructor(private indexService: IndexService, private commonDataService: CommonDataService) {}
 
   ngOnInit() {
-    this.indexService.getWorkGroups().then((items) => {
+    this.commonDataService.getHeadersGrouppedByProject().then((items) => {
       this.projectGroups = items;
     });
   }
