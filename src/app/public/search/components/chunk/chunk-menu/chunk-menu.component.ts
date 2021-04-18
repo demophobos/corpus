@@ -10,9 +10,7 @@ import { ChunkView } from '@shared/models';
 export class ChunkMenuComponent implements OnInit {
 
   @Input() chunk: ChunkView;
-  @Output() showInterp: EventEmitter<any> = new EventEmitter();
-  @Output() nextChunk: EventEmitter<any> = new EventEmitter();
-  @Output() prevChunk: EventEmitter<any> = new EventEmitter();
+  @Output('showHideVersio') showInterp: EventEmitter<any> = new EventEmitter();
   interpIcon: string;
 
   constructor() { }
@@ -21,15 +19,7 @@ export class ChunkMenuComponent implements OnInit {
     this.interpIcon = this.chunk.headerLang == Language.Latin ? Language.Russian : Language.Latin;
   }
 
-  loadInterp(){
+  showHideVersio(){
     this.showInterp.emit();
-  }
-
-  loadPrevChunk(){
-    this.prevChunk.emit();
-  }
-
-  loadNextChunk(){
-    this.nextChunk.emit();
   }
 }

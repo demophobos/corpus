@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
 import { ChunkQuery, TaxonomyViewModel } from '@shared/models';
+import { CommonDataService } from '@shared/services/common-data.service';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 
@@ -26,13 +27,13 @@ export class MorphConditionComponent extends BaseComponent implements OnInit {
   gradus: string = TaxonomyCategoryEnum.Degree;
   genus2:string = TaxonomyCategoryEnum.Voice;
 
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService, private commonDataService: CommonDataService) {
     super();
   }
 
   async ngOnInit() {
 
-    this.searchService.getAllTaxonomyItems().then((items: TaxonomyViewModel[])=>{
+    this.commonDataService.getTaxonomyItems().then((items)=>{
       this.categoryItems = items;
     });
 

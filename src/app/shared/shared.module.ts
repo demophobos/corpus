@@ -41,6 +41,8 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { CommonDataService } from './services/common-data.service';
 @NgModule({
   declarations: [
     ...fromSharedWidgets.widgets,
@@ -89,7 +91,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatExpansionModule,
     MatRadioModule,
     MatButtonToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatAutocompleteModule
   ],
   exports: [
     ...fromSharedWidgets.widgets,
@@ -123,13 +126,15 @@ import {MatBadgeModule} from '@angular/material/badge';
     MatPaginatorModule,
     MatTooltipModule,
     MatButtonToggleModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatAutocompleteModule
   ],
   providers: [
     DialogService,
     RedirectService,
     SnackBarService,
-    LocalStorageService
+    LocalStorageService,
+    CommonDataService
   ]
 })
 export class SharedModule { }

@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
-import { SpinnerComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { LocalStorageKeyEnum, PosEnum } from '@shared/enums';
 import { Guid } from '@shared/helpers';
@@ -15,8 +14,6 @@ import {
   ElementView,
   ExclamView,
   HeaderModel,
-  HeaderView,
-  IndexView,
   MorphModel,
   NounView,
   NumView,
@@ -25,13 +22,11 @@ import {
   PartView,
   PrepView,
   PronView,
-  QueryMorph,
-  TaxonomyQuery,
-  TaxonomyViewModel,
   VerbView,
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
-import { DialogService, LocalStorageService } from '@shared/services';
+import { LocalStorageService } from '@shared/services';
+import { CommonDataService } from '@shared/services/common-data.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
 @Injectable({
@@ -61,43 +56,36 @@ export class SearchService implements OnInit {
   public searchLemma = new BehaviorSubject<boolean>(false);
   public selectedAttributes = new BehaviorSubject<string[]>([]);
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
-  public headers = new BehaviorSubject<HeaderView[]>([]);
-
-  public getHeaders() {
-    return this.headers.value;
-  }
 
   public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
   public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
+
   constructor(
     private localStorageService: LocalStorageService,
-    private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>,
     private chunkService: ApiService<ChunkView>,
-    private headerService: ApiService<HeaderModel>,
-    private taxonomyService: ApiService<TaxonomyViewModel>,
     private elementService: ApiService<ElementView>,
-    private dialogService: DialogService
+    private commonDataService: CommonDataService
   ) {
     this.initQuery();
-    this.loadHeaders();
   }
+
   ngOnInit(): void {}
 
   setSelectedWorksCount(query: ChunkQuery) {
-    let arr: HeaderModel[] = [];
-
-    this.getHeaders().forEach((i) => {
-      if (query.headers.includes(i.id)) {
-        arr.push(i);
-      }
+    this.commonDataService.getHeaders().then(headers=>{
+      let arr: HeaderModel[] = [];
+      headers.forEach((i) => {
+        if (query.headers.includes(i.id)) {
+          arr.push(i);
+        }
+      });
+      this.selectedWorks.next(arr);
     });
-
-    this.selectedWorks.next(arr);
   }
 
   setSelectedMorphAttrubutes(query: ChunkQuery) {
@@ -114,10 +102,6 @@ export class SearchService implements OnInit {
         query.degree
       )
     );
-  }
-
-  public showSpinner() {
-    return this.dialogService.showLoader(SpinnerComponent);
   }
 
   public getLocalStorageQuery() {
@@ -217,11 +201,11 @@ export class SearchService implements OnInit {
     return selected;
   }
 
-  private contains(formAttrs: string[], attr: string): boolean {
-    if (formAttrs.length == 0) {
+  private contains(arr: string[], entry: string): boolean {
+    if (arr.length == 0) {
       return true;
     }
-    return formAttrs.indexOf(attr) > -1;
+    return arr.indexOf(entry) > -1;
   }
 
   private setResult(page: any, query: ChunkQuery) {
@@ -273,48 +257,6 @@ export class SearchService implements OnInit {
 
       return await Promise.resolve(page.documents as ChunkView[]);
     }
-  }
-
-  public async getIndex(id: string): Promise<IndexView> {
-    const result = await this.indexService
-      .findByQuery(new IndexView({}), JSON.stringify({ _id: id }))
-      .toPromise();
-
-    return await Promise.resolve(result[0]);
-  }
-
-  private async loadHeaders() {
-    return await this.headerService
-      .findByQuery(new HeaderView({}), JSON.stringify({}))
-      .toPromise()
-      .then((headers: HeaderView[]) => {
-        this.headers.next(headers);
-        return Promise.resolve();
-      });
-  }
-
-  public getTaxonomyItems(categoryCode: string): Promise<TaxonomyViewModel[]> {
-    return this.taxonomyService
-      .findByQuery(
-        new TaxonomyViewModel({}),
-        JSON.stringify(new TaxonomyQuery({ categoryCode: categoryCode }))
-      )
-      .toPromise()
-      .then((items: TaxonomyViewModel[]) => {
-        return Promise.resolve(items);
-      });
-  }
-
-  public getAllTaxonomyItems(): Promise<TaxonomyViewModel[]> {
-    return this.taxonomyService
-      .findByQuery(
-        new TaxonomyViewModel({}),
-        JSON.stringify(new TaxonomyQuery({}))
-      )
-      .toPromise()
-      .then((items: TaxonomyViewModel[]) => {
-        return Promise.resolve(items);
-      });
   }
 
   async countWordUsage(value: string): Promise<Number> {

@@ -36,8 +36,8 @@ export class ModelMapperService {
         return this.ToInterp(item);
       case AppType.ElementView:
          return this.ToElementView(item);
-      case AppType.IndexView:
-        return this.ToIndexView(item);
+      case AppType.Index:
+        return this.ToIndex(item);
       default:
         return throwError(this.toString() + '. Unknown Type');
     }

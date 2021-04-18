@@ -1,0 +1,9 @@
+<mat-form-field class="work-field">
+    <mat-select [formControl]="workForm" (selectionChange)="headerChanged($event)">
+        <mat-optgroup *ngFor="let group of projectGroups" [label]="group.code" [disabled]="group.disabled">
+            <mat-option *ngFor="let header of group.headers" [value]="header">
+                {{header.code}}
+            </mat-option>
+        </mat-optgroup>
+    </mat-select>
+</mat-form-field>

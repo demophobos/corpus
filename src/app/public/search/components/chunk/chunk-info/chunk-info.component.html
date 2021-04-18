@@ -1,2 +1,4 @@
-<span *ngIf="chunk" class="title" (click)="$event.stopPropagation()" (click)="getInfo(chunk)">{{chunk.headerCode}}, </span>
-<span *ngIf="chunk" class="index-title" (click)="$event.stopPropagation()" (click)="getInfo(chunk)">{{chunk.indexName}}</span>
+<mat-chip-list *ngIf="chunk">
+    <mat-chip color="primary" selected>{{chunk.indexName}}</mat-chip>
+    <mat-chip color="primary">{{chunk.headerCode}}</mat-chip>
+</mat-chip-list>

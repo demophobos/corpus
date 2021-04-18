@@ -6,8 +6,11 @@
 .interp-card,
 .empty-card {
     border-left: #3f51b5;
-    border-left-style: dotted;
+    border-bottom: #3f51b5;
+    border-left-style: solid;
+    border-bottom-style: solid;
     border-left-width: 2px;
+    border-bottom-width: 2px;
 }
 
 .result-card {
