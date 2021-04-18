@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
-import { IndexView } from '@shared/models';
+import { IndexModel, IndexView } from '@shared/models';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { IndexService } from '../../services/index.service';
@@ -12,9 +12,9 @@ import { IndexService } from '../../services/index.service';
   styleUrls: ['./index-selector.component.scss'],
 })
 export class IndexSelectorComponent extends BaseComponent implements OnInit {
-  indeces: IndexView[];
+  indeces: IndexModel[];
   editorForm: FormGroup;
-  filteredIndeces: Observable<IndexView[]>;
+  filteredIndeces: Observable<IndexModel[]>;
   constructor(private indexService: IndexService, private formBuilder: FormBuilder) {
     super();
     this.editorForm = this.formBuilder.group({
@@ -23,23 +23,34 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.indexService.selectedHeader.subscribe((header) => {
+    this.indexService.selectedHeader.pipe(takeUntil(this.destroyed)).subscribe((header) => {
       this.editorForm.controls.indexSelectorControl.setValue('');
       this.editorForm.controls.indexSelectorControl.disable();
-      this.indexService.getIndeces(header.id).then((indeces) => {
-        this.indeces = indeces;
-        if(this.indeces.length > 0){
-          this.editorForm.controls.indexSelectorControl.enable();
+      if(header){
+        if(this.indexService.selectedIndeces.value){
+          this.indeces = this.indexService.selectedIndeces.value;
+          if(this.indeces && this.indeces.length > 0){
+            this.editorForm.controls.indexSelectorControl.setValue(this.indexService.selectedIndex.value.name);
+            this.editorForm.controls.indexSelectorControl.enable();
+          }
+        }else{
+          this.indexService.getIndeces(header.id).then((indeces) => {
+            this.indeces = indeces;
+            this.indexService.selectedIndeces.next(indeces);
+            if(this.indeces && this.indeces.length > 0){
+              this.editorForm.controls.indexSelectorControl.enable();
+            }
+          });
         }
-        this.filteredIndeces = this.editorForm.controls.indexSelectorControl.valueChanges.pipe(
-          startWith(''),
-          map((value) => this._filter(value))
-        );
-      });
+      }
+      this.filteredIndeces = this.editorForm.controls.indexSelectorControl.valueChanges.pipe(
+        startWith(''),
+        map((value) => this._filter(value))
+      );
     });
   }
 
-  private _filter(name: string): IndexView[] {
+  private _filter(name: string): IndexModel[] {
     if(this.indeces){
       const filterValue = name.toLowerCase();
       return this.indeces.filter(
@@ -48,7 +59,7 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
     }
   }
   indexChanged(event) {
-    let selectedIndex = this.indeces.find(i=>i.name == event.option.value)[0];
+    let selectedIndex = this.indeces.find(i=>i.name == event.option.value);
     if(selectedIndex){
       this.indexService.selectedIndex.next(selectedIndex);
     }

@@ -1,6 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
 import { ApiService } from '@core/services';
-import { SpinnerComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
 import { LocalStorageKeyEnum, PosEnum } from '@shared/enums';
 import { Guid } from '@shared/helpers';
@@ -15,8 +14,6 @@ import {
   ElementView,
   ExclamView,
   HeaderModel,
-  HeaderView,
-  IndexView,
   MorphModel,
   NounView,
   NumView,
@@ -25,13 +22,10 @@ import {
   PartView,
   PrepView,
   PronView,
-  QueryMorph,
-  TaxonomyQuery,
-  TaxonomyViewModel,
   VerbView,
 } from '@shared/models';
 import { InterpModel } from '@shared/models/project/interpModel';
-import { DialogService, LocalStorageService } from '@shared/services';
+import { LocalStorageService } from '@shared/services';
 import { CommonDataService } from '@shared/services/common-data.service';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 
@@ -71,7 +65,6 @@ export class SearchService implements OnInit {
 
   constructor(
     private localStorageService: LocalStorageService,
-    private indexService: ApiService<IndexView>,
     private morphService: ApiService<MorphModel>,
     private interpService: ApiService<InterpModel>,
     private chunkService: ApiService<ChunkView>,
@@ -208,11 +201,11 @@ export class SearchService implements OnInit {
     return selected;
   }
 
-  private contains(formAttrs: string[], attr: string): boolean {
-    if (formAttrs.length == 0) {
+  private contains(arr: string[], entry: string): boolean {
+    if (arr.length == 0) {
       return true;
     }
-    return formAttrs.indexOf(attr) > -1;
+    return arr.indexOf(entry) > -1;
   }
 
   private setResult(page: any, query: ChunkQuery) {
@@ -264,14 +257,6 @@ export class SearchService implements OnInit {
 
       return await Promise.resolve(page.documents as ChunkView[]);
     }
-  }
-
-  public async getIndex(id: string): Promise<IndexView> {
-    const result = await this.indexService
-      .findByQuery(new IndexView({}), JSON.stringify({ _id: id }))
-      .toPromise();
-
-    return await Promise.resolve(result[0]);
   }
 
   async countWordUsage(value: string): Promise<Number> {
