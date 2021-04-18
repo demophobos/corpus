@@ -33,7 +33,7 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
     
   }
 
-  loadInterp() {
+  showHideVersio() {
     this.showInterp = !this.showInterp;
     this.loadInterpData();
   }
