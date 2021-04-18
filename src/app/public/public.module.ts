@@ -31,7 +31,6 @@ import { WorkConditionPanelComponent } from './search/components/condition/work-
 import { ExplorerComponent } from './index/components/explorer/explorer.component';
 import { WorkSelectorComponent } from './index/components/work-selector/work-selector.component';
 import { IndexSelectorComponent } from './index/components/index-selector/index-selector.component';
-import { ChunkComponent } from './index/components/chunk/chunk.component';
 
 @NgModule({
   declarations: [
@@ -61,8 +60,7 @@ import { ChunkComponent } from './index/components/chunk/chunk.component';
     WorkConditionPanelComponent,
     ExplorerComponent,
     WorkSelectorComponent,
-    IndexSelectorComponent,
-    ChunkComponent],
+    IndexSelectorComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

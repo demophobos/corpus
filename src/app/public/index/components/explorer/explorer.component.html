@@ -1,8 +1,11 @@
 <mat-card class="mat-elevation-z0">
     <mat-toolbar>
-        <mat-toolbar-row class="mat-elevation-z8 base-condition-row">
+        <mat-toolbar-row class="mat-elevation-z8">
             <app-work-selector></app-work-selector>
             <app-index-selector></app-index-selector>
         </mat-toolbar-row>
     </mat-toolbar>
+</mat-card>
+<mat-card class="mat-elevation-z0">
+    <app-result-chunk [chunk]="chunk"></app-result-chunk>
 </mat-card>

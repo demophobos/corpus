@@ -36,6 +36,7 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
   }
 
   headerChanged(event){
+    this.indexService.selectedChunk.next(undefined);
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
     this.indexService.selectedHeader.next(event.value);
