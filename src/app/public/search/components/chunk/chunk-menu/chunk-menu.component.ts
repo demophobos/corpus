@@ -17,7 +17,7 @@ export class ChunkMenuComponent implements OnInit {
   interpIcon: string;
 
   constructor(private router: Router) { 
-    this.worksVisible = this.router.url == "/search";
+    this.worksVisible = this.router.url !== "/index";
   }
 
   ngOnInit(): void {
