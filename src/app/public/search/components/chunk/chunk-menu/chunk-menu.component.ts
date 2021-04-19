@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Language } from '@shared/enums';
 import { ChunkView } from '@shared/models';
 
@@ -11,9 +12,13 @@ export class ChunkMenuComponent implements OnInit {
 
   @Input() chunk: ChunkView;
   @Output('showHideVersio') showInterp: EventEmitter<any> = new EventEmitter();
+  @Output('showHideContext') showHideContext: EventEmitter<any> = new EventEmitter();
+  worksVisible: boolean = true;
   interpIcon: string;
 
-  constructor() { }
+  constructor(private router: Router) { 
+    this.worksVisible = this.router.url == "/search";
+  }
 
   ngOnInit(): void {
     this.interpIcon = this.chunk.headerLang == Language.Latin ? Language.Russian : Language.Latin;
@@ -21,5 +26,12 @@ export class ChunkMenuComponent implements OnInit {
 
   showHideVersio(){
     this.showInterp.emit();
+  }
+
+  showHideText(){
+    this.showHideContext.emit();
+  }
+  showHideNotes(){
+
   }
 }

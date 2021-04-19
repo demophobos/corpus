@@ -1,3 +1,9 @@
-<mat-chip-list>
-    <mat-chip color="primary" (click)="showHideVersio()" selected>V</mat-chip>
-</mat-chip-list>
+<button mat-icon-button color="primary" (click)="showHideVersio()" matTooltip="Versiones">
+    <mat-icon svgIcon="versio"></mat-icon>
+  </button>
+<!-- <button mat-icon-button color="primary" (click)="showHideNotes()" matTooltip="Notae historicae et criticae">
+    <mat-icon svgIcon="notes"></mat-icon>
+  </button> -->
+<button mat-icon-button color="primary" (click)="showHideText()" matTooltip="Ad textum completum" *ngIf="worksVisible">
+    <mat-icon svgIcon="works"></mat-icon>
+  </button>

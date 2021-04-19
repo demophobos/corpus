@@ -1,7 +1,9 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import { Router } from '@angular/router';
 import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
 import { ChunkView } from '@shared/models';
+import { CommonDataService } from '@shared/services/common-data.service';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -15,7 +17,7 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
   @Input() chunk: ChunkView;
   interpChunks: ChunkView[];
   emptyInterpInfo: string;
-  constructor(private searchService: SearchService) {
+  constructor(private searchService: SearchService, private router: Router, private commonDataService: CommonDataService) {
     super();
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -38,6 +40,9 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
     this.loadInterpData();
   }
 
+  showHideContext(){
+    this.router.navigate(['index'], {state: {headerId: this.chunk.headerId, indexName: this.chunk.indexName }});
+  }
   private loadInterpData() {
     if (this.showInterp) {
       this.interpIsLoading = true;

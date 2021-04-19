@@ -21,6 +21,18 @@ export class AppComponent extends BaseComponent implements OnInit {
   }
   private RegisterIcons() {
     this.matIconRegistry.addSvgIcon(
+      `notes`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/icons/notes.svg'
+        )
+      );
+    this.matIconRegistry.addSvgIcon(
+      `read_more`,
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          '../assets/icons/read_more.svg'
+        )
+      );
+    this.matIconRegistry.addSvgIcon(
       `menu`,
         this.domSanitizer.bypassSecurityTrustResourceUrl(
           '../assets/icons/menu.svg'
@@ -105,9 +117,9 @@ export class AppComponent extends BaseComponent implements OnInit {
       )
     );
     this.matIconRegistry.addSvgIcon(
-      `person_search`,
+      `works`,
       this.domSanitizer.bypassSecurityTrustResourceUrl(
-        '../assets/icons/person_search.svg'
+        '../assets/icons/works.svg'
       )
     );
   }

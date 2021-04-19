@@ -16,6 +16,7 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.indexService.selectedIndex.pipe(takeUntil(this.destroyed)).subscribe(index=>{
       if(index){
         this.indexService.getChunk(index).then(chunk=>{

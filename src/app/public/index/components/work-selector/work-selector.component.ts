@@ -29,16 +29,22 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.workForm.setValue(this.indexService.selectedHeader.getValue());
     this.commonDataService.getHeadersGrouppedByProject().then((items) => {
       this.projectGroups = items;
+      if(history.state.headerId){ //header from search page navigation
+        const header = this.commonDataService.headers.value.find(i=>i.id == history.state.headerId);
+        this.headerChanged(header);
+        history.state.headerId = undefined;
+      }
+    }).then(()=>{
+      this.workForm.setValue(this.indexService.selectedHeader.getValue());
     });
   }
 
-  headerChanged(event){
+  headerChanged(header: HeaderView){
     this.indexService.selectedChunk.next(undefined);
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
-    this.indexService.selectedHeader.next(event.value);
+    this.indexService.selectedHeader.next(header);
   }
 }
