@@ -63,7 +63,7 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
   }
 
   private _filter(name: string): IndexModel[] {
-    if(this.indeces && name){
+    if(this.indeces){
       const filterValue = name.toLowerCase();
       return this.indeces.filter(
         (option) => option.name.indexOf(filterValue) === 0

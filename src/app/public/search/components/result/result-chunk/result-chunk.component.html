@@ -4,14 +4,15 @@
             <app-chunk-info [chunk]="chunk"></app-chunk-info>
         </mat-card-title>
         <span class="spacer"></span>
-        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" (showHideContext)="showHideContext()">
-        </app-chunk-menu>
     </mat-card-header>
     <mat-card-content class="result-content">
         <ng-container *ngFor="let element of chunk.elements">
             <app-result-element [element]="element"></app-result-element>
         </ng-container>
     </mat-card-content>
+    <mat-card-actions align="end">
+        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" (showHideContext)="showHideContext()"></app-chunk-menu>
+    </mat-card-actions>
 </mat-card>
 <ng-container *ngIf="showInterp && interpIsLoading == true">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>

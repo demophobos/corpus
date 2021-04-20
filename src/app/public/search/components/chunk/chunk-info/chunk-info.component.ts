@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { BaseComponent } from '@shared/components';
 import { ChunkView } from '@shared/models';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -7,9 +9,11 @@ import { SearchService } from '../../../services/search.service';
   templateUrl: './chunk-info.component.html',
   styleUrls: ['./chunk-info.component.scss']
 })
-export class ChunkInfoComponent implements OnInit {
+export class ChunkInfoComponent extends BaseComponent implements OnInit {
   @Input() chunk: ChunkView;
-  constructor(private searchService: SearchService) { }
+  constructor(private searchService: SearchService, private deviceService: DeviceDetectorService) {
+    super(deviceService);
+  }
 
   ngOnInit(): void {
 

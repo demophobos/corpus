@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { BaseComponent } from '@shared/components';
 import { ElementView } from '@shared/models';
 
 @Component({
@@ -7,11 +8,13 @@ import { ElementView } from '@shared/models';
   templateUrl: './morph-info.component.html',
   styleUrls: ['./morph-info.component.scss']
 })
-export class MorphInfoComponent implements OnInit {
+export class MorphInfoComponent extends BaseComponent implements OnInit {
 
   @Input() element: ElementView;
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     
