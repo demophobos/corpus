@@ -21,7 +21,7 @@ export class DialogService {
   }
 
   public showComponent(modalComponent: any, modalData: any, width: string, disableClose: boolean = true): Observable<any> {
-    const dialogRef = this.dialog.open(modalComponent, { width: `${width}px`, hasBackdrop: true });
+    const dialogRef = this.dialog.open(modalComponent, { height: `50%`, width: `${width}px`, hasBackdrop: true });
     dialogRef.componentInstance['data'] = modalData;
     dialogRef.disableClose = disableClose;
     return dialogRef.afterClosed();
