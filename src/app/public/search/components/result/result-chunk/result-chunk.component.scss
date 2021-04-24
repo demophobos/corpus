@@ -4,11 +4,11 @@
 
 .index-name,
 .header-code {
-    color: gray;
+    color: #a4a4a4;
 }
 
-.chunk-menu {
-    float: right;
+mat-card-header {
+    flex: auto;
 }
 
 .result-content {
@@ -17,4 +17,8 @@
 
 app-chunk-menu {
     width: 100%;
+}
+
+.mat-card-title {
+    flex: auto;
 }
