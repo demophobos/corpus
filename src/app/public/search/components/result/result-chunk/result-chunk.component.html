@@ -1,14 +1,13 @@
 <mat-card class="card mat-elevation-z4 result-card" *ngIf="chunk">
     <mat-card-header class="chunk-menu">
-        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" (showHideContext)="showHideContext()" (copyChunk)="copyChunk()">
+        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()">
         </app-chunk-menu>
     </mat-card-header>
     <mat-card-content class="result-content">
-        <span class="index-name">[{{chunk.indexName}}] </span>
         <ng-container *ngFor="let element of chunk.elements">
             <app-result-element [element]="element"></app-result-element>
         </ng-container>
-        <span class="header-code"> [{{chunk.headerCode}}]</span>
+        <span class="chunk-info"> [{{chunk.headerCode}}, {{chunk.indexName}}]</span>
     </mat-card-content>
 </mat-card>
 <ng-container *ngIf="showInterp && interpIsLoading == true">
@@ -16,12 +15,15 @@
 </ng-container>
 <ng-container *ngIf="showInterp && !interpIsLoading">
     <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z4 interp-card">
+        <mat-card-header class="chunk-menu">
+            <app-chunk-menu [chunk]="interpChunk" [versioVisible]="false">
+            </app-chunk-menu>
+        </mat-card-header>
         <mat-card-content class="result-content">
-            <span class="index-name">[{{interpChunk.indexName}}] </span>
             <ng-container *ngFor="let element of interpChunk.elements">
                 <app-result-element [element]="element"></app-result-element>
             </ng-container>
-            <span class="header-code"> [{{interpChunk.headerCode}}]</span>
+            <span class="chunk-info"> [{{interpChunk.headerCode}}, {{interpChunk.indexName}}]</span>
         </mat-card-content>
     </mat-card>
     <mat-card class="card mat-elevation-z4 empty-card" *ngIf="!interpChunks">

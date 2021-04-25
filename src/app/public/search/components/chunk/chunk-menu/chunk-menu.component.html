@@ -1,9 +1,12 @@
-<button mat-icon-button color="primary" (click)="showHideVersio()" matTooltip="Versiones">
-    <mat-icon svgIcon="versio"></mat-icon>
+<button disabled mat-icon-button color="primary" (click)="showHideNotes()" matTooltip="Apparatus">
+    <mat-icon svgIcon="notes"></mat-icon>
 </button>
-<button mat-icon-button color="primary" (click)="showHideText()" matTooltip="Ad textum completum" *ngIf="worksVisible">
+<button mat-icon-button color="primary" (click)="showText()" matTooltip="Textus" *ngIf="worksVisible">
     <mat-icon svgIcon="works"></mat-icon>
 </button>
-<button mat-icon-button color="primary" (click)="copyChunk()" matTooltip="Exemplar fragmenti facere">
+<button mat-icon-button color="primary" (click)="showHideVersio()" matTooltip="Versiones" *ngIf="versioVisible">
+    <mat-icon svgIcon="versio"></mat-icon>
+</button>
+<button class="btn-copy" mat-icon-button color="primary" (click)="copyChunk()" matTooltip="Exemplar">
     <mat-icon svgIcon="copy"></mat-icon>
 </button>

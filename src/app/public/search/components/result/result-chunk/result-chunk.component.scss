@@ -2,11 +2,6 @@
     color: #f32308;
 }
 
-.index-name,
-.header-code {
-    color: #a4a4a4;
-}
-
 mat-card-header {
     flex: auto;
 }
@@ -21,4 +16,8 @@ app-chunk-menu {
 
 .mat-card-title {
     flex: auto;
+}
+
+.chunk-info {
+    color: #707070;
 }
