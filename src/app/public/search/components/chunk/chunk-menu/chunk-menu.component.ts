@@ -12,6 +12,7 @@ export class ChunkMenuComponent implements OnInit {
 
   @Input() chunk: ChunkView;
   @Output('showHideVersio') showInterp: EventEmitter<any> = new EventEmitter();
+  @Output('copyChunk') onCopyChunk: EventEmitter<any> = new EventEmitter();
   @Output('showHideContext') showHideContext: EventEmitter<any> = new EventEmitter();
   worksVisible: boolean = true;
   interpIcon: string;
@@ -31,7 +32,7 @@ export class ChunkMenuComponent implements OnInit {
   showHideText(){
     this.showHideContext.emit();
   }
-  showHideNotes(){
-
+  copyChunk(){
+    this.onCopyChunk.emit();
   }
 }

@@ -122,6 +122,12 @@ export class AppComponent extends BaseComponent implements OnInit {
         '../assets/icons/works.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      `copy`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/copy.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

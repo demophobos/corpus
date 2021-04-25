@@ -43,6 +43,8 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { CommonDataService } from './services/common-data.service';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+
 @NgModule({
   declarations: [
     ...fromSharedWidgets.widgets,
@@ -92,7 +94,8 @@ import { CommonDataService } from './services/common-data.service';
     MatRadioModule,
     MatButtonToggleModule,
     MatBadgeModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ClipboardModule
   ],
   exports: [
     ...fromSharedWidgets.widgets,
@@ -127,7 +130,8 @@ import { CommonDataService } from './services/common-data.service';
     MatTooltipModule,
     MatButtonToggleModule,
     MatBadgeModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    ClipboardModule
   ],
   providers: [
     DialogService,

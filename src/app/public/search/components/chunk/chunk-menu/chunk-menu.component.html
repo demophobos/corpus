@@ -1,9 +1,9 @@
 <button mat-icon-button color="primary" (click)="showHideVersio()" matTooltip="Versiones">
     <mat-icon svgIcon="versio"></mat-icon>
 </button>
-<!-- <button mat-icon-button color="primary" (click)="showHideNotes()" matTooltip="Notae historicae et criticae">
-            <mat-icon svgIcon="notes"></mat-icon>
-          </button> -->
 <button mat-icon-button color="primary" (click)="showHideText()" matTooltip="Ad textum completum" *ngIf="worksVisible">
     <mat-icon svgIcon="works"></mat-icon>
+</button>
+<button mat-icon-button color="primary" (click)="copyChunk()" matTooltip="Exemplar fragmenti facere">
+    <mat-icon svgIcon="copy"></mat-icon>
 </button>

@@ -3,9 +3,9 @@ import { Router } from '@angular/router';
 import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
 import { ChunkView } from '@shared/models';
-import { CommonDataService } from '@shared/services/common-data.service';
 import { SearchService } from '../../../services/search.service';
-
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-result-chunk',
   templateUrl: './result-chunk.component.html',
@@ -17,7 +17,7 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
   @Input() chunk: ChunkView;
   interpChunks: ChunkView[];
   emptyInterpInfo: string;
-  constructor(private searchService: SearchService, private router: Router, private commonDataService: CommonDataService) {
+  constructor(private searchService: SearchService, private router: Router, private clipboard: Clipboard, private snackBar: MatSnackBar) {
     super();
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -33,6 +33,25 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
 
   ngOnInit(): void {
     
+  }
+
+  copyChunk(){
+
+    let chunkCopy = `[${this.chunk.indexName}] ${this.chunk.value} [${this.chunk.headerCode}]`;
+
+    if(this.showInterp && !this.interpIsLoading){
+      chunkCopy += `\n`;
+      this.interpChunks.forEach((interp)=>{
+        chunkCopy += `[${interp.indexName}] ${interp.value} [${interp.headerCode}]`;
+        chunkCopy += `\n`;
+      });
+      this.clipboard.copy(chunkCopy);
+    }else{
+      this.clipboard.copy(chunkCopy);
+    }
+    this.snackBar.open(`Exemplar fragmenti [${this.chunk.headerCode}, ${this.chunk.indexName}] factum'st`, 'Claudere', {
+      duration: 3000,
+    });
   }
 
   showHideVersio() {
