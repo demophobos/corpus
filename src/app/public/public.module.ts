@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { DefaultComponent } from './default/components/default.component';
 import { RouterModule } from '@angular/router';
 import { PublicRoutingModule } from './public-routing.module';
@@ -14,12 +13,9 @@ import { ResultElementComponent } from './search/components/result/result-elemen
 import { MorphInfoComponent } from './search/components/morph/morph-info/morph-info.component';
 import { ChunkInfoComponent } from './search/components/chunk/chunk-info/chunk-info.component';
 import { ChunkMenuComponent } from './search/components/chunk/chunk-menu/chunk-menu.component';
-import { CommentPaneComponent } from './search/components/comment/comment-pane/comment-pane.component';
 import { WorkConditionComponent } from './search/components/condition/work-condition/work-condition.component';
 import { MorphConditionComponent } from './search/components/condition/morph-condition/morph-condition.component';
 import { SearchMorphCategoryComponent } from './search/components/morph/morph-category/morph-category.component';
-import { CommentWordComponent } from './search/components/comment/comment-word/comment-word.component';
-import { CommentChunkComponent } from './search/components/comment/comment-chunk/comment-chunk.component';
 import { SearchResultToolbarComponent } from './search/components/search-toolbar/search-toolbar.component';
 import { BaseConditionComponent } from './search/components/condition/base-condition/base-condition.component';
 import { ResultToolbarComponent } from './search/components/result/result-toolbar/result-toolbar.component';
@@ -31,6 +27,8 @@ import { WorkConditionPanelComponent } from './search/components/condition/work-
 import { ExplorerComponent } from './index/components/explorer/explorer.component';
 import { WorkSelectorComponent } from './index/components/work-selector/work-selector.component';
 import { IndexSelectorComponent } from './index/components/index-selector/index-selector.component';
+import { ChunkNoteComponent } from './search/components/chunk/chunk-note/chunk-note.component';
+import { ChunkNoteItemComponent } from './search/components/chunk/chunk-note-item/chunk-note-item.component';
 
 @NgModule({
   declarations: [
@@ -44,12 +42,9 @@ import { IndexSelectorComponent } from './index/components/index-selector/index-
     MorphInfoComponent,
     ChunkInfoComponent,
     ChunkMenuComponent,
-    CommentPaneComponent,
     WorkConditionComponent,
     MorphConditionComponent,
     SearchMorphCategoryComponent,
-    CommentWordComponent,
-    CommentChunkComponent,
     SearchResultToolbarComponent,
     BaseConditionComponent,
     ResultToolbarComponent,
@@ -60,7 +55,9 @@ import { IndexSelectorComponent } from './index/components/index-selector/index-
     WorkConditionPanelComponent,
     ExplorerComponent,
     WorkSelectorComponent,
-    IndexSelectorComponent],
+    IndexSelectorComponent,
+    ChunkNoteComponent,
+    ChunkNoteItemComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

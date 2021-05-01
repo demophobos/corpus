@@ -34,3 +34,4 @@ export * from './project/pos/conjView';
 export * from './project/pos/prepView';
 export * from './project/noteModel';
 export * from './project/noteLinkModel';
+export * from './project/chunkNoteItem';

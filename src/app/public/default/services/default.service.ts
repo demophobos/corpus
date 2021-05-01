@@ -20,7 +20,6 @@ export class DefaultService {
   GetMenuItems() {
     this.menuData.next([
       new MenuItem({ title: 'De Corpore Latino-Rossico', action: ActionEnum.ViewHome, icon: 'home', link: '/', type: MenuItemType.Normal }),
-      new MenuItem({ type: MenuItemType.Divider  }),
       new MenuItem({ title: 'Index Operum', action: ActionEnum.ViewIndex, icon: 'works', link: 'index', type: MenuItemType.Normal  }),
       new MenuItem({ title: 'Inquisitio', action: ActionEnum.ViewSearch, icon: 'search', link: 'search', type: MenuItemType.Normal  })
     ]);

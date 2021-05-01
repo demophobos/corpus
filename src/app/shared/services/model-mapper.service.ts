@@ -13,6 +13,8 @@ import {
   ChunkView,
   TaxonomyViewModel,
   HeaderView,
+  NoteModel,
+  NoteLinkModel,
 } from '@shared/models';
 import { throwError } from 'rxjs';
 
@@ -38,9 +40,33 @@ export class ModelMapperService {
          return this.ToElementView(item);
       case AppType.Index:
         return this.ToIndex(item);
+      case AppType.Note:
+        return this.ToNote(item);
+      case AppType.NoteLink:
+        return this.ToNoteLink(item);
       default:
         return throwError(this.toString() + '. Unknown Type');
     }
+  }
+  static ToNoteLink(item: any) {
+    return new NoteLinkModel(
+      {
+        id: item._id,
+        headerId: item.headerId,
+        indexId: item.indexId,
+        itemId:item.itemId,
+        noteId: item.noteId,
+        target: item.target
+      });
+  }
+  static ToNote(item: any) {
+    return new NoteModel(
+      {
+        id: item._id,
+        headerId: item.headerId,
+        type: item.type,
+        value: item.value
+      });
   }
   static ToTaxonomy(item: any) {
     return new TaxonomyViewModel(
@@ -52,7 +78,7 @@ export class ModelMapperService {
         categoryId:item.categoryId,
         desc: item.desc,
         parentId: item.parentId
-      })
+      });
   }
   static ToChunkViewPage(item: any) {
     let pageResponse = new PageResponse({
