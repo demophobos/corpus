@@ -140,6 +140,12 @@ export class AppComponent extends BaseComponent implements OnInit {
         '../assets/icons/before.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      `bullet`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/bullet.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

@@ -15,6 +15,8 @@ import {
   ExclamView,
   HeaderModel,
   MorphModel,
+  NoteLinkModel,
+  NoteModel,
   NounView,
   NumView,
   PageResponse,
@@ -61,7 +63,7 @@ export class SearchService implements OnInit {
   public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
   public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-
+  public noteLinks: ReplaySubject<NoteLinkModel[]> = new ReplaySubject<NoteLinkModel[]>(1);
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -69,7 +71,9 @@ export class SearchService implements OnInit {
     private interpService: ApiService<InterpModel>,
     private chunkService: ApiService<ChunkView>,
     private elementService: ApiService<ElementView>,
-    private commonDataService: CommonDataService
+    private commonDataService: CommonDataService,
+    private noteService: ApiService<NoteModel>,
+    private noteLinkService: ApiService<NoteLinkModel>
   ) {
     this.initQuery();
   }
@@ -257,6 +261,30 @@ export class SearchService implements OnInit {
 
       return await Promise.resolve(page.documents as ChunkView[]);
     }
+  }
+
+  public async getNoteLinks(indexId: string){
+    return this.noteLinkService.findByQuery(
+      new NoteLinkModel({}),
+      JSON.stringify({ indexId: indexId })
+    )
+    .toPromise()
+    .then((items: NoteLinkModel[]) => {
+      this.noteLinks.next(items);
+      return Promise.resolve(items);
+    });
+  }
+
+  public async getNote(noteId: string){
+    return this.noteService.findOne(
+      new NoteModel({
+        id:noteId
+      })
+    )
+    .toPromise()
+    .then((items: NoteModel) => {
+      return Promise.resolve(items);
+    });
   }
 
   async countWordUsage(value: string): Promise<Number> {

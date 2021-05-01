@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { ChunkQuery, ChunkValueItemModel, ElementView, MorphModel } from '@shared/models';
+import { ChunkQuery, ChunkValueItemModel, ElementView, MorphModel, NoteLinkModel } from '@shared/models';
 import { takeUntil } from 'rxjs/operators';
 import { SearchService } from '../../../services/search.service';
 
@@ -12,11 +12,12 @@ import { SearchService } from '../../../services/search.service';
 export class ResultElementComponent
   extends BaseComponent
   implements OnInit {
-  @Input() element: ChunkValueItemModel;
+  @Input() element: any;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
   isNotMorphStyle: boolean = false;
   isSelected: boolean = false;
+  isCommented: boolean = false;
   query: ChunkQuery;
   morphIds: MorphModel[];
   posTooltip: string;
@@ -41,6 +42,12 @@ export class ResultElementComponent
 
         this.isSelected = this.morphIds?.find(i=>i.id == this.element.morphId) !== undefined;
       
+      });
+
+      this.searchService.noteLinks.pipe(takeUntil(this.destroyed)).subscribe((links: NoteLinkModel[])=>{
+        if(this.element && links.length > 0) {
+          this.isCommented = links.map(i=>i.itemId).indexOf(this.element._id) > -1;
+        }
       });
   }
 

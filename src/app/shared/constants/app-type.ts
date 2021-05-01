@@ -14,5 +14,7 @@ export enum AppType {
   ChunkElementView = 'elements',
   Morph = 'morph-items',
   Interp = 'interps',
-  Taxonomy = 'taxonomy-items'
+  Taxonomy = 'taxonomy-items',
+  Note = 'notes',
+  NoteLink = 'note-links'
 };

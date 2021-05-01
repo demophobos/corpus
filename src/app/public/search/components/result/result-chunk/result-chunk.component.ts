@@ -15,11 +15,13 @@ import { SearchService } from '../../../services/search.service';
   templateUrl: './result-chunk.component.html',
   styleUrls: ['./result-chunk.component.scss'],
 })
-export class ResultChunkComponent
-  extends BaseComponent
-  implements OnInit, OnChanges {
+export class ResultChunkComponent extends BaseComponent implements OnInit, OnChanges {
   showInterp: boolean = false;
+  showNotes: boolean = false;
+  showInterpNotes: boolean = false;
   interpIsLoading: boolean = true;
+  showNotesIsLoading: boolean = true;
+  showInterpNotesIsLoading: boolean = true;
   @Input() chunk: ChunkView;
   interpChunks: ChunkView[];
   emptyInterpInfo: string;
@@ -30,15 +32,8 @@ export class ResultChunkComponent
     if (changes.chunk.currentValue == undefined) {
       this.showInterp = false;
     }
-    if (
-      changes.chunk &&
-      changes.chunk.currentValue &&
-      changes.chunk.previousValue
-    ) {
-      if (
-        changes.chunk.currentValue.id !== changes.chunk.previousValue.id &&
-        this.showInterp
-      ) {
+    if (changes.chunk && changes.chunk.currentValue && changes.chunk.previousValue) {
+      if (changes.chunk.currentValue.id !== changes.chunk.previousValue.id && this.showInterp) {
         this.loadInterpData();
       }
     }
@@ -49,6 +44,15 @@ export class ResultChunkComponent
   showHideVersio() {
     this.showInterp = !this.showInterp;
     this.loadInterpData();
+  }
+
+  showHideInterpNotes(){
+    this.showInterpNotes = !this.showInterpNotes;
+  }
+
+  showHideNotes(){
+    this.showNotes = !this.showNotes;
+
   }
 
   private loadInterpData() {
