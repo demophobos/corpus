@@ -9,9 +9,8 @@ import { SearchService } from '../../../services/search.service';
   templateUrl: './result-element.component.html',
   styleUrls: ['./result-element.component.scss']
 })
-export class ResultElementComponent
-  extends BaseComponent
-  implements OnInit {
+export class ResultElementComponent extends BaseComponent implements OnInit {
+  
   @Input() element: any;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
@@ -21,6 +20,7 @@ export class ResultElementComponent
   query: ChunkQuery;
   morphIds: MorphModel[];
   posTooltip: string;
+
   constructor(private searchService: SearchService) {
     super();
   }

@@ -13,23 +13,26 @@ export class ChunkMenuComponent implements OnInit {
 
   @Input() chunk: ChunkView;
   @Input() versioVisible: boolean = true;
-  @Output('showHideVersio') showInterp: EventEmitter<any> = new EventEmitter();
+  @Output('showHideVersio') onShowHideVersion: EventEmitter<any> = new EventEmitter();
   @Output('showHideNotes') onShowHideNotes: EventEmitter<any> = new EventEmitter();
+  @Output('showHideMorph') onShowHideMorph: EventEmitter<any> = new EventEmitter();
   worksVisible: boolean = true;
-  interpIcon: string;
 
   constructor(private router: Router, private clipboard: Clipboard,
     private snackBar: MatSnackBar) { 
     this.worksVisible = this.router.url !== "/index";
-    
   }
 
   ngOnInit(): void {
-    this.interpIcon = this.chunk.headerLang == Language.Latin ? Language.Russian : Language.Latin;
+    
   }
 
   showHideVersio(){
-    this.showInterp.emit();
+    this.onShowHideVersion.emit();
+  }
+
+  showHideMorph(){
+    this.onShowHideMorph.emit();
   }
 
   showText(){
