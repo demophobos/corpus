@@ -20,8 +20,6 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
   showNotes: boolean = false;
   showInterpNotes: boolean = false;
   interpIsLoading: boolean = true;
-  showNotesIsLoading: boolean = true;
-  showInterpNotesIsLoading: boolean = true;
   @Input() chunk: ChunkView;
   interpChunks: ChunkView[];
   emptyInterpInfo: string;
@@ -52,7 +50,6 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
 
   showHideNotes(){
     this.showNotes = !this.showNotes;
-
   }
 
   private loadInterpData() {

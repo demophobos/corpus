@@ -8,7 +8,7 @@
             <app-result-element [element]="element"></app-result-element>
         </ng-container>
         <span class="chunk-info"> [{{chunk.headerCode}}, {{chunk.indexName}}]</span>
-        <ng-container *ngIf="showNotes && showNotesIsLoading == true">
+        <ng-container *ngIf="showNotes">
             <app-chunk-note [chunk]="chunk"></app-chunk-note>
         </ng-container>
     </mat-card-content>
@@ -27,7 +27,7 @@
                 <app-result-element [element]="element"></app-result-element>
             </ng-container>
             <span class="chunk-info"> [{{interpChunk.headerCode}}, {{interpChunk.indexName}}]</span>
-            <ng-container *ngIf="showInterpNotes && showInterpNotesIsLoading == true">
+            <ng-container *ngIf="showInterpNotes">
                 <app-chunk-note [chunk]="interpChunk"></app-chunk-note>
             </ng-container>
         </mat-card-content>
