@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
 
   version: string = AppConfig.AppVersion;
 
-  copyright: string = AppConfig.Copyright;
+  copyright: string = `${AppConfig.Copyright} ${new Date().getFullYear()}`;
 
   constructor() { }
 
