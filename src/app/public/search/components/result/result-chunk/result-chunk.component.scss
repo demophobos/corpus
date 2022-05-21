@@ -8,7 +8,11 @@ mat-card-header {
 
 .result-content {
     word-break: break-all;
+    display: flex;
+    justify-content: space-between;
 }
+
+.interp-card {}
 
 app-chunk-menu {
     width: 100%;

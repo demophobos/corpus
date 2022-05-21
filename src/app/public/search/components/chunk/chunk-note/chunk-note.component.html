@@ -1,7 +1,8 @@
 <ng-container *ngIf="chunkNotes">
-    <hr *ngIf="chunkNotes.length > 0">
+    <!-- <hr *ngIf="chunkNotes.length > 0"> -->
     <ng-container *ngFor="let chunkNote of chunkNotes">
-        <app-chunk-note-item [chunkNote]="chunkNote"></app-chunk-note-item>
-        <br>
+        <div>
+            <app-chunk-note-item [chunkNote]="chunkNote"></app-chunk-note-item>
+        </div>
     </ng-container>
 </ng-container>

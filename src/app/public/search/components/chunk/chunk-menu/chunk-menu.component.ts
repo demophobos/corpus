@@ -35,12 +35,6 @@ export class ChunkMenuComponent implements OnInit {
     this.onShowHideMorph.emit();
   }
 
-  showText(){
-    this.router.navigate(['index'], {
-      state: { headerId: this.chunk.headerId, indexName: this.chunk.indexName },
-    });
-  }
-
   copyChunk(){
     let chunkCopy = `[${this.chunk.indexName}] ${this.chunk.value} [${this.chunk.headerCode}]`;
     this.clipboard.copy(chunkCopy);
