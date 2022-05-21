@@ -12,43 +12,56 @@ import { MorphConditionComponent } from '../morph-condition/morph-condition.comp
 @Component({
   selector: 'app-morph-condition-panel',
   templateUrl: './morph-condition-panel.component.html',
-  styleUrls: ['./morph-condition-panel.component.scss']
+  styleUrls: ['./morph-condition-panel.component.scss'],
 })
-export class MorphConditionPanelComponent extends BaseComponent implements OnInit{
+export class MorphConditionPanelComponent
+  extends BaseComponent
+  implements OnInit
+{
   morphItems: string[];
   query: ChunkQuery;
-  searchLemma:boolean = false;
+  searchLemma: boolean = false;
 
-  constructor(private dialogService: DialogService, private searchService: SearchService, private deviceService: DeviceDetectorService) {
+  constructor(
+    private searchService: SearchService,
+    private deviceService: DeviceDetectorService,
+    private bottomSheet: MatBottomSheet
+  ) {
     super(deviceService);
   }
 
   ngOnInit(): void {
-    this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query=>{
-      this.query = query;
-    });
-    this.searchService.selectedAttributes.pipe(takeUntil(this.destroyed)).subscribe(items=>{
-      this.morphItems = items;
-    });
-    this.searchService.searchLemma.pipe(takeUntil(this.destroyed)).subscribe(searchLemma=>{
-      this.searchLemma = searchLemma;
-    });
+    this.searchService.chunkQuery
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((query) => {
+        this.query = query;
+      });
+    this.searchService.selectedAttributes
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((items) => {
+        this.morphItems = items;
+      });
+    this.searchService.searchLemma
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((searchLemma) => {
+        this.searchLemma = searchLemma;
+      });
   }
-  showMorphSelector(){
-    this.dialogService.showComponent(MorphConditionComponent, null, AppConfig.DefaultDialogWidth, false);
+  showMorphSelector() {
+    this.bottomSheet.open(MorphConditionComponent);
   }
 
-  removeMorphItem(item){
-    this.morphItems = this.morphItems.filter(i=> i !== item);
-    this.query.pos = this.query.pos.filter(i=> i !== item);
-    this.query.case = this.query.case.filter(i=> i !== item);
-    this.query.degree = this.query.degree.filter(i=> i !== item);
-    this.query.gender = this.query.gender.filter(i=> i !== item);
-    this.query.mood = this.query.mood.filter(i=> i !== item);
-    this.query.number = this.query.number.filter(i=> i !== item);
-    this.query.person = this.query.person.filter(i=> i !== item);
-    this.query.tense = this.query.tense.filter(i=> i !== item);
-    this.query.voice = this.query.voice.filter(i=> i !== item);
+  removeMorphItem(item) {
+    this.morphItems = this.morphItems.filter((i) => i !== item);
+    this.query.pos = this.query.pos.filter((i) => i !== item);
+    this.query.case = this.query.case.filter((i) => i !== item);
+    this.query.degree = this.query.degree.filter((i) => i !== item);
+    this.query.gender = this.query.gender.filter((i) => i !== item);
+    this.query.mood = this.query.mood.filter((i) => i !== item);
+    this.query.number = this.query.number.filter((i) => i !== item);
+    this.query.person = this.query.person.filter((i) => i !== item);
+    this.query.tense = this.query.tense.filter((i) => i !== item);
+    this.query.voice = this.query.voice.filter((i) => i !== item);
     this.searchService.chunkQuery.next(this.query);
     this.searchService.setSelectedMorphAttrubutes(this.query);
   }
