@@ -25,7 +25,7 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
 })
 export class WorkSelectorComponent extends BaseComponent implements OnInit {
   workForm = new FormControl();
-  disabled = true;
+  indexAvailable = false;
   projectGroups: ProjectGroup[] = [];
 
   constructor(
@@ -47,6 +47,7 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
             (i) => i.id == history.state.headerId
           );
           this.headerChanged(header);
+          this.indexAvailable = header !== null;
           history.state.headerId = undefined;
         }
       })
@@ -60,7 +61,7 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
     this.indexService.selectedHeader.next(header);
-    this.disabled = !header;
+    this.indexAvailable = header !== null;
   }
 
   openIndex(event) {

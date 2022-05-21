@@ -42,7 +42,9 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
           if(this.indexService.selectedIndeces.value){
             this.indeces = this.indexService.selectedIndeces.value;
             if(this.indeces && this.indeces.length > 0){
-              this.editorForm.controls.indexSelectorControl.setValue(this.indexService.selectedIndex.value.name);
+              if(this.indexService.selectedIndex.value){
+                this.editorForm.controls.indexSelectorControl.setValue(this.indexService.selectedIndex.value.name);
+              }
               this.editorForm.controls.indexSelectorControl.enable();
             }
           }else{

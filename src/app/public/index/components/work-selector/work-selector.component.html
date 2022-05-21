@@ -6,7 +6,7 @@
             </mat-option>
         </mat-optgroup>
     </mat-select>
-    <button mat-icon-button matSuffix color="primary" (click)="openIndex($event)" matTooltip="Index Operis" [disabled]="disabled">
+    <button mat-icon-button [color]='"primary"' *ngIf="indexAvailable" matSuffix (click)="openIndex($event)" matTooltip="Index Operis">
         <mat-icon svgIcon="toc"></mat-icon>
     </button>
 </mat-form-field>
