@@ -52,7 +52,9 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
         }
       })
       .then(() => {
-        this.workForm.setValue(this.indexService.selectedHeader.getValue());
+        var header = this.indexService.selectedHeader.getValue();
+        this.workForm.setValue(header);
+        this.indexAvailable = !!header;
       });
   }
 
@@ -61,7 +63,7 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
     this.indexService.selectedHeader.next(header);
-    this.indexAvailable = header !== null;
+    this.indexAvailable = !!header;
   }
 
   openIndex(event) {
