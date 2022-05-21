@@ -5,6 +5,7 @@ import { IndexModel, IndexView } from '@shared/models';
 import { Observable } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { IndexService } from '../../services/index.service';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-index-selector',
@@ -15,7 +16,7 @@ export class IndexSelectorComponent extends BaseComponent implements OnInit {
   indeces: IndexModel[];
   editorForm: FormGroup;
   filteredIndeces: Observable<IndexModel[]>;
-  constructor(private indexService: IndexService, private formBuilder: FormBuilder) {
+  constructor(private indexService: IndexService, private formBuilder: FormBuilder, private bottomSheet: MatBottomSheet) {
     super();
     this.editorForm = this.formBuilder.group({
       indexSelectorControl: [{value: '', disabled: true } ]

@@ -1,10 +1,9 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { map, catchError, shareReplay } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { Model } from '@shared/models';
-import { AppConfig } from '@shared/constants';
 import { ModelMapperService } from '@shared/services/model-mapper.service';
 import { ErrorService } from '@shared/services';
 import { environment } from '@env/environment';

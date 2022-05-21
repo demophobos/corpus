@@ -2,8 +2,11 @@
     <mat-select [formControl]="workForm" (selectionChange)="headerChanged($event.value)">
         <mat-optgroup *ngFor="let group of projectGroups" [label]="group.code" [disabled]="group.disabled">
             <mat-option *ngFor="let header of group.headers" [value]="header">
-                {{header.code}}
+                {{header.desc}}
             </mat-option>
         </mat-optgroup>
     </mat-select>
+    <button mat-icon-button matSuffix color="primary" (click)="openIndex($event)" matTooltip="Index Operis" [disabled]="disabled">
+        <mat-icon svgIcon="toc"></mat-icon>
+    </button>
 </mat-form-field>

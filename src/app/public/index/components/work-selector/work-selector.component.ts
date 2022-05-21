@@ -3,8 +3,12 @@ import { FormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { HeaderView } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
-import { first, takeUntil } from 'rxjs/operators';
 import { IndexService, ProjectGroup } from '../../services/index.service';
+import {
+  MatBottomSheet,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+import { IndexSelectorComponent } from '../index-selector/index-selector.component';
 
 export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   const filterValue = value.toLowerCase();
@@ -21,30 +25,46 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
 })
 export class WorkSelectorComponent extends BaseComponent implements OnInit {
   workForm = new FormControl();
-
+  disabled = true;
   projectGroups: ProjectGroup[] = [];
 
-  constructor(private indexService: IndexService, private commonDataService: CommonDataService) {
+  constructor(
+    private indexService: IndexService,
+    private commonDataService: CommonDataService,
+    private bottomSheet: MatBottomSheet
+  ) {
     super();
   }
 
   ngOnInit() {
-    this.commonDataService.getHeadersGrouppedByProject().then((items) => {
-      this.projectGroups = items;
-      if(history.state.headerId){ //header from search page navigation
-        const header = this.commonDataService.headers.value.find(i=>i.id == history.state.headerId);
-        this.headerChanged(header);
-        history.state.headerId = undefined;
-      }
-    }).then(()=>{
-      this.workForm.setValue(this.indexService.selectedHeader.getValue());
-    });
+    this.commonDataService
+      .getHeadersGrouppedByProject()
+      .then((items) => {
+        this.projectGroups = items;
+        if (history.state.headerId) {
+          //header from search page navigation
+          const header = this.commonDataService.headers.value.find(
+            (i) => i.id == history.state.headerId
+          );
+          this.headerChanged(header);
+          history.state.headerId = undefined;
+        }
+      })
+      .then(() => {
+        this.workForm.setValue(this.indexService.selectedHeader.getValue());
+      });
   }
 
-  headerChanged(header: HeaderView){
+  headerChanged(header: HeaderView) {
     this.indexService.selectedChunk.next(undefined);
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
     this.indexService.selectedHeader.next(header);
+    this.disabled = !header;
+  }
+
+  openIndex(event) {
+    event.stopPropagation();
+    this.bottomSheet.open(IndexSelectorComponent);
   }
 }
