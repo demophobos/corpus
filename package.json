@@ -66,6 +66,7 @@
         "tslint": "~6.1.0",
         "typescript": "~4.6.4",
         "minimist": ">=1.2.6",
-        "moment": ">=2.29.2"
+        "moment": ">=2.29.2",
+        "ansi-regex": ">=5.0.1"
     }
 }
