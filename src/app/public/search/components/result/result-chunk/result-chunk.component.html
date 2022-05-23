@@ -20,6 +20,7 @@
         </ng-container>
         <ng-container *ngIf="showInterp && !interpIsLoading">
             <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z0 interp-card">
+                <hr />
                 <mat-card-content class="result-content">
                     <div class="chunk">
                         <ng-container *ngFor="let element of interpChunk.elements">
@@ -37,6 +38,7 @@
                 </mat-card-content>
             </mat-card>
             <mat-card class="card mat-elevation-z0 empty-card" *ngIf="!interpChunks">
+                <hr />
                 <mat-card-content class="empty-interp">
                     {{emptyInterpInfo}}
                 </mat-card-content>
