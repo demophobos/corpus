@@ -8,7 +8,7 @@ import {
   MatBottomSheet,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { IndexSelectorComponent } from '../index-selector/index-selector.component';
+import { IndexTreeComponent } from '../index-tree/index-tree.component';
 
 export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   const filterValue = value.toLowerCase();
@@ -68,6 +68,6 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
 
   openIndex(event) {
     event.stopPropagation();
-    this.bottomSheet.open(IndexSelectorComponent);
+    this.bottomSheet.open(IndexTreeComponent);
   }
 }

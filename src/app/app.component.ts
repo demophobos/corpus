@@ -158,6 +158,18 @@ export class AppComponent extends BaseComponent implements OnInit {
         '../assets/icons/chunk_menu.svg'
       )
     );
+    this.matIconRegistry.addSvgIcon(
+      `tree-open`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/tree_open.svg'
+      )
+    );
+    this.matIconRegistry.addSvgIcon(
+      `tree-close`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl(
+        '../assets/icons/tree_close.svg'
+      )
+    );
   }
 
   ngOnInit(): void {}

@@ -26,9 +26,9 @@ import { MorphConditionPanelComponent } from './search/components/condition/morp
 import { WorkConditionPanelComponent } from './search/components/condition/work-condition-panel/work-condition-panel.component';
 import { ExplorerComponent } from './index/components/explorer/explorer.component';
 import { WorkSelectorComponent } from './index/components/work-selector/work-selector.component';
-import { IndexSelectorComponent } from './index/components/index-selector/index-selector.component';
 import { ChunkNoteComponent } from './search/components/chunk/chunk-note/chunk-note.component';
 import { ChunkNoteItemComponent } from './search/components/chunk/chunk-note-item/chunk-note-item.component';
+import { IndexTreeComponent } from './index/components/index-tree/index-tree.component';
 
 @NgModule({
   declarations: [
@@ -55,9 +55,9 @@ import { ChunkNoteItemComponent } from './search/components/chunk/chunk-note-ite
     WorkConditionPanelComponent,
     ExplorerComponent,
     WorkSelectorComponent,
-    IndexSelectorComponent,
     ChunkNoteComponent,
-    ChunkNoteItemComponent],
+    ChunkNoteItemComponent,
+    IndexTreeComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,
