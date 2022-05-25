@@ -61,6 +61,7 @@ export class ResultChunkComponent extends BaseComponent implements OnInit, OnCha
           if (values.length > 0) {
             this.interpChunks = values;
           } else {
+            this.interpChunks = null;
             this.emptyInterpInfo = 'versio deest';
           }
         })
