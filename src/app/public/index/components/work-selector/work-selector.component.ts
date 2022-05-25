@@ -68,6 +68,6 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
 
   openIndex(event) {
     event.stopPropagation();
-    this.bottomSheet.open(IndexTreeComponent);
+    this.bottomSheet.open(IndexTreeComponent, { hasBackdrop: false, autoFocus:'first-tabbable' });
   }
 }
