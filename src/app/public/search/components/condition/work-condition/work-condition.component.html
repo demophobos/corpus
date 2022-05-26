@@ -1,7 +1,13 @@
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>Opera</mat-card-title>
-    </mat-card-header>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span>Opera</span>
+            <span class="spacer"></span>
+            <button mat-icon-button color="primary" aria-label="Claudere" (click)="closeOpera()">
+                <mat-icon svgIcon="close"></mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
     <mat-card-content>
         <mat-selection-list *ngIf="projectGroups" [formControl]="headerSelector" color="primary" class="input-field-full-width author-selector" multiple>
             <div *ngFor="let group of projectGroups">

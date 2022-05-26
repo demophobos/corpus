@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
 import { ProjectGroup } from '@shared/interfaces';
 import { ChunkQuery, HeaderView, ProjectModel } from '@shared/models';
@@ -18,7 +19,7 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
   headers: HeaderView[];
   query: ChunkQuery;
   projectGroups: ProjectGroup[] = [];
-  constructor(private searchService: SearchService, private commonDataService: CommonDataService) {
+  constructor(private searchService: SearchService, private commonDataService: CommonDataService, private bottomSheet: MatBottomSheet) {
     super();
   }
 
@@ -26,23 +27,6 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
     this.commonDataService.getHeadersGrouppedByProject().then((items) => {
       this.projectGroups = items;
     });
-    // this.commonDataService.getHeaders()
-    //   .then((headers) => {
-    //     this.headers = headers;
-    //     this.projects = headers
-    //       .filter(
-    //         (thing, i, arr) =>
-    //           arr.findIndex((t) => t.projectId == thing.projectId) === i
-    //       )
-    //       .map(
-    //         (i) =>
-    //           new ProjectModel({
-    //             code: i.projectCode,
-    //             desc: i.projectDesc,
-    //             id: i.projectId,
-    //           })
-    //       );
-    //   });
 
     this.searchService.chunkQuery
       .pipe(takeUntil(this.destroyed))
@@ -65,5 +49,9 @@ export class WorkConditionComponent extends BaseComponent implements OnInit {
 
   getProjectHeaders(projectId: string) {
     return this.headers.filter((i) => i.projectId == projectId);
+  }
+
+  closeOpera(){
+    this.bottomSheet.dismiss();
   }
 }

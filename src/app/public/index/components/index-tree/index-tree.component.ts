@@ -4,6 +4,7 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { IndexTreeItem, IndexService } from '../../services/index.service';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '@shared/components';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-index-tree',
@@ -11,23 +12,23 @@ import { BaseComponent } from '@shared/components';
   styleUrls: ['./index-tree.component.scss'],
 })
 export class IndexTreeComponent extends BaseComponent implements OnInit {
-  interpIsLoading: boolean = true;
+  isLoading: boolean = true;
   treeControl = new NestedTreeControl<IndexTreeItem>((node) => node.indexItems);
   dataSource = new MatTreeNestedDataSource<IndexTreeItem>();
-  constructor(private indexService: IndexService) {
+  constructor(private indexService: IndexService, readonly bottomSheet: MatBottomSheet) {
     super();
     this.indexService.selectedHeader
       .pipe(takeUntil(this.destroyed))
       .subscribe((header) => {
         if (header) {
-          this.interpIsLoading = true;
+          this.isLoading = true;
           this.indexService
             .getIndexTree(header.id)
             .then((indeces) => {
               this.dataSource.data = indeces;
             })
             .then(() => {
-              this.interpIsLoading = false;
+              this.isLoading = false;
             });
         }
       });
@@ -42,5 +43,8 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
     if (indexId) {
       this.indexService.selectedIndex.next(indexId);
     }
+  }
+  closeIndex(){
+    this.bottomSheet.dismiss();
   }
 }

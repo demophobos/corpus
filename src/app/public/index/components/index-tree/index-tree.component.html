@@ -1,7 +1,16 @@
-<ng-container *ngIf="interpIsLoading == true">
+<ng-container *ngIf="isLoading == true">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
 <mat-card>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span>Index Operis</span>
+            <span class="spacer"></span>
+            <button mat-icon-button color="primary" aria-label="Claudere" (click)="closeIndex()">
+                <mat-icon svgIcon="close"></mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
     <mat-card-content>
         <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
             <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>

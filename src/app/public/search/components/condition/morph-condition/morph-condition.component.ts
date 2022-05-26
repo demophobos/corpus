@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
 import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
 import { ChunkQuery, TaxonomyViewModel } from '@shared/models';
@@ -27,7 +28,7 @@ export class MorphConditionComponent extends BaseComponent implements OnInit {
   gradus: string = TaxonomyCategoryEnum.Degree;
   genus2:string = TaxonomyCategoryEnum.Voice;
 
-  constructor(private searchService: SearchService, private commonDataService: CommonDataService) {
+  constructor(private searchService: SearchService, private commonDataService: CommonDataService, private bottomSheet: MatBottomSheet) {
     super();
   }
 
@@ -140,5 +141,7 @@ export class MorphConditionComponent extends BaseComponent implements OnInit {
       this.searchService.setSelectedMorphAttrubutes(this.query);
     }
   }
-
+  closeMorphologia(){
+this.bottomSheet.dismiss();
+  }
 }

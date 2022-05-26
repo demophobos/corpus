@@ -1,7 +1,13 @@
 <mat-card *ngIf="query">
-    <mat-card-header>
-        <mat-card-title>Morphologia</mat-card-title>
-    </mat-card-header>
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span>Morphologia</span>
+            <span class="spacer"></span>
+            <button mat-icon-button color="primary" aria-label="Claudere" (click)="closeMorphologia()">
+                <mat-icon svgIcon="close"></mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
     <mat-card-content>
         <mat-tab-group class="category-tab">
             <mat-tab>
