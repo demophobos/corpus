@@ -5,6 +5,7 @@ import { IndexTreeItem, IndexService } from '../../services/index.service';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '@shared/components';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-index-tree',
@@ -15,7 +16,7 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
   isLoading: boolean = true;
   treeControl = new NestedTreeControl<IndexTreeItem>((node) => node.indexItems);
   dataSource = new MatTreeNestedDataSource<IndexTreeItem>();
-  constructor(private indexService: IndexService, readonly bottomSheet: MatBottomSheet) {
+  constructor(private indexService: IndexService, readonly bottomSheet: MatBottomSheet, private router: Router) {
     super();
     this.indexService.selectedHeader
       .pipe(takeUntil(this.destroyed))
@@ -32,6 +33,11 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
             });
         }
       });
+      router.events.pipe(takeUntil(this.destroyed)).subscribe((event:NavigationStart) => {
+        if(event.url !== '/index'){
+          this.bottomSheet.dismiss();
+        }
+    });
   }
 
   hasChild = (_: number, node: IndexTreeItem) =>

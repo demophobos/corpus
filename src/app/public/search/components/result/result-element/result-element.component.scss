@@ -1,6 +1,6 @@
 .morph {
     cursor: pointer;
-    color: blue;
+    color: blueviolet;
 }
 
 .notmorph {
@@ -14,6 +14,8 @@
 }
 
 .note {
-    font-style: italic;
-    font-weight: 600;
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    text-decoration-color: firebrick;
+    text-decoration-thickness: 1px;
 }
