@@ -1,0 +1,11 @@
+<mat-list role="list">
+    <mat-list-item class="pos-view-item"><span>Pars orationis</span><span class="pos-view-item-value">{{morphInfo.pos}}</span></mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="pos-view-item"><span>Lemma</span><span class="pos-view-item-value">{{morphInfo.lemma}}</span></mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="pos-view-item"><span>Forma</span><span class="pos-view-item-value">{{morphInfo.form}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.dialect"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.dialect"><span>Sermo</span><span class="pos-view-item-value">{{morphInfo.dialect}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.feature"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.feature"><span>Attributio</span><span class="pos-view-item-value">{{morphInfo.feature}}</span></mat-list-item>
+</mat-list>

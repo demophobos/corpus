@@ -1,0 +1,21 @@
+.full-width-row {
+    padding: 0 !important;
+}
+
+.container {
+    position: relative;
+    min-height: 200px;
+}
+
+.header {
+    display: none;
+}
+
+.table-container {
+    position: relative;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}

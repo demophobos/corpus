@@ -1,48 +1,12 @@
-<mat-card class="card mat-elevation-z4 result-card" *ngIf="chunk">
-    <mat-card-content class="result-content">
-        <div class="chunk">
-            <ng-container *ngFor="let element of chunk.elements">
-                <app-result-element [element]="element"></app-result-element>
-            </ng-container>
-            <span class="chunk-info"> [{{chunk.headerCode}}, {{chunk.indexName}}]</span>
-            <ng-container *ngIf="showNotes">
-                <app-chunk-note [chunk]="chunk"></app-chunk-note>
-            </ng-container>
-        </div>
-        <div class="chunk-menu">
-            <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" (showHideNotes)="showHideNotes()">
-            </app-chunk-menu>
-        </div>
-    </mat-card-content>
-    <mat-card-footer>
-        <ng-container *ngIf="showInterp && interpIsLoading == true">
-            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<hr *ngIf="isParallel" />
+<div class="chunk">
+    <div class="chunk-value">
+        <ng-container *ngFor="let element of chunk.elements">
+            <app-result-element [element]="element"></app-result-element>
         </ng-container>
-        <ng-container *ngIf="showInterp && !interpIsLoading">
-            <mat-card *ngFor="let interpChunk of interpChunks" class="mat-elevation-z0 interp-card">
-                <hr />
-                <mat-card-content class="result-content">
-                    <div class="chunk">
-                        <ng-container *ngFor="let element of interpChunk.elements">
-                            <app-result-element [element]="element"></app-result-element>
-                        </ng-container>
-                        <span class="chunk-info"> [{{interpChunk.headerCode}}, {{interpChunk.indexName}}]</span>
-                        <ng-container *ngIf="showInterpNotes">
-                            <app-chunk-note [chunk]="interpChunk"></app-chunk-note>
-                        </ng-container>
-                    </div>
-                    <div class="chunk-menu">
-                        <app-chunk-menu [chunk]="interpChunk" [versioVisible]="false" (showHideNotes)="showHideInterpNotes()">
-                        </app-chunk-menu>
-                    </div>
-                </mat-card-content>
-            </mat-card>
-            <mat-card class="card mat-elevation-z0 empty-card" *ngIf="!interpChunks">
-                <hr />
-                <mat-card-content class="empty-interp">
-                    {{emptyInterpInfo}}
-                </mat-card-content>
-            </mat-card>
-        </ng-container>
-    </mat-card-footer>
-</mat-card>
+        <span class="chunk-info"> [{{chunk.headerCode}}, {{chunk.indexName}}]</span>
+    </div>
+    <div class="chunk-menu">
+        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" [versioVisible]="!isParallel"></app-chunk-menu>
+    </div>
+</div>

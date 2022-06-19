@@ -3,6 +3,7 @@ export const AppConfig = {
     DefaultDialogWidth: '800',
     DefaultLoginDialogWidth: '500',
     SessionExpiresIn: 180,
+    ChunksTopUpdated: 10,
     AppFullTitle: 'CORPUS LATINO-ROSSICUM',
     AppShortTitle: 'CLR',
     Copyright: 'ILS RAS',

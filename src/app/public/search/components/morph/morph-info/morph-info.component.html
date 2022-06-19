@@ -1,4 +1,36 @@
-<div *ngIf="element && element.form">
-    <span>{{element.form}}, {{element.pos}}</span>
-    <span *ngIf="element.lemma !== element.form">[{{element.lemma}}]</span>
-</div>
+<ng-container *ngIf="morphInfo.pos == 'adj'">
+    <app-adj-view [morphInfo]="morphInfo"></app-adj-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'noun'">
+    <app-noun-view [morphInfo]="morphInfo"></app-noun-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'verb'">
+    <app-verb-view [morphInfo]="morphInfo"></app-verb-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'adv'">
+    <app-adv-view [morphInfo]="morphInfo"></app-adv-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'conj'">
+    <app-conj-view [morphInfo]="morphInfo"></app-conj-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'exclam'">
+    <app-exclam-view [morphInfo]="morphInfo"></app-exclam-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'numeral'">
+    <app-exclam-view [morphInfo]="morphInfo"></app-exclam-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'part'">
+    <app-part-view [morphInfo]="morphInfo"></app-part-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'partic'">
+    <app-particle-view [morphInfo]="morphInfo"></app-particle-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'prep'">
+    <app-prep-view [morphInfo]="morphInfo"></app-prep-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'pron'">
+    <app-pron-view [morphInfo]="morphInfo"></app-pron-view>
+</ng-container>
+<ng-container *ngIf="morphInfo.pos == 'article'">
+    <app-article-view [morphInfo]="morphInfo"></app-article-view>
+</ng-container>

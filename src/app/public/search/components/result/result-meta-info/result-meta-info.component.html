@@ -1,0 +1,8 @@
+<mat-tab-group>
+    <mat-tab *ngIf="hasMorphology" label="Morphologia">
+        <app-morph-info></app-morph-info>
+    </mat-tab>
+    <mat-tab *ngIf="hasComments" label="Commentaria">
+        <app-chunk-note [chunk]="data"></app-chunk-note>
+    </mat-tab>
+</mat-tab-group>

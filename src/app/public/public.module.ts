@@ -29,6 +29,22 @@ import { WorkSelectorComponent } from './index/components/work-selector/work-sel
 import { ChunkNoteComponent } from './search/components/chunk/chunk-note/chunk-note.component';
 import { ChunkNoteItemComponent } from './search/components/chunk/chunk-note-item/chunk-note-item.component';
 import { IndexTreeComponent } from './index/components/index-tree/index-tree.component';
+import { TopChunksWidgetComponent } from './home/components/top-chunks-widget/top-chunks-widget.component';
+import { AboutCorpusComponent } from './home/components/about-corpus/about-corpus.component';
+import { NounViewComponent } from './search/components/morph/pos-view/noun-view/noun-view.component';
+import { AdjViewComponent } from './search/components/morph/pos-view/adj-view/adj-view.component';
+import { AdvViewComponent } from './search/components/morph/pos-view/adv-view/adv-view.component';
+import { ConjViewComponent } from './search/components/morph/pos-view/conj-view/conj-view.component';
+import { ExclamViewComponent } from './search/components/morph/pos-view/exclam-view/exclam-view.component';
+import { NumeralViewComponent } from './search/components/morph/pos-view/numeral-view/numeral-view.component';
+import { PartViewComponent } from './search/components/morph/pos-view/part-view/part-view.component';
+import { ParticleViewComponent } from './search/components/morph/pos-view/particle-view/particle-view.component';
+import { PrepViewComponent } from './search/components/morph/pos-view/prep-view/prep-view.component';
+import { PronViewComponent } from './search/components/morph/pos-view/pron-view/pron-view.component';
+import { VerbViewComponent } from './search/components/morph/pos-view/verb-view/verb-view.component';
+import { ArticleViewComponent } from './search/components/morph/pos-view/article-view/article-view.component';
+import { ResultMetaInfoComponent } from './search/components/result/result-meta-info/result-meta-info.component';
+import { ResultChunkSetComponent } from './search/components/result/result-chunk-set/result-chunk-set.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +73,23 @@ import { IndexTreeComponent } from './index/components/index-tree/index-tree.com
     WorkSelectorComponent,
     ChunkNoteComponent,
     ChunkNoteItemComponent,
-    IndexTreeComponent],
+    IndexTreeComponent,
+    TopChunksWidgetComponent,
+    AboutCorpusComponent,
+    NounViewComponent,
+    AdjViewComponent,
+    AdvViewComponent,
+    ConjViewComponent,
+    ExclamViewComponent,
+    NumeralViewComponent,
+    PartViewComponent,
+    ParticleViewComponent,
+    PrepViewComponent,
+    PronViewComponent,
+    VerbViewComponent,
+    ArticleViewComponent,
+    ResultMetaInfoComponent,
+    ResultChunkSetComponent],
   imports: [
     CommonModule,
     PublicRoutingModule,

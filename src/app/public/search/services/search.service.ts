@@ -59,11 +59,19 @@ export class SearchService implements OnInit {
   public selectedAttributes = new BehaviorSubject<string[]>([]);
   public selectedWorks = new BehaviorSubject<HeaderModel[]>([]);
 
-  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(1);
-  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<ChunkView[]>(1);
-  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<MorphModel[]>(1);
+  public chunkQuery: ReplaySubject<ChunkQuery> = new ReplaySubject<ChunkQuery>(
+    1
+  );
+  public elementedChunks: ReplaySubject<ChunkView[]> = new ReplaySubject<
+    ChunkView[]
+  >(1);
+  public foundForms: ReplaySubject<MorphModel[]> = new ReplaySubject<
+    MorphModel[]
+  >(1);
   public isLoading: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  public noteLinks: ReplaySubject<NoteLinkModel[]> = new ReplaySubject<NoteLinkModel[]>(1);
+  public noteLinks: ReplaySubject<NoteLinkModel[]> = new ReplaySubject<
+    NoteLinkModel[]
+  >(1);
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -81,7 +89,7 @@ export class SearchService implements OnInit {
   ngOnInit(): void {}
 
   setSelectedWorksCount(query: ChunkQuery) {
-    this.commonDataService.getHeaders().then(headers=>{
+    this.commonDataService.getHeaders().then((headers) => {
       let arr: HeaderModel[] = [];
       headers.forEach((i) => {
         if (query.headers.includes(i.id)) {
@@ -177,6 +185,7 @@ export class SearchService implements OnInit {
           total: query.total,
           headers: query.headers,
           includeIds: query.includeIds,
+          topUpdated:query.topUpdated
         })
       )
       .toPromise()
@@ -263,28 +272,27 @@ export class SearchService implements OnInit {
     }
   }
 
-  public async getNoteLinks(indexId: string){
-    return this.noteLinkService.findByQuery(
-      new NoteLinkModel({}),
-      JSON.stringify({ indexId: indexId })
-    )
-    .toPromise()
-    .then((items: NoteLinkModel[]) => {
-      this.noteLinks.next(items);
-      return Promise.resolve(items);
-    });
+  public async getNoteLinks(indexId: string) {
+    return this.noteLinkService
+      .findByQuery(new NoteLinkModel({}), JSON.stringify({ indexId: indexId }))
+      .toPromise()
+      .then((items: NoteLinkModel[]) => {
+        this.noteLinks.next(items);
+        return Promise.resolve(items);
+      });
   }
 
-  public async getNote(noteId: string){
-    return this.noteService.findOne(
-      new NoteModel({
-        id:noteId
-      })
-    )
-    .toPromise()
-    .then((items: NoteModel) => {
-      return Promise.resolve(items);
-    });
+  public async getNote(noteId: string) {
+    return this.noteService
+      .findOne(
+        new NoteModel({
+          id: noteId,
+        })
+      )
+      .toPromise()
+      .then((items: NoteModel) => {
+        return Promise.resolve(items);
+      });
   }
 
   async countWordUsage(value: string): Promise<Number> {
@@ -310,7 +318,7 @@ export class SearchService implements OnInit {
           CASUS: element.case,
           NUMERUS: element.number,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Adj:
         return new AdjView({
@@ -322,7 +330,7 @@ export class SearchService implements OnInit {
           NUMERUS: element.number,
           GRADUS: element.degree,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Adv:
         return new AdvView({
@@ -331,7 +339,7 @@ export class SearchService implements OnInit {
           PARS_ORATIONIS: element.pos,
           GRADUS: element.degree,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Conj:
         return new ConjView({
@@ -339,7 +347,7 @@ export class SearchService implements OnInit {
           LEMMA: element.lemma,
           PARS_ORATIONIS: element.pos,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Exclam:
         return new ExclamView({
@@ -347,7 +355,7 @@ export class SearchService implements OnInit {
           LEMMA: element.lemma,
           PARS_ORATIONIS: element.pos,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Numeral:
         return new NumView({
@@ -358,7 +366,7 @@ export class SearchService implements OnInit {
           CASUS: element.case,
           NUMERUS: element.number,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Part:
         return new PartView({
@@ -371,7 +379,7 @@ export class SearchService implements OnInit {
           CASUS: element.case,
           NUMERUS: element.number,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Particle:
         return new ParticView({
@@ -379,7 +387,7 @@ export class SearchService implements OnInit {
           LEMMA: element.lemma,
           PARS_ORATIONIS: element.pos,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Prep:
         return new PrepView({
@@ -387,7 +395,7 @@ export class SearchService implements OnInit {
           LEMMA: element.lemma,
           PARS_ORATIONIS: element.pos,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Pron:
         return new PronView({
@@ -398,7 +406,7 @@ export class SearchService implements OnInit {
           CASUS: element.case,
           NUMERUS: element.number,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Verb:
         return new VerbView({
@@ -413,7 +421,7 @@ export class SearchService implements OnInit {
           NUMERUS: element.number,
           PERSON: element.person,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       case PosEnum.Article:
         return new ArticleView({
@@ -424,7 +432,7 @@ export class SearchService implements OnInit {
           GENUS: element.gender,
           NUMERUS: element.number,
           SERMO: element.dialect,
-          ATTRIBUTIO: element.feature
+          ATTRIBUTIO: element.feature,
         });
       default:
         return null;

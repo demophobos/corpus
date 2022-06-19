@@ -1,0 +1,25 @@
+<mat-list role="list">
+    <mat-list-item class="pos-view-item"><span>Pars orationis</span><span class="pos-view-item-value">{{morphInfo.pos}}</span></mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="pos-view-item"><span>Lemma</span><span class="pos-view-item-value">{{morphInfo.lemma}}</span></mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item class="pos-view-item"><span>Forma</span><span class="pos-view-item-value">{{morphInfo.form}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.voice"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.voice"><span>Genus verbi</span><span class="pos-view-item-value">{{morphInfo.voice}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.tense"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.tense"><span>Tempus</span><span class="pos-view-item-value">{{morphInfo.tense}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.mood"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.mood"><span>Modus</span><span class="pos-view-item-value">{{morphInfo.mood}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.gender"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.gender"><span>Genus</span><span class="pos-view-item-value">{{morphInfo.gender}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.case"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.case"><span>Casus</span><span class="pos-view-item-value">{{morphInfo.case}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.person"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.person"><span>Persona</span><span class="pos-view-item-value">{{morphInfo.person}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.number"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.number"><span>Numerus</span><span class="pos-view-item-value">{{morphInfo.number}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.dialect"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.dialect"><span>Sermo</span><span class="pos-view-item-value">{{morphInfo.dialect}}</span></mat-list-item>
+    <mat-divider *ngIf="morphInfo.feature"></mat-divider>
+    <mat-list-item class="pos-view-item" *ngIf="morphInfo.feature"><span>Attributio</span><span class="pos-view-item-value">{{morphInfo.feature}}</span></mat-list-item>
+</mat-list>

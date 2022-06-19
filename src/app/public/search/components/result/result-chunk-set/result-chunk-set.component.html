@@ -1,0 +1,18 @@
+<mat-card class="card mat-elevation-z0 result-card" *ngIf="chunk">
+    <mat-card-content class="result-content">
+        <app-result-chunk [chunk]="chunk" (showHideVersionEvent)="showHideVersio()"></app-result-chunk>
+
+        <ng-container *ngIf="showInterp && interpIsLoading == true">
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </ng-container>
+
+        <ng-container *ngIf="showInterp && !interpIsLoading">
+            <ng-container *ngFor="let interpChunk of interpChunks">
+                <app-result-chunk [chunk]="interpChunk" [isParallel]="true"></app-result-chunk>
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!interpChunks && showInterp">
+            {{emptyInterpInfo}}
+        </ng-container>
+    </mat-card-content>
+</mat-card>
