@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
 import { TaxonomyCategoryEnum } from '@shared/enums/taxonomy-category-enum';
@@ -15,7 +15,7 @@ import { SearchService } from '../../../services/search.service';
 })
 export class MorphConditionComponent extends BaseComponent implements OnInit {
   panelOpenState = false;
-  categorySelector = new FormControl();
+  categorySelector = new UntypedFormControl();
   query: ChunkQuery;
   categoryItems: TaxonomyViewModel[];
   pos: string = TaxonomyCategoryEnum.Pos;

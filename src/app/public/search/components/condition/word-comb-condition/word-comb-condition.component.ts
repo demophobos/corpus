@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { WordMatchCombEnum } from '@shared/enums/word-match-comb-enum';
 import { ChunkQuery } from '@shared/models';
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./word-comb-condition.component.scss']
 })
 export class WordCombConditionComponent extends BaseComponent implements OnInit {
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   query: ChunkQuery;
   options: any = [
     {value: 'or', name: WordMatchCombEnum.AnyWord}, 
@@ -21,7 +21,7 @@ export class WordCombConditionComponent extends BaseComponent implements OnInit 
     //{value: 'phrase', name: WordMatchCombEnum.Phrase}
   ];
   disabled: boolean = true;
-  constructor(public fb: FormBuilder, private searchService: SearchService, private deviceService: DeviceDetectorService) { 
+  constructor(public fb: UntypedFormBuilder, private searchService: SearchService, private deviceService: DeviceDetectorService) { 
     super(deviceService);
   }
 

@@ -118,7 +118,6 @@
       }
     }
   },
-  "defaultProject": "crlc",
   "cli": {
     "analytics": false
   }

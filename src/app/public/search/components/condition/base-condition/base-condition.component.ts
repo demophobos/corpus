@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
@@ -11,16 +11,16 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./base-condition.component.scss'],
 })
 export class BaseConditionComponent extends BaseComponent implements OnInit {
-  editorForm: FormGroup;
+  editorForm: UntypedFormGroup;
   query: ChunkQuery;
   disabled: boolean;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private searchService: SearchService
   ) {
     super();
     this.editorForm = this.formBuilder.group({
-      valueControl: new FormControl(''),
+      valueControl: new UntypedFormControl(''),
     });
   }
 

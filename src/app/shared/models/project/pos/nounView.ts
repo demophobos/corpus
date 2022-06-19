@@ -1,4 +1,3 @@
-import { stringify } from '@angular/compiler/src/util';
 import { PosBaseView } from './posBaseView';
 
 export class NounView extends PosBaseView {

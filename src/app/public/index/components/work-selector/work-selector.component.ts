@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { HeaderView } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
@@ -24,7 +24,7 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   styleUrls: ['./work-selector.component.scss'],
 })
 export class WorkSelectorComponent extends BaseComponent implements OnInit {
-  workForm = new FormControl();
+  workForm = new UntypedFormControl();
   indexAvailable = false;
   projectGroups: ProjectGroup[] = [];
 

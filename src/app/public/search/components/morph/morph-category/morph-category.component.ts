@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { TaxonomyViewModel } from '@shared/models';
 
@@ -23,7 +23,7 @@ export class SearchMorphCategoryComponent
   @Input() items: TaxonomyViewModel[];
   @Input() selectedItems: string[];
   @Output() selected: EventEmitter<void> = new EventEmitter();
-  selector = new FormControl();
+  selector = new UntypedFormControl();
 
   constructor() {
     super();

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
 import { ProjectGroup } from '@shared/interfaces';
@@ -14,7 +14,7 @@ import { SearchService } from '../../../services/search.service';
   styleUrls: ['./work-condition.component.scss'],
 })
 export class WorkConditionComponent extends BaseComponent implements OnInit {
-  headerSelector = new FormControl();
+  headerSelector = new UntypedFormControl();
   projects: ProjectModel[];
   headers: HeaderView[];
   query: ChunkQuery;

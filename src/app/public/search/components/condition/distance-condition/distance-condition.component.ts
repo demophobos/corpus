@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
 import { ChunkQuery } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./distance-condition.component.scss']
 })
 export class DistanceConditionComponent extends BaseComponent implements OnInit {
-  formGroup: FormGroup;
+  formGroup: UntypedFormGroup;
   query: ChunkQuery;
   options: any = [
     {value: 0, name: ' '}, 
@@ -27,7 +27,7 @@ export class DistanceConditionComponent extends BaseComponent implements OnInit 
     {value: 9, name: '-9-'}
   ];
   disabled: boolean = true;
-  constructor(public fb: FormBuilder, private searchService: SearchService, private deviceService: DeviceDetectorService) {
+  constructor(public fb: UntypedFormBuilder, private searchService: SearchService, private deviceService: DeviceDetectorService) {
     super(deviceService);
   }
 
