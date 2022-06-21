@@ -36,6 +36,21 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
 })
 export class SearchService implements OnInit {
   //#region Commentable entities
+  public currentChunk: BehaviorSubject<ChunkView> = new BehaviorSubject<ChunkView>(
+    undefined
+  );
+
+  set setCurrentChunk(value: ChunkView) {
+    this.currentChunk.next(value);
+  }
+
+  public currentForm: BehaviorSubject<ChunkValueItemModel> = new BehaviorSubject<ChunkValueItemModel>(
+    undefined
+  );
+
+  set setCurrentForm(value: ChunkValueItemModel) {
+    this.currentForm.next(value);
+  }
   public commentable: BehaviorSubject<
     ChunkView | ChunkValueItemModel | ElementView
   > = new BehaviorSubject<ChunkView | ChunkValueItemModel | ElementView>(

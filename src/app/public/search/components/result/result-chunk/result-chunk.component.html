@@ -2,7 +2,7 @@
 <div class="chunk">
     <div class="chunk-value">
         <ng-container *ngFor="let element of chunk.elements">
-            <app-result-element [element]="element"></app-result-element>
+            <app-result-element [element]="element" [chunk]="chunk"></app-result-element>
         </ng-container>
         <span class="chunk-info"> [{{chunk.headerCode}}, {{chunk.indexName}}]</span>
     </div>

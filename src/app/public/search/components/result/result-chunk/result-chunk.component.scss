@@ -6,13 +6,17 @@ app-chunk-menu {
     color: #707070;
 }
 
-.chunk-value {
-    width: 100%;
-}
-
 .chunk {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 5px;
+}
+
+.chunk-menu {
+    width: 40px;
+}
+
+hr {
+    width: 100%;
 }

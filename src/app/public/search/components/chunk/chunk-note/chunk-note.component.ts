@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { linq } from '@shared/helpers';
-import { ChunkNoteItem, ChunkView, NoteLinkModel } from '@shared/models';
+import { ChunkNoteItem, NoteLinkModel } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
 
 @Component({
@@ -10,14 +11,13 @@ import { SearchService } from 'app/public/search/services/search.service';
   styleUrls: ['./chunk-note.component.scss'],
 })
 export class ChunkNoteComponent extends BaseComponent implements OnInit {
-  @Input() chunk: ChunkView;
   chunkNotes: ChunkNoteItem[];
   constructor(private searchService: SearchService) {
     super();
   }
 
-  async ngOnInit(): Promise<void> {
-    if(this.chunk){
+  ngOnInit() {
+    if(this.searchService.currentChunk.value){
       this.chunkNotes = [];
       this.searchService.noteLinks.subscribe((links: NoteLinkModel[]) => {
         if (links.length > 0) {
@@ -28,7 +28,7 @@ export class ChunkNoteComponent extends BaseComponent implements OnInit {
               new ChunkNoteItem({
                 noteId: id,
                 elements: groupped[id].map((i: any) =>
-                  this.chunk.elements.find((j: any) => j._id == i.itemId)
+                this.searchService.currentChunk.value.elements.find((j: any) => j._id == i.itemId)
                 ),
               })
             );

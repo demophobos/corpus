@@ -1,8 +1,5 @@
-<ng-container *ngIf="chunkNotes">
-    <!-- <hr *ngIf="chunkNotes.length > 0"> -->
-    <ng-container *ngFor="let chunkNote of chunkNotes">
-        <div>
-            <app-chunk-note-item [chunkNote]="chunkNote"></app-chunk-note-item>
-        </div>
-    </ng-container>
-</ng-container>
+<mat-list role="list" *ngIf="chunkNotes">
+    <mat-list-item *ngFor="let chunkNote of chunkNotes">
+        <app-chunk-note-item [chunkNote]="chunkNote"></app-chunk-note-item>
+    </mat-list-item>
+</mat-list>

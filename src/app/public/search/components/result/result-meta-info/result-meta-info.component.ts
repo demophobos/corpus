@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
 import {
   ChunkValueItemModel,
+  ChunkView,
   ElementView,
   NoteLinkModel,
 } from '@shared/models';
@@ -16,24 +18,21 @@ import { takeUntil } from 'rxjs/operators';
 export class ResultMetaInfoComponent extends BaseComponent implements OnInit {
   hasMorphology: boolean = false;
   hasComments: boolean = false;
-  data:any;
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
-    this.searchService.commentable
+    if(this.searchService.currentForm.value){
+      this.hasMorphology = this.searchService.currentForm.value.pos.length > 0;
+      this.searchService.noteLinks
       .pipe(takeUntil(this.destroyed))
-      .subscribe((element: ChunkValueItemModel) => {
-        this.hasMorphology = element.pos.length > 0;
-        this.searchService.noteLinks
-          .pipe(takeUntil(this.destroyed))
-          .subscribe((links: NoteLinkModel[]) => {
-            if (links.length > 0) {
-              this.hasComments =
-                links.map((i) => i.itemId).indexOf(element['_id']) > -1;
-            }
-          });
+      .subscribe((links: NoteLinkModel[]) => {
+        if (links.length > 0) {
+          this.hasComments =
+            links.map((i) => i.itemId).indexOf(this.searchService.currentForm.value['_id']) > -1;
+        }
       });
+    }
   }
 }

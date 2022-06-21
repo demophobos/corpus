@@ -4,6 +4,7 @@ import { BaseComponent } from '@shared/components';
 import {
   ChunkQuery,
   ChunkValueItemModel,
+  ChunkView,
   MorphModel,
   NoteLinkModel,
 } from '@shared/models';
@@ -17,6 +18,7 @@ import { ResultMetaInfoComponent } from '../result-meta-info/result-meta-info.co
   styleUrls: ['./result-element.component.scss'],
 })
 export class ResultElementComponent extends BaseComponent implements OnInit {
+  @Input() chunk: ChunkView;
   @Input() element: any;
   @Input() selectedValue: string;
   isMorphStyle: boolean = false;
@@ -54,6 +56,7 @@ export class ResultElementComponent extends BaseComponent implements OnInit {
           this.morphIds?.find((i) => i.id == this.element.morphId) !==
           undefined;
       });
+
     this.searchService.noteLinks
       .pipe(takeUntil(this.destroyed))
       .subscribe((links: NoteLinkModel[]) => {
@@ -64,9 +67,10 @@ export class ResultElementComponent extends BaseComponent implements OnInit {
       });
   }
 
-  selectWord(word: ChunkValueItemModel) {
-    this.searchService.setCommentable = word;
-    if (word.pos.length > 0 || this.isCommented) {
+  selectForm(form: ChunkValueItemModel) {
+    this.searchService.setCurrentChunk = this.chunk;
+    this.searchService.setCurrentForm = form;
+    if (form.pos.length > 0 || this.isCommented) {
       this.bottomSheet.open(ResultMetaInfoComponent, {
         hasBackdrop: false,
         autoFocus: 'first-tabbable'

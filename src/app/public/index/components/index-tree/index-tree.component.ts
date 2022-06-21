@@ -5,7 +5,7 @@ import { IndexTreeItem, IndexService } from '../../services/index.service';
 import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '@shared/components';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-index-tree',

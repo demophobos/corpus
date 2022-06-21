@@ -1,4 +1,4 @@
-<span *ngIf="element.type == 0" (click)="selectWord(element)" [ngClass]="{morph: isMorphStyle, notmorph: isNotMorphStyle, mark: isSelected, note: isCommented}">{{element.value}}</span>
+<span *ngIf="element.type == 0" (click)="selectForm(element)" [ngClass]="{morph: isMorphStyle, notmorph: isNotMorphStyle, mark: isSelected, note: isCommented}">{{element.value}}</span>
 <span *ngIf="element.type == 1 || element.type == 2" (click)="$event.stopPropagation()">{{element.value}}</span>
 <span *ngIf="element.type == 3" (click)="$event.stopPropagation()">&nbsp;</span>
 <div *ngIf="element.type == 4"></div>

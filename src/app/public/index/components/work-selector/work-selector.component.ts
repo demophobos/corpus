@@ -4,10 +4,7 @@ import { BaseComponent } from '@shared/components';
 import { HeaderView } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
 import { IndexService, ProjectGroup } from '../../services/index.service';
-import {
-  MatBottomSheet,
-  MatBottomSheetRef,
-} from '@angular/material/bottom-sheet';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { IndexTreeComponent } from '../index-tree/index-tree.component';
 
 export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
@@ -58,16 +55,25 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
       });
   }
 
-  headerChanged(header: HeaderView) {
+  async headerChanged(header: HeaderView) {
     this.indexService.selectedChunk.next(undefined);
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
-    this.indexService.selectedHeader.next(header);
+    if (
+      this.indexService.selectedHeader.getValue() === undefined ||
+      header.id !== this.indexService.selectedHeader.getValue().id
+    ) {
+      this.indexService.selectedHeader.next(header);
+      await this.indexService.getIndexTree(header.id);
+    }
     this.indexAvailable = !!header;
   }
 
   openIndex(event) {
     event.stopPropagation();
-    this.bottomSheet.open(IndexTreeComponent, { hasBackdrop: false, autoFocus:'first-tabbable' });
+    this.bottomSheet.open(IndexTreeComponent, {
+      hasBackdrop: false,
+      autoFocus: 'first-tabbable',
+    });
   }
 }
