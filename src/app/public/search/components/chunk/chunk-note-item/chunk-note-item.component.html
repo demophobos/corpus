@@ -1,3 +1,10 @@
 <ng-container *ngIf="chunkNote && note">
-    <span class="note-title">{{title}}</span> — <span class="note-value">{{note.value}}</span>
+    <mat-card class="mat-elevation-z0">
+        <mat-card-title class="note-title">
+            {{title}}
+        </mat-card-title>
+        <mat-card-content>
+            {{note.value}}
+        </mat-card-content>
+    </mat-card>
 </ng-container>

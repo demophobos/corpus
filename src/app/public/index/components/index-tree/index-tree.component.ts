@@ -23,14 +23,10 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
       .subscribe((header) => {
         if (header) {
           this.isLoading = true;
-          this.indexService
-            .getIndexTree(header.id)
-            .then((indeces) => {
-              this.dataSource.data = indeces;
-            })
-            .then(() => {
-              this.isLoading = false;
-            });
+          this.indexService.currentIndexTreeItems.pipe(takeUntil(this.destroyed)).subscribe((indeces) => {
+            this.dataSource.data = indeces;
+            this.isLoading = false;
+          })
         }
       });
       router.events.pipe(takeUntil(this.destroyed)).subscribe((event:NavigationStart) => {
