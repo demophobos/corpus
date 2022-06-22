@@ -1,4 +1,3 @@
 <ng-container *ngFor="let chunkNote of chunkNotes">
     <app-chunk-note-item [chunkNote]="chunkNote"></app-chunk-note-item>
-    <hr *ngIf="chunkNotes.length > 1 && (chunkNotes.indexOf(chunkNote) + 1) < chunkNotes.length" />
 </ng-container>

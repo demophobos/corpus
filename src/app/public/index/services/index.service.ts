@@ -45,6 +45,15 @@ export class IndexService {
         return Promise.resolve(result);
       });
   }
+  public flatIndexTreeItems: IndexTreeItem[] = [];
+  public getFlatIndexTreeItems(items: IndexTreeItem[]) {
+    items.forEach((item:IndexTreeItem) => {
+      this.flatIndexTreeItems.push(item);
+      if(item.indexItems && item.indexItems.length){
+        this.getFlatIndexTreeItems(item.indexItems);
+      }
+    });
+  }
 
   public async getIndexTree(headerId: string): Promise<IndexTreeItem[]> {
     return await this.indexApiService

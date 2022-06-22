@@ -6,5 +6,15 @@
     </mat-toolbar>
 </mat-card>
 <mat-card class="mat-elevation-z0">
-    <app-result-chunk-set [chunk]="chunk"></app-result-chunk-set>
+    <ng-container *ngIf="chunk">
+        <app-result-chunk-set [chunk]="chunk"></app-result-chunk-set>
+    </ng-container>
+    <ng-container *ngIf="!chunk && currentIndex">
+        <mat-card class="card mat-elevation-z0 result-card">
+            <mat-card-content class="result-content">
+                <span class="chunk-info">[{{currentIndex.name}}] Textus deest</span>
+            </mat-card-content>
+        </mat-card>
+    </ng-container>
+    <mat-paginator *ngIf="header" [length]="length" [pageSize]="pageSize" [showFirstLastButtons]="true" (page)="paginateChange($event)"></mat-paginator>
 </mat-card>

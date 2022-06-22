@@ -1,12 +1,14 @@
 <hr *ngIf="isParallel" />
 <div class="chunk">
     <div class="chunk-value">
+        <span class="chunk-info">[{{chunk.indexName}}] </span>
         <ng-container *ngFor="let element of chunk.elements">
             <app-result-element [element]="element" [chunk]="chunk"></app-result-element>
         </ng-container>
-        <span class="chunk-info"> [{{chunk.headerCode}}, {{chunk.indexName}}]</span>
+        <span class="chunk-info"> [{{chunk.headerCode}}]</span>
     </div>
     <div class="chunk-menu">
-        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" [versioVisible]="!isParallel"></app-chunk-menu>
+        <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" [versioVisible]="!isParallel">
+        </app-chunk-menu>
     </div>
 </div>
