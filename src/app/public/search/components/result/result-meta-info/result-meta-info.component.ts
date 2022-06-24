@@ -24,7 +24,7 @@ export class ResultMetaInfoComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.searchService.currentForm.value){
-      this.hasMorphology = this.searchService.currentForm.value.pos.length > 0;
+      this.hasMorphology = this.searchService.currentForm.value.pos != undefined;
       this.searchService.noteLinks
       .pipe(takeUntil(this.destroyed))
       .subscribe((links: NoteLinkModel[]) => {

@@ -6,6 +6,7 @@ import { CommonDataService } from '@shared/services/common-data.service';
 import { IndexService, ProjectGroup } from '../../services/index.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { IndexTreeComponent } from '../index-tree/index-tree.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   const filterValue = value.toLowerCase();
@@ -24,7 +25,7 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
   workForm = new UntypedFormControl();
   indexAvailable = false;
   projectGroups: ProjectGroup[] = [];
-
+  header: HeaderView;
   constructor(
     private indexService: IndexService,
     private commonDataService: CommonDataService,
@@ -40,33 +41,34 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
         this.projectGroups = items;
         if (history.state.headerId) {
           //header from search page navigation
-          const header = this.commonDataService.headers.value.find(
+          this.header = this.commonDataService.headers.value.find(
             (i) => i.id == history.state.headerId
           );
-          this.headerChanged(header);
-          this.indexAvailable = header !== null;
+          this.headerChanged(this.header);
+          this.indexAvailable = this.header !== null;
           history.state.headerId = undefined;
         }
       })
       .then(() => {
-        var header = this.indexService.selectedHeader.getValue();
-        this.workForm.setValue(header);
-        this.indexAvailable = !!header;
+        this.header = this.indexService.selectedHeader.getValue();
+        this.workForm.setValue(this.header);
+        this.indexAvailable = !!this.header;
       });
   }
 
   async headerChanged(header: HeaderView) {
+    this.header = header;
     this.indexService.selectedChunk.next(undefined);
     this.indexService.selectedIndeces.next(undefined);
     this.indexService.selectedIndex.next(undefined);
     if (
       this.indexService.selectedHeader.getValue() === undefined ||
-      header.id !== this.indexService.selectedHeader.getValue().id
+      this.header.id !== this.indexService.selectedHeader.getValue().id
     ) {
-      this.indexService.selectedHeader.next(header);
-      await this.indexService.getIndexTree(header.id);
+      this.indexService.selectedHeader.next(this.header);
+      await this.indexService.getIndexTree(this.header.id);
     }
-    this.indexAvailable = !!header;
+    this.indexAvailable = !!this.header;
   }
 
   openIndex(event) {

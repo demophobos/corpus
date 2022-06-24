@@ -70,7 +70,7 @@ export class ResultElementComponent extends BaseComponent implements OnInit {
   selectForm(form: ChunkValueItemModel) {
     this.searchService.setCurrentChunk = this.chunk;
     this.searchService.setCurrentForm = form;
-    if (form.pos.length > 0 || this.isCommented) {
+    if (form.pos || this.isCommented) {
       this.bottomSheet.open(ResultMetaInfoComponent, {
         hasBackdrop: false,
         autoFocus: 'first-tabbable'
