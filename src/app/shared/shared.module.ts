@@ -42,6 +42,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { CommonDataService } from './services/common-data.service';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 
@@ -95,6 +96,7 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     MatButtonToggleModule,
     MatBadgeModule,
     MatAutocompleteModule,
+    MatSlideToggleModule,
     ClipboardModule
   ],
   exports: [
@@ -131,7 +133,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     MatButtonToggleModule,
     MatBadgeModule,
     MatAutocompleteModule,
-    ClipboardModule
+    ClipboardModule,
+    MatSlideToggleModule
   ],
   providers: [
     DialogService,

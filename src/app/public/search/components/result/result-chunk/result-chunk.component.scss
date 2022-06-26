@@ -4,6 +4,7 @@ app-chunk-menu {
 
 .chunk-info {
     color: #707070;
+    width: 50px;
 }
 
 .chunk {
@@ -17,8 +18,24 @@ app-chunk-menu {
     width: 40px;
 }
 
-hr {
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, .75), rgba(0, 0, 0, 0));
+mat-card-header {
+    flex: auto;
+}
+
+.chunk-menu {
+    width: 40px;
+}
+
+.mat-card-title {
+    flex: auto;
+}
+
+.result-content {
+    word-break: break-all;
+    display: flex;
+    flex-direction: column;
+}
+
+.chunk-value {
+    width: 100%;
 }

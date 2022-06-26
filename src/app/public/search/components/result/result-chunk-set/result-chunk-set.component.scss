@@ -1,13 +1,7 @@
-mat-card-header {
-    flex: auto;
+.mat-expansion-indicator {
+    margin-left: 15px !important;
 }
 
-.result-content {
-    word-break: break-all;
-    display: flex;
-    flex-direction: column;
-}
-
-.mat-card-title {
-    flex: auto;
+.mat-expansion-panel-header {
+    height: 40px !important;
 }
