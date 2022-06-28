@@ -5,5 +5,6 @@
         </button>
         <span class="spacer"></span>
         <mat-paginator [pageIndex]="index" [length]="total" [pageSize]="limit" (page)="pageEvent = loadPage($event)" [disabled]="isLoading == true" [showFirstLastButtons]="true"></mat-paginator>
+        <mat-slide-toggle [checked]="showInterp" ariaLabel="Versio" [matTooltip]="showVersionTooltip" color="primary" (toggleChange)="showHideVersio()"></mat-slide-toggle>
     </mat-toolbar>
 </mat-card>

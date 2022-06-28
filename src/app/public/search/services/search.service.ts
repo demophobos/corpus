@@ -35,6 +35,7 @@ import { BehaviorSubject, ReplaySubject } from 'rxjs';
   providedIn: 'root',
 })
 export class SearchService implements OnInit {
+  public showHideVersion: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   //#region Commentable entities
   public currentChunk: BehaviorSubject<ChunkView> = new BehaviorSubject<ChunkView>(
     undefined

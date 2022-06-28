@@ -24,6 +24,7 @@ export interface IndexTreeItem {
   providedIn: 'root',
 })
 export class IndexService {
+  public showHideVersion: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public selectedHeader = new BehaviorSubject<HeaderView>(undefined);
   public selectedIndeces = new BehaviorSubject<IndexModel[]>(undefined);
   public selectedIndex = new BehaviorSubject<string>(undefined);

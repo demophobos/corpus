@@ -5,7 +5,7 @@
                 <ng-container matColumnDef="chunk">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let row" class="full-width-row">
-                        <app-result-chunk-set [chunk]="row"></app-result-chunk-set>
+                        <app-result-chunk-set [chunk]="row" [showInterp]="showInterp"></app-result-chunk-set>
                     </td>
                 </ng-container>
                 <tr class="header" mat-header-row *matHeaderRowDef="displayedColumns"></tr>

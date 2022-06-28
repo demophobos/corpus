@@ -9,24 +9,38 @@ import { ChunkView } from '@shared/models';
   templateUrl: './result-table.component.html',
   styleUrls: ['./result-table.component.scss'],
 })
-export class ResultTableComponent extends BaseComponent implements AfterViewInit {
-
+export class ResultTableComponent
+  extends BaseComponent
+  implements AfterViewInit
+{
   displayedColumns: string[] = ['chunk'];
 
   chunks: MatTableDataSource<ChunkView> = new MatTableDataSource([]);
 
   isLoading: boolean = false;
 
+  showInterp: boolean = false;
+
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngAfterViewInit() {
-    this.searchService.elementedChunks.pipe(takeUntil(this.destroyed)).subscribe((chunks) => {
+    this.searchService.showHideVersion
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((value) => {
+        this.showInterp = value;
+      });
+      
+    this.searchService.elementedChunks
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((chunks) => {
         this.chunks = new MatTableDataSource(chunks);
       });
 
-    this.searchService.isLoading.pipe(takeUntil(this.destroyed)).subscribe((isLoading) => {
+    this.searchService.isLoading
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((isLoading) => {
         this.isLoading = isLoading;
       });
   }

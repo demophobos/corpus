@@ -1,17 +1,9 @@
-<app-result-chunk [chunk]="chunk" (showHideVersionEvent)="showHideVersio()"></app-result-chunk>
+<app-result-chunk [chunk]="chunk"></app-result-chunk>
 <ng-container *ngIf="showInterp && interpIsLoading == true">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
-<mat-accordion *ngIf="showInterp && !interpIsLoading" hideToggle="true" multi>
-    <mat-expansion-panel expanded="true" class="mat-elevation-z0" *ngFor="let interpChunk of interpChunks">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <button mat-icon-button [matTooltip]="interpChunk.headerDesc">
-                    <mat-icon svgIcon="book" color="primary"></mat-icon>
-                </button>
-                <span> {{interpChunk.headerCode}}</span>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
+<ng-container *ngIf="showInterp && !interpIsLoading">
+    <ng-container *ngFor="let interpChunk of interpChunks">
         <app-result-chunk [chunk]="interpChunk" [isParallel]="true"></app-result-chunk>
-    </mat-expansion-panel>
-</mat-accordion>
+    </ng-container>
+</ng-container>

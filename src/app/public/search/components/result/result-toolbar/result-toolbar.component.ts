@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { BaseComponent } from '@shared/components';
 import { AppConfig } from '@shared/constants';
@@ -10,6 +10,7 @@ import { takeUntil } from 'rxjs/operators';
   selector: 'app-result-toolbar',
   templateUrl: './result-toolbar.component.html',
   styleUrls: ['./result-toolbar.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ResultToolbarComponent extends BaseComponent implements OnInit {
   query: ChunkQuery;
@@ -19,12 +20,16 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
   pageEvent: PageEvent;
   isLoading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
+  showVersionTooltip: string = 'Ad versionem monstrandam';
+  showInterp: boolean = false;
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
+    this.searchService.showHideVersion.pipe(takeUntil(this.destroyed)).subscribe(value =>{
+      this.showInterp = value;
+    })
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
         this.query = query;
 
@@ -55,5 +60,14 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
     this.query.index = page.pageIndex;
     this.query.skip = page.pageIndex * AppConfig.DefaultPageLimit;
     this.searchService.getChunks(this.query);
+  }
+
+  showHideVersio(){
+    this.searchService.showHideVersion.next(!this.searchService.showHideVersion.getValue());
+    if (this.searchService.showHideVersion.getValue()) {
+      this.showVersionTooltip = 'Ad versionem occultandam';
+    } else {
+      this.showVersionTooltip = 'Ad versionem monstrandam';
+    }
   }
 }

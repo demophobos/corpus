@@ -5,7 +5,7 @@
                 <ng-container *ngFor="let element of chunk.elements">
                     <app-result-element [element]="element" [chunk]="chunk"></app-result-element>
                 </ng-container>
-                <span class="chunk-info"> [{{chunk.indexName}}]</span>
+                <span class="chunk-info" [matTooltip]="chunk.headerDesc"> [{{chunk.indexName}}, {{chunk.headerCode}}]</span>
             </div>
         </div>
     </mat-card-content>

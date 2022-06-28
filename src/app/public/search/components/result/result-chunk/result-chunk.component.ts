@@ -12,7 +12,6 @@ import { SearchService } from '../../../services/search.service';
 export class ResultChunkComponent extends BaseComponent implements OnInit {
   @Input() chunk: ChunkView;
   @Input() isParallel: boolean = false;
-  @Output() showHideVersionEvent: EventEmitter<void> = new EventEmitter();
 
   constructor(private searchService: SearchService) {
     super();
@@ -22,9 +21,5 @@ export class ResultChunkComponent extends BaseComponent implements OnInit {
     if (this.chunk) {
       this.searchService.getNoteLinks(this.chunk.indexId);
     }
-  }
-
-  showHideVersio() {
-    this.showHideVersionEvent.emit();
   }
 }

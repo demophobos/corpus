@@ -9,12 +9,12 @@
         <button *ngIf="header" mat-icon-button [color]='"primary"' (click)="openIndex($event)" matTooltip="Index Operis">
             <mat-icon svgIcon="toc"></mat-icon>
         </button>
-        <mat-slide-toggle ariaLabel="Versio" [matTooltip]="showVersionTooltip" color="primary" (toggleChange)="showHideVersio()"></mat-slide-toggle>
+        <mat-slide-toggle [checked]="showInterp" ariaLabel="Versio" [matTooltip]="showVersionTooltip" color="primary" (toggleChange)="showHideVersio()"></mat-slide-toggle>
     </mat-toolbar>
 </mat-card>
 <mat-card class="mat-elevation-z0">
     <ng-container *ngIf="chunk">
-        <app-result-chunk-set [chunk]="chunk" [showInterp]="showVersion"></app-result-chunk-set>
+        <app-result-chunk-set [chunk]="chunk" [showInterp]="showInterp"></app-result-chunk-set>
     </ng-container>
     <ng-container *ngIf="!chunk && currentIndex">
         <mat-card class="card mat-elevation-z0 result-card">
