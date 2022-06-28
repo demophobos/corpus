@@ -1,16 +1,11 @@
 <mat-card class="card mat-elevation-z0  result-card" *ngIf="chunk">
     <mat-card-content class="result-content">
         <div class="chunk">
-            <div class="chunk-info">[{{chunk.indexName}}]</div>
             <div class="chunk-value">
                 <ng-container *ngFor="let element of chunk.elements">
                     <app-result-element [element]="element" [chunk]="chunk"></app-result-element>
                 </ng-container>
-            </div>
-            <div class="chunk-menu" *ngIf="!isParallel">
-                <mat-slide-toggle color="primary" (toggleChange)="showHideVersio()">Versio</mat-slide-toggle>
-                <!-- <app-chunk-menu [chunk]="chunk" (showHideVersio)="showHideVersio()" [versioVisible]="!isParallel">
-                </app-chunk-menu> -->
+                <span class="chunk-info"> [{{chunk.indexName}}]</span>
             </div>
         </div>
     </mat-card-content>

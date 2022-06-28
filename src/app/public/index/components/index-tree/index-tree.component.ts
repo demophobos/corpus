@@ -16,24 +16,32 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
   isLoading: boolean = true;
   treeControl = new NestedTreeControl<IndexTreeItem>((node) => node.indexItems);
   dataSource = new MatTreeNestedDataSource<IndexTreeItem>();
-  constructor(private indexService: IndexService, readonly bottomSheet: MatBottomSheet, private router: Router) {
+  constructor(
+    private indexService: IndexService,
+    readonly bottomSheet: MatBottomSheet,
+    private router: Router
+  ) {
     super();
     this.indexService.selectedHeader
       .pipe(takeUntil(this.destroyed))
       .subscribe((header) => {
         if (header) {
           this.isLoading = true;
-          this.indexService.currentIndexTreeItems.pipe(takeUntil(this.destroyed)).subscribe((indeces) => {
-            this.dataSource.data = indeces;
-            this.isLoading = false;
-          })
+          this.indexService.currentIndexTreeItems
+            .pipe(takeUntil(this.destroyed))
+            .subscribe((indeces) => {
+              this.dataSource.data = indeces;
+              this.isLoading = false;
+            });
         }
       });
-      router.events.pipe(takeUntil(this.destroyed)).subscribe((event:NavigationStart) => {
-        if(event.url !== '/index'){
+    router.events
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((event: NavigationStart) => {
+        if (event.url !== '/index') {
           this.bottomSheet.dismiss();
         }
-    });
+      });
   }
 
   hasChild = (_: number, node: IndexTreeItem) =>
@@ -46,7 +54,7 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
       this.indexService.selectedIndex.next(indexId);
     }
   }
-  closeIndex(){
+  closeIndex() {
     this.bottomSheet.dismiss();
   }
 }

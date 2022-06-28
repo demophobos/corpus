@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { BaseComponent } from '@shared/components';
-import { HeaderView } from '@shared/models';
+import { HeaderView, ProjectModel } from '@shared/models';
 import { CommonDataService } from '@shared/services/common-data.service';
 import { IndexService, ProjectGroup } from '../../services/index.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { IndexTreeComponent } from '../index-tree/index-tree.component';
 import { MatPaginator } from '@angular/material/paginator';
-
+import { WorkConditionComponent } from 'app/public/search/components/condition/work-condition/work-condition.component';
+import { takeUntil } from 'rxjs/operators';
+import { NavigationStart, Router } from '@angular/router';
 export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   const filterValue = value.toLowerCase();
 
@@ -20,62 +22,43 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   selector: 'app-work-selector',
   templateUrl: './work-selector.component.html',
   styleUrls: ['./work-selector.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class WorkSelectorComponent extends BaseComponent implements OnInit {
-  workForm = new UntypedFormControl();
-  indexAvailable = false;
+  headerSelector = new UntypedFormControl();
+  projects: ProjectModel[];
   projectGroups: ProjectGroup[] = [];
-  header: HeaderView;
+  workForm = new UntypedFormControl();
   constructor(
     private indexService: IndexService,
     private commonDataService: CommonDataService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private router: Router
   ) {
     super();
+    router.events
+    .pipe(takeUntil(this.destroyed))
+    .subscribe((event: NavigationStart) => {
+      if (event.url !== '/index') {
+        this.bottomSheet.dismiss();
+      }
+    });
   }
 
   ngOnInit() {
-    this.commonDataService
-      .getHeadersGrouppedByProject()
-      .then((items) => {
-        this.projectGroups = items;
-        if (history.state.headerId) {
-          //header from search page navigation
-          this.header = this.commonDataService.headers.value.find(
-            (i) => i.id == history.state.headerId
-          );
-          this.headerChanged(this.header);
-          this.indexAvailable = this.header !== null;
-          history.state.headerId = undefined;
-        }
-      })
-      .then(() => {
-        this.header = this.indexService.selectedHeader.getValue();
-        this.workForm.setValue(this.header);
-        this.indexAvailable = !!this.header;
-      });
-  }
-
-  async headerChanged(header: HeaderView) {
-    this.header = header;
-    this.indexService.selectedChunk.next(undefined);
-    this.indexService.selectedIndeces.next(undefined);
-    this.indexService.selectedIndex.next(undefined);
-    if (
-      this.indexService.selectedHeader.getValue() === undefined ||
-      this.header.id !== this.indexService.selectedHeader.getValue().id
-    ) {
-      this.indexService.selectedHeader.next(this.header);
-      await this.indexService.getIndexTree(this.header.id);
-    }
-    this.indexAvailable = !!this.header;
-  }
-
-  openIndex(event) {
-    event.stopPropagation();
-    this.bottomSheet.open(IndexTreeComponent, {
-      hasBackdrop: false,
-      autoFocus: 'first-tabbable',
+    this.commonDataService.getHeadersGrouppedByProject().then((items) => {
+      this.projectGroups = items;
     });
+
+    this.headerSelector.valueChanges
+    .pipe(takeUntil(this.destroyed))
+    .subscribe((header: HeaderView) => {
+      this.indexService.selectedHeader.next(header);
+      this.indexService.getIndexTree(header.id);
+    });
+  }
+
+  closeOpera(){
+    this.bottomSheet.dismiss();
   }
 }

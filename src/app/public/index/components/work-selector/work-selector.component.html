@@ -1,12 +1,21 @@
-<mat-form-field class="work-field">
-    <mat-select [formControl]="workForm" (selectionChange)="headerChanged($event.value)">
-        <mat-optgroup *ngFor="let group of projectGroups" [label]="group.code" [disabled]="group.disabled">
-            <mat-option *ngFor="let header of group.headers" [value]="header">
-                {{header.code}}
-            </mat-option>
-        </mat-optgroup>
-    </mat-select>
-    <button mat-icon-button [color]='"primary"' *ngIf="indexAvailable" matSuffix (click)="openIndex($event)" matTooltip="Index Operis">
-        <mat-icon svgIcon="toc"></mat-icon>
-    </button>
-</mat-form-field>
+<mat-card>
+    <mat-toolbar>
+        <button mat-icon-button class="library" aria-label="library">
+            <mat-icon svgIcon="library"></mat-icon>
+          </button>
+        <span>Opera</span>
+        <span class="spacer"></span>
+        <button mat-icon-button color="primary" aria-label="Claudere" (click)="closeOpera()">
+            <mat-icon svgIcon="close"></mat-icon>
+        </button>
+    </mat-toolbar>
+    <mat-card-content>
+        <mat-radio-group *ngIf="projectGroups" [formControl]="headerSelector" color="primary" required>
+            <div *ngFor="let group of projectGroups" class="example-radio-group">
+                <h3>{{group.code}}</h3>
+                <mat-radio-button class="example-radio-button" *ngFor="let header of group.headers" [value]="header">
+                    {{header.code}}</mat-radio-button>
+            </div>
+        </mat-radio-group>
+    </mat-card-content>
+</mat-card>

@@ -2,11 +2,14 @@
 <ng-container *ngIf="showInterp && interpIsLoading == true">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </ng-container>
-<mat-accordion *ngIf="showInterp && !interpIsLoading" togglePosition="before" multi>
+<mat-accordion *ngIf="showInterp && !interpIsLoading" hideToggle="true" multi>
     <mat-expansion-panel expanded="true" class="mat-elevation-z0" *ngFor="let interpChunk of interpChunks">
         <mat-expansion-panel-header>
             <mat-panel-title>
-                {{interpChunk.headerCode}}
+                <button mat-icon-button [matTooltip]="interpChunk.headerDesc">
+                    <mat-icon svgIcon="book" color="primary"></mat-icon>
+                </button>
+                <span> {{interpChunk.headerCode}}</span>
             </mat-panel-title>
         </mat-expansion-panel-header>
         <app-result-chunk [chunk]="interpChunk" [isParallel]="true"></app-result-chunk>

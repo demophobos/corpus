@@ -13,7 +13,7 @@ import { SearchService } from 'app/public/search/services/search.service';
 })
 export class ResultChunkSetComponent extends BaseComponent implements OnInit {
   
-  showInterp: boolean = false;
+  @Input() showInterp: boolean = false;
   showNotes: boolean = true;
   showInterpNotes: boolean = true;
   interpIsLoading: boolean = true;
@@ -30,8 +30,11 @@ export class ResultChunkSetComponent extends BaseComponent implements OnInit {
 
   }
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.chunk.currentValue == undefined) {
-      this.showInterp = false;
+    // if (changes.chunk.currentValue == undefined) {
+    //   this.showInterp = false;
+    // }
+    if(changes.showInterp && changes.showInterp.currentValue == true){
+      this.loadInterpData();
     }
     if (changes.chunk && changes.chunk.currentValue && changes.chunk.previousValue) {
       if (changes.chunk.currentValue.id !== changes.chunk.previousValue.id) {

@@ -4,4 +4,17 @@
 
 .mat-expansion-panel-header {
     height: 40px !important;
+    background-color: whitesmoke !important;
+}
+
+.mat-expansion-panel-header-title {
+    margin-left: 15px;
+}
+
+.mat-expansion-panel-header-title>.mat-icon {
+    margin-right: 5px;
+}
+
+.mat-expansion-panel-content {
+    background-color: whitesmoke;
 }

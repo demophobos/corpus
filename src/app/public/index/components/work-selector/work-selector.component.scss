@@ -1,3 +1,16 @@
-.work-field {
-    width: 100%;
+.example-radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+}
+
+.example-radio-button {
+    margin: 5px;
+    margin-left: 16px;
+}
+
+.mat-radio-label {
+    flex-direction: row;
+    justify-content: space-between;
 }
