@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { NavigationStart, Router } from '@angular/router';
 import { BaseComponent } from '@shared/components';
 import {
   ChunkValueItemModel,
@@ -19,16 +18,8 @@ import { takeUntil } from 'rxjs/operators';
 export class ResultMetaInfoComponent extends BaseComponent implements OnInit {
   hasMorphology: boolean = false;
   hasComments: boolean = false;
-  constructor(private searchService: SearchService, private bottomSheet: MatBottomSheet,
-    private router: Router) {
+  constructor(private searchService: SearchService, private bottomSheet: MatBottomSheet) {
     super();
-    router.events
-    .pipe(takeUntil(this.destroyed))
-    .subscribe((event: NavigationStart) => {
-      if (event.url !== '/index') {
-        this.bottomSheet.dismiss();
-      }
-    });
   }
 
   ngOnInit(): void {

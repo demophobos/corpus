@@ -73,7 +73,8 @@ export class ResultElementComponent extends BaseComponent implements OnInit {
     if (form.pos || this.isCommented) {
       this.bottomSheet.open(ResultMetaInfoComponent, {
         hasBackdrop: false,
-        autoFocus: 'first-tabbable'
+        autoFocus: 'first-tabbable',
+        closeOnNavigation: true
       });
     } else {
       this.bottomSheet.dismiss();
