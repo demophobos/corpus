@@ -4,13 +4,10 @@ app-chunk-menu {
 
 .chunk-info {
     color: gray;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
+    margin-left: 5px;
 }
 
 .chunk-info>mat-icon {
-    margin-top: 5px;
     cursor: help;
 }
 

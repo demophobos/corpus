@@ -1,6 +1,5 @@
 .morph {
     cursor: pointer;
-    color: blueviolet;
 }
 
 .notmorph {
@@ -17,6 +16,12 @@
     font-style: italic;
     font-weight: 600;
     cursor: pointer;
+}
+
+.morph:hover,
+.note:hover {
+    border-bottom: 1px dotted blueviolet;
+    color: blueviolet;
 }
 
 .mat-bottom-sheet-container {

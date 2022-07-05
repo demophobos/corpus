@@ -19,7 +19,7 @@ export class ResultTableComponent
 
   isLoading: boolean = false;
 
-  showInterp: boolean = false;
+  showVersion: boolean = false;
 
   constructor(private searchService: SearchService) {
     super();
@@ -29,7 +29,7 @@ export class ResultTableComponent
     this.searchService.showHideVersion
       .pipe(takeUntil(this.destroyed))
       .subscribe((value) => {
-        this.showInterp = value;
+        this.showVersion = value;
       });
       
     this.searchService.elementedChunks

@@ -1,23 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
-import {
-  ChunkQuery,
-  ChunkValueItemModel,
-  ChunkView,
-  MorphModel,
-  NoteLinkModel,
-} from '@shared/models';
+import { ChunkQuery, ChunkValueItemModel, ChunkView, MorphModel, NoteLinkModel } from '@shared/models';
+import { SearchService } from 'app/public/search/services/search.service';
 import { takeUntil } from 'rxjs/operators';
-import { SearchService } from '../../../services/search.service';
-import { ResultMetaInfoComponent } from '../result-meta-info/result-meta-info.component';
+import { ChunkElementInfoComponent } from '../chunk-element-info/chunk-element-info.component';
 
 @Component({
-  selector: 'app-result-element',
-  templateUrl: './result-element.component.html',
-  styleUrls: ['./result-element.component.scss'],
+  selector: 'app-chunk-element',
+  templateUrl: './chunk-element.component.html',
+  styleUrls: ['./chunk-element.component.scss']
 })
-export class ResultElementComponent extends BaseComponent implements OnInit {
+export class ChunkElementComponent extends BaseComponent implements OnInit {
   @Input() chunk: ChunkView;
   @Input() element: any;
   @Input() selectedValue: string;
@@ -71,7 +65,7 @@ export class ResultElementComponent extends BaseComponent implements OnInit {
     this.searchService.setCurrentChunk = this.chunk;
     this.searchService.setCurrentForm = form;
     if (form.pos || this.isCommented) {
-      this.bottomSheet.open(ResultMetaInfoComponent, {
+      this.bottomSheet.open(ChunkElementInfoComponent, {
         hasBackdrop: false,
         autoFocus: 'first-tabbable',
         closeOnNavigation: true

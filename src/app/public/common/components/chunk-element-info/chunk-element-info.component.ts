@@ -1,21 +1,16 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatBottomSheet, MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { BaseComponent } from '@shared/components';
-import {
-  ChunkValueItemModel,
-  ChunkView,
-  ElementView,
-  NoteLinkModel,
-} from '@shared/models';
+import { NoteLinkModel } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-result-meta-info',
-  templateUrl: './result-meta-info.component.html',
-  styleUrls: ['./result-meta-info.component.scss'],
+  selector: 'app-chunk-element-info',
+  templateUrl: './chunk-element-info.component.html',
+  styleUrls: ['./chunk-element-info.component.scss']
 })
-export class ResultMetaInfoComponent extends BaseComponent implements OnInit {
+export class ChunkElementInfoComponent extends BaseComponent implements OnInit {
   hasMorphology: boolean = false;
   hasComments: boolean = false;
   constructor(private searchService: SearchService, private bottomSheet: MatBottomSheet) {

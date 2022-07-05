@@ -9,7 +9,12 @@ app-work-selector {
 }
 
 .chunk-info {
-    color: #707070;
+    color: gray;
+    margin-left: 5px;
+}
+
+.empty-fragment {
+    color: gray;
 }
 
 .mat-slide-toggle {

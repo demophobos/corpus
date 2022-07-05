@@ -1,0 +1,9 @@
+<app-chunk [chunk]="chunk" [showHeaderCode]="showMainHeaderCode"></app-chunk>
+<ng-container *ngIf="showVersion && versionIsLoading == true">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-container>
+<ng-container *ngIf="showVersion && !versionIsLoading">
+    <ng-container *ngFor="let version of versions">
+        <app-chunk [chunk]="version" [isParallel]="true"></app-chunk>
+    </ng-container>
+</ng-container>

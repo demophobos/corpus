@@ -1,0 +1,14 @@
+<mat-card class="card mat-elevation-z0  result-card" *ngIf="chunk">
+    <mat-card-content class="result-content">
+        <div class="chunk">
+            <div class="chunk-value">
+                <ng-container *ngFor="let element of chunk.elements">
+                    <app-chunk-element [element]="element" [chunk]="chunk"></app-chunk-element>
+                </ng-container>
+                <ng-container *ngIf="showHeaderCode">
+                    <app-chunk-info [index]="chunk.indexName" [code]="chunk.headerCode" [desc]="chunk.headerDesc"></app-chunk-info>
+                </ng-container>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

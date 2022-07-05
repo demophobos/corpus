@@ -21,14 +21,14 @@ export class ResultToolbarComponent extends BaseComponent implements OnInit {
   isLoading: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   showVersionTooltip: string = 'Ad versionem monstrandam';
-  showInterp: boolean = false;
+  showVersion: boolean = false;
   constructor(private searchService: SearchService) {
     super();
   }
 
   ngOnInit(): void {
     this.searchService.showHideVersion.pipe(takeUntil(this.destroyed)).subscribe(value =>{
-      this.showInterp = value;
+      this.showVersion = value;
     })
     this.searchService.chunkQuery.pipe(takeUntil(this.destroyed)).subscribe(query => {
         this.query = query;

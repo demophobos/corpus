@@ -3,11 +3,11 @@ import { ChunkNoteItem, NoteModel } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
 
 @Component({
-  selector: 'app-chunk-note-item',
-  templateUrl: './chunk-note-item.component.html',
-  styleUrls: ['./chunk-note-item.component.scss']
+  selector: 'app-note-item',
+  templateUrl: './note-item.component.html',
+  styleUrls: ['./note-item.component.scss']
 })
-export class ChunkNoteItemComponent implements OnInit {
+export class NoteItemComponent implements OnInit {
   @Input() chunkNote: ChunkNoteItem;
   note: NoteModel;
   title: string;

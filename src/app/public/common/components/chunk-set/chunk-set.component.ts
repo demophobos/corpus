@@ -1,31 +1,25 @@
-import {
-  Component,
-  Input,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatAccordion } from '@angular/material/expansion';
 import { BaseComponent } from '@shared/components';
 import { Language } from '@shared/enums';
 import { ChunkView } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
-import { takeUntil } from 'rxjs/operators';
+
 @Component({
-  selector: 'app-result-chunk-set',
-  templateUrl: './result-chunk-set.component.html',
-  styleUrls: ['./result-chunk-set.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-chunk-set',
+  templateUrl: './chunk-set.component.html',
+  styleUrls: ['./chunk-set.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
-export class ResultChunkSetComponent extends BaseComponent implements OnInit {
-  @Input() showInterp: boolean = false;
+export class ChunkSetComponent extends BaseComponent implements OnInit {
+  @Input() showVersion: boolean = false;
   showNotes: boolean = true;
-  showInterpNotes: boolean = true;
-  interpIsLoading: boolean = true;
-  interpChunks: ChunkView[];
-  emptyInterpInfo: string;
+  showVersionNotes: boolean = true;
+  versionIsLoading: boolean = true;
+  versions: ChunkView[];
+  emptyVersionInfo: string;
   @Input() chunk: ChunkView;
+  @Input() showMainHeaderCode: boolean = true;
   @ViewChild(MatAccordion) accordion: MatAccordion;
 
   constructor(private searchService: SearchService) {
@@ -36,10 +30,10 @@ export class ResultChunkSetComponent extends BaseComponent implements OnInit {
   }
   ngOnChanges(changes: SimpleChanges): void {
 
-    if (this.showInterp == true) {
-      this.loadInterpData();
+    if (this.showVersion == true) {
+      this.loadVersions();
     } else {
-      this.interpChunks = null;
+      this.versions = null;
     }
     if (
       changes.chunk &&
@@ -48,29 +42,29 @@ export class ResultChunkSetComponent extends BaseComponent implements OnInit {
     ) {
       if (changes.chunk.currentValue.id !== changes.chunk.previousValue.id) {
         this.searchService.getNoteLinks(changes.chunk.currentValue.indexId);
-        if (this.showInterp == true) {
-          this.loadInterpData();
+        if (this.showVersion == true) {
+          this.loadVersions();
         } else {
-          this.interpChunks = null;
+          this.versions = null;
         }
       }
     }
   }
 
-  private loadInterpData() {
-    this.interpIsLoading = true;
+  private loadVersions() {
+    this.versionIsLoading = true;
     this.searchService
       .getInterp(this.chunk.id, this.chunk.headerLang == Language.Latin)
       .then((values: ChunkView[]) => {
         if (values.length > 0) {
-          this.interpChunks = values;
+          this.versions = values;
         } else {
-          this.interpChunks = null;
-          this.emptyInterpInfo = 'versio deest';
+          this.versions = null;
+          this.emptyVersionInfo = 'versio deest';
         }
       })
       .then(() => {
-        this.interpIsLoading = false;
+        this.versionIsLoading = false;
         Promise.resolve();
       });
   }

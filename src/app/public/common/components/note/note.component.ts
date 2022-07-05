@@ -1,16 +1,15 @@
-
 import { Component, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
-import { linq } from '@shared/helpers';
 import { ChunkNoteItem, NoteLinkModel } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
+import { linq } from '@shared/helpers';
 
 @Component({
-  selector: 'app-chunk-note',
-  templateUrl: './chunk-note.component.html',
-  styleUrls: ['./chunk-note.component.scss'],
+  selector: 'app-note',
+  templateUrl: './note.component.html',
+  styleUrls: ['./note.component.scss']
 })
-export class ChunkNoteComponent extends BaseComponent implements OnInit {
+export class NoteComponent extends BaseComponent implements OnInit {
   chunkNotes: ChunkNoteItem[];
   constructor(private searchService: SearchService) {
     super();

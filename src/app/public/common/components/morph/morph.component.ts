@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { BaseComponent } from '@shared/components';
 import { ChunkValueItemModel } from '@shared/models';
 import { SearchService } from 'app/public/search/services/search.service';
-import { takeUntil } from 'rxjs/operators';
+
 @Component({
-  selector: 'app-morph-info',
-  templateUrl: './morph-info.component.html',
-  styleUrls: ['./morph-info.component.scss'],
+  selector: 'app-morph',
+  templateUrl: './morph.component.html',
+  styleUrls: ['./morph.component.scss']
 })
-export class MorphInfoComponent extends BaseComponent implements OnInit {
+export class MorphComponent extends BaseComponent implements OnInit {
   @Input() morphInfo: ChunkValueItemModel;
 
   constructor(private searchService: SearchService) {

@@ -24,7 +24,6 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
   showVersion: boolean = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   showVersionTooltip: string = 'Ad versionem monstrandam';
-  showInterp:boolean = false;
   constructor(
     private indexService: IndexService,
     private bottomSheet: MatBottomSheet
@@ -34,7 +33,7 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.indexService.showHideVersion.pipe(takeUntil(this.destroyed)).subscribe((value =>{
-        this.showInterp = value;
+        this.showVersion = value;
     }));
     
     this.indexService.selectedHeader
@@ -100,8 +99,8 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
   }
   showHideVersio() {
     this.indexService.showHideVersion.next(!this.indexService.showHideVersion.getValue());
-    this.showInterp = this.indexService.showHideVersion.getValue();
-    if (this.showInterp) {
+    this.showVersion = this.indexService.showHideVersion.getValue();
+    if (this.showVersion) {
       this.showVersionTooltip = 'Ad versionem occultandam';
     } else {
       this.showVersionTooltip = 'Ad versionem monstrandam';

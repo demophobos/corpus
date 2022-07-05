@@ -1,9 +1,0 @@
-<app-result-chunk [chunk]="chunk"></app-result-chunk>
-<ng-container *ngIf="showInterp && interpIsLoading == true">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</ng-container>
-<ng-container *ngIf="showInterp && !interpIsLoading">
-    <ng-container *ngFor="let interpChunk of interpChunks">
-        <app-result-chunk [chunk]="interpChunk" [isParallel]="true"></app-result-chunk>
-    </ng-container>
-</ng-container>
