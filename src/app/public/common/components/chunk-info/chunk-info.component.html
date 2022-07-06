@@ -1,7 +1,7 @@
 <ng-container *ngIf="code">
-    <span class="chunk-info" [matTooltip]="desc">{{code}}</span>
-    <span> [{{index}}]</span>
+    <span class="code" [matTooltip]="desc">{{code}}</span>
+    <span class="index">[{{index}}]</span>
 </ng-container>
 <ng-container *ngIf="!code">
-    <span class="chunk-empty-info">[Textus abest]</span>
+    <span class="empty">[Textus abest]</span>
 </ng-container>
