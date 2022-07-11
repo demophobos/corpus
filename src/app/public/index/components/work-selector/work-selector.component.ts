@@ -22,13 +22,14 @@ export const _filter = (headers: HeaderView[], value: string): HeaderView[] => {
   selector: 'app-work-selector',
   templateUrl: './work-selector.component.html',
   styleUrls: ['./work-selector.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class WorkSelectorComponent extends BaseComponent implements OnInit {
   headerSelector = new UntypedFormControl();
   projects: ProjectModel[];
   projectGroups: ProjectGroup[] = [];
   workForm = new UntypedFormControl();
+  selected: HeaderView;
   constructor(
     private indexService: IndexService,
     private commonDataService: CommonDataService,
@@ -37,12 +38,12 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
   ) {
     super();
     router.events
-    .pipe(takeUntil(this.destroyed))
-    .subscribe((event: NavigationStart) => {
-      if (event.url !== '/index') {
-        this.bottomSheet.dismiss();
-      }
-    });
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((event: NavigationStart) => {
+        if (event.url !== '/index') {
+          this.closeOpera();
+        }
+      });
   }
 
   ngOnInit() {
@@ -50,15 +51,21 @@ export class WorkSelectorComponent extends BaseComponent implements OnInit {
       this.projectGroups = items;
     });
 
+    this.indexService.selectedHeader
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((selected) => {
+        this.selected = selected;
+      });
+
     this.headerSelector.valueChanges
-    .pipe(takeUntil(this.destroyed))
-    .subscribe((header: HeaderView) => {
-      this.indexService.selectedHeader.next(header);
-      this.indexService.getIndexTree(header.id);
-    });
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((header: HeaderView) => {
+        this.indexService.selectedHeader.next(header);
+        this.indexService.getIndexTree(header.id);
+      });
   }
 
-  closeOpera(){
+  closeOpera() {
     this.bottomSheet.dismiss();
   }
 }

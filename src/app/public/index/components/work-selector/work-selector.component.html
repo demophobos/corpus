@@ -13,7 +13,7 @@
         <mat-radio-group *ngIf="projectGroups" [formControl]="headerSelector" color="primary" required>
             <div *ngFor="let group of projectGroups" class="example-radio-group">
                 <h3>{{group.code}}</h3>
-                <mat-radio-button class="example-radio-button" *ngFor="let header of group.headers" [value]="header">
+                <mat-radio-button class="example-radio-button" *ngFor="let header of group.headers" [value]="header" [checked]="header == selected">
                     {{header.code}}</mat-radio-button>
             </div>
         </mat-radio-group>
