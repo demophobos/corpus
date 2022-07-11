@@ -11,7 +11,7 @@
             <app-chunk-info [index]="currentIndex.name" [code]="header.code"></app-chunk-info>
         </ng-container>
         <span class="spacer"></span>
-        <mat-paginator *ngIf="header" [hidePageSize]="true" [length]="length" [pageSize]="pageSize" [showFirstLastButtons]="false" (page)="paginateChange($event)"></mat-paginator>
+        <mat-paginator *ngIf="header" [hidePageSize]="true" [length]="length" [pageSize]="pageSize" [showFirstLastButtons]="true" (page)="paginateChange($event)"></mat-paginator>
         <button *ngIf="header" mat-icon-button [color]='"primary"' (click)="openIndex($event)" matTooltip="Index Operis">
             <mat-icon svgIcon="toc"></mat-icon>
         </button>

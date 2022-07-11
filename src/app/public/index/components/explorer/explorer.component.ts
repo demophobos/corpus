@@ -23,7 +23,7 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
   currentIndex: IndexTreeItem;
   showVersion: boolean = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  showVersionTooltip: string = 'Ad versionem monstrandam';
+  showVersionTooltip: string = 'Ad monstrandum versiones';
   constructor(
     private indexService: IndexService,
     private bottomSheet: MatBottomSheet
@@ -101,9 +101,9 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
     this.indexService.showHideVersion.next(!this.indexService.showHideVersion.getValue());
     this.showVersion = this.indexService.showHideVersion.getValue();
     if (this.showVersion) {
-      this.showVersionTooltip = 'Ad versionem occultandam';
+      this.showVersionTooltip = 'Ad occultandum versiones';
     } else {
-      this.showVersionTooltip = 'Ad versionem monstrandam';
+      this.showVersionTooltip = 'Ad monstrandum versiones';
     }
   }
 }
