@@ -1,16 +1,40 @@
-.example-radio-group {
+.radio-group {
     display: flex;
     flex-direction: column;
-    margin: 15px 0;
     align-items: flex-start;
 }
 
-.example-radio-button {
+.radio-button {
     margin: 5px;
     margin-left: 16px;
+    display: flex;
+    flex-direction: column;
 }
 
 .mat-radio-label {
     flex-direction: row;
     justify-content: space-between;
+    white-space: break-spaces !important;
+}
+
+.selector-title {
+    margin-left: 15px;
+}
+
+.project-code {
+    font-weight: 700;
+}
+
+.app-toolbar-sticky {
+    position: sticky;
+    position: -webkit-sticky;
+    /* For macOS/iOS Safari */
+    top: 0;
+    /* Sets the sticky toolbar to be on top */
+    z-index: 1000;
+    /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+.header-desc {
+    font-size: smaller;
 }

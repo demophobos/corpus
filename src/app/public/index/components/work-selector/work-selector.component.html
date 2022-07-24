@@ -1,21 +1,37 @@
-<mat-card>
-    <mat-toolbar>
-        <button mat-icon-button class="library" aria-label="library">
-            <mat-icon svgIcon="library"></mat-icon>
-          </button>
-        <span>Opera</span>
-        <span class="spacer"></span>
-        <button mat-icon-button color="primary" aria-label="Claudere" (click)="closeOpera()">
-            <mat-icon svgIcon="close"></mat-icon>
-        </button>
-    </mat-toolbar>
+<mat-toolbar class="app-toolbar-sticky" color="primary">
+    <span class="selector-title">OPERA</span>
+    <span class="spacer"></span>
+    <button mat-icon-button color="primary" aria-label="Claudere" (click)="closeOpera()">
+        <mat-icon svgIcon="close"></mat-icon>
+    </button>
+</mat-toolbar>
+<mat-card class="mat-elevation-z0">
     <mat-card-content>
-        <mat-radio-group *ngIf="projectGroups" [formControl]="headerSelector" color="primary" required>
+        <mat-accordion *ngIf="projectGroups">
+            <mat-expansion-panel class="mat-elevation-z0" *ngFor="let group of projectGroups" color="primary" [expanded]="selected !== undefined && group.code == selected.projectCode">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="project-code">
+                        {{group.code}}
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-template matExpansionPanelContent>
+                    <mat-radio-group [formControl]="headerSelector">
+                        <div class="radio-group">
+                            <mat-radio-button color="primary" class="radio-button" *ngFor="let header of group.headers" [value]="header" [checked]="header == selected">
+                                <div class="header-code">{{header.code}}</div>
+                                <div class="header-desc">{{header.desc}}</div>
+                            </mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                </ng-template>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <!-- <mat-radio-group *ngIf="projectGroups" [formControl]="headerSelector" color="primary" required>
             <div *ngFor="let group of projectGroups" class="example-radio-group">
                 <h3>{{group.code}}</h3>
                 <mat-radio-button class="example-radio-button" *ngFor="let header of group.headers" [value]="header" [checked]="header == selected">
                     {{header.code}}</mat-radio-button>
             </div>
-        </mat-radio-group>
+        </mat-radio-group> -->
     </mat-card-content>
 </mat-card>
