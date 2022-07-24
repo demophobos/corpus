@@ -88,6 +88,7 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
     this.bottomSheet.open(IndexTreeComponent, {
       hasBackdrop: false,
       autoFocus: 'first-tabbable',
+      closeOnNavigation: true
     });
   }
 
@@ -95,6 +96,7 @@ export class ExplorerComponent extends BaseComponent implements OnInit {
     this.bottomSheet.open(WorkSelectorComponent, {
       hasBackdrop: false,
       autoFocus: 'first-tabbable',
+      closeOnNavigation: true
     });
   }
   showHideVersio() {

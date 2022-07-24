@@ -52,6 +52,7 @@ export class IndexTreeComponent extends BaseComponent implements OnInit {
   indexChanged(indexId: string) {
     if (indexId) {
       this.indexService.selectedIndex.next(indexId);
+      this.closeIndex();
     }
   }
   closeIndex() {
